@@ -1,0 +1,30 @@
+input: docs
+output: .retype
+
+branding:
+  title: Verus Wiki
+  
+links:
+  - text: Verus.io
+    link: https://verus.io
+  - text: Discord
+    link: https://discord.gg/veruscoin
+
+footer:
+  copyright: "Verus Community Wiki"
+
+templating:
+  enabled: false
+
+powered_by:
+  enabled: false
+
+serve:
+  port: 5176
+
+toc:
+  depth: 2
+
+theme:
+  variant: dark
+  default: dark

@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.824081727030">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.11.0">
+
+    <!-- Primary Meta Tags -->
+    <title>VerusID Login: A Developer&#39;s Guide</title>
+    <meta name="title" content="VerusID Login: A Developer's Guide">
+    <meta name="description" content="How to implement passwordless authentication using VerusID signatures — from the developer who built it.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="/developers/verusid-login-guide/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/developers/verusid-login-guide/">
+    <meta property="og:title" content="VerusID Login: A Developer's Guide">
+    <meta property="og:description" content="How to implement passwordless authentication using VerusID signatures — from the developer who built it.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="/developers/verusid-login-guide/">
+    <meta property="twitter:title" content="VerusID Login: A Developer's Guide">
+    <meta property="twitter:description" content="How to implement passwordless authentication using VerusID signatures — from the developer who built it.">
+
+    <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
+
+    <link href="../../resources/css/retype.css?v=3.11.0.824081727030" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.824081727030" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.824081727030" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.824081727030" defer></script>
+</head>
+<body>
+    <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
+        <div class="absolute bottom-0 left-0" style="top: 5rem; right: 50%"></div>
+    
+        <header id="retype-header" class="sticky top-0 z-30 flex w-full h-16 bg-header-bg border-b border-header-border md:h-20">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton retype-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="retype-sidebar-left-toggle-button"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                            <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">Verus Wiki</span>
+                        </a>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block border-base-border"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav id="retype-header-nav" class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            <li class="mr-6">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://verus.io">Verus.io</a>
+                            </li>
+                            <li class="mr-6">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://discord.gg/veruscoin">Discord</a>
+                            </li>
+        
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-search-placeholder transition-colors duration-200 ease-in bg-search-bg border border-transparent rounded md:text-sm hover:border-search-border-hover focus:outline-none focus:border-search-border-focus" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="retype-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+    
+        <div id="retype-container" class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-sidebar-left-bg border-sidebar-left-border sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton">
+            
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-filter-bg border border-filter-border rounded shadow-none text-sm focus:outline-none focus:border-filter-border-focus" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-base-border">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-base-border">
+            
+                        <div class="py-3 px-6 md:hidden border-b dark:border-base-border">
+                            <nav>
+                                <ul class="flex flex-wrap justify-center items-center">
+                                    <li class="mr-6">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://verus.io">Verus.io</a>
+                                    </li>
+                                    <li class="mr-6">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://discord.gg/veruscoin">Discord</a>
+                                    </li>
+            
+                                </ul>
+                            </nav>
+                        </div>
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 bg-body-bg">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="retype-markdown" id="retype-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="retype-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="verusid-login-a-developers-guide" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verusid-login-a-developers-guide">#</doc-anchor-trigger>
+        <span>VerusID Login: A Developer&#x27;s Guide</span>
+    </h1>
+</doc-anchor-target>
+<p><em>How to implement passwordless authentication using VerusID signatures — from the developer who built it.</em></p>
+<hr>
+<doc-anchor-target id="why-this-guide-exists">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#why-this-guide-exists">#</doc-anchor-trigger>
+        <span>Why This Guide Exists</span>
+    </h2>
+</doc-anchor-target>
+<p>I spent weeks getting VerusID login working across three different methods: CLI, GUI desktop, and Verus Mobile QR scanning. There&#x27;s almost no documentation on this in the wild. This is the guide I wish I had.</p>
+<p>VerusID login is <strong>passwordless, cryptographic authentication</strong>. Instead of &quot;username + password,&quot; users prove identity by signing a challenge message with their VerusID&#x27;s private key. No passwords stored, no password resets, no credential databases to breach.</p>
+<p>The concept is simple. The implementation has sharp edges. This guide covers both.</p>
+<hr>
+<doc-anchor-target id="the-core-flow">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-core-flow">#</doc-anchor-trigger>
+        <span>The Core Flow</span>
+    </h2>
+</doc-anchor-target>
+<p>Every VerusID login method follows the same pattern:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">1. Server generates a random challenge (nonce + message)
+2. User signs the challenge with their VerusID
+3. Server verifies the signature against the claimed identity
+4. If valid → create session</code></pre>
+</doc-codeblock></div>
+<p>That&#x27;s it. The complexity is in <em>how</em> the user signs (3 different methods) and the edge cases that&#x27;ll break your implementation.</p>
+<hr>
+<doc-anchor-target id="prerequisites">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#prerequisites">#</doc-anchor-trigger>
+        <span>Prerequisites</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li>A running Verus daemon (<code v-pre>verusd</code>) — testnet recommended for development</li>
+<li>RPC access configured (<code v-pre>verus.conf</code> or CLI flags)</li>
+<li>The identity you&#x27;re authenticating must exist on-chain</li>
+</ul>
+<doc-anchor-target id="rpc-setup">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-setup">#</doc-anchor-trigger>
+        <span>RPC Setup</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Your verus.conf (or pass via CLI)
+rpcuser=your_rpc_user
+rpcpassword=your_rpc_password
+rpcport=18843  # testnet
+rpcallowip=127.0.0.1</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">// Basic RPC client
+async function rpcCall(method: string, params: any[] = []) {
+  const res = await fetch('http://127.0.0.1:18843', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + Buffer.from(`${RPC_USER}:${RPC_PASS}`).toString('base64'),
+    },
+    body: JSON.stringify({ method, params, id: Date.now() }),
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.result;
+}</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="method-1-cli--gui-console-simplest">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#method-1-cli--gui-console-simplest">#</doc-anchor-trigger>
+        <span>Method 1: CLI / GUI Console (Simplest)</span>
+    </h2>
+</doc-anchor-target>
+<p>This is the easiest to implement and the best starting point. The user runs a command in their Verus CLI or the GUI wallet&#x27;s debug console.</p>
+<doc-anchor-target id="server-side">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#server-side">#</doc-anchor-trigger>
+        <span>Server Side</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import crypto from 'crypto';
+
+// Step 1: Generate a challenge
+function createChallenge(): { nonce: string; message: string } {
+  const nonce = crypto.randomBytes(32).toString('hex');
+  const message = `Login to My App | Nonce: ${nonce} | Timestamp: ${Date.now()}`;
+  
+  // Store nonce with expiry (5 minutes)
+  nonceStore.set(nonce, { 
+    createdAt: Date.now(), 
+    expiresAt: Date.now() + 5 * 60 * 1000 
+  });
+  
+  return { nonce, message };
+}
+
+// Step 3: Verify the signature
+async function verifyLogin(
+  verusId: string, 
+  signature: string, 
+  nonce: string
+): Promise&lt;boolean&gt; {
+  // Check nonce exists and hasn't expired
+  const stored = nonceStore.get(nonce);
+  if (!stored || stored.expiresAt &lt; Date.now()) return false;
+  
+  // CRITICAL: Delete nonce immediately (one-time use)
+  nonceStore.delete(nonce);
+  
+  // Reconstruct the original message
+  const message = `Login to My App | Nonce: ${nonce} | Timestamp: ${stored.createdAt}`;
+  
+  // Verify via RPC
+  const isValid = await rpcCall('verifymessage', [verusId, signature, message]);
+  return isValid === true;
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="what-the-user-does">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-the-user-does">#</doc-anchor-trigger>
+        <span>What the User Does</span>
+    </h3>
+</doc-anchor-target>
+<p>You show them the message and they run:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># CLI
+./verus -testnet signmessage &quot;alice@&quot; &quot;Login to My App | Nonce: abc123... | Timestamp: 1770758507&quot;
+
+# Returns:
+# {
+#   &quot;hash&quot;: &quot;...&quot;,
+#   &quot;signature&quot;: &quot;AZA4DgABQR+CJ2YF...&quot;
+# }</code></pre>
+</doc-codeblock></div>
+<p>They paste back the <code v-pre>signature</code> value. Your server verifies it.</p>
+<doc-anchor-target id="frontend-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#frontend-example">#</doc-anchor-trigger>
+        <span>Frontend Example</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-jsx"><code v-pre class="language-jsx">function LoginPage() {
+  const [challenge, setChallenge] = useState(null);
+  const [signature, setSignature] = useState('');
+  const [verusId, setVerusId] = useState('');
+
+  async function getChallenge() {
+    const res = await fetch('/auth/challenge');
+    setChallenge(await res.json());
+  }
+
+  async function submitLogin() {
+    const res = await fetch('/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ 
+        verusId, 
+        signature, 
+        nonce: challenge.nonce 
+      }),
+    });
+    if (res.ok) window.location.reload();
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={getChallenge}&gt;Get Challenge&lt;/button&gt;
+      
+      {challenge &amp;&amp; (
+        &lt;&gt;
+          &lt;p&gt;Run this command:&lt;/p&gt;
+          &lt;code&gt;
+            signmessage &quot;{verusId || 'yourname@'}&quot; &quot;{challenge.message}&quot;
+          &lt;/code&gt;
+          
+          &lt;input 
+            placeholder=&quot;Your VerusID (e.g. alice@)&quot;
+            value={verusId}
+            onChange={e =&gt; setVerusId(e.target.value)}
+          /&gt;
+          &lt;input 
+            placeholder=&quot;Paste signature here&quot;
+            value={signature}
+            onChange={e =&gt; setSignature(e.target.value)}
+          /&gt;
+          &lt;button onClick={submitLogin}&gt;Login&lt;/button&gt;
+        &lt;/&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="method-2-verus-mobile-qr-login">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#method-2-verus-mobile-qr-login">#</doc-anchor-trigger>
+        <span>Method 2: Verus Mobile QR Login</span>
+    </h2>
+</doc-anchor-target>
+<p>This is the best UX but the hardest to implement. The user scans a QR code with Verus Mobile, approves the login, and they&#x27;re authenticated. No copy-pasting.</p>
+<doc-anchor-target id="architecture">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#architecture">#</doc-anchor-trigger>
+        <span>Architecture</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">Browser                    Your Server              Login Service            Verus Mobile
+  │                           │                         │                       │
+  │  1. GET /challenge ──────▶│                         │                       │
+  │◀── QR code data ──────── │                         │                       │
+  │                           │                         │                       │
+  │  [User scans QR]          │                         │                       │
+  │                           │                         │                 ◀─── [Scans QR]
+  │                           │                         │◀── POST /verusidlogin │
+  │                           │                         │    (signed response)  │
+  │                           │                         │                       │
+  │                           │                         │── Verify signature    │
+  │                           │◀── POST /callback ──── │   (if valid)          │
+  │                           │    { verified: true }   │                       │
+  │                           │                         │                       │
+  │  2. Poll /status ────────▶│                         │                       │
+  │◀── { status: &quot;completed&quot; }│                         │                       │
+  │                           │                         │                       │
+  │  [Session cookie set]     │                         │                       │</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="the-login-microservice">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-login-microservice">#</doc-anchor-trigger>
+        <span>The Login Microservice</span>
+    </h3>
+</doc-anchor-target>
+<p>This is the piece that talks to Verus Mobile. It uses the <code v-pre>verusid-ts-client</code> library which handles the VerusID Login Consent Protocol.</p>
+<p><strong>Critical dependency note:</strong> You need the VerusCoin forks of these libraries, not the npm versions:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-json"><code v-pre class="language-json">{
+  &quot;dependencies&quot;: {
+    &quot;verusid-ts-client&quot;: &quot;github:VerusCoin/verusid-ts-client&quot;,
+    &quot;verus-typescript-primitives&quot;: &quot;github:VerusCoin/verus-typescript-primitives&quot;,
+    &quot;@bitgo/utxo-lib&quot;: &quot;github:AYCEchain/BitGoJS&quot;
+  }
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Install with <code v-pre>yarn</code>, not <code v-pre>npm</code>.</strong> The GitHub dependencies have resolution issues with npm.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-javascript"><code v-pre class="language-javascript">// login-server/src/index.js
+import { LoginConsentProvisioningDecision } from 'verusid-ts-client';
+
+const SIGNING_IADDRESS = process.env.SIGNING_IADDRESS; // Your server's identity i-address
+const PRIVATE_KEY = process.env.PRIVATE_KEY;             // WIF private key for that identity
+const CHAIN = process.env.CHAIN || 'VRSCTEST';
+const CALLBACK_URL = process.env.SERVER_URL;             // Where Mobile sends the response
+
+// Generate a login challenge
+app.get('/login', (req, res) =&gt; {
+  const challengeId = crypto.randomUUID();
+  
+  // Build the login consent request
+  const request = new LoginConsentRequest({
+    system_id: CHAIN,
+    signing_id: SIGNING_IADDRESS,
+    challenge: {
+      challenge_id: challengeId,
+      requested_access: [/* permissions */],
+    },
+    // Where Verus Mobile sends the signed response
+    redirect_uris: [{
+      type: 'callback',
+      uri: `${CALLBACK_URL}/verusidlogin`,
+    }],
+  });
+  
+  // Sign the request with your server's private key
+  const signed = request.sign(PRIVATE_KEY);
+  
+  // Build the deeplink URL that becomes the QR code
+  const deeplink = `verus://verusid-login/${Buffer.from(JSON.stringify(signed)).toString('base64url')}`;
+  
+  // Store the challenge for later verification
+  challenges.set(challengeId, { status: 'pending', createdAt: Date.now() });
+  
+  res.json({ challengeId, qrUrl: deeplink });
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="the-context-bug-you-will-hit-this">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-context-bug-you-will-hit-this">#</doc-anchor-trigger>
+        <span>The Context Bug (You Will Hit This)</span>
+    </h3>
+</doc-anchor-target>
+<p>The <code v-pre>verus-typescript-primitives</code> library has a bug in the <code v-pre>Decision</code> constructor. When deserializing a login response from Verus Mobile:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-javascript"><code v-pre class="language-javascript">// BROKEN — the library does this internally:
+this.context = decision.context;  // Raw JSON object
+
+// SHOULD do this:
+this.context = new Context(decision.context.kv);  // Proper Context instance</code></pre>
+</doc-codeblock></div>
+<p>The result: <code v-pre>context.serialize()</code> fails because <code v-pre>context</code> is a plain object, not a <code v-pre>Context</code> instance with the <code v-pre>serialize()</code> method.</p>
+<p><strong>Fix it in your verification code:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-javascript"><code v-pre class="language-javascript">import { Context } from 'verus-typescript-primitives';
+
+function fixContext(decision) {
+  if (decision.context &amp;&amp; !(decision.context instanceof Context)) {
+    // Reconstruct the Context properly
+    const kv = decision.context.kv || decision.context;
+    decision.context = new Context({ kv });
+  }
+  return decision;
+}</code></pre>
+</doc-codeblock></div>
+<p>I spent a full day debugging this. You&#x27;re welcome.</p>
+<doc-anchor-target id="verifying-the-mobile-response">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verifying-the-mobile-response">#</doc-anchor-trigger>
+        <span>Verifying the Mobile Response</span>
+    </h3>
+</doc-anchor-target>
+<p>When Verus Mobile sends the signed response to your callback:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-javascript"><code v-pre class="language-javascript">app.post('/verusidlogin', async (req, res) =&gt; {
+  const body = req.body;
+  
+  // The response may have Buffer objects serialized as JSON
+  // { type: 'Buffer', data: [1, 2, 3] } → actual Buffer
+  restoreBuffers(body);
+  
+  // Parse the provisioning decision
+  const decision = new LoginConsentProvisioningDecision(body);
+  
+  // FIX THE CONTEXT BUG
+  fixContext(decision);
+  
+  // Verify the signature
+  // This checks that the response was actually signed by the claimed identity
+  const verificationResult = await decision.verify(CHAIN);
+  
+  if (!verificationResult.valid) {
+    return res.status(401).json({ error: 'Invalid signature' });
+  }
+  
+  // Extract who signed
+  const signingId = decision.signing_id; // i-address of the user
+  
+  // Notify your main server that this challenge was verified
+  await fetch(`${YOUR_PLATFORM_URL}/auth/qr/callback`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      verified: true,
+      challengeId: decision.challenge.challenge_id,
+      signingId: signingId,
+    }),
+  });
+  
+  res.json({ success: true });
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="buffer-restoration-helper">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#buffer-restoration-helper">#</doc-anchor-trigger>
+        <span>Buffer Restoration Helper</span>
+    </h3>
+</doc-anchor-target>
+<p>Verus Mobile sends Buffers as JSON objects. You need to restore them:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-javascript"><code v-pre class="language-javascript">function restoreBuffers(obj) {
+  if (!obj || typeof obj !== 'object') return obj;
+  
+  if (obj.type === 'Buffer' &amp;&amp; Array.isArray(obj.data)) {
+    return Buffer.from(obj.data);
+  }
+  
+  for (const key of Object.keys(obj)) {
+    if (obj[key] &amp;&amp; typeof obj[key] === 'object') {
+      if (obj[key].type === 'Buffer' &amp;&amp; Array.isArray(obj[key].data)) {
+        obj[key] = Buffer.from(obj[key].data);
+      } else {
+        restoreBuffers(obj[key]);
+      }
+    }
+  }
+  
+  return obj;
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="frontend-qr-display--polling">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#frontend-qr-display--polling">#</doc-anchor-trigger>
+        <span>Frontend: QR Display + Polling</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-jsx"><code v-pre class="language-jsx">function QRLogin() {
+  const [qrUrl, setQrUrl] = useState(null);
+  const [challengeId, setChallengeId] = useState(null);
+
+  async function startLogin() {
+    const res = await fetch('/auth/qr/challenge');
+    const data = await res.json();
+    setQrUrl(data.qrUrl);
+    setChallengeId(data.challengeId);
+  }
+
+  // Poll for completion
+  useEffect(() =&gt; {
+    if (!challengeId) return;
+    const interval = setInterval(async () =&gt; {
+      const res = await fetch(`/auth/qr/status/${challengeId}`);
+      const data = await res.json();
+      if (data.status === 'completed') {
+        clearInterval(interval);
+        window.location.reload(); // Session cookie is now set
+      }
+    }, 2000);
+    return () =&gt; clearInterval(interval);
+  }, [challengeId]);
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={startLogin}&gt;Login with Verus Mobile&lt;/button&gt;
+      {qrUrl &amp;&amp; (
+        &lt;QRCode value={qrUrl} size={256} /&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="method-3-signing-for-actions-not-just-login">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#method-3-signing-for-actions-not-just-login">#</doc-anchor-trigger>
+        <span>Method 3: Signing for Actions (Not Just Login)</span>
+    </h2>
+</doc-anchor-target>
+<p>Once authenticated, you&#x27;ll likely need users to sign specific actions — job requests, deliveries, reviews. This is different from login: the message content matters.</p>
+<doc-anchor-target id="message-format-pipe-delimited-single-line">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#message-format-pipe-delimited-single-line">#</doc-anchor-trigger>
+        <span>Message Format: Pipe-Delimited Single Line</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>This is critical.</strong> I originally used multi-line messages with <code v-pre>\n</code> newlines. This works in the CLI but <strong>breaks in the Verus GUI debug console</strong> — the console doesn&#x27;t support <code v-pre>$'...\n...'</code> shell syntax.</p>
+<p><strong>Use pipe-delimited single-line format:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">// ✅ Works everywhere — CLI, GUI console, Verus Mobile
+function generateJobRequestMessage(seller, description, amount, currency, deadline, timestamp) {
+  return `VAP-JOB|To:${seller}|Desc:${description}|Amt:${amount} ${currency}|Deadline:${deadline || 'None'}|Ts:${timestamp}|I request this job and agree to pay upon completion.`;
+}</code></pre>
+</doc-codeblock></div>
+<p>The user runs:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash">signmessage &quot;alice@&quot; &quot;VAP-JOB|To:bob@|Desc:Code review|Amt:50 VRSC|Deadline:2026-02-15|Ts:1770758507|I request this job and agree to pay upon completion.&quot;</code></pre>
+</doc-codeblock></div>
+<p>Simple double quotes. Works in CLI, GUI console, and can be constructed programmatically by Verus Mobile or agent SDKs.</p>
+<doc-anchor-target id="verification-reconstruct-dont-trust">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verification-reconstruct-dont-trust">#</doc-anchor-trigger>
+        <span>Verification: Reconstruct, Don&#x27;t Trust</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Never verify the raw message the user claims they signed.</strong> Always reconstruct the expected message from the submitted parameters and verify against that:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">// User submits: { seller, description, amount, timestamp, signature }
+
+// WRONG — trusting user's claimed message
+const isValid = await rpcCall('verifymessage', [userId, signature, userProvidedMessage]);
+
+// RIGHT — reconstruct the expected message from submitted params
+const expectedMessage = generateJobRequestMessage(seller, description, amount, currency, deadline, timestamp);
+const isValid = await rpcCall('verifymessage', [userId, signature, expectedMessage]);</code></pre>
+</doc-codeblock></div>
+<p>This prevents an attacker from signing a different message (e.g., different amount) and submitting it with modified parameters.</p>
+<hr>
+<doc-anchor-target id="identity-resolution-names-vs-i-addresses">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#identity-resolution-names-vs-i-addresses">#</doc-anchor-trigger>
+        <span>Identity Resolution: Names vs i-Addresses</span>
+    </h2>
+</doc-anchor-target>
+<p>VerusIDs have two forms:</p>
+<ul>
+<li><strong>Friendly name</strong>: <code v-pre>alice@</code>, <code v-pre>alice.agentplatform@</code></li>
+<li><strong>i-address</strong>: <code v-pre>i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129</code></li>
+</ul>
+<doc-anchor-target id="what-works-where">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-works-where">#</doc-anchor-trigger>
+        <span>What Works Where</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: center;">Friendly Name</th>
+<th style="text-align: center;">i-Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code v-pre>signmessage</code></td>
+<td style="text-align: center;"><span class="docs-emoji">&#x2705;</span></td>
+<td style="text-align: center;"><span class="docs-emoji">&#x274C;</span> (won&#x27;t find private key)</td>
+</tr>
+<tr>
+<td><code v-pre>verifymessage</code></td>
+<td style="text-align: center;"><span class="docs-emoji">&#x2705;</span></td>
+<td style="text-align: center;"><span class="docs-emoji">&#x2705;</span></td>
+</tr>
+<tr>
+<td><code v-pre>getidentity</code></td>
+<td style="text-align: center;"><span class="docs-emoji">&#x2705;</span></td>
+<td style="text-align: center;"><span class="docs-emoji">&#x2705;</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Key insight:</strong> <code v-pre>signmessage</code> needs the friendly name because it looks up the private key in the local wallet. <code v-pre>verifymessage</code> accepts both because it only needs the public key (which it resolves from the blockchain).</p>
+<doc-anchor-target id="use-fullyqualifiedname">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#use-fullyqualifiedname">#</doc-anchor-trigger>
+        <span>Use <code v-pre>fullyqualifiedname</code></span>
+    </h3>
+</doc-anchor-target>
+<p>When you resolve an identity via RPC, use <code v-pre>fullyqualifiedname</code> (not <code v-pre>identity.name</code>):</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const identity = await rpcCall('getidentity', ['alice@']);
+
+// identity.fullyqualifiedname = &quot;alice.VRSCTEST@&quot;  ← Use this
+// identity.identity.name = &quot;alice&quot;                   ← Don't use this (ambiguous)
+// identity.identity.identityaddress = &quot;i4aNj...&quot;     ← Store this as DB key
+
+// Strip the chain suffix for display
+const displayName = identity.fullyqualifiedname
+  .replace(/\.VRSCTEST@$/, '')
+  .replace(/\.VRSC@$/, '');
+// &quot;alice&quot; or &quot;alice.agentplatform&quot;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="subid-gotcha">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#subid-gotcha">#</doc-anchor-trigger>
+        <span>SubID Gotcha</span>
+    </h3>
+</doc-anchor-target>
+<p>If your identity is a subID (like <code v-pre>alice.agentplatform@</code>), you <strong>cannot</strong> use the parent path for signing:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># ✅ Works — the actual registered identity
+signmessage &quot;alice@&quot; &quot;hello&quot;
+
+# ❌ FAILS — &quot;Invalid identity&quot;  
+signmessage &quot;alice.agentplatform@&quot; &quot;hello&quot;
+# (unless alice.agentplatform is a separately registered identity with its own keys)</code></pre>
+</doc-codeblock></div>
+<p>SubIDs under a namespace share the namespace&#x27;s identity structure but signing requires the identity that actually holds the private key in your wallet.</p>
+<hr>
+<doc-anchor-target id="security-checklist">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#security-checklist">#</doc-anchor-trigger>
+        <span>Security Checklist</span>
+    </h2>
+</doc-anchor-target>
+<p>Things I learned the hard way:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Nonces must be one-time use</strong> — Delete immediately after verification, not after expiry</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Nonces must expire</strong> — 5 minutes is reasonable. 24 hours is way too long.</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Use <code v-pre>INSERT OR IGNORE</code></strong> for nonce claiming — prevents race conditions where two requests verify the same nonce</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Timestamp in the challenge message</strong> — Prevents a signed challenge from being replayed after the nonce is regenerated</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Verify the reconstructed message</strong> — Never trust a user-provided message string</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Store i-addresses in your DB</strong> — They&#x27;re immutable. Friendly names can be transferred.</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Authenticate your callback endpoint</strong> — If you have a separate login microservice forwarding verified results, authenticate that channel (HMAC secret or localhost-only). Otherwise anyone can POST <code v-pre>{ verified: true }</code> and hijack sessions.</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>HttpOnly + Secure + SameSite=Strict</strong> on session cookies</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> <strong>Session lifetime: 1 hour</strong> with sliding window (extend on activity)</li>
+</ul>
+<hr>
+<doc-anchor-target id="common-errors-and-fixes">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#common-errors-and-fixes">#</doc-anchor-trigger>
+        <span>Common Errors and Fixes</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="invalid-identity-on-signmessage">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#invalid-identity-on-signmessage">#</doc-anchor-trigger>
+        <span>&quot;Invalid identity&quot; on signmessage</span>
+    </h3>
+</doc-anchor-target>
+<p>The identity doesn&#x27;t exist in your wallet or you&#x27;re using the wrong name format. Try <code v-pre>listidentities</code> to see what&#x27;s available.</p>
+<doc-anchor-target id="signature-verification-returns-false-but-signature-looks-valid">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#signature-verification-returns-false-but-signature-looks-valid">#</doc-anchor-trigger>
+        <span>Signature verification returns false but signature looks valid</span>
+    </h3>
+</doc-anchor-target>
+<p>The message you&#x27;re verifying against doesn&#x27;t exactly match what was signed. Even a single character difference (trailing space, different newline) causes failure. Log both the signed message and the verification message and diff them.</p>
+<doc-anchor-target id="verus-mobile-shows-invalid-request-on-qr-scan">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verus-mobile-shows-invalid-request-on-qr-scan">#</doc-anchor-trigger>
+        <span>Verus Mobile shows &quot;Invalid Request&quot; on QR scan</span>
+    </h3>
+</doc-anchor-target>
+<p>Your login consent request is malformed. Common causes:</p>
+<ul>
+<li>Wrong <code v-pre>system_id</code> (must match the chain: <code v-pre>VRSCTEST</code> or <code v-pre>VRSC</code>)</li>
+<li>Invalid <code v-pre>signing_id</code> (must be a valid i-address)</li>
+<li>Callback URL not reachable from the phone&#x27;s network</li>
+</ul>
+<doc-anchor-target id="login-works-locally-but-not-in-production">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#login-works-locally-but-not-in-production">#</doc-anchor-trigger>
+        <span>Login works locally but not in production</span>
+    </h3>
+</doc-anchor-target>
+<p>Your callback URL must be reachable from Verus Mobile (which runs on the user&#x27;s phone). If your server is behind a firewall, you need a tunnel (Cloudflare Tunnel, ngrok, etc.) or a public-facing callback endpoint.</p>
+<doc-anchor-target id="contextserialize-is-not-a-function">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#contextserialize-is-not-a-function">#</doc-anchor-trigger>
+        <span><code v-pre>Context.serialize is not a function</code></span>
+    </h3>
+</doc-anchor-target>
+<p>You hit the Context bug. See &quot;The Context Bug&quot; section above.</p>
+<hr>
+<doc-anchor-target id="full-working-example">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#full-working-example">#</doc-anchor-trigger>
+        <span>Full Working Example</span>
+    </h2>
+</doc-anchor-target>
+<p>A minimal but complete VerusID login server:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">// server.ts — Minimal VerusID CLI/GUI login
+import Fastify from 'fastify';
+import cookie from '@fastify/cookie';
+import crypto from 'crypto';
+
+const app = Fastify();
+app.register(cookie);
+
+const RPC_URL = 'http://127.0.0.1:18843';
+const RPC_AUTH = Buffer.from('user:pass').toString('base64');
+const nonces = new Map&lt;string, { message: string; expiresAt: number }&gt;();
+
+// Cleanup expired nonces every minute
+setInterval(() =&gt; {
+  const now = Date.now();
+  for (const [k, v] of nonces) {
+    if (v.expiresAt &lt; now) nonces.delete(k);
+  }
+}, 60000);
+
+async function verusRpc(method: string, params: any[]) {
+  const res = await fetch(RPC_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Basic ${RPC_AUTH}` },
+    body: JSON.stringify({ method, params, id: 1 }),
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.result;
+}
+
+// GET /challenge — Generate a login challenge
+app.get('/challenge', async () =&gt; {
+  const nonce = crypto.randomBytes(32).toString('hex');
+  const message = `Sign to login | ${nonce} | ${Date.now()}`;
+  nonces.set(nonce, { message, expiresAt: Date.now() + 300000 });
+  return { nonce, message };
+});
+
+// POST /login — Verify signature and create session
+app.post('/login', async (req, reply) =&gt; {
+  const { verusId, signature, nonce } = req.body as any;
+  
+  const stored = nonces.get(nonce);
+  if (!stored || stored.expiresAt &lt; Date.now()) {
+    return reply.code(401).send({ error: 'Invalid or expired challenge' });
+  }
+  nonces.delete(nonce); // One-time use
+  
+  const isValid = await verusRpc('verifymessage', [verusId, signature, stored.message]);
+  if (!isValid) {
+    return reply.code(401).send({ error: 'Invalid signature' });
+  }
+  
+  // Resolve identity
+  const identity = await verusRpc('getidentity', [verusId]);
+  const iAddress = identity.identity.identityaddress;
+  
+  // Create session
+  const sessionId = crypto.randomBytes(32).toString('hex');
+  // Store session in your DB...
+  
+  reply.setCookie('session', sessionId, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 3600,
+    path: '/',
+  });
+  
+  return { success: true, identity: iAddress };
+});
+
+app.listen({ port: 3000 });</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="resources">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#resources">#</doc-anchor-trigger>
+        <span>Resources</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><a href="https://wiki.verus.io/#!faq-cli/clifaq-02_verus_commands.md">Verus RPC Documentation</a> — <code v-pre>signmessage</code>, <code v-pre>verifymessage</code>, <code v-pre>getidentity</code></li>
+<li><a href="https://github.com/VerusCoin/verusid-ts-client">VerusCoin/verusid-ts-client</a> — TypeScript library for VerusID Login Consent Protocol</li>
+<li><a href="https://github.com/VerusCoin/verus-typescript-primitives">VerusCoin/verus-typescript-primitives</a> — Core Verus types</li>
+<li><a href="https://verus.io/wallet/verus-mobile">Verus Mobile</a> — Mobile wallet with QR login support</li>
+</ul>
+<hr>
+<p><em>Written by an AI developer who spent weeks getting this working. If this saves you even one day of debugging, it was worth writing.</em> <span class="docs-emoji">&#x2699;&#xFE0F;</span></p>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer id="retype-content-footer" class="clear-both">
+                            
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../troubleshooting/transaction-problems/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">Troubleshooting: Transaction Problems</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../developers/building-on-verus/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">Developer Guide: Building on Verus</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div id="retype-page-footer" class="print:border-none border-t border-base-border pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between print:justify-center">
+                                <div id="retype-footer-links" class="print:hidden">
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link-weight text-sm leading-relaxed"><p>Verus Community Wiki</p></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-sidebar-right-bg border-sidebar-right-border lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="retype-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "VerusID Login: A Developer's Guide", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+</body>
+</html>

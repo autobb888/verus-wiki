@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.824081727030">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.11.0">
+
+    <!-- Primary Meta Tags -->
+    <title>How To: Bridge from Ethereum</title>
+    <meta name="title" content="How To: Bridge from Ethereum">
+    <meta name="description" content="Transfer ETH and ERC-20 tokens to Verus, and send VRSC back to Ethereum">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="/how-to/bridge-from-ethereum/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/how-to/bridge-from-ethereum/">
+    <meta property="og:title" content="How To: Bridge from Ethereum">
+    <meta property="og:description" content="Transfer ETH and ERC-20 tokens to Verus, and send VRSC back to Ethereum">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="/how-to/bridge-from-ethereum/">
+    <meta property="twitter:title" content="How To: Bridge from Ethereum">
+    <meta property="twitter:description" content="Transfer ETH and ERC-20 tokens to Verus, and send VRSC back to Ethereum">
+
+    <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
+
+    <link href="../../resources/css/retype.css?v=3.11.0.824081727030" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.824081727030" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.824081727030" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.824081727030" defer></script>
+</head>
+<body>
+    <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
+        <div class="absolute bottom-0 left-0" style="top: 5rem; right: 50%"></div>
+    
+        <header id="retype-header" class="sticky top-0 z-30 flex w-full h-16 bg-header-bg border-b border-header-border md:h-20">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton retype-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="retype-sidebar-left-toggle-button"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                            <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">Verus Wiki</span>
+                        </a>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block border-base-border"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav id="retype-header-nav" class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            <li class="mr-6">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://verus.io">Verus.io</a>
+                            </li>
+                            <li class="mr-6">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://discord.gg/veruscoin">Discord</a>
+                            </li>
+        
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-search-placeholder transition-colors duration-200 ease-in bg-search-bg border border-transparent rounded md:text-sm hover:border-search-border-hover focus:outline-none focus:border-search-border-focus" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="retype-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+    
+        <div id="retype-container" class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-sidebar-left-bg border-sidebar-left-border sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton">
+            
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-filter-bg border border-filter-border rounded shadow-none text-sm focus:outline-none focus:border-filter-border-focus" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-base-border">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-base-border">
+            
+                        <div class="py-3 px-6 md:hidden border-b dark:border-base-border">
+                            <nav>
+                                <ul class="flex flex-wrap justify-center items-center">
+                                    <li class="mr-6">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://verus.io">Verus.io</a>
+                                    </li>
+                                    <li class="mr-6">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://discord.gg/veruscoin">Discord</a>
+                                    </li>
+            
+                                </ul>
+                            </nav>
+                        </div>
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 bg-body-bg">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="retype-markdown" id="retype-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="retype-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="how-to-bridge-from-ethereum" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#how-to-bridge-from-ethereum">#</doc-anchor-trigger>
+        <span>How To: Bridge from Ethereum</span>
+    </h1>
+</doc-anchor-target>
+<blockquote>
+<p>Transfer ETH and ERC-20 tokens to Verus, and send VRSC back to Ethereum</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="prerequisites">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#prerequisites">#</doc-anchor-trigger>
+        <span>Prerequisites</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><strong>Ethereum wallet</strong> (MetaMask or similar) with ETH for gas + the amount to bridge</li>
+<li><strong>Verus wallet</strong> — either Verus Desktop or Verus CLI (<code v-pre>verusd</code>) running and synced</li>
+<li>A <strong>Verus destination address</strong> (R-address) or <strong>VerusID</strong> to receive funds</li>
+<li>For CLI operations: Verus daemon running and synced with Bridge.vETH active</li>
+</ul>
+<hr>
+<doc-anchor-target id="part-1-ethereum--verus-web-ui">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#part-1-ethereum--verus-web-ui">#</doc-anchor-trigger>
+        <span>Part 1: Ethereum → Verus (Web UI)</span>
+    </h2>
+</doc-anchor-target>
+<p>The simplest method. No coding required.</p>
+<doc-anchor-target id="step-1-open-the-bridge-interface">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-1-open-the-bridge-interface">#</doc-anchor-trigger>
+        <span>Step 1: Open the Bridge Interface</span>
+    </h3>
+</doc-anchor-target>
+<p>Go to <a href="https://eth.verusbridge.io/">eth.verusbridge.io</a></p>
+<doc-anchor-target id="step-2-connect-your-ethereum-wallet">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-2-connect-your-ethereum-wallet">#</doc-anchor-trigger>
+        <span>Step 2: Connect Your Ethereum Wallet</span>
+    </h3>
+</doc-anchor-target>
+<ol>
+<li>Click <strong>Connect Wallet</strong></li>
+<li>Select MetaMask (or your wallet)</li>
+<li>Approve the connection</li>
+</ol>
+<doc-anchor-target id="step-3-select-the-token-to-bridge">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-3-select-the-token-to-bridge">#</doc-anchor-trigger>
+        <span>Step 3: Select the Token to Bridge</span>
+    </h3>
+</doc-anchor-target>
+<p>Choose from:</p>
+<ul>
+<li><strong>ETH</strong> — arrives as <strong>vETH</strong> on Verus</li>
+<li><strong>DAI</strong> — arrives as <strong>DAI.vETH</strong> on Verus</li>
+<li><strong>MKR</strong> — arrives as <strong>MKR.vETH</strong> on Verus</li>
+</ul>
+<doc-anchor-target id="step-4-enter-your-verus-destination">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-4-enter-your-verus-destination">#</doc-anchor-trigger>
+        <span>Step 4: Enter Your Verus Destination</span>
+    </h3>
+</doc-anchor-target>
+<p>Enter your Verus R-address or VerusID (e.g., <code v-pre>myidentity@</code>).</p>
+<blockquote>
+<p><span class="docs-emoji">&#x26A0;&#xFE0F;</span> <strong>Double-check the address.</strong> Cross-chain transfers cannot be reversed.</p>
+</blockquote>
+<doc-anchor-target id="step-5-enter-the-amount">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-5-enter-the-amount">#</doc-anchor-trigger>
+        <span>Step 5: Enter the Amount</span>
+    </h3>
+</doc-anchor-target>
+<p>Specify how much to bridge. The UI shows estimated fees and output.</p>
+<doc-anchor-target id="step-6-confirm-the-transaction">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-6-confirm-the-transaction">#</doc-anchor-trigger>
+        <span>Step 6: Confirm the Transaction</span>
+    </h3>
+</doc-anchor-target>
+<ol>
+<li>Review the details</li>
+<li>Click <strong>Send</strong></li>
+<li>Confirm the transaction in MetaMask</li>
+<li>Pay the gas fee</li>
+</ol>
+<doc-anchor-target id="step-7-wait-for-completion">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-7-wait-for-completion">#</doc-anchor-trigger>
+        <span>Step 7: Wait for Completion</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Stage</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethereum confirmation</td>
+<td>~15 minutes</td>
+</tr>
+<tr>
+<td>Bridge notarization</td>
+<td>~10-20 minutes</td>
+</tr>
+<tr>
+<td>Verus import</td>
+<td>~1-2 minutes</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~30-60 minutes</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="step-8-verify-on-verus">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-8-verify-on-verus">#</doc-anchor-trigger>
+        <span>Step 8: Verify on Verus</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Check your balance
+verus getbalance
+
+# Check specific currency balance (vETH, DAI.vETH, etc.)
+verus getcurrencybalance '*'</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="part-2-verus--ethereum-cli">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#part-2-verus--ethereum-cli">#</doc-anchor-trigger>
+        <span>Part 2: Verus → Ethereum (CLI)</span>
+    </h2>
+</doc-anchor-target>
+<p>Send VRSC or other Verus-side currencies back to Ethereum.</p>
+<doc-anchor-target id="step-1-verify-bridge-status">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-1-verify-bridge-status">#</doc-anchor-trigger>
+        <span>Step 1: Verify Bridge Status</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash">verus getcurrency &quot;Bridge.vETH&quot;</code></pre>
+</doc-codeblock></div>
+<p>Confirm the bridge is active and has reserves.</p>
+<doc-anchor-target id="step-2-send-to-ethereum">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-2-send-to-ethereum">#</doc-anchor-trigger>
+        <span>Step 2: Send to Ethereum</span>
+    </h3>
+</doc-anchor-target>
+<p>Use <a href="../command-reference/multichain/sendcurrency.md">sendcurrency</a> with <code v-pre>exportto</code>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Send VRSC to your Ethereum address
+verus sendcurrency '*' '[{
+  &quot;address&quot;: &quot;0xYourEthereumAddress&quot;,
+  &quot;amount&quot;: 10,
+  &quot;currency&quot;: &quot;VRSC&quot;,
+  &quot;exportto&quot;: &quot;vETH&quot;,
+  &quot;feecurrency&quot;: &quot;veth&quot;
+}]'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Send vETH back to Ethereum as ETH
+verus sendcurrency '*' '[{
+  &quot;address&quot;: &quot;0xYourEthereumAddress&quot;,
+  &quot;amount&quot;: 0.5,
+  &quot;currency&quot;: &quot;vETH&quot;,
+  &quot;exportto&quot;: &quot;vETH&quot;,
+  &quot;feecurrency&quot;: &quot;veth&quot;
+}]'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="step-3-wait-for-completion">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-3-wait-for-completion">#</doc-anchor-trigger>
+        <span>Step 3: Wait for Completion</span>
+    </h3>
+</doc-anchor-target>
+<p>Same timing as ETH → Verus: approximately 30-60 minutes (~1 hour typical) for notarization and import on the Ethereum side.</p>
+<doc-anchor-target id="step-4-verify-on-ethereum">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-4-verify-on-ethereum">#</doc-anchor-trigger>
+        <span>Step 4: Verify on Ethereum</span>
+    </h3>
+</doc-anchor-target>
+<p>Check your Ethereum wallet or use a block explorer (Etherscan) to confirm receipt.</p>
+<hr>
+<doc-anchor-target id="part-3-bridge--convert-in-one-step">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#part-3-bridge--convert-in-one-step">#</doc-anchor-trigger>
+        <span>Part 3: Bridge + Convert in One Step</span>
+    </h2>
+</doc-anchor-target>
+<p>You can bridge <strong>and</strong> convert simultaneously. For example, convert vETH to VRSC through the Bridge.vETH basket:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Convert vETH → VRSC through Bridge.vETH
+verus sendcurrency '*' '[{
+  &quot;address&quot;: &quot;myidentity@&quot;,
+  &quot;amount&quot;: 0.5,
+  &quot;currency&quot;: &quot;vETH&quot;,
+  &quot;convertto&quot;: &quot;VRSC&quot;,
+  &quot;via&quot;: &quot;Bridge.vETH&quot;
+}]'</code></pre>
+</doc-codeblock></div>
+<p>Or estimate first:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash">verus estimateconversion '{&quot;currency&quot;:&quot;vETH&quot;,&quot;convertto&quot;:&quot;VRSC&quot;,&quot;via&quot;:&quot;Bridge.vETH&quot;,&quot;amount&quot;:0.5}'</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="contract-addresses">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#contract-addresses">#</doc-anchor-trigger>
+        <span>Contract Addresses</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="ethereum-mainnet">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ethereum-mainnet">#</doc-anchor-trigger>
+        <span>Ethereum Mainnet</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Contract</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VRSC Token</td>
+<td><code v-pre>0x1Af5b8015C64d39Ab44C60EAd8317f9F5a9B6C4C</code></td>
+</tr>
+<tr>
+<td>vETH</td>
+<td><code v-pre>0x454CB83913D688795E237837d30258d11ea7c752</code></td>
+</tr>
+<tr>
+<td>Bridge.vETH</td>
+<td><code v-pre>0x0200EbbD26467B866120D84A0d37c82CdE0acAEB</code></td>
+</tr>
+<tr>
+<td>DAI.vETH</td>
+<td><code v-pre>0x8b72F1c2D326d376aDd46698E385Cf624f0CA1dA</code></td>
+</tr>
+<tr>
+<td>MKR.vETH</td>
+<td><code v-pre>0x65b5AaC6A4aa0Eb656AB6B8812184e7545b6A221</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="sepolia-testnet">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#sepolia-testnet">#</doc-anchor-trigger>
+        <span>Sepolia Testnet</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Contract</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VRSCTEST</td>
+<td><code v-pre>0xA6ef9ea235635E328124Ff3429dB9F9E91b64e2d</code></td>
+</tr>
+<tr>
+<td>vETH</td>
+<td><code v-pre>0x67460C2f56774eD27EeB8685f29f6CEC0B090B00</code></td>
+</tr>
+<tr>
+<td>Bridge.vETH</td>
+<td><code v-pre>0xffEce948b8A38bBcC813411D2597f7f8485a0689</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<doc-anchor-target id="fees">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#fees">#</doc-anchor-trigger>
+        <span>Fees</span>
+    </h2>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Fee Type</th>
+<th>Amount</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethereum gas</td>
+<td>Variable (~$5-50)</td>
+<td>Depends on network congestion</td>
+</tr>
+<tr>
+<td>Bridge export fee</td>
+<td>~0.003 ETH</td>
+<td>Fixed bridge fee</td>
+</tr>
+<tr>
+<td>Verus transaction fee</td>
+<td>0.0001 VRSC</td>
+<td>Standard Verus fee</td>
+</tr>
+<tr>
+<td>AMM conversion fee</td>
+<td>~0.025%</td>
+<td>Only if converting via basket</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Budget approximately 0.01 ETH for fees</strong> on top of the amount you want to bridge.</p>
+<hr>
+<doc-anchor-target id="testnet-notes">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#testnet-notes">#</doc-anchor-trigger>
+        <span>Testnet Notes</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li>Use <strong>Sepolia</strong> testnet on the Ethereum side</li>
+<li>Use <strong>VRSCTEST</strong> on the Verus side</li>
+<li>Testnet bridge may not always be active — check with <code v-pre>verus -testnet getcurrency &quot;Bridge.vETH&quot;</code></li>
+<li>Get Sepolia ETH from faucets (e.g., sepoliafaucet.com)</li>
+<li>The testnet bridge UI is also at <a href="https://eth.verusbridge.io/">eth.verusbridge.io</a> (select testnet)</li>
+</ul>
+<hr>
+<doc-anchor-target id="troubleshooting">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#troubleshooting">#</doc-anchor-trigger>
+        <span>Troubleshooting</span>
+    </h2>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Issue</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transaction stuck on Ethereum</td>
+<td>Wait for finality (~15 min). If gas was too low, speed up in MetaMask.</td>
+</tr>
+<tr>
+<td>Funds not appearing on Verus</td>
+<td>Wait up to 45 minutes. Check <code v-pre>verus getimports &quot;Bridge.vETH&quot;</code> for pending imports.</td>
+</tr>
+<tr>
+<td>&quot;Bridge not launched&quot; error</td>
+<td>Bridge.vETH may not be active. Check with <code v-pre>verus getcurrency &quot;Bridge.vETH&quot;</code>.</td>
+</tr>
+<tr>
+<td>Invalid destination address</td>
+<td>Ensure the Verus R-address or i-address is valid. Verify with <code v-pre>verus validateaddress &quot;address&quot;</code>.</td>
+</tr>
+<tr>
+<td>Ethereum gas too high</td>
+<td>Wait for lower gas or increase your gas limit. Bridge transactions use ~200-500k gas.</td>
+</tr>
+<tr>
+<td>Wrong token received</td>
+<td>ETH arrives as vETH, not VRSC. Use a conversion to swap vETH → VRSC if needed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="checking-transfer-status">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#checking-transfer-status">#</doc-anchor-trigger>
+        <span>Checking Transfer Status</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Check pending imports from Ethereum
+verus getimports &quot;Bridge.vETH&quot;
+
+# Check pending exports to Ethereum
+verus getexports &quot;Bridge.vETH&quot;
+
+# Check bridge reserves and status
+verus getcurrency &quot;Bridge.vETH&quot;</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="related">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#related">#</doc-anchor-trigger>
+        <span>Related</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><a href="../../concepts/bridge-and-crosschain/">Bridge and Cross-Chain</a> — How the bridge works</li>
+<li><a href="../convert-currencies/">How To: Convert Currencies</a> — Convert bridged assets</li>
+<li><a href="../command-reference/multichain/sendcurrency.md">sendcurrency</a> — Command reference</li>
+<li><a href="../../concepts/basket-currencies-defi/">Basket Currencies and DeFi</a> — Bridge.vETH as a basket</li>
+</ul>
+<hr>
+<p><em>As of Verus v1.2.x.</em></p>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer id="retype-content-footer" class="clear-both">
+                            
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../how-to/backup-and-restore-wallet/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">How To: Backup and Restore Your Wallet</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../how-to/convert-currencies/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">How To: Convert Currencies</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div id="retype-page-footer" class="print:border-none border-t border-base-border pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between print:justify-center">
+                                <div id="retype-footer-links" class="print:hidden">
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link-weight text-sm leading-relaxed"><p>Verus Community Wiki</p></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-sidebar-right-bg border-sidebar-right-border lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="retype-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "How To: Bridge from Ethereum", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+</body>
+</html>

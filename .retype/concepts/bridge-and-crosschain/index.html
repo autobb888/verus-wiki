@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.824081727030">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.11.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Bridge and Cross-Chain Transfers</title>
+    <meta name="title" content="Bridge and Cross-Chain Transfers">
+    <meta name="description" content="Trustless interoperability between Verus and Ethereum via the Verus-Ethereum bridge">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="/concepts/bridge-and-crosschain/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/concepts/bridge-and-crosschain/">
+    <meta property="og:title" content="Bridge and Cross-Chain Transfers">
+    <meta property="og:description" content="Trustless interoperability between Verus and Ethereum via the Verus-Ethereum bridge">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="/concepts/bridge-and-crosschain/">
+    <meta property="twitter:title" content="Bridge and Cross-Chain Transfers">
+    <meta property="twitter:description" content="Trustless interoperability between Verus and Ethereum via the Verus-Ethereum bridge">
+
+    <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
+
+    <link href="../../resources/css/retype.css?v=3.11.0.824081727030" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.824081727030" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.824081727030" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.824081727030" defer></script>
+</head>
+<body>
+    <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
+        <div class="absolute bottom-0 left-0" style="top: 5rem; right: 50%"></div>
+    
+        <header id="retype-header" class="sticky top-0 z-30 flex w-full h-16 bg-header-bg border-b border-header-border md:h-20">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton retype-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="retype-sidebar-left-toggle-button"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                            <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">Verus Wiki</span>
+                        </a>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block border-base-border"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav id="retype-header-nav" class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            <li class="mr-6">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://verus.io">Verus.io</a>
+                            </li>
+                            <li class="mr-6">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://discord.gg/veruscoin">Discord</a>
+                            </li>
+        
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-search-placeholder transition-colors duration-200 ease-in bg-search-bg border border-transparent rounded md:text-sm hover:border-search-border-hover focus:outline-none focus:border-search-border-focus" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="retype-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+    
+        <div id="retype-container" class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-sidebar-left-bg border-sidebar-left-border sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton">
+            
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-filter-bg border border-filter-border rounded shadow-none text-sm focus:outline-none focus:border-filter-border-focus" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-base-border">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-base-border">
+            
+                        <div class="py-3 px-6 md:hidden border-b dark:border-base-border">
+                            <nav>
+                                <ul class="flex flex-wrap justify-center items-center">
+                                    <li class="mr-6">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://verus.io">Verus.io</a>
+                                    </li>
+                                    <li class="mr-6">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://discord.gg/veruscoin">Discord</a>
+                                    </li>
+            
+                                </ul>
+                            </nav>
+                        </div>
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 bg-body-bg">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="retype-markdown" id="retype-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="retype-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="bridge-and-cross-chain-transfers" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bridge-and-cross-chain-transfers">#</doc-anchor-trigger>
+        <span>Bridge and Cross-Chain Transfers</span>
+    </h1>
+</doc-anchor-target>
+<blockquote>
+<p>Trustless interoperability between Verus and Ethereum via the Verus-Ethereum bridge</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="what-is-the-verus-ethereum-bridge">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-the-verus-ethereum-bridge">#</doc-anchor-trigger>
+        <span>What Is the Verus-Ethereum Bridge?</span>
+    </h2>
+</doc-anchor-target>
+<p>The Verus-Ethereum bridge is a <strong>trustless, decentralized protocol</strong> that enables transfers of value between the Verus and Ethereum blockchains. Unlike centralized bridges that rely on custodians holding funds, the Verus bridge uses <strong>notarization proofs</strong> validated by both chains — the same consensus mechanism that secures Verus itself.</p>
+<p>The bridge allows you to:</p>
+<ul>
+<li>Send ETH and ERC-20 tokens (DAI, MKR) from Ethereum to Verus</li>
+<li>Send VRSC and Verus-side tokens from Verus back to Ethereum</li>
+<li>Convert between bridged assets using Verus&#x27;s protocol-level AMM</li>
+<li>Move VerusIDs and currency definitions cross-chain</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│   ETHEREUM                          VERUS                   │
+│                                                             │
+│   ETH ─────────────────────────→  vETH                     │
+│   DAI ─────────────────────────→  DAI.vETH                 │
+│   MKR ─────────────────────────→  MKR.vETH                 │
+│                                                             │
+│   ←─── Bridge.vETH (basket currency) ───→                  │
+│                                                             │
+│   VRSC token ←─────────────────  VRSC                      │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="key-concepts">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#key-concepts">#</doc-anchor-trigger>
+        <span>Key Concepts</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="bridgeveth--the-bridge-currency">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bridgeveth--the-bridge-currency">#</doc-anchor-trigger>
+        <span>Bridge.vETH — The Bridge Currency</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Bridge.vETH</strong> is a <a href="../basket-currencies-defi/">basket currency</a> that sits at the heart of the bridge. It holds reserves of multiple currencies from both chains:</p>
+<ul>
+<li><strong>VRSC</strong> — Native Verus currency</li>
+<li><strong>vETH</strong> — Ethereum (ETH) represented on Verus</li>
+<li><strong>DAI.vETH</strong> — DAI stablecoin represented on Verus</li>
+<li><strong>MKR.vETH</strong> — MakerDAO governance token represented on Verus</li>
+</ul>
+<p>Because Bridge.vETH is a basket, it functions as an automatic exchange. You can convert between any of its reserve currencies using the same AMM mechanism described in <a href="../basket-currencies-defi/">Basket Currencies and DeFi</a>.</p>
+<doc-anchor-target id="mapped-tokens">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#mapped-tokens">#</doc-anchor-trigger>
+        <span>Mapped Tokens</span>
+    </h3>
+</doc-anchor-target>
+<p>When an Ethereum asset crosses the bridge, it gets a <strong>mapped representation</strong> on Verus:</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Ethereum Asset</th>
+<th>Verus Representation</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ETH (native)</td>
+<td><strong>vETH</strong></td>
+<td>Mapped currency</td>
+</tr>
+<tr>
+<td>DAI (ERC-20)</td>
+<td><strong>DAI.vETH</strong></td>
+<td>Mapped token</td>
+</tr>
+<tr>
+<td>MKR (ERC-20)</td>
+<td><strong>MKR.vETH</strong></td>
+<td>Mapped token</td>
+</tr>
+<tr>
+<td>NATI (ERC-20)</td>
+<td><strong>NATI.vETH</strong></td>
+<td>Mapped token</td>
+</tr>
+<tr>
+<td>VRSC (ERC-20 on ETH)</td>
+<td><strong>VRSC</strong> (native)</td>
+<td>Native currency</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Note:</strong> Additional ERC-20 tokens can be mapped to the bridge. The list above includes the currently active mapped tokens. Check the bridge interface at <a href="https://eth.verusbridge.io">eth.verusbridge.io</a> for the latest available tokens.</p>
+</blockquote>
+<p>The <code v-pre>.vETH</code> suffix indicates the token originated from the Ethereum side of the bridge. These mapped tokens are fully fungible on Verus — you can hold them, trade them, use them in basket currencies, or bridge them back to Ethereum at any time.</p>
+<doc-anchor-target id="currency-ids">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#currency-ids">#</doc-anchor-trigger>
+        <span>Currency IDs</span>
+    </h3>
+</doc-anchor-target>
+<p>Every currency on Verus has a permanent i-address identifier:</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Currency</th>
+<th>Mainnet i-address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VRSC</td>
+<td><code v-pre>i5w5MuNik5NtLcYmNzcvaoixooEebB6MGV</code></td>
+</tr>
+<tr>
+<td>vETH</td>
+<td><code v-pre>i9nwxtKuVYX4MSbeULLiK2ttVi6rUEhh4X</code></td>
+</tr>
+<tr>
+<td>Bridge.vETH</td>
+<td><code v-pre>i3f7tSctFkiPpiedY8QR5Tep9p4qDVebDx</code></td>
+</tr>
+<tr>
+<td>DAI.vETH</td>
+<td><code v-pre>iGBs4DWztRNvNEJBt4mqHszLxfKTNHTkhM</code></td>
+</tr>
+<tr>
+<td>MKR.vETH</td>
+<td><code v-pre>iCkKJuJScy4Z6NSDK7Mt42ZAB2NEnAE1o4</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<doc-anchor-target id="how-cross-chain-transfers-work">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#how-cross-chain-transfers-work">#</doc-anchor-trigger>
+        <span>How Cross-Chain Transfers Work</span>
+    </h2>
+</doc-anchor-target>
+<p>Every cross-chain transfer follows a three-phase process: <strong>export → notarization → import</strong>.</p>
+<doc-anchor-target id="phase-1-export">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#phase-1-export">#</doc-anchor-trigger>
+        <span>Phase 1: Export</span>
+    </h3>
+</doc-anchor-target>
+<p>When you initiate a cross-chain transfer, the source chain creates an <strong>export transaction</strong>. This locks or burns the source currency and records the transfer details (destination, amount, fees) in a special output.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Example: Send 10 VRSC to Ethereum
+verus sendcurrency '*' '[{
+  &quot;address&quot;: &quot;0xYourEthAddress&quot;,
+  &quot;amount&quot;: 10,
+  &quot;currency&quot;: &quot;VRSC&quot;,
+  &quot;exportto&quot;: &quot;vETH&quot;,
+  &quot;feecurrency&quot;: &quot;veth&quot;
+}]'</code></pre>
+</doc-codeblock></div>
+<p>The export is bundled with other exports in the same block into an <strong>export bundle</strong> — a batch of transfers that cross together.</p>
+<doc-anchor-target id="phase-2-notarization">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#phase-2-notarization">#</doc-anchor-trigger>
+        <span>Phase 2: Notarization</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Notaries</strong> are nodes that run both a Verus node and an Ethereum node. They observe finalized transactions on one chain and create <strong>notarization proofs</strong> for the other chain.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">Source Chain                    Notaries                    Dest Chain
+     │                            │                            │
+     │  1. Export tx confirmed    │                            │
+     │ ─────────────────────────→ │                            │
+     │                            │  2. Create proof           │
+     │                            │  3. Submit notarization    │
+     │                            │ ─────────────────────────→ │
+     │                            │                            │
+     │                            │  4. Dest chain validates   │
+     │                            │     proof against headers  │</code></pre>
+</doc-codeblock></div>
+<p>Key properties of notarization:</p>
+<ul>
+<li><strong>Multiple notaries</strong> must agree — no single point of failure</li>
+<li>Notarizations include <strong>Merkle proofs</strong> of the export transactions</li>
+<li>The destination chain <strong>independently validates</strong> the proofs</li>
+<li>Notaries cannot forge transfers — they can only attest to what actually happened</li>
+</ul>
+<doc-anchor-target id="phase-3-import">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#phase-3-import">#</doc-anchor-trigger>
+        <span>Phase 3: Import</span>
+    </h3>
+</doc-anchor-target>
+<p>Once a valid notarization is accepted by the destination chain, the <strong>import</strong> is processed automatically. The destination chain mints or releases the appropriate currency to the recipient address.</p>
+<p>For Ethereum-bound transfers, the import is processed by the <strong>Delegator smart contract</strong> on Ethereum. For Verus-bound transfers, the Verus blockchain processes the import natively.</p>
+<doc-anchor-target id="complete-flow-diagram">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#complete-flow-diagram">#</doc-anchor-trigger>
+        <span>Complete Flow Diagram</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">ETH → VRSC Transfer:
+
+  Ethereum                                              Verus
+  ────────                                              ─────
+  1. User sends ETH to              
+     Delegator contract          
+     with Verus destination      
+           │                     
+           │ (ETH locked)        
+           ▼                     
+  2. Export recorded on          
+     Ethereum                    
+           │                     
+           │ (~15 min finality)  
+           ▼                     
+  3. Notaries observe ──────────────→ 4. Notarization proof
+     finalized export                    submitted to Verus
+                                              │
+                                              ▼
+                                  5. Verus validates proof
+                                     against ETH headers
+                                              │
+                                              ▼
+                                  6. Import processed:
+                                     vETH minted to
+                                     destination address
+                                              │
+                                              ▼
+                                  7. User receives vETH
+                                     (or auto-converts
+                                      to VRSC via basket)</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="fees-and-timing">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#fees-and-timing">#</doc-anchor-trigger>
+        <span>Fees and Timing</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="fees">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#fees">#</doc-anchor-trigger>
+        <span>Fees</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Fee</th>
+<th>Amount</th>
+<th>Paid On</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethereum gas</td>
+<td>Variable (~$5-50)</td>
+<td>Ethereum</td>
+</tr>
+<tr>
+<td>Bridge export fee</td>
+<td>~0.003 ETH</td>
+<td>Ethereum</td>
+</tr>
+<tr>
+<td>Verus transaction fee</td>
+<td>0.0001 VRSC</td>
+<td>Verus</td>
+</tr>
+<tr>
+<td>Conversion fee (if converting)</td>
+<td>~0.025%</td>
+<td>Verus (into basket reserves)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When bridging <strong>from Ethereum to Verus</strong>, fees are paid in ETH. When bridging <strong>from Verus to Ethereum</strong>, if you don&#x27;t set the <code v-pre>feecurrency</code> flag, VRSC is automatically converted to vETH via the Bridge.vETH basket to cover Ethereum gas costs. You can explicitly set <code v-pre>&quot;feecurrency&quot;: &quot;veth&quot;</code> to pay fees in vETH directly.</p>
+<doc-anchor-target id="timing">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#timing">#</doc-anchor-trigger>
+        <span>Timing</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Stage</th>
+<th>Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethereum finality</td>
+<td>~15 minutes</td>
+</tr>
+<tr>
+<td>Notarization propagation</td>
+<td>~10-20 minutes</td>
+</tr>
+<tr>
+<td>Verus import processing</td>
+<td>~1-2 minutes</td>
+</tr>
+<tr>
+<td><strong>Total (ETH → Verus)</strong></td>
+<td><strong>~30-60 minutes</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Verus-to-Ethereum transfers take a similar amount of time. Expect roughly <strong>1 hour</strong> for a complete bridge transfer in either direction, depending on network conditions.</p>
+<hr>
+<doc-anchor-target id="security-model">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#security-model">#</doc-anchor-trigger>
+        <span>Security Model</span>
+    </h2>
+</doc-anchor-target>
+<p>The bridge&#x27;s security rests on several layers:</p>
+<doc-anchor-target id="1-proof-based-verification">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-proof-based-verification">#</doc-anchor-trigger>
+        <span>1. Proof-Based Verification</span>
+    </h3>
+</doc-anchor-target>
+<p>Transfers are not trusted — they are <strong>proven</strong>. Each notarization includes cryptographic Merkle proofs that the destination chain verifies independently. A notary cannot claim a transfer happened if it didn&#x27;t, because the proof wouldn&#x27;t validate against the source chain&#x27;s block headers.</p>
+<doc-anchor-target id="2-multi-notary-consensus">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-multi-notary-consensus">#</doc-anchor-trigger>
+        <span>2. Multi-Notary Consensus</span>
+    </h3>
+</doc-anchor-target>
+<p>Multiple independent notaries must agree on the state of the source chain. No single notary can authorize an import. This is similar to how multi-signature wallets require multiple keys — except here the &quot;signatures&quot; are notarization proofs from independent observers.</p>
+<doc-anchor-target id="3-no-custodial-risk">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-no-custodial-risk">#</doc-anchor-trigger>
+        <span>3. No Custodial Risk</span>
+    </h3>
+</doc-anchor-target>
+<p>Unlike wrapped-token bridges (e.g., WBTC), where a custodian holds the underlying asset, the Verus bridge locks assets in smart contracts (Ethereum side) or burns/mints them at the protocol level (Verus side). No entity holds custody of bridged funds.</p>
+<doc-anchor-target id="4-ethereum-smart-contract-security">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-ethereum-smart-contract-security">#</doc-anchor-trigger>
+        <span>4. Ethereum Smart Contract Security</span>
+    </h3>
+</doc-anchor-target>
+<p>The Ethereum side of the bridge uses a <strong>Delegator contract</strong> pattern. The contract:</p>
+<ul>
+<li>Validates notarization proofs from Verus</li>
+<li>Processes imports (releasing ETH/tokens to recipients)</li>
+<li>Processes exports (locking ETH/tokens for bridge transfers)</li>
+<li>Is upgradeable through Verus notarization consensus, not a single admin key</li>
+</ul>
+<doc-anchor-target id="5-rollback-protection">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#5-rollback-protection">#</doc-anchor-trigger>
+        <span>5. Rollback Protection</span>
+    </h3>
+</doc-anchor-target>
+<p>The bridge waits for sufficient confirmations (finality) on both chains before processing transfers. This protects against blockchain reorganizations that could invalidate transfers.</p>
+<doc-anchor-target id="comparison-to-other-bridges">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#comparison-to-other-bridges">#</doc-anchor-trigger>
+        <span>Comparison to Other Bridges</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Verus Bridge</th>
+<th>Typical Centralized Bridge</th>
+<th>Typical MPC Bridge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custody</td>
+<td>Non-custodial</td>
+<td>Custodial</td>
+<td>Multi-party custody</td>
+</tr>
+<tr>
+<td>Trust model</td>
+<td>Proof-based</td>
+<td>Trust the operator</td>
+<td>Trust the MPC set</td>
+</tr>
+<tr>
+<td>Single point of failure</td>
+<td>No</td>
+<td>Yes</td>
+<td>Reduced but present</td>
+</tr>
+<tr>
+<td>Exploit surface</td>
+<td>Minimal (protocol-level)</td>
+<td>Smart contract + custodian</td>
+<td>Smart contract + MPC</td>
+</tr>
+<tr>
+<td>Upgrade mechanism</td>
+<td>Consensus-based</td>
+<td>Admin key</td>
+<td>Multi-sig</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<doc-anchor-target id="using-the-bridge">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-the-bridge">#</doc-anchor-trigger>
+        <span>Using the Bridge</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="from-ethereum-to-verus-web-ui">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#from-ethereum-to-verus-web-ui">#</doc-anchor-trigger>
+        <span>From Ethereum to Verus (Web UI)</span>
+    </h3>
+</doc-anchor-target>
+<p>The simplest way to bridge is via the web interface:</p>
+<ol>
+<li>Go to <a href="https://eth.verusbridge.io/">eth.verusbridge.io</a></li>
+<li>Connect your Ethereum wallet (MetaMask, etc.)</li>
+<li>Select the token to bridge (ETH, DAI, MKR)</li>
+<li>Enter your Verus destination (R-address or VerusID)</li>
+<li>Enter the amount</li>
+<li>Confirm the transaction</li>
+<li>Wait ~30-45 minutes for the transfer to complete</li>
+</ol>
+<doc-anchor-target id="from-verus-to-ethereum-cli">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#from-verus-to-ethereum-cli">#</doc-anchor-trigger>
+        <span>From Verus to Ethereum (CLI)</span>
+    </h3>
+</doc-anchor-target>
+<p>Use <a href="../command-reference/multichain/sendcurrency.md">sendcurrency</a> with <code v-pre>exportto</code>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Send VRSC to Ethereum
+verus sendcurrency '*' '[{
+  &quot;address&quot;: &quot;0xYourEthAddress&quot;,
+  &quot;amount&quot;: 10,
+  &quot;currency&quot;: &quot;VRSC&quot;,
+  &quot;exportto&quot;: &quot;vETH&quot;,
+  &quot;feecurrency&quot;: &quot;veth&quot;
+}]'
+
+# Send vETH back to Ethereum as ETH
+verus sendcurrency '*' '[{
+  &quot;address&quot;: &quot;0xYourEthAddress&quot;,
+  &quot;amount&quot;: 0.5,
+  &quot;currency&quot;: &quot;vETH&quot;,
+  &quot;exportto&quot;: &quot;vETH&quot;,
+  &quot;feecurrency&quot;: &quot;veth&quot;
+}]'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="bridge--convert-in-one-step">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bridge--convert-in-one-step">#</doc-anchor-trigger>
+        <span>Bridge + Convert in One Step</span>
+    </h3>
+</doc-anchor-target>
+<p>You can bridge and convert simultaneously. For example, bridge ETH to Verus and receive VRSC (not vETH):</p>
+<p>From the Verus side, if you hold vETH:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Convert vETH → VRSC through Bridge.vETH basket
+verus sendcurrency '*' '[{
+  &quot;address&quot;: &quot;myidentity@&quot;,
+  &quot;amount&quot;: 0.5,
+  &quot;currency&quot;: &quot;vETH&quot;,
+  &quot;convertto&quot;: &quot;VRSC&quot;,
+  &quot;via&quot;: &quot;Bridge.vETH&quot;
+}]'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="checking-bridge-status">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#checking-bridge-status">#</doc-anchor-trigger>
+        <span>Checking Bridge Status</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># View Bridge.vETH currency details and reserves
+verus getcurrency &quot;Bridge.vETH&quot;
+
+# Check pending exports
+verus getexports &quot;Bridge.vETH&quot;
+
+# Check pending imports
+verus getimports &quot;Bridge.vETH&quot;</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="contract-addresses">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#contract-addresses">#</doc-anchor-trigger>
+        <span>Contract Addresses</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="ethereum-mainnet">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ethereum-mainnet">#</doc-anchor-trigger>
+        <span>Ethereum Mainnet</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Contract</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Delegator</td>
+<td>See <a href="https://eth.verusbridge.io/">eth.verusbridge.io</a></td>
+</tr>
+<tr>
+<td>VRSC Token</td>
+<td><code v-pre>0x1Af5b8015C64d39Ab44C60EAd8317f9F5a9B6C4C</code></td>
+</tr>
+<tr>
+<td>vETH</td>
+<td><code v-pre>0x454CB83913D688795E237837d30258d11ea7c752</code></td>
+</tr>
+<tr>
+<td>Bridge.vETH</td>
+<td><code v-pre>0x0200EbbD26467B866120D84A0d37c82CdE0acAEB</code></td>
+</tr>
+<tr>
+<td>DAI.vETH</td>
+<td><code v-pre>0x8b72F1c2D326d376aDd46698E385Cf624f0CA1dA</code></td>
+</tr>
+<tr>
+<td>MKR.vETH</td>
+<td><code v-pre>0x65b5AaC6A4aa0Eb656AB6B8812184e7545b6A221</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="sepolia-testnet">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#sepolia-testnet">#</doc-anchor-trigger>
+        <span>Sepolia Testnet</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Contract</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VRSCTEST</td>
+<td><code v-pre>0xA6ef9ea235635E328124Ff3429dB9F9E91b64e2d</code></td>
+</tr>
+<tr>
+<td>vETH</td>
+<td><code v-pre>0x67460C2f56774eD27EeB8685f29f6CEC0B090B00</code></td>
+</tr>
+<tr>
+<td>Bridge.vETH</td>
+<td><code v-pre>0xffEce948b8A38bBcC813411D2597f7f8485a0689</code></td>
+</tr>
+<tr>
+<td>DAI</td>
+<td><code v-pre>0xCCe5d18f305474F1e0e0ec1C507D8c85e7315fdf</code></td>
+</tr>
+<tr>
+<td>MKR</td>
+<td><code v-pre>0x005005b2b10a897FeD36FbD71c878213a7a169BF</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<doc-anchor-target id="key-takeaways">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#key-takeaways">#</doc-anchor-trigger>
+        <span>Key Takeaways</span>
+    </h2>
+</doc-anchor-target>
+<ol>
+<li><strong>Trustless</strong> — The bridge uses cryptographic proofs, not custodians. Notaries attest to what happened; the destination chain verifies independently.</li>
+<li><strong>Bidirectional</strong> — Assets flow both ways: Ethereum → Verus and Verus → Ethereum.</li>
+<li><strong>Integrated AMM</strong> — Bridge.vETH is a basket currency, so bridged assets can be converted instantly via the protocol-level AMM.</li>
+<li><strong>Multi-asset</strong> — ETH, DAI, MKR, and VRSC are all supported. Additional ERC-20 tokens can be added through governance.</li>
+<li><strong>Protocol-level</strong> — The bridge is not a third-party dApp. It&#x27;s part of the Verus protocol, secured by the same consensus mechanism as the blockchain itself.</li>
+<li><strong>~30-45 minutes</strong> — Transfers take time because both chains must reach finality. This is a security feature, not a limitation.</li>
+</ol>
+<hr>
+<doc-anchor-target id="related">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#related">#</doc-anchor-trigger>
+        <span>Related</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><a href="../basket-currencies-defi/">Basket Currencies and DeFi</a> — How the Bridge.vETH basket works</li>
+<li><a href="../../how-to/bridge-from-ethereum/">How To: Bridge from Ethereum</a> — Step-by-step bridging guide</li>
+<li><a href="../../how-to/convert-currencies/">How To: Convert Currencies</a> — Converting bridged assets</li>
+<li><a href="../command-reference/multichain/sendcurrency.md">sendcurrency</a> — The command that does it all</li>
+<li><a href="../command-reference/multichain/getcurrency.md">getcurrency</a> — Check bridge reserves and status</li>
+</ul>
+<hr>
+<p><em>As of Verus v1.2.x.</em></p>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer id="retype-content-footer" class="clear-both">
+                            
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../concepts/basket-currencies-defi/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">Basket Currencies and De​Fi on Verus</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../concepts/currencies-and-tokens/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">Currencies and Tokens on Verus</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div id="retype-page-footer" class="print:border-none border-t border-base-border pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between print:justify-center">
+                                <div id="retype-footer-links" class="print:hidden">
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link-weight text-sm leading-relaxed"><p>Verus Community Wiki</p></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-sidebar-right-bg border-sidebar-right-border lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="retype-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Bridge and Cross-Chain Transfers", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+</body>
+</html>

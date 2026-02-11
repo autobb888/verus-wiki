@@ -1,0 +1,352 @@
+{
+  "version": "3.11.0",
+  "created": "2026-02-10T23:35:33Z",
+  "files": [
+    {
+      "path": ".nojekyll"
+    },
+    {
+      "path": "404.html"
+    },
+    {
+      "path": "command-reference/addressindex/index.html"
+    },
+    {
+      "path": "command-reference/blockchain/index.html"
+    },
+    {
+      "path": "command-reference/control/index.html"
+    },
+    {
+      "path": "command-reference/disclosure/index.html"
+    },
+    {
+      "path": "command-reference/generating/index.html"
+    },
+    {
+      "path": "command-reference/identity/getidentitieswithaddress/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/getidentitieswithrecovery/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/getidentitieswithrevocation/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/getidentity/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/getidentitycontent/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/getidentityhistory/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/getidentitytrust/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/index.html"
+    },
+    {
+      "path": "command-reference/identity/listidentities/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/recoveridentity/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/registeridentity/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/registernamecommitment/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/revokeidentity/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/setidentitytimelock/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/setidentitytrust/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/signdata/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/signfile/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/signmessage/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/updateidentity/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/verifyfile/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/verifyhash/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/verifymessage/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/identity/verifysignature/index.html",
+      "old": true
+    },
+    {
+      "path": "command-reference/marketplace/index.html"
+    },
+    {
+      "path": "command-reference/mining/index.html"
+    },
+    {
+      "path": "command-reference/multichain/index.html"
+    },
+    {
+      "path": "command-reference/network/index.html"
+    },
+    {
+      "path": "command-reference/rawtransactions/index.html"
+    },
+    {
+      "path": "command-reference/util/index.html"
+    },
+    {
+      "path": "command-reference/vdxf/index.html"
+    },
+    {
+      "path": "command-reference/wallet/index.html"
+    },
+    {
+      "path": "concepts/basket-currencies-defi/index.html"
+    },
+    {
+      "path": "concepts/bridge-and-crosschain/index.html"
+    },
+    {
+      "path": "concepts/currencies-and-tokens/index.html"
+    },
+    {
+      "path": "concepts/currency-options-reference/index.html"
+    },
+    {
+      "path": "concepts/data-descriptor/index.html"
+    },
+    {
+      "path": "concepts/identity-system/index.html"
+    },
+    {
+      "path": "concepts/marketplace-and-offers/index.html"
+    },
+    {
+      "path": "concepts/mining-and-staking/index.html"
+    },
+    {
+      "path": "concepts/privacy-shielded-tx/index.html"
+    },
+    {
+      "path": "concepts/utxo-model/index.html"
+    },
+    {
+      "path": "concepts/vdxf-data-pipeline/index.html"
+    },
+    {
+      "path": "concepts/vdxf-data-standard/index.html"
+    },
+    {
+      "path": "concepts/vdxf-uni-value/index.html"
+    },
+    {
+      "path": "developers/building-on-verus/index.html"
+    },
+    {
+      "path": "developers/integration-patterns/index.html"
+    },
+    {
+      "path": "developers/rpc-api-overview/index.html"
+    },
+    {
+      "path": "developers/testnet-guide/index.html"
+    },
+    {
+      "path": "developers/verusid-login-guide/index.html"
+    },
+    {
+      "path": "for-agents/agent-bootstrap/index.html"
+    },
+    {
+      "path": "for-agents/agent-cli-reference/index.html"
+    },
+    {
+      "path": "for-agents/agent-economy/index.html"
+    },
+    {
+      "path": "for-agents/agent-identity/index.html"
+    },
+    {
+      "path": "for-agents/agent-messaging/index.html"
+    },
+    {
+      "path": "getting-started/first-steps/index.html"
+    },
+    {
+      "path": "getting-started/installation/index.html"
+    },
+    {
+      "path": "getting-started/key-concepts/index.html"
+    },
+    {
+      "path": "getting-started/wallet-setup/index.html"
+    },
+    {
+      "path": "how-to/backup-and-restore-wallet/index.html"
+    },
+    {
+      "path": "how-to/bridge-from-ethereum/index.html"
+    },
+    {
+      "path": "how-to/convert-currencies/index.html"
+    },
+    {
+      "path": "how-to/create-marketplace-offer/index.html"
+    },
+    {
+      "path": "how-to/create-verusid/index.html"
+    },
+    {
+      "path": "how-to/launch-token/index.html"
+    },
+    {
+      "path": "how-to/manage-subids/index.html"
+    },
+    {
+      "path": "how-to/mine-vrsc/index.html"
+    },
+    {
+      "path": "how-to/send-private-transaction/index.html"
+    },
+    {
+      "path": "how-to/setup-multisig/index.html"
+    },
+    {
+      "path": "how-to/stake-vrsc/index.html"
+    },
+    {
+      "path": "index.html"
+    },
+    {
+      "path": "research/verus-agent-discovery-hiring-guide-humans/index.html"
+    },
+    {
+      "path": "research/verus-agent-discovery-hiring-guide/index.html"
+    },
+    {
+      "path": "research/verus-agent-registry-schema/index.html"
+    },
+    {
+      "path": "research/verus-eth-bridge-guide/index.html"
+    },
+    {
+      "path": "research/verus-master-walkthrough-humans/index.html"
+    },
+    {
+      "path": "research/verus-master-walkthrough/index.html"
+    },
+    {
+      "path": "research/verus-subid-creation-guide/index.html"
+    },
+    {
+      "path": "research/verus-token-economics-agent-economy-humans/index.html"
+    },
+    {
+      "path": "research/verus-token-economics-agent-economy/index.html"
+    },
+    {
+      "path": "resources/css/retype.css"
+    },
+    {
+      "path": "resources/fonts/Inter-italic-latin-var.woff2"
+    },
+    {
+      "path": "resources/fonts/Inter-roman-latin-var.woff2"
+    },
+    {
+      "path": "resources/js/config.js"
+    },
+    {
+      "path": "resources/js/lunr.js"
+    },
+    {
+      "path": "resources/js/prism.js"
+    },
+    {
+      "path": "resources/js/retype.js"
+    },
+    {
+      "path": "resources/js/search.json"
+    },
+    {
+      "path": "resources/lunr.js.LICENSE.txt"
+    },
+    {
+      "path": "resources/mermaid.js.LICENSE.txt"
+    },
+    {
+      "path": "resources/prism.js.LICENSE.txt"
+    },
+    {
+      "path": "resources/retype.js.LICENSE.txt"
+    },
+    {
+      "path": "resources/retype.LICENSE.txt"
+    },
+    {
+      "path": "robots.txt"
+    },
+    {
+      "path": "sitemap.xml.gz"
+    },
+    {
+      "path": "troubleshooting/common-errors/index.html"
+    },
+    {
+      "path": "troubleshooting/identity-issues/index.html"
+    },
+    {
+      "path": "troubleshooting/sync-issues/index.html"
+    },
+    {
+      "path": "troubleshooting/transaction-problems/index.html"
+    },
+    {
+      "path": "tutorials/beginner-send-receive/index.html"
+    },
+    {
+      "path": "tutorials/launch-your-first-token/index.html"
+    },
+    {
+      "path": "tutorials/your-first-verusid/index.html"
+    }
+  ]
+}
