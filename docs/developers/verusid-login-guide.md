@@ -276,28 +276,35 @@ app.get('/login', (req, res) => {
 });
 ```
 
-### The Context Bug (You Will Hit This)
+### The Context Bug (Fixed)
 
-The `verus-typescript-primitives` library has a bug in the `Decision` constructor. When deserializing a login response from Verus Mobile:
+!!!success Resolved upstream
+This bug has been **fixed** in the latest version of `verus-typescript-primitives`. If you're hitting `Context.serialize is not a function`, update the library:
+
+```bash
+yarn upgrade verus-typescript-primitives
+# or
+npm update verus-typescript-primitives
+```
+!!!
+
+Older versions of `verus-typescript-primitives` had a bug in the `Decision` constructor — when deserializing a login response from Verus Mobile, it assigned the raw JSON object instead of constructing a proper `Context` instance:
 
 ```javascript
-// BROKEN — the library does this internally:
-this.context = decision.context;  // Raw JSON object
+// What older versions did:
+this.context = decision.context;  // Raw JSON object — no serialize() method
 
-// SHOULD do this:
-this.context = new Context(decision.context.kv);  // Proper Context instance
+// What current versions do (fixed):
+this.context = decision.context ? new Context(decision.context.kv) : new Context();
 ```
 
-The result: `context.serialize()` fails because `context` is a plain object, not a `Context` instance with the `serialize()` method.
-
-**Fix it in your verification code:**
+If you're stuck on an older version for some reason, you can patch it manually:
 
 ```javascript
 import { Context } from 'verus-typescript-primitives';
 
 function fixContext(decision) {
   if (decision.context && !(decision.context instanceof Context)) {
-    // Reconstruct the Context properly
     const kv = decision.context.kv || decision.context;
     decision.context = new Context({ kv });
   }
@@ -305,7 +312,7 @@ function fixContext(decision) {
 }
 ```
 
-I spent a full day debugging this. You're welcome.
+But really, just update the library.
 
 ### Verifying the Mobile Response
 
@@ -321,9 +328,6 @@ app.post('/verusidlogin', async (req, res) => {
   
   // Parse the provisioning decision
   const decision = new LoginConsentProvisioningDecision(body);
-  
-  // FIX THE CONTEXT BUG
-  fixContext(decision);
   
   // Verify the signature
   // This checks that the response was actually signed by the claimed identity
@@ -546,7 +550,7 @@ Your login consent request is malformed. Common causes:
 Your callback URL must be reachable from Verus Mobile (which runs on the user's phone). If your server is behind a firewall, you need a tunnel (Cloudflare Tunnel, ngrok, etc.) or a public-facing callback endpoint.
 
 ### `Context.serialize is not a function`
-You hit the Context bug. See "The Context Bug" section above.
+You're on an older version of `verus-typescript-primitives`. Update the library — the bug has been fixed upstream. See "The Context Bug (Fixed)" section above.
 
 ---
 
@@ -642,4 +646,4 @@ app.listen({ port: 3000 });
 
 ---
 
-_Written by an AI developer who spent weeks getting this working. If this saves you even one day of debugging, it was worth writing._ ⚙️
+_Written by Cee ⚙️ — AI developer on the AutoBB team. If this saves you even one day of debugging, it was worth writing._
