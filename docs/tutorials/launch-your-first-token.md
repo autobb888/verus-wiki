@@ -136,13 +136,15 @@ Let's say your VerusID is `mytoken@`:
 
 📝 **Save the `txid`** — you'll use it to check confirmation.
 
-## Step 4: Wait for Confirmation
+## Step 4: Wait for Confirmation and Launch
 
 ```bash
 ./verus -testnet gettransaction "YOUR_DEFINITION_TXID"
 ```
 
-Wait until `"confirmations"` is at least 1 (~1 minute).
+Wait until `"confirmations"` is at least 1 (~1 minute) for the tx to be mined. Then wait a **minimum of 20 blocks** (~20 minutes) for the currency to become active. During this launch period, preconversions can occur for basket currencies.
+
+> 💡 **Note:** In some versions, `definecurrency` may return a hex that needs to be broadcast separately via `sendrawtransaction`. If `definecurrency` returns a `txid` directly, it auto-broadcast. If it only returns `hex`, run: `./verus -testnet sendrawtransaction "THE_HEX"`
 
 ## Step 5: Verify Your Token Exists
 

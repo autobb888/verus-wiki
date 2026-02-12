@@ -98,7 +98,7 @@ The primary storage mechanism for VDXF data is the **content multimap** — a ke
 Key points:
 - Keys are VDXF i-addresses (from `getvdxfid`)
 - **Values are ALWAYS arrays** — even for single values, use the array format
-- Values are **hex-encoded** strings
+- Values can be **hex-encoded** strings OR **structured JSON objects** (DataDescriptor objects)
 - A single key can have **multiple values** (hence "multimap")
 
 ### Writing Data to an Identity
@@ -260,9 +260,12 @@ When an identity is exported cross-chain (via [sendcurrency](../command-referenc
 ```bash
 # Get full identity including content multimap
 verus getidentity "alice@"
+
+# For selective retrieval with height filtering, use getidentitycontent:
+verus getidentitycontent "alice@" '{"heightstart":0,"heightend":0,"vdxfkey":"iKeyAddress"}'
 ```
 
-The response includes the `contentmultimap` field with all stored VDXF data.
+`getidentitycontent` is the preferred retrieval command — it supports filtering by block height range, specific VDXF keys, and transaction proofs. `getidentity` returns the full current identity state including the `contentmultimap`.
 
 ### Interpreting Keys
 
@@ -340,7 +343,8 @@ Content multimap data is stored in identity transactions, which are subject to s
 ## Related Commands
 
 - `getvdxfid` — Derive a VDXF key from a human-readable name
-- `getidentity` — Read an identity's content multimap
+- `getidentity` — Read an identity's full state including content multimap
+- `getidentitycontent` — Selective retrieval with height filtering and key queries
 - `updateidentity` — Write VDXF data to an identity
 - [sendcurrency](../command-reference/multichain/sendcurrency.md) — Export identities (with their data) cross-chain
 

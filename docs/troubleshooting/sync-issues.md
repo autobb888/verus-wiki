@@ -70,6 +70,19 @@ Output shows all known chain tips:
 
 **If you suspect you're on the wrong fork:**
 
+**Method 1: Invalidate the bad block (faster)**
+
+```bash
+# Invalidate the block where the fork started
+./verus invalidateblock "HASH_OF_BAD_BLOCK"
+
+# The node will automatically switch to the correct chain
+# If needed, reconsider a block later:
+./verus reconsiderblock "BLOCK_HASH"
+```
+
+**Method 2: Full reindex (slower, use as last resort)**
+
 ```bash
 # Stop daemon properly
 ./verus stop
@@ -78,7 +91,7 @@ Output shows all known chain tips:
 ./verusd -reindex
 ```
 
-⚠️ Reindexing replays the entire blockchain and can take many hours. **Always stop with `verus stop`** — never kill the process, as this can corrupt the database.
+⚠️ Reindexing replays the entire blockchain and can take many hours. Try `invalidateblock` first. **Always stop with `verus stop`** — never kill the process, as this can corrupt the database.
 
 ---
 
@@ -86,7 +99,7 @@ Output shows all known chain tips:
 
 **When to use:** Fresh install, or data is corrupted and reindex would take too long.
 
-**What it is:** The `-bootstrap` flag tells `verusd` to automatically download a blockchain snapshot and sync from there instead of from block 0.
+**What it is:** The `-bootstrap` flag tells `verusd` to automatically download a blockchain snapshot and sync from there instead of from block 0. (Official docs also reference a separate `fetch-bootstrap` script in the CLI package — both methods achieve the same result.)
 
 **Steps:**
 
@@ -164,13 +177,22 @@ Monitor progress:
 # 1. Check your config has no restrictive settings
 cat ~/.komodo/VRSC/VRSC.conf | grep -E "connect=|maxconnections="
 
-# 2. Manually add seed nodes
+# 2. Add known nodes to VRSC.conf
+echo "addnode=195.248.234.41" >> ~/.komodo/VRSC/VRSC.conf
+
+# 3. Or add at runtime
 ./verus addnode "seed_node_ip:27485" "add"
 
-# 3. Check firewall
+# 4. Remove stale peer cache and restart
+rm ~/.komodo/VRSC/peers.dat
+./verus stop && ./verusd -daemon
+
+# 5. Check firewall
 # Default p2p ports: mainnet=27485, testnet=18842
 sudo ufw allow 27485    # if using ufw
 ```
+
+> 💡 **Tip:** The Verus Discord has a `/peerinfo` command that can provide current node addresses.
 
 ### Few Peers / Slow Sync
 

@@ -172,7 +172,7 @@ ETH → VRSC Transfer:
 | Ethereum gas | Variable (~$5-50) | Ethereum |
 | Bridge export fee | ~0.003 ETH | Ethereum |
 | Verus transaction fee | 0.0001 VRSC | Verus |
-| Conversion fee (if converting) | ~0.025% | Verus (into basket reserves) |
+| Conversion fee (if converting) | 0.025% (basket↔reserve) or 0.05% (reserve↔reserve) | Verus (into basket reserves) |
 
 When bridging **from Ethereum to Verus**, fees are paid in ETH. When bridging **from Verus to Ethereum**, if you don't set the `feecurrency` flag, VRSC is automatically converted to vETH via the Bridge.vETH basket to cover Ethereum gas costs. You can explicitly set `"feecurrency": "veth"` to pay fees in vETH directly.
 
@@ -241,7 +241,7 @@ The simplest way to bridge is via the web interface:
 4. Enter your Verus destination (R-address or VerusID)
 5. Enter the amount
 6. Confirm the transaction
-7. Wait ~30-45 minutes for the transfer to complete
+7. Wait ~30-60 minutes for the transfer to complete
 
 ### From Verus to Ethereum (CLI)
 
@@ -254,7 +254,8 @@ verus sendcurrency '*' '[{
   "amount": 10,
   "currency": "VRSC",
   "exportto": "vETH",
-  "feecurrency": "veth"
+  "feecurrency": "veth",
+  "refundto": "YourVerusRAddress"
 }]'
 
 # Send vETH back to Ethereum as ETH
@@ -263,7 +264,8 @@ verus sendcurrency '*' '[{
   "amount": 0.5,
   "currency": "vETH",
   "exportto": "vETH",
-  "feecurrency": "veth"
+  "feecurrency": "veth",
+  "refundto": "YourVerusRAddress"
 }]'
 ```
 
@@ -305,9 +307,9 @@ verus getimports "Bridge.vETH"
 | Contract | Address |
 |---|---|
 | Delegator | See [eth.verusbridge.io](https://eth.verusbridge.io/) |
-| VRSC Token | `0x1Af5b8015C64d39Ab44C60EAd8317f9F5a9B6C4C` |
+| VRSC Token | `0xBc2738BA63882891094C99E59a02141Ca1A1C36a` |
 | vETH | `0x454CB83913D688795E237837d30258d11ea7c752` |
-| Bridge.vETH | `0x0200EbbD26467B866120D84A0d37c82CdE0acAEB` |
+| Bridge.vETH | `0xE6052Dcc60573561ECef2D9A4C0FEA6d3aC5B9A2` |
 | DAI.vETH | `0x8b72F1c2D326d376aDd46698E385Cf624f0CA1dA` |
 | MKR.vETH | `0x65b5AaC6A4aa0Eb656AB6B8812184e7545b6A221` |
 
@@ -330,7 +332,7 @@ verus getimports "Bridge.vETH"
 3. **Integrated AMM** — Bridge.vETH is a basket currency, so bridged assets can be converted instantly via the protocol-level AMM.
 4. **Multi-asset** — ETH, DAI, MKR, and VRSC are all supported. Additional ERC-20 tokens can be added through governance.
 5. **Protocol-level** — The bridge is not a third-party dApp. It's part of the Verus protocol, secured by the same consensus mechanism as the blockchain itself.
-6. **~30-45 minutes** — Transfers take time because both chains must reach finality. This is a security feature, not a limitation.
+6. **~30-60 minutes** — Transfers take time because both chains must reach finality. This is a security feature, not a limitation.
 
 ---
 

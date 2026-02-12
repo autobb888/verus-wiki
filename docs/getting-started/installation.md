@@ -45,6 +45,11 @@ Download the appropriate archive from [GitHub Releases](https://github.com/Verus
 
 ## Install — Linux
 
+**Dependencies (if on a fresh system):**
+```bash
+sudo apt-get install libcurl3 g++-multilib    # Ubuntu/Debian
+```
+
 ```bash
 # Extract the archive
 tar -xzf Verus-CLI-Linux-v*.tar.gz
@@ -58,10 +63,10 @@ chmod +x verusd verus fetch-params
 
 ### Zcash Parameters (Auto-Downloaded)
 
-The daemon automatically downloads the required Zcash cryptographic parameters (~1.7 GB to `~/.zcash-params/`) on first run. You can also download them manually ahead of time if you prefer:
+The daemon automatically downloads the required Zcash cryptographic parameters (~1.7 GB to `~/.zcash-params/`) on first run. The official docs recommend running `fetch-params` before first start, but the daemon will handle it if you skip this step:
 
 ```bash
-./fetch-params   # Optional — verusd downloads these automatically on first start
+./fetch-params   # Recommended before first start; daemon auto-downloads if missing
 ```
 
 ## Install — macOS
@@ -117,6 +122,7 @@ The CLI package contains these key binaries:
 | `verusd` | The Verus daemon — runs the blockchain node |
 | `verus` | CLI client — sends commands to `verusd` |
 | `fetch-params` | Downloads required Zcash cryptographic parameters |
+| `fetch-bootstrap` | Downloads blockchain bootstrap for fast initial sync |
 
 ## Next Steps
 

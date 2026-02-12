@@ -8,8 +8,8 @@
 
 A `DataDescriptor` is a **structured container** for on-chain data. Instead of storing raw hex blobs in a contentmultimap, you can wrap data in a DataDescriptor to add:
 
-- **Labels** — human-readable name for the data (max 64 chars)
-- **MIME types** — content type declaration (max 128 chars)
+- **Labels** — human-readable name for the data (max 64 UTF-8 bytes)
+- **MIME types** — content type declaration (max 128 UTF-8 bytes)
 - **Encryption** — full encryption support with salt, public keys, viewing keys
 - **Versioning** — forward-compatible schema evolution
 
@@ -36,8 +36,8 @@ DataDescriptor storage:
 | `version` | integer | Schema version (currently 1) |
 | `flags` | bitmask | Indicates which optional fields are present |
 | `objectdata` | bytes | The actual data payload (serialized via VdxfUniValue) |
-| `label` | string | Human-readable label, max 64 characters |
-| `mimeType` | string | MIME type (e.g., `text/plain`, `application/json`), max 128 chars |
+| `label` | string | Human-readable label, max 64 UTF-8 bytes |
+| `mimeType` | string | MIME type (e.g., `text/plain`, `application/json`), max 128 UTF-8 bytes |
 | `salt` | bytes | Encryption salt |
 | `epk` | bytes | Encryption public key |
 | `ivk` | bytes | Incoming viewing key (for selective disclosure) |
@@ -234,9 +234,9 @@ For encrypted data:
 
 ## Size Considerations
 
-- **Label**: max 64 characters
-- **MIME type**: max 128 characters
-- **Objectdata**: limited by transaction size (~5KB practical limit for contentmultimap)
+- **Label**: max 64 UTF-8 bytes
+- **MIME type**: max 128 UTF-8 bytes
+- **Objectdata**: limited by transaction size (~4KB practical limit for contentmultimap)
 - **Overhead**: ~10-20 bytes for version, flags, and length prefixes
 - A DataDescriptor with label + MIME type adds ~200 bytes of overhead vs raw data
 
@@ -244,16 +244,60 @@ For large data, store a hash on-chain in the DataDescriptor and keep the full da
 
 ---
 
+## How Schema Discovery Works (DefinedKey vs DataDescriptor)
+
+A common point of confusion: **DataDescriptor labels are per-value**, while **DefinedKey labels are per-key and shared across all identities in a namespace**. Here's how the full schema discovery pattern works:
+
+### The Pattern: Namespace → Schema → SubIDs
+
+```
+agentplatform@  (namespace/root identity)
+  └── contentmultimap:
+        └── DATA_TYPE_DEFINEDKEY → [
+              DefinedKey("agentplatform::agent.v1.name"),    ← "i3oa8... means agent.v1.name"
+              DefinedKey("agentplatform::agent.v1.type"),    ← "i9YN6... means agent.v1.type"
+              DefinedKey("agentplatform::agent.v1.version"), ← "iBShC... means agent.v1.version"
+              ...
+            ]
+
+alice.agentplatform@  (subID)
+  └── contentmultimap:
+        ├── i3oa8... → ["416c696365"]           ← "Alice"
+        ├── i9YN6... → ["4149204167656e74"]      ← "AI Agent"
+        └── iBShC... → ["312e30"]                ← "1.0"
+```
+
+**How an app/wallet reads alice.agentplatform@:**
+
+1. Fetch `alice.agentplatform@` → sees i-addresses as keys
+2. Recognize the parent namespace → `agentplatform@`
+3. Fetch `agentplatform@` → find DefinedKey blobs
+4. Decode DefinedKeys → now knows `i3oa8...` = `agent.v1.name`
+5. Display: `agent.v1.name: "Alice"` instead of `i3oa8...: 416c696365`
+
+**The namespace identity is the schema registry.** Any app that understands DefinedKey can discover your schema automatically by reading the parent identity.
+
+### DataDescriptor's Role
+
+DataDescriptor is **not** the schema discovery mechanism — that's DefinedKey's job. DataDescriptor is for when individual values need their own metadata:
+
+- A document that needs a MIME type (`application/pdf`)
+- Encrypted data that carries its own decryption keys
+- A value that needs a per-instance label different from the schema key name
+
+For simple profiles (name, type, version, status), you don't need DataDescriptor at all — just raw hex values + DefinedKeys on the namespace.
+
 ## When to Use DataDescriptor
 
 | Scenario | Use DataDescriptor? |
 |---|---|
 | Simple key-value string data | Not needed — raw hex is fine |
-| Data that needs a label for wallets | ✅ Yes — use `label` field |
+| Data that needs a label for wallets | Not needed — use [DefinedKey](definedkey-vdxf-labels.md) on the namespace instead |
 | Content with a known format | ✅ Yes — use `mimeType` |
 | Encrypted on-chain data | ✅ Yes — encryption fields built in |
 | Merkle proofs / hash trees | ✅ Yes — hash vector support |
-| Agent profile fields | Usually not needed — use [DefinedKey](definedkey-vdxf-labels.md) for labels instead |
+| Agent profile fields | Not needed — DefinedKey + raw hex is simpler and cheaper |
+| Documents / large payloads | ✅ Yes — label + MIME + optional encryption |
 
 ---
 

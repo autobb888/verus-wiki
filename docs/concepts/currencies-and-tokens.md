@@ -50,8 +50,8 @@ The `proofprotocol` setting determines the fundamental nature of your token:
 | proofprotocol | Name | Meaning |
 |---|---|---|
 | 1 | PROOF_PBAASMMR | Decentralized — Verus MMR proof, no notaries required. Supply fixed at launch. |
-| 2 | PROOF_CHAINID | Centralized — currency controller can mint/burn tokens and change basket weights. |
-| 3 | PROOF_ETHNOTARIZATION | Ethereum proof — ETH & Patricia Trie proof. **Advanced: requires C++, JS & Solidity devs.** |
+| 2 | PROOF_CHAINID | Centralized — currency controller (rootID owner) can mint/burn tokens. For basket currencies, minting/burning affects the reserve ratio. |
+| 3 | PROOF_ETHNOTARIZATION | Ethereum ERC-20 mapped — token supply follows an Ethereum contract. Used for bridged tokens. |
 
 **proofprotocol: 2 (centralized)** is useful for:
 - Stablecoins (mint/burn to maintain peg)
@@ -86,7 +86,7 @@ This is covered in depth in [Basket Currencies and DeFi](basket-currencies-defi.
 
 - **options: 33** — `FRACTIONAL` (0x01) + `TOKEN` (0x20) = 0x21 = 33. Add `ID_REFERRALS` (0x08) for 41, or other flags as needed
 - **currencies** — Array of reserve currency names or i-addresses
-- **weights** — How much each reserve currency contributes (must sum to 1.0 or less)
+- **weights** — How much each reserve currency contributes (must sum to 1.0; minimum 0.1 per reserve; up to 10 currencies total)
 - **initialsupply** — Total supply of the basket token after launch
 
 ```bash
@@ -223,7 +223,7 @@ This makes centralized tokens on Verus **accountable** — there's always a know
 | PBaaS Chain | Mainnet | 10,000 VRSC |
 | PBaaS Chain | Testnet | 10,000 VRSCTEST |
 
-*Plus the cost of a VerusID (~100 VRSC for a root ID on mainnet, ~20 with referral). Free IDs available via Valu; subIDs and PBaaS chain IDs can cost pennies or less.*
+*Plus the cost of a VerusID (~100 VRSC for a root ID on mainnet, 80 with referral (as low as ~20 net with a full referral chain)). Free IDs available via Valu; subIDs and PBaaS chain IDs can cost pennies or less.*
 
 **Where the fees go:**
 - **Token/Basket (200 VRSC):** Goes to Verus miners and stakers
@@ -240,13 +240,16 @@ The `options` parameter is a bitfield. Combine flags by adding their values:
 | Flag | Value (decimal) | Hex | Meaning |
 |---|---|---|---|
 | OPTION_FRACTIONAL | 1 | 0x01 | Fractional reserve basket |
-| OPTION_ID_ISRESTRICTED | 2 | 0x02 | Restricted ID registration |
-| OPTION_ID_STAKING | 4 | 0x04 | Staking requires a VerusID (no bare R-address staking) |
+| OPTION_ID_ISRESTRICTED | 2 | 0x02 | Only the controlling ID (rootID) can create subIDs |
+| OPTION_ID_STAKING | 4 | 0x04 | All IDs on chain stake equally (ID-based staking, not value-based) |
 | OPTION_ID_REFERRALS | 8 | 0x08 | Enable ID referral rewards |
-| OPTION_ID_REFERRALSREQUIRED | 16 | 0x10 | Referral required to register |
+| OPTION_ID_REFERRALSREQUIRED | 16 | 0x10 | Referral required to register an ID |
 | OPTION_TOKEN | 32 | 0x20 | Is a token (not a native coin) |
-| OPTION_RESERVED | 64 | 0x40 | Reserved flag |
+| OPTION_SINGLECURRENCY | 64 | 0x40 | Restrict PBaaS chain or gateway to single currency |
+| OPTION_GATEWAY | 128 | 0x80 | Is a gateway currency |
 | OPTION_IS_PBAAS_CHAIN | 256 | 0x100 | Is a PBaaS blockchain |
+| OPTION_GATEWAY_CONVERTER | 512 | 0x200 | Is a gateway converter |
+| OPTION_GATEWAY_NAMECONTROLLER | 1024 | 0x400 | Gateway name controller |
 | OPTION_NFT_TOKEN | 2048 | 0x800 | Single-satoshi NFT with tokenized control of root ID |
 
 **Common combinations:**

@@ -33,7 +33,8 @@ mkdir -p ~/verus-cli
 wget -q -O /tmp/verus-cli.tgz "$DOWNLOAD_URL"
 tar -xzf /tmp/verus-cli.tgz -C ~/verus-cli --strip-components=1
 
-# ZK parameters auto-download on first daemon start (~1.5GB)
+# ZK parameters (~1.7GB) — run fetch-params before first daemon start
+# The daemon may auto-download if missing, but official docs recommend running this first
 # To pre-download manually (optional):
 cd ~/verus-cli && ./fetch-params
 ```
@@ -99,7 +100,7 @@ This is the step that requires external help:
 | **Human sponsor** | Have someone send VRSCTEST to your R-address |
 | **Mining** | `./verus -testnet setgenerate true 1` (slow) |
 
-You need ~100 VRSCTEST for identity registration + fees (free test currency from faucet). On mainnet, a root ID costs ~100 VRSC (~20 with referral), but free IDs are available via Valu, and subIDs/PBaaS chain IDs can cost pennies.
+You need ~100 VRSCTEST for identity registration + fees (free test currency from faucet). On mainnet, a root ID costs ~100 VRSC (80 with referral). The 20 VRSC discount goes to the referral chain, not back to the registrant — you always pay 80 minimum. Free IDs are available via Valu, and subIDs/PBaaS chain IDs can cost pennies.
 
 ## Step 5: Register Identity
 
@@ -115,15 +116,19 @@ sleep 90
 ~/verus-cli/verus -testnet registeridentity '{
   "txid": "COMMITMENT_TXID",
   "namereservation": {
+    "version": 1,
     "name": "youragentname",
     "salt": "SALT_FROM_COMMITMENT",
     "parent": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
-    "referral": ""
+    "referral": "",
+    "nameid": "NAMEID_FROM_COMMITMENT"
   },
   "identity": {
     "name": "youragentname",
     "primaryaddresses": ["YOUR_R_ADDRESS"],
-    "minimumsignatures": 1
+    "minimumsignatures": 1,
+    "revocationauthority": "youragentname.VRSCTEST@",
+    "recoveryauthority": "youragentname.VRSCTEST@"
   }
 }'
 

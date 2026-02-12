@@ -20,7 +20,7 @@ A **VerusID** is a self-sovereign blockchain identity. Think of it like a userna
 ## What You Need
 
 - Verus CLI installed and synced to testnet ([setup guide](../../../research/verus-cli-setup-guide.md))
-- A wallet with some VRSCTEST (~1 VRSCTEST is plenty on testnet)
+- A wallet with some VRSCTEST (~100 VRSCTEST for a root ID on testnet — same cost as mainnet but with free test coins)
 - A name you want to register (letters, numbers, spaces — no special characters)
 
 ## Step 1: Make Sure Your Daemon Is Running
@@ -76,7 +76,7 @@ Check your balance:
 0.00000000
 ```
 
-or some number. You need at least ~0.01 VRSCTEST on testnet.
+or some number. You need ~100 VRSCTEST for a root VerusID (same cost as mainnet). Get free VRSCTEST from the Discord faucet.
 
 **How to get testnet coins:**
 - Ask in the Verus Discord `#testnet` channel
@@ -108,8 +108,8 @@ Cannot find identity
 ### Name Rules
 
 Your name:
-- ✅ Can have: letters, numbers, spaces
-- ❌ Cannot have: `\ / : * ? " < > | @`
+- ✅ Can have: letters, numbers, hyphens, spaces
+- ❌ Cannot have: `\ / : * ? " < > | @ .`
 - ❌ Cannot start or end with spaces
 - ❌ Cannot have multiple consecutive spaces
 - Is **case-insensitive** (`Alice` = `alice` = `ALICE`)
@@ -277,7 +277,7 @@ Check balance:
 
 ## Using a Referral (Save on Mainnet)
 
-On mainnet, a root VerusID costs ~100 VRSC (~20 VRSC with a referral). Other options: free IDs from the Valu community program, cheap IDs on PBaaS chains (pennies), or subIDs under an existing namespace (fractions of a cent). Example with referral:
+On mainnet, a root VerusID costs ~100 VRSC (80 VRSC with a referral (as low as ~20 net with a full referral chain)). Other options: free IDs from the Valu community program, cheap IDs on PBaaS chains (pennies), or subIDs under an existing namespace (fractions of a cent). Example with referral:
 
 ```bash
 ./verus registernamecommitment "alice" "YOUR_ADDRESS" "existingfriend@"

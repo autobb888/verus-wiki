@@ -2,7 +2,7 @@
 
 Verus implements multisig natively through VerusID — no special scripts or contracts needed. This guide shows how to create a 2-of-3 multisig identity.
 
-> **Prerequisites**: Daemon synced, enough VRSC for VerusID registration (~100 VRSC for a root ID, ~20 with referral; or use cheaper alternatives like subIDs or PBaaS chain IDs). See [Create a VerusID](create-verusid.md).
+> **Prerequisites**: Daemon synced, enough VRSC for VerusID registration (~100 VRSC for a root ID, 80 with referral; or use cheaper alternatives like subIDs or PBaaS chain IDs). See [Create a VerusID](create-verusid.md).
 
 ## What Is Multisig?
 

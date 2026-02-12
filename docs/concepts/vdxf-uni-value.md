@@ -47,6 +47,22 @@ VdxfUniValue recognizes a fixed set of VDXF system keys, each corresponding to a
 | `MMRDescriptorKey` | MMR descriptor | variable |
 | `SignatureDataKey` | Signature data | variable |
 | `CredentialKey` | Credential | variable |
+| `DataUint64Key` | 64-bit unsigned integer | 8 bytes |
+| `DataVectorKey` | Generic vector | variable |
+| `DataInt32VectorKey` | Vector of int32 | variable |
+| `DataInt64VectorKey` | Vector of int64 | variable |
+| `TypeDefinitionKey` | Type definition | variable |
+| `EncryptionDescriptorKey` | Encryption descriptor | variable |
+| `SaltedDataKey` | Salted (hashed) data | variable |
+| `URLKey` | URL reference | variable |
+| `UTXORefKey` | UTXO reference | variable |
+| `MultimapKey` | Identity multimap key | variable |
+| `MultimapRemoveKey` | Identity multimap removal | variable |
+| `ProfileMediaKey` | Profile media attachment | variable |
+| `ZMemoMessageKey` | Z-address memo message | variable |
+| `ZMemoSignatureKey` | Z-address memo signature | variable |
+| `MMRHashesKey` | MMR hashes | variable |
+| `MMRLinksKey` | MMR links | variable |
 
 Each type has its own serialization format. VdxfUniValue handles dispatch automatically based on the key.
 

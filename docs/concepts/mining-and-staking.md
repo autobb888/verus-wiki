@@ -10,9 +10,9 @@ Verus uses a **50/50 hybrid** of Proof of Work (PoW) and Proof of Stake (PoS). T
 
 ```
 Block N   [PoW] ← Miner solves hash puzzle
-Block N+1 [PoS] ← Staker selected by coin age
+Block N+1 [PoS] ← Staker selected by UTXO size
 Block N+2 [PoW] ← Miner solves hash puzzle
-Block N+3 [PoS] ← Staker selected by coin age
+Block N+3 [PoS] ← Staker selected by UTXO size
   ...
 ```
 
@@ -26,7 +26,7 @@ Each consensus mechanism has weaknesses. Combining them provides stronger securi
 |---|---|---|---|
 | 51% hashrate attack | Vulnerable | N/A | Need hashrate AND stake |
 | Nothing-at-stake | N/A | Vulnerable | PoW blocks anchor the chain |
-| Centralization via ASICs | High risk | N/A | VerusHash resists ASICs |
+| Centralization via ASICs | High risk | N/A | VerusHash equalizes FPGAs, no ASICs exist |
 | Wealth concentration | N/A | Rich get richer | Mining provides alternative path |
 
 To attack Verus, you'd need to control both significant hashrate *and* significant coin holdings simultaneously — a much harder proposition than attacking either mechanism alone.
@@ -44,7 +44,7 @@ Most crypto mining algorithms eventually get dominated by specialized hardware:
 - **Ethash** (old Ethereum) → GPUs dominated
 - **RandomX** (Monero) → CPU-friendly but still FPGA-vulnerable
 
-VerusHash 2.2 uses a combination of techniques — including large random lookups, AES instructions, and variable-length hashing — that map well to modern CPU architectures but are difficult and expensive to implement in FPGAs or ASICs.
+VerusHash 2.2 uses a combination of techniques — including AES and AVX instructions — that map well to modern CPU architectures. FPGAs **can** mine Verus but are intentionally equalized to roughly ~2x CPU cost-performance, preventing them from dominating. No ASICs exist for VerusHash. GPUs can also mine (ccminer has a `Verus2.2gpu` branch) but generally perform worse than modern CPUs. CPUs remain the primary and most cost-effective mining hardware.
 
 **The result:** As of v1.2.x, CPU mining remains competitive on Verus. A modern desktop CPU can meaningfully participate in mining, which supports decentralization.
 
@@ -72,7 +72,7 @@ The [getmininginfo](../command-reference/mining/getmininginfo.md) command shows 
 
 **Solo mining** means your node finds blocks independently. You get the full block reward when you find a block, but blocks may be infrequent depending on your hashrate relative to the network.
 
-**Pool mining** means you contribute hashrate to a pool that combines many miners' power. Rewards are split proportionally. More consistent payouts, but you pay a pool fee (typically 1-2%).
+**Pool mining** means you contribute hashrate to a pool that combines many miners' power. Rewards are split proportionally. More consistent payouts, but you pay a pool fee (0.1–5% depending on the pool).
 
 For most miners, pools provide more predictable income. Solo mining is viable mainly for those with significant hashrate.
 
@@ -89,24 +89,22 @@ Here's the process:
 1. You hold VRSC in your wallet
 2. You enable staking (`verus setgenerate true 0` — 0 threads means staking only, no mining)
 3. Your wallet must remain **unlocked** and **online**
-4. The protocol selects stakers based on **coin age** — how many coins you have and how long they've been unspent
+4. The protocol selects stakers based on **UTXO size** — larger UTXOs have a higher probability of being selected to stake a block
 5. When selected, your wallet automatically creates a PoS block and earns the block reward
 
 ```
 Staking Selection (simplified):
 
-  Coin Age = Amount × Time Since Last Spent
-
-  Higher coin age → Higher probability of being selected
+  Larger UTXO → Higher probability of being selected
   
-  After staking, coin age resets → prevents monopolization
+  After staking, the UTXO is consumed → prevents monopolization
 ```
 
 ### Staking Requirements
 
 | Requirement | Details |
 |---|---|
-| Minimum amount | None (any amount can stake) |
+| Minimum amount | Effectively none (minimum 0.00000001 VRSC) |
 | Coin maturity | UTXOs must have 150 confirmations (~2.5 hours) |
 | Wallet state | Must be unlocked (or unlocked for staking only) |
 | Node state | Must be running and synced to the network |
@@ -127,16 +125,22 @@ Staking Selection (simplified):
 
 Verus follows a halving schedule similar to Bitcoin, but with its own parameters:
 
-| Era | Block Range | Block Reward | Approx. Date |
+| Era | Block Range | Block Reward | Notes |
 |---|---|---|---|
-| 1 | 1 – 10,080 | Variable | May 2018 |
-| 2 | 10,081 – 1,051,924 | 24 VRSC | May 2018 – Jun 2020 |
-| 3 | 1,051,925 – 2,103,848 | 12 VRSC | Jun 2020 – Jul 2022 |
-| 4 | 2,103,849 – 3,155,772 | 6 VRSC | Jul 2022 – Aug 2024 |
-| 5 | 3,155,773 – 4,207,696 | **3 VRSC** (current on mainnet) | Aug 2024 – ~Aug 2026 |
-| 6 | 4,207,697+ | 1.5 VRSC | ~Aug 2026 onward |
+| 1 | 1 – 10,080 | Variable (up to 0–384) | Launch phase (~485K VRSC, timelocked) |
+| 2 | 10,080 – 53,280 | 384 VRSC | Timelocked |
+| 3 | 53,280 – 96,480 | 192 VRSC | Timelocked |
+| 4 | 96,480 – 139,680 | 96 VRSC | |
+| 5 | 139,680 – 226,080 | 48 VRSC | |
+| 6 | 226,080 – 1,278,000 | 24 VRSC | |
+| 7 | 1,278,000 – 2,329,920 | 12 VRSC | |
+| 8 | 2,329,920 – 3,381,840 | 6 VRSC | |
+| 9 | 3,381,840 – 4,433,760 | **3 VRSC** (current on mainnet) | |
+| 10 | 4,433,760+ | 1.5 VRSC | Next halving ~Aug 2026 |
 
-Halving interval: **1,051,924 blocks** (~2 years at 62s average block time).
+Halving interval: **1,051,920 blocks** (~2 years at ~60s average block time).
+
+*(Source: [docs.verus.io — Economy](https://docs.verus.io/economy/))*
 
 > **Tip:** Use `getblocksubsidy` to check the current block reward. Use `getcurrency VRSC` to see the halving interval in the `eras` field.
 
@@ -144,13 +148,13 @@ Each block reward is split between the miner/staker who found the block. Since b
 
 ### Supply
 
-Verus has no hard supply cap encoded in the protocol in the same way as Bitcoin's 21M, but the halving schedule means emission decreases geometrically. The practical supply curve approaches a limit over time.
+Verus has a **max supply of 83,540,184 VRSC**. The halving schedule means emission decreases geometrically, approaching this limit over time.
 
 ---
 
 ## Merged Mining
 
-Verus supports **merged mining** — the ability to mine Verus and one or more PBaaS chains simultaneously, with the same hashrate.
+Verus supports **merged mining** — the ability to mine Verus and up to **22 PBaaS chains** simultaneously, with the same hashrate.
 
 ```
 Your CPU Hashrate
@@ -173,14 +177,19 @@ This is significant because:
 
 ## Staking Pools
 
-While mining pools are straightforward (combine hashrate, split rewards), **staking pools** on Verus work differently. As of v1.2.x, there is no native delegation mechanism — your coins must be in your own wallet to stake.
+While mining pools are straightforward (combine hashrate, split rewards), **staking pools** on Verus come in two forms:
 
-However, community-organized staking arrangements exist where:
-- A pool operator runs a 24/7 node
-- Participants send coins to a multisig or shared wallet
-- Rewards are distributed proportionally
+### Non-Custodial (VerusID-based)
 
-**Caution:** Unlike mining pools, staking pools require trusting someone with your coins (unless using multisig). Always evaluate the trust model carefully.
+Your coins remain in your wallet. Using VerusID, you can delegate staking power to a pool without transferring custody. The pool combines staking power from multiple participants without holding anyone's coins.
+
+Example: **Synergy Pool** uses this model.
+
+### Custodial
+
+A pool operator runs a 24/7 node and participants send coins to a shared wallet. Rewards are distributed proportionally. This requires trusting the operator with your coins.
+
+**Recommendation:** Prefer non-custodial VerusID staking pools when available — you retain full control of your funds.
 
 ---
 

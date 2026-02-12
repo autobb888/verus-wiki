@@ -84,7 +84,7 @@ ps aux | grep verusd
 
 # If no instance is running but error persists, remove the lock file
 rm ~/.komodo/VRSC/.lock        # mainnet
-rm ~/.komodo/vrsctest/.lock    # testnet
+rm ~/.komodo/VRSCTEST/.lock    # testnet
 
 # Restart
 ./verusd -daemon
@@ -179,7 +179,7 @@ Common port mismatches:
 ./verus getunconfirmedbalance
 ```
 
-A root VerusID on mainnet costs ~100 VRSC (or ~20 VRSC with a referral). Cheaper alternatives exist: free IDs from the Valu community program, cheap IDs on PBaaS chains (pennies), or subIDs under an existing namespace (fractions of a cent). Transaction fees are ~0.0001 VRSC. Make sure you have enough for both the operation and the fee.
+A root VerusID on mainnet costs ~100 VRSC (or 80 VRSC with a referral). Cheaper alternatives exist: free IDs from the Valu community program, cheap IDs on PBaaS chains (pennies), or subIDs under an existing namespace (fractions of a cent). Transaction fees are ~0.0001 VRSC. Make sure you have enough for both the operation and the fee.
 
 ---
 
@@ -202,7 +202,7 @@ A root VerusID on mainnet costs ~100 VRSC (or ~20 VRSC with a referral). Cheaper
     "name": "myname",
     "salt": "7f8a9b2c3d...",   ← Use this EXACT value
     "referral": "",
-    "parent": "",
+    "parent": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
     "nameid": "iXYZ..."
   }
 }
@@ -231,9 +231,9 @@ A root VerusID on mainnet costs ~100 VRSC (or ~20 VRSC with a referral). Cheaper
 
 **When:** Calling `registernamecommitment`.
 
-**Cause:** The name contains forbidden characters: `\ / : * ? " < > | @`
+**Cause:** The name contains forbidden characters: `\ / : * ? " < > | @ .`
 
-**Solution:** Use only letters, numbers, hyphens, and spaces. No leading or trailing spaces. Names are case-insensitive (`Alice` and `alice` are the same).
+**Solution:** Use only letters, numbers, hyphens, and spaces. No leading or trailing spaces. No dots. Names are case-insensitive (`Alice` and `alice` are the same).
 
 ---
 

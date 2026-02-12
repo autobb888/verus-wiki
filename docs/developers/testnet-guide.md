@@ -27,7 +27,7 @@ curl -s https://api.github.com/repos/VerusCoin/VerusCoin/releases/latest \
 mkdir -p ~/verus-cli
 tar -xzf /tmp/verus-cli.tgz -C ~/verus-cli --strip-components=1
 
-# ZK parameters are auto-downloaded on first daemon start (~1.5GB)
+# ZK parameters are auto-downloaded on first daemon start (~1.7GB)
 # To pre-download manually (optional):
 cd ~/verus-cli && ./fetch-params
 ```
@@ -101,13 +101,13 @@ If you have testnet coins elsewhere:
 | Feature | Testnet | Mainnet |
 |---------|---------|---------|
 | CLI prefix | `./verus -testnet` | `./verus` |
-| Config directory | `~/.komodo/vrsctest/` | `~/.komodo/VRSC/` |
-| Config file | `vrsctest.conf` | `VRSC.conf` |
+| Config directory | `~/.komodo/VRSCTEST/` | `~/.komodo/VRSC/` |
+| Config file | `VRSCTEST.conf` | `VRSC.conf` |
 | RPC port | 18843 | 27486 |
 | P2P port | 18842 | 27485 |
 | Currency | VRSCTEST | VRSC |
 | ID suffix | `name.VRSCTEST@` | `name@` |
-| ID cost | ~100 VRSCTEST (free test coins) | ~100 VRSC root ID (~20 with referral; free via Valu; pennies on PBaaS chains) |
+| ID cost | ~100 VRSCTEST (free test coins) | ~100 VRSC root ID (80 with referral; as low as ~20 net with a full referral chain you own; free via Valu; pennies on PBaaS chains) |
 | Parent i-address | `iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq` | `i5w5MuNik5NtLcYmNzcvaoixooEebB6MGV` |
 | Coin value | None (free) | Real value |
 | Chain data size | ~5–10 GB | ~15–25 GB |
@@ -217,10 +217,19 @@ Always shut down cleanly:
 If you need a fresh testnet state:
 ```bash
 ./verus -testnet stop
+
+# Option A: Quick reset (keeps wallet and config)
 rm -rf ~/.komodo/VRSCTEST/blocks ~/.komodo/VRSCTEST/chainstate
-# Keep VRSCTEST.conf and wallet.dat
+./verusd -testnet -bootstrap
+
+# Option B: Full reset (removes everything — back up wallet.dat first!)
+cp ~/.komodo/VRSCTEST/wallet.dat ~/wallet-testnet-backup.dat
+rm -rf ~/.komodo/VRSCTEST/
+rm -rf ~/.verustest/    # testnet data may also be here
 ./verusd -testnet -bootstrap
 ```
+
+> **macOS paths:** Replace `~/.komodo/VRSCTEST/` with `~/Library/Application Support/Komodo/VRSCTEST/`
 
 ---
 

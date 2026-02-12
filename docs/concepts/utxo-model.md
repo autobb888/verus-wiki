@@ -93,7 +93,7 @@ Scenario B — Many small UTXOs:
 - **More smaller UTXOs** = more frequent but smaller rewards (smoother income)
 - **Very tiny UTXOs** (dust) = may never stake and waste resources
 
-> **Staking eligibility:** A UTXO must have at least **150 confirmations** (~2.6 hours at 62s/block) before it can stake.
+> **Staking eligibility:** A UTXO must have at least **150 confirmations** (~2.5 hours at ~60s/block) before it can stake.
 
 ### 2. Privacy
 
@@ -188,7 +188,7 @@ This turns one 10,000 VRSC UTXO into four 2,500 VRSC UTXOs.
       ▼                         ▼                         ▼
  ┌─────────┐  150 blocks   ┌─────────┐  Used as     ┌─────────┐
  │  New     │──────────────→│ Eligible│──input in──→ │ Spent   │
- │  UTXO    │  (~2.6 hrs)  │ to stake│  a new tx    │ (gone)  │
+ │  UTXO    │  (~2.5 hrs)  │ to stake│  a new tx    │ (gone)  │
  └─────────┘               └─────────┘              └─────────┘
                                 │                        │
                                 │ Selected for staking   │ Creates new UTXOs

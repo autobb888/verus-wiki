@@ -107,7 +107,7 @@ An automatically-managed liquidity pool backed by reserve currencies.
 **Additional flags:**
 - `options: 33` — FRACTIONAL (1) + TOKEN (32)
 - `currencies` — Reserve currencies backing the basket
-- `weights` — Relative weight of each reserve (must sum to 1.0, minimum 0.05 per reserve)
+- `weights` — Relative weight of each reserve (must sum to 1.0, minimum 0.1 per reserve)
 - `initialsupply` — Total supply after initial contributions convert
 - `initialcontributions` — Amount of each reserve deposited at launch
 
@@ -120,13 +120,13 @@ An automatically-managed liquidity pool backed by reserve currencies.
 }
 ```
 
-### 4. Wait for Confirmation
+### 4. Wait for Confirmation and Launch
 
 ```bash
 ./verus -testnet gettransaction "YOUR_DEFINITION_TXID"
 ```
 
-Wait for at least 1 confirmation.
+Wait for at least 1 confirmation for the definition tx to be mined. Then wait a **minimum of 20 blocks** (~20 minutes) for the currency to become active and usable. During this launch period, preconversions can occur for basket currencies.
 
 ### 5. Verify the Currency
 
@@ -174,6 +174,7 @@ Options are combined by adding values:
 | 4 | 16 | IDREFERRALSREQUIRED | Referral required for ID registration |
 | 5 | 32 | TOKEN | Token on this chain (not an independent chain) |
 | 8 | 256 | IS_PBAAS_CHAIN | Independent blockchain |
+| 11 | 2048 | NFT_TOKEN | Single-satoshi NFT with tokenized rootID control |
 
 **Common combinations:**
 - `32` = Simple token

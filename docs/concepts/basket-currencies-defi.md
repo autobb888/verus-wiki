@@ -191,7 +191,7 @@ After launch, the price adjusts dynamically as people buy (reserves grow, price 
 
 ## Multi-Reserve Baskets
 
-Baskets can have **multiple reserve currencies**, each with a different weight. This enables sophisticated financial instruments:
+Baskets can have **multiple reserve currencies** (up to 10, including the native currency), each with a different weight. This enables sophisticated financial instruments:
 
 ```
 Index Fund Basket:
@@ -250,7 +250,7 @@ The term "fractional" in fractional basket currencies refers to the **reserve ra
 
 - **100% reserve (weights sum to 1.0):** Price is very stable. The basket tracks the weighted average of its reserves closely.
 - **Lower reserve ratios (weights sum to less than 1.0):** More volatile. Price amplifies movements in the underlying reserves. The basket behaves more like a leveraged position.
-- **Minimum:** Each reserve currency must have a weight of at least **5%** (0.05).
+- **Minimum:** Each reserve currency must have a weight of at least **10%** (0.1). The total reserve ratio (sum of all weights) can range from 5% to 100%.
 
 ```
 High Reserve Ratio (stable):

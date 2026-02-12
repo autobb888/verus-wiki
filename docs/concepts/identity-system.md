@@ -80,6 +80,11 @@ By default, both point to the identity itself. But you can set them to *differen
 
 **Why this matters:** In traditional crypto, if your private key is stolen, your funds are gone forever. With VerusID, your recovery authority can revoke the compromised identity and restore control to you with new keys. It's like having a trusted friend who can freeze your credit card and issue you a new one.
 
+**Important constraints:**
+- Only the current **revocation authority** can change the revocation authority
+- Only the current **recovery authority** can change the recovery authority
+- This prevents an attacker who compromises your primary keys from reassigning these safety nets
+
 **Best practice:** Set revocation and recovery to *different* identities that you control with separate keys, ideally stored in different locations. If all three (identity, revocation, recovery) share the same keys, you lose the safety net.
 
 ---
@@ -205,14 +210,64 @@ For SubIDs, the cost is set by the parent currency's `idregistrationfees` parame
 
 ### Referral System
 
-When registering an identity, you can specify a **referral identity**. If you do:
-- The registration costs **80 VRSC** instead of 100 VRSC
-- The referring identity receives **20 VRSC** as a reward
-- The referral chain can go multiple levels deep (configured via `idreferrallevels`)
+When registering a root identity, you can specify a **referral identity**. This activates a multi-level referral chain that reduces the registrant's cost and rewards referrers.
 
-**Power user trick:** If you own multiple identities and use them as referrals for each other in a chain (e.g., `ari@` → `alice@` → `bob@` → `charlie@` → `eve@`), each registration costs 80 VRSC but you receive 20 VRSC back from each referral. After several registrations, your effective cost per ID approaches **~20 VRSC** since the referral rewards flow back to your own identities. Note: the blockchain is public, so this referral chain is visible to anyone.
+**How it works:**
 
-This creates an incentive for people to onboard new users to the network.
+The registration fee (e.g., 100 VRSC) is divided into **(levels + 2) equal parts**, where "levels" is the `idreferrallevels` setting on the currency (min 0, max 5, **default 3**):
+
+| `idreferrallevels` | Parts | Each part | Registrant discount | Registrant pays |
+|---|---|---|---|---|
+| 0 | 2 | 1/2 = 50 VRSC | 50 VRSC | 50 VRSC |
+| 1 | 3 | 1/3 ≈ 33.3 VRSC | 33.3 VRSC | ~66.7 VRSC |
+| 2 | 4 | 1/4 = 25 VRSC | 25 VRSC | 75 VRSC |
+| **3 (default)** | **5** | **1/5 = 20 VRSC** | **20 VRSC** | **80 VRSC** |
+| 4 | 6 | 1/6 ≈ 16.7 VRSC | 16.7 VRSC | ~83.3 VRSC |
+| 5 | 7 | 1/7 ≈ 14.3 VRSC | 14.3 VRSC | ~85.7 VRSC |
+
+The parts are distributed as follows:
+1. **1 part → discount** (registrant pays less)
+2. **1 part → burned / to rootID** (miners/stakers)
+3. **1 part per referral level** → each referrer in the chain
+
+If a referral level is **unfilled** (the chain isn't deep enough), that level's portion goes to miners/stakers instead.
+
+Referral rewards are sent to each referrer's **i-address** (not their R-address).
+
+**Example — `idreferrallevels=3` with a 2-level chain (verified on VRSCTEST):**
+
+We registered `AgentOversight@` using `SafeChat@` as referrer. SafeChat@ was registered using `Verus Coin Foundation@` as referrer. The fee split into 5 parts of 20 VRSC each:
+
+| Recipient | Amount | Role |
+|---|---|---|
+| Discount | 20 VRSC | Registrant pays 80 instead of 100 |
+| SafeChat@ (i-address) | 20 VRSC | Level 1 referrer (direct) |
+| Verus Coin Foundation@ (i-address) | 20 VRSC | Level 2 (SafeChat's referrer) |
+| Miners/stakers | 20 VRSC | Burned/to rootID |
+| Miners/stakers | 20 VRSC | Unfilled level 3 (no deeper chain) |
+| **Total** | **100 VRSC** | |
+
+**Power user strategy:** If you own a chain of 3 identities (A → B → C, each referred the next), registering a 4th identity D using C as referrer costs 80 VRSC — but 60 VRSC flows back to your own identities (20 to C, 20 to B, 20 to A). Your **net cost is only ~20 VRSC** (the burned/rootID portion that goes to miners).
+
+| Referral depth (levels=3) | Registrant pays | Back to your IDs | Net cost |
+|---|---|---|---|
+| No referral used | 100 VRSC | 0 | 100 VRSC |
+| 1 level filled | 80 VRSC | 20 VRSC | 60 VRSC |
+| 2 levels filled | 80 VRSC | 40 VRSC | 40 VRSC |
+| 3 levels filled (full chain) | 80 VRSC | 60 VRSC | **20 VRSC** |
+
+Note: The referral chain is visible on the public blockchain.
+
+**Command syntax:**
+```bash
+verus registernamecommitment "newname" "controladdress" "referralidentity" "" "sourceoffunds"
+```
+
+The third parameter (`referralidentity`) accepts a friendly name like `SafeChat@` or an i-address.
+
+To enable referrals on your own currency, add `"options": 8` (IDREFERRALS flag) to `definecurrency` and set `idreferrallevels` (0-5).
+
+*(Source: [docs.verus.io — Defining Parameters](https://docs.verus.io/currencies/launch-currency.html#defining-parameters))*
 
 ---
 
@@ -229,6 +284,37 @@ To tie it all together, here's how VerusID maps to familiar concepts:
 | Business card | Content multimap data |
 | Company with employees | Namespace with SubIDs |
 | Notarized document | Identity transaction (on-chain, timestamped) |
+
+---
+
+## Additional Features
+
+### Private Address (z-address)
+
+Each VerusID can optionally have attached **private z-addresses** (Sapling shielded addresses). This enables receiving private, shielded transactions directly to your VerusID. See [Privacy & Shielded Transactions](privacy-shielded-tx.md).
+
+### Verus Vault (Timelocking)
+
+**Verus Vault** allows you to lock funds on your VerusID with a time delay. When locked:
+- Funds cannot be spent until the timelock expires
+- The identity can still stake its locked coins ("safe staking")
+- Useful for trusts, vesting schedules, and protecting large holdings from theft
+
+### Signatures
+
+VerusIDs can create **unforgeable, verifiable signatures** on files, hashes, and messages. Anyone can verify the signature against the on-chain identity — providing non-repudiation tied to a human-readable name.
+
+### VerusID Login (SSID)
+
+VerusID supports **passwordless login** to supported services. Instead of creating a username and password, you authenticate with your VerusID — proving ownership of the identity without exposing any private keys. This is similar to "Sign in with Google" but self-sovereign and decentralized.
+
+### Marketplace
+
+VerusIDs, currencies, and tokens can be traded on the **peer-to-peer on-chain marketplace** using atomic offers. See [Marketplace and Offers](marketplace-and-offers.md).
+
+### Name Restrictions
+
+VerusID names can include all characters from all character sets **except**: `/ : * ? " < > | @ .` — names are case-insensitive.
 
 ---
 

@@ -238,7 +238,7 @@ All of this must fit within Verus transaction limits:
 | DefinedKey blob | ~60-80 bytes each |
 | Full agent profile (10 fields) | ~1-2 KB |
 | 26 DefinedKey labels | ~2 KB |
-| **Transaction limit** | **~5 KB per update** |
+| **Transaction limit** | **~4 KB per update** |
 
 A typical agent profile plus all its DefinedKey labels can fit in 2 transactions.
 

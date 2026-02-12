@@ -74,7 +74,8 @@ Your wallet file contains your private keys. **If you lose it, you lose your fun
 
 ### Wallet File Location
 
-- **Linux/macOS**: `~/.komodo/VRSC/wallet.dat`
+- **Linux**: `~/.komodo/VRSC/wallet.dat`
+- **macOS**: `~/Library/Application Support/Komodo/VRSC/wallet.dat`
 - **Windows**: `%AppData%\Komodo\VRSC\wallet.dat`
 
 ### How to Back Up

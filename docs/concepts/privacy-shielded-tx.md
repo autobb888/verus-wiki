@@ -53,7 +53,9 @@ This returns an **operation ID** (e.g., `opid-abc123`). Check its status:
 ./verus z_getoperationstatus '["opid-abc123"]'
 ```
 
-### Shield Mining Rewards
+### Shield Mining/Staking Rewards
+
+> **Note:** As of block **800,200** on mainnet, coinbase shielding is **no longer required** before spending mining/staking rewards. Prior to this block, coinbase outputs had to be shielded (sent to a z-address and back) before they could be spent transparently.
 
 Miners can shield coinbase rewards directly:
 

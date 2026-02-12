@@ -15,8 +15,9 @@
 ## How Staking Works
 
 Verus uses a hybrid PoW/PoS consensus. When you stake:
-- Your wallet automatically creates stake transactions using your mature coins
-- Larger balances = higher chance of being selected to stake a block
+- Your wallet automatically creates stake transactions using your mature UTXOs
+- Larger UTXOs = higher chance of being selected to stake a block (one large UTXO stakes better than many small ones of the same total)
+- There is no minimum balance requirement (technically 0.00000001 VRSC)
 - You earn the full block reward when you successfully stake
 - Your coins never leave your wallet — they're not locked or at risk
 
@@ -113,12 +114,12 @@ It depends on your balance relative to the total staking supply:
 
 | Your Balance | Network Staking Supply | Approx. Time Between Stakes |
 |-------------|----------------------|---------------------------|
-| 1,000 VRSC | 30,000,000 VRSC | ~20+ days |
-| 10,000 VRSC | 30,000,000 VRSC | ~2 days |
-| 100,000 VRSC | 30,000,000 VRSC | ~5 hours |
-| 1,000,000 VRSC | 30,000,000 VRSC | ~30 minutes |
+| 1,000 VRSC | 30,000,000 VRSC | ~42 days |
+| 10,000 VRSC | 30,000,000 VRSC | ~4 days |
+| 100,000 VRSC | 30,000,000 VRSC | ~10 hours |
+| 1,000,000 VRSC | 30,000,000 VRSC | ~1 hour |
 
-These are rough estimates. Staking is probabilistic — you might stake sooner or later.
+**Formula:** `(Staking Supply ÷ Your Balance) ÷ 720 = days between stakes` (720 = avg PoS blocks per day at 50/50 split). These are rough estimates — staking is probabilistic.
 
 ## Auto-Start Staking on Boot
 
@@ -130,6 +131,15 @@ genproclimit=0
 ```
 
 This enables staking every time the daemon starts.
+
+## Pool Staking
+
+You can also stake through **non-custodial staking pools** using VerusID. This lets you combine staking power with other users without giving up control of your coins:
+
+- **Non-custodial (VerusID-based)**: Your coins remain in your wallet, but your VerusID delegates staking power to a pool. No trust required.
+- **Custodial**: You send coins to a pool operator (requires trust).
+
+Check the Verus Discord for current staking pools (e.g., Synergy Pool).
 
 ## Troubleshooting
 

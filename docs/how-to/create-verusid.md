@@ -3,7 +3,7 @@
 > Register a self-sovereign identity on the Verus blockchain.
 
 **Estimated time:** 10–15 minutes  
-**Cost:** 100 VRSC for a root mainnet ID (80 VRSC with referral — referrer receives 20 VRSC). Alternatives: free IDs via Valu (Verus Discord `#valu` channel, `/getid`), cheap IDs on PBaaS chains, subIDs (set by namespace owner). Testnet: ~0.01 VRSCTEST (free test currency).  
+**Cost:** 100 VRSC for a root mainnet ID (80 VRSC with referral — the 20 VRSC discount is split among the referral chain; see [Referral System](../concepts/identity-system.md#referral-system)). Alternatives: free IDs via Valu (Verus Discord `#valu` channel, `/getid`), cheap IDs on PBaaS chains, subIDs (set by namespace owner). Testnet: ~100 VRSCTEST (free test currency).  
 **Difficulty:** Beginner
 
 ## Prerequisites
@@ -80,7 +80,7 @@ This hides your name choice to prevent front-running:
 
 > ⚠️ **Save this entire output!** You need it for the next step. If you lose the `salt`, your commitment is wasted.
 
-#### With a Referral (saves ~80% on mainnet)
+#### With a Referral (saves ~20% on mainnet — you pay 80 instead of 100 VRSC)
 
 ```bash
 ./verus -testnet registernamecommitment "alice" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5" "existingid@"
@@ -137,15 +137,15 @@ After 1 confirmation:
 ./verus -testnet getidentity "alice@"
 ```
 
-You should see your identity details including your primary address.
+You should see your identity details including your primary address. Check that `canspendfor` and `cansignfor` are `true` — this confirms the identity is in your wallet and you can control it.
 
 ## Testnet vs Mainnet Differences
 
 | Feature | Testnet | Mainnet |
 |---------|---------|---------|
 | Command prefix | `./verus -testnet` | `./verus` |
-| Registration cost | ~0.01 VRSCTEST | ~100 VRSC root (~20 w/ referral; free via Valu; pennies on PBaaS) |
-| Referral discount | Available | Available (~80% off) |
+| Registration cost | ~100 VRSCTEST | ~100 VRSC root (~80 w/ referral; free via Valu; pennies on PBaaS) |
+| Referral discount | Available | Available (~20% off — pay 80 instead of 100) |
 | RPC port | 18843 | 27486 |
 | Currency | VRSCTEST | VRSC |
 
@@ -157,7 +157,7 @@ You should see your identity details including your primary address.
 | `Identity not found` after registering | Transaction not yet confirmed | Wait for 1+ confirmations |
 | Lost the commitment output | Salt is gone forever | Create a new commitment (old one is wasted) |
 | `Name already registered` | Someone beat you to it | Choose a different name |
-| `Invalid name` | Name has forbidden characters (`\ / : * ? " < > \| @`) | Use only letters, numbers, spaces (no leading/trailing) |
+| `Invalid name` | Name has forbidden characters (`\ / : * ? " < > \| @ .`) | Use only letters, numbers, hyphens, spaces (no leading/trailing) |
 | `Must wait for commitment` | Commitment not yet mined | Wait for at least 1 block |
 
 ## Advanced Options

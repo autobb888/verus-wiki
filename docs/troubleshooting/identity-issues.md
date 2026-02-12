@@ -102,7 +102,7 @@ Only the **recovery authority** can restore a revoked identity:
 
 ⚠️ You must control the recovery authority's keys to do this. If you set recovery to an identity you don't control, only they can recover it.
 
-**If you set revocation and recovery to yourself (default):**
+**If you set revocation and recovery to yourself (common choice — note these are explicit fields you set at registration, not silent defaults):**
 ```bash
 # You can recover your own identity
 # The revocation authority revokes, recovery authority restores

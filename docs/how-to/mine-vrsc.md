@@ -9,12 +9,12 @@
 ## Prerequisites
 
 - Verus CLI installed and daemon fully synced ([setup guide](../../../research/verus-cli-setup-guide.md))
-- A modern CPU (Verus is CPU-only — GPUs and ASICs cannot be used to mine Verus)
+- A modern CPU with AES-NI and AVX support (recommended — GPUs and FPGAs can also mine but CPUs are most cost-effective)
 - Terminal access
 
 ## About VerusHash 2.2
 
-Verus uses **VerusHash 2.2**, a mining algorithm specifically designed for CPUs only. GPUs and ASICs **cannot mine Verus** — the algorithm leverages AES-NI instructions in a way that makes GPU/ASIC implementation infeasible. This keeps mining accessible and fair: anyone with a CPU (including mobile phones and ARM devices) can mine competitively.
+Verus uses **VerusHash 2.2**, a mining algorithm optimized for CPUs. It leverages AES and AVX instructions. **FPGAs can mine** but are intentionally equalized to ~2x CPU cost-performance — they're not blocked, just not dominant. No ASICs exist. **GPU mining software exists** (ccminer `Verus2.2gpu` branch) but GPUs generally perform worse than modern CPUs. Older CPUs without AES-NI can still mine, just at significantly reduced performance. This keeps mining accessible and fair: anyone with a CPU can participate.
 
 ## Steps
 
@@ -117,7 +117,7 @@ Any value > 0 enables both mining and staking (if you have mature coins).
 | Consistency | Very inconsistent (feast or famine) | Steady, smaller payouts |
 | Difficulty | Need significant hashrate to compete | Low hashrate still earns |
 | Setup | Built into Verus CLI | Requires pool software |
-| Fees | None | 0-2% pool fee typically |
+| Fees | None | 0.1–5% pool fee (varies by pool) |
 
 **Recommendation:** For most users, **staking is more practical** than solo mining on mainnet. If you want to mine, use a pool — solo mining on an average desktop CPU is no longer practical given current network hashrate. Staking requires no special hardware and earns comparable rewards.
 
@@ -129,19 +129,21 @@ For pool mining, you need a separate mining application instead of the built-in 
 
 | Pool | URL | Fee |
 |------|-----|-----|
-| Luckpool | https://luckpool.net/verus | ~1% |
-| Zergpool | https://zergpool.com | ~0.5% |
-| CoinBlockers | https://verus.coinblockers.com | ~1% |
+| Luckpool | https://luckpool.net/verus | 1% |
+| Zergpool | https://zergpool.com | 0.5% |
+| Verus Farm | https://verus.farm | 1% |
+| Paddy Pool | https://paddypool.net | 0.1% |
+| Verus Pool (VCF) | https://pool.verus.io | 5% (donated to VCF) |
 
-> ⚠️ Pool availability changes — check current pools at [verus.io](https://verus.io) or the Verus Discord.
+> ⚠️ Pool availability and fees change — check current pools at [verus.io](https://verus.io) or the Verus Discord. The full list has 13+ pools.
 
 ### Pool Mining Setup (CCMiner)
 
-1. Download a VerusHash-compatible miner (e.g., CCMiner, nheqminer)
+1. Download a VerusHash-compatible miner (e.g., CCMiner — the officially recommended mining software)
 2. Configure with your pool and wallet address:
 
 ```bash
-ccminer -a verushash -o stratum+tcp://POOL_ADDRESS:PORT -u YOUR_VRSC_ADDRESS.WORKER_NAME
+ccminer -a verus -o stratum+tcp://POOL_ADDRESS:PORT -u YOUR_VRSC_ADDRESS.WORKER_NAME
 ```
 
 Replace:
@@ -153,12 +155,12 @@ Replace:
 
 | CPU Feature | Impact |
 |------------|--------|
-| AES-NI support | **Required** for competitive hashrate |
+| AES-NI support | **Strongly recommended** for competitive hashrate (older CPUs can still mine slowly) |
 | Core count | More cores = more threads = higher hashrate |
 | Clock speed | Higher is better per-thread |
 | Cache size | Larger L3 cache helps |
 
-**Typical hashrates (rough estimates):**
+**Typical hashrates (community estimates — actual results vary):**
 - Intel i5 (4 cores): ~2-4 MH/s
 - Intel i7 (8 cores): ~5-10 MH/s
 - AMD Ryzen 7 (8 cores): ~8-15 MH/s
