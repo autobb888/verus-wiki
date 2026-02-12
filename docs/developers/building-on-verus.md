@@ -38,7 +38,7 @@ VerusID provides naming, authentication, data storage, and key recovery — all 
 - [getidentity](../command-reference/identity.md#getidentity) — Look up identity data
 - [updateidentity](../command-reference/identity.md#updateidentity) — Store data on-chain
 - [signmessage](../command-reference/identity.md#signmessage) / [verifymessage](../command-reference/identity.md#verifymessage) — Prove identity ownership
-- [getvdxfid](../command-reference/identity.md#getvdxfid) — Create standardized data keys
+- [getvdxfid](../command-reference/vdxf.md#getvdxfid) — Create standardized data keys
 
 **Example: Login Flow**
 ```

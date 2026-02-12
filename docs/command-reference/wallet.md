@@ -273,7 +273,7 @@ verus decryptdata '{"datadescriptor":{...encrypted output...}}'
 
 - [`signdata`](identity.md#signdata) — Sign and optionally encrypt data
 - [`z_exportviewingkey`](#z_exportviewingkey) — Export viewing key for decryption
-- [`verifydata`](identity.md#verifydata) — Verify signed data
+- [`verifydata`](identity.md#signdata) — Verify signed data
 
 **Notes**
 
@@ -483,9 +483,9 @@ verus walletlock
 
 **Related Commands**
 
-- [`walletpassphrase`](wallet.md#walletpassphrase) — Unlock encrypted wallet
-- [`walletlock`](wallet.md#walletlock) — Lock the wallet
-- [`walletpassphrasechange`](wallet.md#walletpassphrasechange) — Change encryption passphrase
+- [`walletpassphrase`](wallet.md#encryptwallet) — Unlock encrypted wallet
+- [`walletlock`](wallet.md#encryptwallet) — Lock the wallet
+- [`walletpassphrasechange`](wallet.md#encryptwallet) — Change encryption passphrase
 
 **Notes**
 
@@ -1497,7 +1497,7 @@ curl --user user:pass --data-binary \
 **Related Commands**
 
 - [`dumpprivkey`](#dumpprivkey) — Export a private key
-- [`importaddress`](util.md#importaddress) — Import watch-only address
+- [`importaddress`](wallet.md#importaddress) — Import watch-only address
 
 **Notes**
 

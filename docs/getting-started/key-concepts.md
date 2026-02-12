@@ -77,6 +77,6 @@ You can mix and match: shield coins when you want privacy, use transparent when 
 
 Ready to dive deeper? Pick a concept above, or explore:
 
-- [Command Reference](../command-reference/) — All CLI commands
-- [How-To Guides](../how-to/) — Step-by-step tutorials
-- [Troubleshooting](../troubleshooting/) — Common issues and fixes
+- [Command Reference](../command-reference/blockchain.md) — All CLI commands
+- [How-To Guides](../how-to/create-verusid.md) — Step-by-step tutorials
+- [Troubleshooting](../troubleshooting/sync-issues.md) — Common issues and fixes

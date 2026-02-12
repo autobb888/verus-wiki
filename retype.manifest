@@ -1,12 +1,15 @@
 {
   "version": "3.11.0",
-  "created": "2026-02-12T08:21:44Z",
+  "created": "2026-02-12T08:35:49Z",
   "files": [
     {
       "path": ".nojekyll"
     },
     {
       "path": "404.html"
+    },
+    {
+      "path": "CNAME"
     },
     {
       "path": "command-reference/addressindex/index.html"

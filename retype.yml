@@ -1,5 +1,6 @@
 input: docs
 output: .retype
+url: https://wiki.autobb.app
 
 branding:
   title: Verus Wiki

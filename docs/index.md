@@ -19,7 +19,7 @@ New to Verus? Start here.
 - [Wallet Setup](getting-started/wallet-setup.md) — Create addresses, receive VRSC, back up your wallet
 - [Key Concepts](getting-started/key-concepts.md) — VerusID, currencies, mining, staking, privacy
 
-### [Command Reference](command-reference/)
+### [Command Reference](command-reference/blockchain.md)
 Complete documentation for all CLI commands across 14 categories:
 - [Blockchain](command-reference/blockchain.md) · [Control](command-reference/control.md) · [Generating](command-reference/generating.md) · [Identity](command-reference/identity.md) · [Marketplace](command-reference/marketplace.md) · [Mining](command-reference/mining.md) · [Multichain](command-reference/multichain.md) · [Network](command-reference/network.md) · [Raw Transactions](command-reference/rawtransactions.md) · [Util](command-reference/util.md) · [Wallet](command-reference/wallet.md)
 
@@ -31,21 +31,21 @@ Deep dives into how Verus works:
 - [Basket Currencies & DeFi](concepts/basket-currencies-defi.md) — Protocol-level AMM
 - [Bridge & Cross-Chain](concepts/bridge-and-crosschain.md) — PBaaS and Ethereum connectivity
 
-### [How-To Guides](how-to/)
+### [How-To Guides](how-to/create-verusid.md)
 Step-by-step instructions for common tasks:
 - [Register a VerusID](how-to/create-verusid.md) · [Send Private Transaction](how-to/send-private-transaction.md) · [Mine VRSC](how-to/mine-vrsc.md) · [Stake VRSC](how-to/stake-vrsc.md) · [Launch a Token](how-to/launch-token.md) · [Setup Multisig](how-to/setup-multisig.md) · [Manage SubIDs](how-to/manage-subids.md)
 
-### [Tutorials](tutorials/)
+### [Tutorials](tutorials/your-first-verusid.md)
 End-to-end walkthroughs for complex workflows.
 
-### [Troubleshooting](troubleshooting/)
+### [Troubleshooting](troubleshooting/sync-issues.md)
 Solutions to common issues:
 - [Sync Issues](troubleshooting/sync-issues.md) · [Common Errors](troubleshooting/common-errors.md) · [Identity Issues](troubleshooting/identity-issues.md) · [Transaction Problems](troubleshooting/transaction-problems.md)
 
-### [Developers](developers/)
+### [Developers](developers/rpc-api-overview.md)
 Build on Verus — RPC integration, API patterns, and development guides.
 
-### [For Agents](for-agents/)
+### [For Agents](for-agents/agent-identity.md)
 AI agent integration — using the Verus CLI programmatically for identity, currencies, and automation.
 
 ---

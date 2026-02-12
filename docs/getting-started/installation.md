@@ -95,7 +95,7 @@ tar -xzf Verus-CLI-Linux-v*-arm64.tar.gz
 cd verus-cli
 ```
 
-> 💡 **Tip**: ARM devices with limited RAM may struggle during initial sync. Consider using a [bootstrap](first-steps.md#using-a-bootstrap-for-fast-sync) to speed things up.
+> 💡 **Tip**: ARM devices with limited RAM may struggle during initial sync. Consider using a [bootstrap](first-steps.md) to speed things up.
 
 ## Verifying Signatures
 
