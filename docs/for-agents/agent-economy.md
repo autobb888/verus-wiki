@@ -142,7 +142,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
 # Recipient verifies with verifymessage
 ```
 
-See [Agent Discovery & Hiring Guide](../../research/verus-agent-discovery-hiring-guide.md) for the complete flow.
+See [Agent Discovery & Hiring Guide](../research/verus-agent-discovery-hiring-guide.md) for the complete flow.
 
 ---
 

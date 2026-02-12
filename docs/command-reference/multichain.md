@@ -59,8 +59,8 @@ curl --user myusername --data-binary '{"jsonrpc":"1.0","id":"curltest","method":
 
 **Related Commands**
 
-- [`getblocktemplate`](../mining/getblocktemplate.md) — Get block template for mining
-- [`submitblock`](../mining/submitblock.md) — Submit a mined block
+- [`getblocktemplate`](mining.md#getblocktemplate) — Get block template for mining
+- [`submitblock`](mining.md#submitblock) — Submit a mined block
 
 **Notes**
 
@@ -137,8 +137,8 @@ verus -testnet clearrawmempool '["offermap"]'
 
 **Related Commands**
 
-- [`getrawmempool`](../blockchain/getrawmempool.md) — View current mempool contents
-- [`getmempoolinfo`](../blockchain/getmempoolinfo.md) — Get mempool statistics
+- [`getrawmempool`](blockchain.md#getrawmempool) — View current mempool contents
+- [`getmempoolinfo`](blockchain.md#getmempoolinfo) — Get mempool statistics
 
 **Notes**
 
@@ -280,10 +280,10 @@ curl --user user1445741888:pass... --data-binary \
 | `Invalid currency definition` | Missing required fields or invalid options | Check all required fields are present |
 
 **Related Commands**
-- [getcurrency](getcurrency.md) — verify the currency after creation
-- [listcurrencies](listcurrencies.md) — list all currencies
-- [sendcurrency](sendcurrency.md) — send/convert with the new currency
-- [getlaunchinfo](getlaunchinfo.md) — get launch details
+- [getcurrency](#getcurrency) — verify the currency after creation
+- [listcurrencies](#listcurrencies) — list all currencies
+- [sendcurrency](#sendcurrency) — send/convert with the new currency
+- [getlaunchinfo](#getlaunchinfo) — get launch details
 
 **Notes**
 - The identity named after the currency must exist and have no active currency
@@ -398,9 +398,9 @@ curl --user user1445741888:pass... --data-binary \
 | `Currency not found` | Invalid currency name | Check spelling with `getcurrency` |
 
 **Related Commands**
-- [sendcurrency](sendcurrency.md) — execute the conversion
-- [getcurrencyconverters](getcurrencyconverters.md) — find available conversion pairs
-- [getcurrencystate](getcurrencystate.md) — check current reserve ratios
+- [sendcurrency](#sendcurrency) — execute the conversion
+- [getcurrencyconverters](#getcurrencyconverters) — find available conversion pairs
+- [getcurrencystate](#getcurrencystate) — check current reserve ratios
 
 **Notes**
 - Fees are ~0.025% conversion fee + 0.02% network fee (visible in `netinputamount` vs `amount`)
@@ -493,9 +493,9 @@ verus -testnet getbestproofroot '{"proofroots":[],"lastconfirmed":0}'
 
 **Related Commands**
 
-- [`getnotarizationdata`](getnotarizationdata.md) — Get notarization data for a currency
-- [`getnotarizationproofs`](getnotarizationproofs.md) — Get notarization proofs
-- [`submitacceptednotarization`](submitacceptednotarization.md) — Submit a notarization
+- [`getnotarizationdata`](#getnotarizationdata) — Get notarization data for a currency
+- [`getnotarizationproofs`](#getnotarizationproofs) — Get notarization proofs
+- [`submitacceptednotarization`](#submitacceptednotarization) — Submit a notarization
 
 **Notes**
 
@@ -599,10 +599,10 @@ curl --user user1445741888:pass... --data-binary \
 | No output | Daemon not synced | Wait for sync to complete |
 
 **Related Commands**
-- [listcurrencies](listcurrencies.md) — list all registered currencies
-- [getcurrencystate](getcurrencystate.md) — get current state at specific height
-- [definecurrency](definecurrency.md) — define a new currency
-- [getlaunchinfo](getlaunchinfo.md) — get launch details
+- [listcurrencies](#listcurrencies) — list all registered currencies
+- [getcurrencystate](#getcurrencystate) — get current state at specific height
+- [definecurrency](#definecurrency) — define a new currency
+- [getlaunchinfo](#getlaunchinfo) — get launch details
 
 **Notes**
 - `options: 32` (0x20) = TOKEN, `options: 33` (0x21) = FRACTIONAL TOKEN
@@ -692,9 +692,9 @@ curl --user user1445741888:pass... --data-binary \
 | Empty array `[]` | No fractional currencies hold the specified reserve(s) | Check currency names; only fractional baskets are returned |
 
 **Related Commands**
-- [estimateconversion](estimateconversion.md) — estimate a specific conversion
-- [sendcurrency](sendcurrency.md) — execute a conversion
-- [getcurrency](getcurrency.md) — get details on a specific converter
+- [estimateconversion](#estimateconversion) — estimate a specific conversion
+- [sendcurrency](#sendcurrency) — execute a conversion
+- [getcurrency](#getcurrency) — get details on a specific converter
 
 **Notes**
 - Only returns **fractional** currencies (baskets with reserves)
@@ -792,9 +792,9 @@ curl --user user1445741888:pass... --data-binary \
 | Empty array `[]` | Height before currency existed | Use height >= currency's `startblock` |
 
 **Related Commands**
-- [getcurrency](getcurrency.md) — full currency definition
-- [getinitialcurrencystate](getinitialcurrencystate.md) — state at launch
-- [estimateconversion](estimateconversion.md) — estimate conversion with current state
+- [getcurrency](#getcurrency) — full currency definition
+- [getinitialcurrencystate](#getinitialcurrencystate) — state at launch
+- [estimateconversion](#estimateconversion) — estimate conversion with current state
 
 **Notes**
 - For fractional currencies, the state includes `reservecurrencies` with weights, reserves, and prices
@@ -867,8 +867,8 @@ curl --user user1445741888:pass... --data-binary \
 | Empty response | No trust ratings configured | This is normal — default is trust mode 0 (no filtering) |
 
 **Related Commands**
-- [setcurrencytrust](setcurrencytrust.md) — modify trust ratings
-- [listcurrencies](listcurrencies.md) — list all currencies
+- [setcurrencytrust](#setcurrencytrust) — modify trust ratings
+- [listcurrencies](#listcurrencies) — list all currencies
 
 **Notes**
 - Trust ratings are wallet-local settings, not on-chain
@@ -960,9 +960,9 @@ curl --user user1445741888:pass... --data-binary \
 | `Currency not found` | Invalid chain name | Verify with `getcurrency` |
 
 **Related Commands**
-- [getimports](getimports.md) — get incoming imports
-- [getpendingtransfers](getpendingtransfers.md) — pending (not yet exported) transfers
-- [sendcurrency](sendcurrency.md) — create exports with `exportto`
+- [getimports](#getimports) — get incoming imports
+- [getpendingtransfers](#getpendingtransfers) — pending (not yet exported) transfers
+- [sendcurrency](#sendcurrency) — create exports with `exportto`
 
 **Notes**
 - The first export for a currency is typically the launch/definition transaction
@@ -1053,9 +1053,9 @@ curl --user user1445741888:pass... --data-binary \
 | `Currency not found` | Invalid chain name | Verify with `getcurrency` |
 
 **Related Commands**
-- [getexports](getexports.md) — get outgoing exports
-- [getpendingtransfers](getpendingtransfers.md) — transfers awaiting export
-- [sendcurrency](sendcurrency.md) — send cross-chain (creates exports that become imports)
+- [getexports](#getexports) — get outgoing exports
+- [getpendingtransfers](#getpendingtransfers) — transfers awaiting export
+- [sendcurrency](#sendcurrency) — send cross-chain (creates exports that become imports)
 
 **Notes**
 - The first import for VRSCTEST (height 238) is the chain's genesis/definition import
@@ -1142,9 +1142,9 @@ curl --user user1445741888:pass... --data-binary \
 | `Currency not found` | Invalid name/ID | Verify with `getcurrency` |
 
 **Related Commands**
-- [getcurrencystate](getcurrencystate.md) — current state (compare with initial)
-- [getlaunchinfo](getlaunchinfo.md) — full launch details with proofs
-- [getcurrency](getcurrency.md) — currency definition
+- [getcurrencystate](#getcurrencystate) — current state (compare with initial)
+- [getlaunchinfo](#getlaunchinfo) — full launch details with proofs
+- [getcurrency](#getcurrency) — currency definition
 
 **Notes**
 - For simple tokens without pre-conversion, all values will be 0 (supply comes from preallocations)
@@ -1208,9 +1208,9 @@ error message: Invalid chain name or chain ID
 
 **Related Commands**
 
-- [`getnotarizationdata`](getnotarizationdata.md) — Get notarization data for a currency
-- [`submitimports`](submitimports.md) — Submit imports from another system
-- [`getimports`](getimports.md) — Get imports for a currency
+- [`getnotarizationdata`](#getnotarizationdata) — Get notarization data for a currency
+- [`submitimports`](#submitimports) — Submit imports from another system
+- [`getimports`](#getimports) — Get imports for a currency
 
 **Notes**
 
@@ -1287,9 +1287,9 @@ curl --user user1445741888:pass... --data-binary \
 | `Currency not found` | Invalid name/ID | Check with `getcurrency` |
 
 **Related Commands**
-- [getinitialcurrencystate](getinitialcurrencystate.md) — initial state at launch
-- [getcurrency](getcurrency.md) — current currency definition
-- [definecurrency](definecurrency.md) — how the currency was defined
+- [getinitialcurrencystate](#getinitialcurrencystate) — initial state at launch
+- [getcurrency](#getcurrency) — current currency definition
+- [definecurrency](#definecurrency) — how the currency was defined
 
 **Notes**
 - Simple tokens (like `agentplatform`) that launch without pre-conversions may return "No valid export found"
@@ -1397,9 +1397,9 @@ verus -testnet getnotarizationdata "VRSCTEST"
 
 **Related Commands**
 
-- [`getbestproofroot`](getbestproofroot.md) — Get best proof root
-- [`getnotarizationproofs`](getnotarizationproofs.md) — Get notarization proofs
-- [`submitacceptednotarization`](submitacceptednotarization.md) — Submit a notarization
+- [`getbestproofroot`](#getbestproofroot) — Get best proof root
+- [`getnotarizationproofs`](#getnotarizationproofs) — Get notarization proofs
+- [`submitacceptednotarization`](#submitacceptednotarization) — Submit a notarization
 
 **Notes**
 
@@ -1475,9 +1475,9 @@ verus -testnet getnotarizationproofs '[{"type":"iCwxpRL6h3YeCRtGjgQSsqoKdZCuM4Dx
 
 **Related Commands**
 
-- [`getnotarizationdata`](getnotarizationdata.md) — Get notarization data
-- [`submitchallenges`](submitchallenges.md) — Submit evidence challenges
-- [`getbestproofroot`](getbestproofroot.md) — Get best proof root
+- [`getnotarizationdata`](#getnotarizationdata) — Get notarization data
+- [`submitchallenges`](#submitchallenges) — Submit evidence challenges
+- [`getbestproofroot`](#getbestproofroot) — Get best proof root
 
 **Notes**
 
@@ -1544,9 +1544,9 @@ curl --user user1445741888:pass... --data-binary \
 | `Currency not found` | Invalid chain name | Verify with `getcurrency` |
 
 **Related Commands**
-- [getexports](getexports.md) — see completed exports
-- [getimports](getimports.md) — see completed imports
-- [sendcurrency](sendcurrency.md) — create transfers
+- [getexports](#getexports) — see completed exports
+- [getimports](#getimports) — see completed imports
+- [sendcurrency](#sendcurrency) — create transfers
 
 **Notes**
 - Pending transfers are temporary — they get batched into exports at the next block
@@ -1632,9 +1632,9 @@ curl --user user1445741888:pass... --data-binary \
 | `Currency not found` | Invalid name/ID | Verify with `getcurrency` |
 
 **Related Commands**
-- [getcurrencystate](getcurrencystate.md) — includes reserve amounts in currency state
-- [getcurrency](getcurrency.md) — see currency definition with reserve currencies and weights
-- [getcurrencyconverters](getcurrencyconverters.md) — find currencies with reserves
+- [getcurrencystate](#getcurrencystate) — includes reserve amounts in currency state
+- [getcurrency](#getcurrency) — see currency definition with reserve currencies and weights
+- [getcurrencyconverters](#getcurrencyconverters) — find currencies with reserves
 
 **Notes**
 - Only fractional currencies (baskets) have reserve deposits
@@ -1714,8 +1714,8 @@ verus -testnet getsaplingtree "926980,926990,5"
 
 **Related Commands**
 
-- [`getblock`](../blockchain/getblock.md) — Get block data at a height
-- [`getblockchaininfo`](../blockchain/getblockchaininfo.md) — Get blockchain state info
+- [`getblock`](blockchain.md#getblock) — Get block data at a height
+- [`getblockchaininfo`](blockchain.md#getblockchaininfo) — Get blockchain state info
 
 **Notes**
 
@@ -1816,9 +1816,9 @@ curl --user user1445741888:pass... --data-binary \
 | Timeout | Too many currencies to return | Use `startblock`/`endblock` to narrow range |
 
 **Related Commands**
-- [getcurrency](getcurrency.md) — get details for a specific currency
-- [getcurrencyconverters](getcurrencyconverters.md) — find conversion pairs
-- [getcurrencytrust](getcurrencytrust.md) — check trust ratings
+- [getcurrency](#getcurrency) — get details for a specific currency
+- [getcurrencyconverters](#getcurrencyconverters) — find conversion pairs
+- [getcurrencytrust](#getcurrencytrust) — check trust ratings
 
 **Notes**
 - Output can be very large on active networks; use filters to narrow results
@@ -1879,9 +1879,9 @@ error message: Cannot refund the specified chain
 
 **Related Commands**
 
-- [`definecurrency`](definecurrency.md) — Define a new currency
-- [`getcurrency`](getcurrency.md) — Get currency information
-- [`getcurrencystate`](getcurrencystate.md) — Get current state of a currency
+- [`definecurrency`](#definecurrency) — Define a new currency
+- [`getcurrency`](#getcurrency) — Get currency information
+- [`getcurrencystate`](#getcurrencystate) — Get current state of a currency
 
 **Notes**
 
@@ -2044,10 +2044,10 @@ curl --user user1445741888:pass... --data-binary \
 | `Cannot mint currency` | Sending from wrong ID or non-centralized currency | Must send from the currency's control ID; currency must have `proofprotocol: 2` |
 
 **Related Commands**
-- [estimateconversion](estimateconversion.md) — preview conversion before sending
-- [getcurrencyconverters](getcurrencyconverters.md) — find conversion pairs
-- [getcurrency](getcurrency.md) — check currency details
-- [getexports](getexports.md) / [getimports](getimports.md) — track cross-chain transfers
+- [estimateconversion](#estimateconversion) — preview conversion before sending
+- [getcurrencyconverters](#getcurrencyconverters) — find conversion pairs
+- [getcurrency](#getcurrency) — check currency details
+- [getexports](#getexports) / [getimports](#getimports) — track cross-chain transfers
 
 **Notes**
 - **Conversions are DeFi**: all conversions in the same block get the same price (no front-running)
@@ -2129,8 +2129,8 @@ curl --user user1445741888:pass... --data-binary \
 | Invalid parameters | Malformed JSON or invalid currency ID | Check JSON syntax and verify currency IDs |
 
 **Related Commands**
-- [getcurrencytrust](getcurrencytrust.md) — view current trust settings
-- [listcurrencies](listcurrencies.md) — see available currencies
+- [getcurrencytrust](#getcurrencytrust) — view current trust settings
+- [listcurrencies](#listcurrencies) — see available currencies
 
 **Notes**
 - Trust settings are wallet-local only — they don't affect the blockchain
@@ -2185,9 +2185,9 @@ verus -testnet submitacceptednotarization "{earnednotarization}" "{notaryevidenc
 
 **Related Commands**
 
-- [`getnotarizationdata`](getnotarizationdata.md) — Get notarization data
-- [`getnotarizationproofs`](getnotarizationproofs.md) — Get notarization proofs
-- [`submitchallenges`](submitchallenges.md) — Submit evidence challenges
+- [`getnotarizationdata`](#getnotarizationdata) — Get notarization data
+- [`getnotarizationproofs`](#getnotarizationproofs) — Get notarization proofs
+- [`submitchallenges`](#submitchallenges) — Submit evidence challenges
 
 **Notes**
 
@@ -2251,9 +2251,9 @@ verus -testnet submitchallenges '[{"notarizationref":{"txid":"hexvalue","voutnum
 
 **Related Commands**
 
-- [`getnotarizationproofs`](getnotarizationproofs.md) — Get proofs for challenges
-- [`getnotarizationdata`](getnotarizationdata.md) — Get notarization data
-- [`submitacceptednotarization`](submitacceptednotarization.md) — Submit a notarization
+- [`getnotarizationproofs`](#getnotarizationproofs) — Get proofs for challenges
+- [`getnotarizationdata`](#getnotarizationdata) — Get notarization data
+- [`submitacceptednotarization`](#submitacceptednotarization) — Submit a notarization
 
 **Notes**
 
@@ -2326,9 +2326,9 @@ verus -testnet submitimports '{"sourcesystemid":"systemid","notarizationtxid":"t
 
 **Related Commands**
 
-- [`getlastimportfrom`](getlastimportfrom.md) — Get last import from a system
-- [`getnotarizationdata`](getnotarizationdata.md) — Get notarization data
-- [`submitacceptednotarization`](submitacceptednotarization.md) — Submit a notarization
+- [`getlastimportfrom`](#getlastimportfrom) — Get last import from a system
+- [`getnotarizationdata`](#getnotarizationdata) — Get notarization data
+- [`submitacceptednotarization`](#submitacceptednotarization) — Submit a notarization
 
 **Notes**
 

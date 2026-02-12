@@ -198,7 +198,7 @@ Check that your addresses are in the wallet:
 
 ## sendcurrency Failures
 
-**Symptom:** [sendcurrency](../command-reference/financial/sendcurrency.md) returns an error.
+**Symptom:** [sendcurrency](../command-reference/multichain.md#sendcurrency) returns an error.
 
 **Common errors:**
 

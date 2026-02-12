@@ -76,9 +76,9 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | Invalid address format | Not a valid R-address | Provide a valid transparent address |
 
 **Related Commands**
-- [getidentitieswithrecovery](../identity/getidentitieswithrecovery.md) — Find identities by recovery authority
-- [getidentitieswithrevocation](../identity/getidentitieswithrevocation.md) — Find identities by revocation authority
-- [getidentity](../identity/getidentity.md) — Look up a specific identity by name or i-address
+- [getidentitieswithrecovery](identity.md#getidentitieswithrecovery) — Find identities by recovery authority
+- [getidentitieswithrevocation](identity.md#getidentitieswithrevocation) — Find identities by revocation authority
+- [getidentity](identity.md#getidentity) — Look up a specific identity by name or i-address
 
 **Notes**
 - **Requires `-idindex=1`** daemon flag. This builds an address-to-identity index on disk. Without it, the command cannot function.
@@ -161,12 +161,12 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | `Identity not found` | The specified recovery identity doesn't exist | Verify the identity name or i-address |
 
 **Related Commands**
-- [getidentitieswithrevocation](../identity/getidentitieswithrevocation.md) — Find identities by revocation authority
-- [getidentitieswithaddress](../identity/getidentitieswithaddress.md) — Find identities by primary address
-- [getidentity](../identity/getidentity.md) — Look up a specific identity
+- [getidentitieswithrevocation](identity.md#getidentitieswithrevocation) — Find identities by revocation authority
+- [getidentitieswithaddress](identity.md#getidentitieswithaddress) — Find identities by primary address
+- [getidentity](identity.md#getidentity) — Look up a specific identity
 
 **Notes**
-- **Requires `-idindex=1`** daemon flag. See [getidentitieswithaddress](../identity/getidentitieswithaddress.md) for details.
+- **Requires `-idindex=1`** daemon flag. See [getidentitieswithaddress](identity.md#getidentitieswithaddress) for details.
 - By default, an identity's recovery authority is set to itself. This means querying `"ari@"` will return `ari@` itself plus any other identities that explicitly set `ari@` as their recovery authority.
 - Recovery authority is the identity that can recover (regain control of) an identity if primary keys are compromised.
 
@@ -245,9 +245,9 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | `Identity not found` | The specified identity doesn't exist | Verify the identity name or i-address |
 
 **Related Commands**
-- [getidentitieswithrecovery](../identity/getidentitieswithrecovery.md) — Find identities by recovery authority
-- [getidentitieswithaddress](../identity/getidentitieswithaddress.md) — Find identities by primary address
-- [getidentity](../identity/getidentity.md) — Look up a specific identity
+- [getidentitieswithrecovery](identity.md#getidentitieswithrecovery) — Find identities by recovery authority
+- [getidentitieswithaddress](identity.md#getidentitieswithaddress) — Find identities by primary address
+- [getidentity](identity.md#getidentity) — Look up a specific identity
 
 **Notes**
 - **Requires `-idindex=1`** daemon flag.
@@ -404,10 +404,10 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | `Invalid identity` | Malformed i-address | Check the i-address format |
 
 **Related Commands**
-- [getidentityhistory](../identity/getidentityhistory.md) — Get all historical versions of an identity
-- [getidentitycontent](../identity/getidentitycontent.md) — Get aggregated content across identity history
-- [listidentities](../identity/listidentities.md) — List identities in the local wallet
-- [registernamecommitment](../identity/registernamecommitment.md) — First step to registering a new identity
+- [getidentityhistory](identity.md#getidentityhistory) — Get all historical versions of an identity
+- [getidentitycontent](identity.md#getidentitycontent) — Get aggregated content across identity history
+- [listidentities](identity.md#listidentities) — List identities in the local wallet
+- [registernamecommitment](identity.md#registernamecommitment) — First step to registering a new identity
 
 **Name Qualification**
 
@@ -535,8 +535,8 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | Empty contentmultimap | Identity has no on-chain content | This is valid — the identity simply has no stored data |
 
 **Related Commands**
-- [getidentity](../identity/getidentity.md) — Get current state of an identity (latest update only)
-- [getidentityhistory](../identity/getidentityhistory.md) — Get full identity objects at each update point
+- [getidentity](identity.md#getidentity) — Get current state of an identity (latest update only)
+- [getidentityhistory](identity.md#getidentityhistory) — Get full identity objects at each update point
 
 **Notes**
 - Unlike `getidentity` which returns only the *current* content, `getidentitycontent` aggregates across all updates. This means you'll see duplicate entries for content that was present in multiple updates.
@@ -661,8 +661,8 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | Empty history array | No updates in the specified range | Widen the block range |
 
 **Related Commands**
-- [getidentity](../identity/getidentity.md) — Get current identity state only
-- [getidentitycontent](../identity/getidentitycontent.md) — Get aggregated content across updates
+- [getidentity](identity.md#getidentity) — Get current identity state only
+- [getidentitycontent](identity.md#getidentitycontent) — Get aggregated content across updates
 
 **Notes**
 - Each entry in the `history` array represents a complete snapshot of the identity at that block height. You can see exactly what changed between updates by diffing consecutive entries.
@@ -743,8 +743,8 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | Empty result | No trust ratings configured | This is normal for a default node — trust mode 0 means no restrictions |
 
 **Related Commands**
-- [setidentitytrust](../identity/setidentitytrust.md) — Set trust ratings for identities
-- [getidentity](../identity/getidentity.md) — Look up an identity
+- [setidentitytrust](identity.md#setidentitytrust) — Set trust ratings for identities
+- [getidentity](identity.md#getidentity) — Look up an identity
 
 **Notes**
 - When no trust ratings are configured and `identitytrustmode` is 0, the node syncs all identity data without restriction.
@@ -876,9 +876,9 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 | Wallet not loaded | Wallet is encrypted/locked | Unlock wallet with `walletpassphrase` |
 
 **Related Commands**
-- [getidentity](../identity/getidentity.md) — Get details for a specific identity
-- [registernamecommitment](../identity/registernamecommitment.md) — Begin registering a new identity
-- [registeridentity](../identity/registeridentity.md) — Complete identity registration
+- [getidentity](identity.md#getidentity) — Get details for a specific identity
+- [registernamecommitment](identity.md#registernamecommitment) — Begin registering a new identity
+- [registeridentity](identity.md#registeridentity) — Complete identity registration
 
 **Notes**
 - This command only shows identities for which the local wallet has relevant keys. It does **not** search the entire blockchain.
@@ -956,9 +956,9 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Identity not found | Invalid name or i-address | Check the identity name/address |
 
 **Related Commands**
-- [`revokeidentity`](revokeidentity.md) — Revoke an identity (required before recovery)
-- [`updateidentity`](updateidentity.md) — Update identity (for non-revoked IDs)
-- [`getidentity`](getidentity.md) — Check current identity status
+- [`revokeidentity`](#revokeidentity) — Revoke an identity (required before recovery)
+- [`updateidentity`](#updateidentity) — Update identity (for non-revoked IDs)
+- [`getidentity`](#getidentity) — Check current identity status
 
 **Notes**
 - Recovery requires the **recovery authority** keys — not the primary keys or revocation authority
@@ -1071,10 +1071,10 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Must wait for commitment to be mined | Commitment tx not yet confirmed | Wait for at least 1 confirmation |
 
 **Related Commands**
-- [`registernamecommitment`](registernamecommitment.md) — Step 1: create a name commitment (required before registeridentity)
-- [`getidentity`](getidentity.md) — Look up a registered identity
-- [`updateidentity`](updateidentity.md) — Modify an existing identity
-- [`listidentities`](listidentities.md) — List identities in wallet
+- [`registernamecommitment`](#registernamecommitment) — Step 1: create a name commitment (required before registeridentity)
+- [`getidentity`](#getidentity) — Look up a registered identity
+- [`updateidentity`](#updateidentity) — Modify an existing identity
+- [`listidentities`](#listidentities) — List identities in wallet
 
 **Notes**
 - Registration is a **two-step process**: first `registernamecommitment`, then `registeridentity`
@@ -1191,9 +1191,9 @@ Names must **not** have:
 | Commitment for existing name | Name already registered | The commitment succeeds but `registeridentity` will fail. Check name availability first with `getidentity`. |
 
 **Related Commands**
-- [registeridentity](../identity/registeridentity.md) — Step 2: Complete registration using the commitment
-- [getidentity](../identity/getidentity.md) — Check if a name is already taken
-- [listidentities](../identity/listidentities.md) — List identities in your wallet
+- [registeridentity](identity.md#registeridentity) — Step 2: Complete registration using the commitment
+- [getidentity](identity.md#getidentity) — Check if a name is already taken
+- [listidentities](identity.md#listidentities) — List identities in your wallet
 
 **Notes**
 - **Save the output!** The `namereservation` object (especially `salt`) is required for `registeridentity`. If lost, the commitment is wasted.
@@ -1275,9 +1275,9 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Already revoked | Identity is already in revoked state | Use `recoveridentity` to restore |
 
 **Related Commands**
-- [`recoveridentity`](recoveridentity.md) — Recover a revoked identity with new keys
-- [`updateidentity`](updateidentity.md) — Update identity (cannot be done while revoked)
-- [`getidentity`](getidentity.md) — Check identity status (flags will show revoked state)
+- [`recoveridentity`](#recoveridentity) — Recover a revoked identity with new keys
+- [`updateidentity`](#updateidentity) — Update identity (cannot be done while revoked)
+- [`getidentity`](#getidentity) — Check identity status (flags will show revoked state)
 
 **Notes**
 - **This is a destructive operation** — a revoked identity cannot sign, spend funds, or authenticate
@@ -1383,9 +1383,9 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Identity not found | Invalid name or i-address | Verify the identity exists |
 
 **Related Commands**
-- [`getidentity`](getidentity.md) — Check current timelock status in identity flags
-- [`updateidentity`](updateidentity.md) — General identity updates
-- [`revokeidentity`](revokeidentity.md) — Revoke/recover can bypass timelock
+- [`getidentity`](#getidentity) — Check current timelock status in identity flags
+- [`updateidentity`](#updateidentity) — General identity updates
+- [`revokeidentity`](#revokeidentity) — Revoke/recover can bypass timelock
 
 **Notes**
 - Timelocking is **per-chain** — it does not affect the same identity exported to other chains
@@ -1480,7 +1480,7 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 
 **Related Commands**
 - `getidentitytrust` — Read current trust ratings and mode
-- [`getidentity`](getidentity.md) — Look up identity details
+- [`getidentity`](#getidentity) — Look up identity details
 
 **Notes**
 - Trust ratings are **local to your wallet** — they don't affect the blockchain
@@ -1618,9 +1618,9 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Identity not found | Invalid identity name or address | Verify the identity exists |
 
 **Related Commands**
-- [`verifysignature`](verifysignature.md) — Verify a signdata signature (use `datahash` from output)
-- [`signmessage`](signmessage.md) — Simpler message signing (v1 signatures)
-- [`signfile`](signfile.md) — Simple file signing
+- [`verifysignature`](#verifysignature) — Verify a signdata signature (use `datahash` from output)
+- [`signmessage`](#signmessage) — Simpler message signing (v1 signatures)
+- [`signfile`](#signfile) — Simple file signing
 
 **Notes**
 - Returns **signature version 2** which includes system context in the hash — this means the hash differs from a simple SHA256 of the message
@@ -1693,9 +1693,9 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Identity not found | Invalid identity name | Check spelling and chain suffix |
 
 **Related Commands**
-- [`verifyfile`](verifyfile.md) — Verify a file signature
-- [`signmessage`](signmessage.md) — Sign a text message instead
-- [`signdata`](signdata.md) — Advanced signing with VDXF keys, bound hashes, etc.
+- [`verifyfile`](#verifyfile) — Verify a file signature
+- [`signmessage`](#signmessage) — Sign a text message instead
+- [`signdata`](#signdata) — Advanced signing with VDXF keys, bound hashes, etc.
 
 **Notes**
 - The hash returned is **SHA256** (not SHA256D, despite using SHA256D internally for signing)
@@ -1774,10 +1774,10 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Wallet locked | Wallet is encrypted and locked | Run `walletpassphrase` first |
 
 **Related Commands**
-- [`verifymessage`](verifymessage.md) — Verify a signmessage signature
-- [`verifyhash`](verifyhash.md) — Verify using the hash directly
-- [`signdata`](signdata.md) — Advanced signing with VDXF keys, bound hashes, etc.
-- [`signfile`](signfile.md) — Sign a file instead of a message
+- [`verifymessage`](#verifymessage) — Verify a signmessage signature
+- [`verifyhash`](#verifyhash) — Verify using the hash directly
+- [`signdata`](#signdata) — Advanced signing with VDXF keys, bound hashes, etc.
+- [`signfile`](#signfile) — Sign a file instead of a message
 
 **Notes**
 - Returns a **v1 simple signature** — use `verifymessage` (not `verifysignature`) to verify
@@ -1878,10 +1878,10 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Insufficient funds | Not enough for transaction fee | Fund the wallet or specify `sourceoffunds` |
 
 **Related Commands**
-- [`getidentity`](getidentity.md) — View current identity state before/after update
-- [`registeridentity`](registeridentity.md) — Initial identity registration
-- [`revokeidentity`](revokeidentity.md) — Revoke an identity
-- [`recoveridentity`](recoveridentity.md) — Recover a revoked identity
+- [`getidentity`](#getidentity) — View current identity state before/after update
+- [`registeridentity`](#registeridentity) — Initial identity registration
+- [`revokeidentity`](#revokeidentity) — Revoke an identity
+- [`recoveridentity`](#recoveridentity) — Recover a revoked identity
 
 **Notes**
 - The `name` field is always required to identify which ID to update
@@ -1957,9 +1957,9 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Identity not found | Invalid identity name | Check the identity name/address |
 
 **Related Commands**
-- [`signfile`](signfile.md) — Sign a file (produces the signature to verify)
-- [`verifymessage`](verifymessage.md) — Verify a message signature
-- [`verifyhash`](verifyhash.md) — Verify using a hash directly
+- [`signfile`](#signfile) — Sign a file (produces the signature to verify)
+- [`verifymessage`](#verifymessage) — Verify a message signature
+- [`verifyhash`](#verifyhash) — Verify using a hash directly
 
 **Notes**
 - The file must be accessible to the **daemon process**
@@ -2025,11 +2025,11 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Invalid hex | Hash is not valid hex | Provide a valid 64-character hex hash |
 
 **Related Commands**
-- [`signmessage`](signmessage.md) — Sign a message (output includes hash)
-- [`signfile`](signfile.md) — Sign a file (output includes hash)
-- [`verifymessage`](verifymessage.md) — Verify with the original message text
-- [`verifyfile`](verifyfile.md) — Verify with the original file
-- [`verifysignature`](verifysignature.md) — Advanced verification for `signdata` signatures
+- [`signmessage`](#signmessage) — Sign a message (output includes hash)
+- [`signfile`](#signfile) — Sign a file (output includes hash)
+- [`verifymessage`](#verifymessage) — Verify with the original message text
+- [`verifyfile`](#verifyfile) — Verify with the original file
+- [`verifysignature`](#verifysignature) — Advanced verification for `signdata` signatures
 
 **Notes**
 - The hash must be the **SHA256** hash as returned by `signmessage` or `signfile`
@@ -2101,10 +2101,10 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Identity not found | Invalid identity name | Check spelling and format |
 
 **Related Commands**
-- [`signmessage`](signmessage.md) — Sign a message (produces the signature to verify)
-- [`verifyhash`](verifyhash.md) — Verify using the hash instead of the message
-- [`verifyfile`](verifyfile.md) — Verify a file signature
-- [`verifysignature`](verifysignature.md) — Advanced verification for `signdata` signatures
+- [`signmessage`](#signmessage) — Sign a message (produces the signature to verify)
+- [`verifyhash`](#verifyhash) — Verify using the hash instead of the message
+- [`verifyfile`](#verifyfile) — Verify a file signature
+- [`verifysignature`](#verifysignature) — Advanced verification for `signdata` signatures
 
 **Notes**
 - The message must match **exactly** — including whitespace and case
@@ -2217,9 +2217,9 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 | Missing signature | No signature provided | Include the `signature` field |
 
 **Related Commands**
-- [`signdata`](signdata.md) — Sign data (produces signatures verified by this command)
-- [`verifymessage`](verifymessage.md) — Verify simple `signmessage` signatures
-- [`verifyhash`](verifyhash.md) — Simple hash verification for `signmessage`/`signfile`
+- [`signdata`](#signdata) — Sign data (produces signatures verified by this command)
+- [`verifymessage`](#verifymessage) — Verify simple `signmessage` signatures
+- [`verifyhash`](#verifyhash) — Simple hash verification for `signmessage`/`signfile`
 
 **Notes**
 - **Critical:** `signdata` produces v2 signatures that include system context in the hash. Passing the original `message` to `verifysignature` will compute a different hash and return "invalid". Always use the `datahash` (the `hash` field from `signdata` output) for verification.

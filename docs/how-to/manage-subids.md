@@ -203,4 +203,4 @@ The recovery authority can then restore it with new keys using `recoveridentity`
 
 - [Create a VerusID](create-verusid.md) — Root-level identity registration
 - [Launch a Token](launch-token.md) — Create your namespace first
-- [VerusID Concepts](../concepts/verusid.md) — Identity system deep dive
+- [VerusID Concepts](../concepts/identity-system.md) — Identity system deep dive

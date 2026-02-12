@@ -1,6 +1,6 @@
 # Currency Options & Protocol Reference
 
-Quick reference for the numeric values used in `definecurrency`. See also: [definecurrency command reference](../command-reference/multichain/definecurrency.md)
+Quick reference for the numeric values used in `definecurrency`. See also: [definecurrency command reference](../command-reference/multichain.md#definecurrency)
 
 ## `options` (Bitfield)
 
@@ -70,6 +70,6 @@ Requires `"options": 8` (IDREFERRALS flag) to be set. See [Referral System](iden
 
 - [Currencies and Tokens on Verus](currencies-and-tokens.md) — overview of currency types
 - [Basket Currencies and DeFi](basket-currencies-defi.md) — how fractional currencies work
-- [definecurrency](../command-reference/multichain/definecurrency.md) — full command reference
+- [definecurrency](../command-reference/multichain.md#definecurrency) — full command reference
 - [How to Launch a Token](../how-to/launch-token.md) — step-by-step guide
 - [How to Manage SubIDs](../how-to/manage-subids.md) — creating subIDs under your namespace

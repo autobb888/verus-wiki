@@ -171,4 +171,4 @@ Transparent Balance            │
 
 - [Send a Private Transaction](../how-to/send-private-transaction.md) — Step-by-step how-to
 - [Wallet Setup](../getting-started/wallet-setup.md) — Address types explained
-- [Command Reference: Wallet](../command-reference/wallet/) — All z_* commands
+- [Command Reference: Wallet](../command-reference/wallet.md) — All z_* commands

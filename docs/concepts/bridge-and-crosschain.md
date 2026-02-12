@@ -245,7 +245,7 @@ The simplest way to bridge is via the web interface:
 
 ### From Verus to Ethereum (CLI)
 
-Use [sendcurrency](../command-reference/multichain/sendcurrency.md) with `exportto`:
+Use [sendcurrency](../command-reference/multichain.md#sendcurrency) with `exportto`:
 
 ```bash
 # Send VRSC to Ethereum
@@ -341,8 +341,8 @@ verus getimports "Bridge.vETH"
 - [Basket Currencies and DeFi](basket-currencies-defi.md) — How the Bridge.vETH basket works
 - [How To: Bridge from Ethereum](../how-to/bridge-from-ethereum.md) — Step-by-step bridging guide
 - [How To: Convert Currencies](../how-to/convert-currencies.md) — Converting bridged assets
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — The command that does it all
-- [getcurrency](../command-reference/multichain/getcurrency.md) — Check bridge reserves and status
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — The command that does it all
+- [getcurrency](../command-reference/multichain.md#getcurrency) — Check bridge reserves and status
 
 ---
 

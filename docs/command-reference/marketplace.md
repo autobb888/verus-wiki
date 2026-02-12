@@ -68,10 +68,10 @@ verus -testnet closeoffers '["txid1"]' "RTransparentAddr" "zs1privateaddr..."
 
 **Related Commands**
 
-- [`makeoffer`](makeoffer.md) — Create an offer
-- [`listopenoffers`](listopenoffers.md) — List wallet's open offers
-- [`getoffers`](getoffers.md) — List offers for a currency/identity
-- [`takeoffer`](takeoffer.md) — Accept an offer
+- [`makeoffer`](#makeoffer) — Create an offer
+- [`listopenoffers`](#listopenoffers) — List wallet's open offers
+- [`getoffers`](#getoffers) — List offers for a currency/identity
+- [`takeoffer`](#takeoffer) — Accept an offer
 
 **Notes**
 
@@ -178,10 +178,10 @@ verus -testnet getoffers "someid@" false
 
 **Related Commands**
 
-- [`makeoffer`](makeoffer.md) — Create an offer
-- [`takeoffer`](takeoffer.md) — Accept an offer
-- [`listopenoffers`](listopenoffers.md) — List wallet's open offers
-- [`closeoffers`](closeoffers.md) — Close/cancel offers
+- [`makeoffer`](#makeoffer) — Create an offer
+- [`takeoffer`](#takeoffer) — Accept an offer
+- [`listopenoffers`](#listopenoffers) — List wallet's open offers
+- [`closeoffers`](#closeoffers) — Close/cancel offers
 
 **Notes**
 
@@ -249,10 +249,10 @@ No specific errors — returns empty if no offers exist.
 
 **Related Commands**
 
-- [`makeoffer`](makeoffer.md) — Create an offer
-- [`getoffers`](getoffers.md) — List offers for a specific currency/identity
-- [`closeoffers`](closeoffers.md) — Close/cancel open offers
-- [`takeoffer`](takeoffer.md) — Accept an offer
+- [`makeoffer`](#makeoffer) — Create an offer
+- [`getoffers`](#getoffers) — List offers for a specific currency/identity
+- [`closeoffers`](#closeoffers) — Close/cancel open offers
+- [`takeoffer`](#takeoffer) — Accept an offer
 
 **Notes**
 
@@ -353,10 +353,10 @@ verus -testnet makeoffer "*" '{"changeaddress":"RChangeAddr","offer":{"currency"
 
 **Related Commands**
 
-- [`takeoffer`](takeoffer.md) — Accept an existing offer
-- [`getoffers`](getoffers.md) — List offers for a currency or identity
-- [`listopenoffers`](listopenoffers.md) — List wallet's open offers
-- [`closeoffers`](closeoffers.md) — Close/cancel open offers
+- [`takeoffer`](#takeoffer) — Accept an existing offer
+- [`getoffers`](#getoffers) — List offers for a currency or identity
+- [`listopenoffers`](#listopenoffers) — List wallet's open offers
+- [`closeoffers`](#closeoffers) — Close/cancel open offers
 
 **Notes**
 
@@ -437,10 +437,10 @@ verus -testnet takeoffer "i*" '{"txid":"offertxid","changeaddress":"RChangeAddr"
 
 **Related Commands**
 
-- [`makeoffer`](makeoffer.md) — Create an offer
-- [`getoffers`](getoffers.md) — List available offers
-- [`listopenoffers`](listopenoffers.md) — List wallet's open offers
-- [`closeoffers`](closeoffers.md) — Close/cancel offers
+- [`makeoffer`](#makeoffer) — Create an offer
+- [`getoffers`](#getoffers) — List available offers
+- [`listopenoffers`](#listopenoffers) — List wallet's open offers
+- [`closeoffers`](#closeoffers) — Close/cancel offers
 
 **Notes**
 

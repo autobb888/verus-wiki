@@ -81,9 +81,9 @@ verus -testnet getaddressbalance '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5
 
 **Related Commands**
 
-- [`getaddressutxos`](getaddressutxos.md) — Get unspent outputs for an address
-- [`getaddressdeltas`](getaddressdeltas.md) — Get all changes for an address
-- [`getaddresstxids`](getaddresstxids.md) — Get transaction IDs for an address
+- [`getaddressutxos`](#getaddressutxos) — Get unspent outputs for an address
+- [`getaddressdeltas`](#getaddressdeltas) — Get all changes for an address
+- [`getaddresstxids`](#getaddresstxids) — Get transaction IDs for an address
 
 **Notes**
 
@@ -154,9 +154,9 @@ verus -testnet getaddressdeltas '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5r
 
 **Related Commands**
 
-- [`getaddressbalance`](getaddressbalance.md) — Current balance
-- [`getaddresstxids`](getaddresstxids.md) — Just transaction IDs
-- [`getaddressmempool`](getaddressmempool.md) — Mempool-only deltas
+- [`getaddressbalance`](#getaddressbalance) — Current balance
+- [`getaddresstxids`](#getaddresstxids) — Just transaction IDs
+- [`getaddressmempool`](#getaddressmempool) — Mempool-only deltas
 
 **Notes**
 
@@ -225,8 +225,8 @@ verus -testnet getaddressmempool '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5
 
 **Related Commands**
 
-- [`getaddressdeltas`](getaddressdeltas.md) — Confirmed deltas
-- [`getaddressbalance`](getaddressbalance.md) — Current confirmed balance
+- [`getaddressdeltas`](#getaddressdeltas) — Confirmed deltas
+- [`getaddressbalance`](#getaddressbalance) — Current confirmed balance
 
 **Notes**
 
@@ -288,9 +288,9 @@ verus -testnet getaddresstxids '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM
 
 **Related Commands**
 
-- [`getaddressbalance`](getaddressbalance.md) — Balance summary
-- [`getaddressdeltas`](getaddressdeltas.md) — Full delta details
-- [`getaddressutxos`](getaddressutxos.md) — Unspent outputs
+- [`getaddressbalance`](#getaddressbalance) — Balance summary
+- [`getaddressdeltas`](#getaddressdeltas) — Full delta details
+- [`getaddressutxos`](#getaddressutxos) — Unspent outputs
 
 **Notes**
 
@@ -358,9 +358,9 @@ verus -testnet getaddressutxos '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM
 
 **Related Commands**
 
-- [`getaddressbalance`](getaddressbalance.md) — Aggregated balance
-- [`getaddresstxids`](getaddresstxids.md) — Transaction IDs only
-- [`getaddressdeltas`](getaddressdeltas.md) — All changes including spent
+- [`getaddressbalance`](#getaddressbalance) — Aggregated balance
+- [`getaddresstxids`](#getaddresstxids) — Transaction IDs only
+- [`getaddressdeltas`](#getaddressdeltas) — All changes including spent
 
 **Notes**
 
@@ -443,8 +443,8 @@ verus -testnet getsnapshot
 
 **Related Commands**
 
-- [`getaddressbalance`](getaddressbalance.md) — Balance for specific addresses
-- [`getaddressutxos`](getaddressutxos.md) — UTXOs for specific addresses
+- [`getaddressbalance`](#getaddressbalance) — Balance for specific addresses
+- [`getaddressutxos`](#getaddressutxos) — UTXOs for specific addresses
 
 **Notes**
 

@@ -12,23 +12,23 @@
 
 | # | Document | Phase | What You'll Learn |
 |---|----------|-------|-------------------|
-| 1 | [verus-cli-setup-guide.md](verus-cli-setup-guide.md) | 0 | Download CLI, fetch ZK params, start daemon, sync |
-| 2 | [verus-agent-bootstrap-guide.md](verus-agent-bootstrap-guide.md) | 0–1 | Automated bootstrap script, config, wallet creation, funding barrier |
-| 3 | [verus-for-agents.md](verus-for-agents.md) | 1–2 | Register VerusID, populate VDXF data, encryption basics |
+| 1 | verus-cli-setup-guide.md | 0 | Download CLI, fetch ZK params, start daemon, sync |
+| 2 | verus-agent-bootstrap-guide.md | 0–1 | Automated bootstrap script, config, wallet creation, funding barrier |
+| 3 | verus-for-agents.md | 1–2 | Register VerusID, populate VDXF data, encryption basics |
 | 4 | [verus-agent-registry-schema.md](verus-agent-registry-schema.md) | 2 | Full VDXF key schema (`ari::agent.v1.*`), hex encoding, contentmultimap format |
 | 5 | [verus-subid-creation-guide.md](verus-subid-creation-guide.md) | 3 | Create namespace currency, mint tokens, register subIDs |
-| 6 | [verus-encryption-guide.md](verus-encryption-guide.md) | 4 | signdata, decryptdata, verifysignature |
-| 7 | [verus-agent-messaging.md](verus-agent-messaging.md) | 4 | Encrypted agent-to-agent messaging |
-| 8 | [verus-attestations-guide.md](verus-attestations-guide.md) | 4 | On-chain attestations and proofs |
-| 9 | [verus-veruspay-guide.md](verus-veruspay-guide.md) | 4 | Payment URIs and QR codes |
-| 10 | [verus-atomic-swaps-guide.md](verus-atomic-swaps-guide.md) | 5 | makeoffer/takeoffer trading |
-| 11 | [verus-multisig-guide.md](verus-multisig-guide.md) | 5 | M-of-N identity control |
-| 12 | [verus-pbaas-crosschain.md](verus-pbaas-crosschain.md) | 5 | Cross-chain identity export |
-| 13 | [verus-revocation-recovery.md](verus-revocation-recovery.md) | 5 | Revocation/recovery authorities |
+| 6 | verus-encryption-guide.md | 4 | signdata, decryptdata, verifysignature |
+| 7 | verus-agent-messaging.md | 4 | Encrypted agent-to-agent messaging |
+| 8 | verus-attestations-guide.md | 4 | On-chain attestations and proofs |
+| 9 | verus-veruspay-guide.md | 4 | Payment URIs and QR codes |
+| 10 | verus-atomic-swaps-guide.md | 5 | makeoffer/takeoffer trading |
+| 11 | verus-multisig-guide.md | 5 | M-of-N identity control |
+| 12 | verus-pbaas-crosschain.md | 5 | Cross-chain identity export |
+| 13 | verus-revocation-recovery.md | 5 | Revocation/recovery authorities |
 | 14 | [verus-eth-bridge-guide.md](verus-eth-bridge-guide.md) | 5 | ETH↔VRSC bridge (programmatic) |
-| 15 | [verus-cron-updates.md](verus-cron-updates.md) | 5 | Automated on-chain profile updates |
-| 16 | [verus-advanced-findings.md](verus-advanced-findings.md) | 5 | decryptdata bug, SSK, priormmr edge cases |
-| 17 | [verus-cli-agent-reference.md](verus-cli-agent-reference.md) | Ref | Full CLI command reference |
+| 15 | verus-cron-updates.md | 5 | Automated on-chain profile updates |
+| 16 | verus-advanced-findings.md | 5 | decryptdata bug, SSK, priormmr edge cases |
+| 17 | verus-cli-agent-reference.md | Ref | Full CLI command reference |
 
 Each doc also has a `-humans.md` version in plain language.
 
@@ -53,7 +53,7 @@ Each doc also has a `-humans.md` version in plain language.
 
 ## Phase 0: Environment Setup
 
-📖 **Read:** [verus-cli-setup-guide.md](verus-cli-setup-guide.md), [verus-agent-bootstrap-guide.md](verus-agent-bootstrap-guide.md)  
+📖 **Read:** verus-cli-setup-guide.md, verus-agent-bootstrap-guide.md  
 **Prerequisites:** Linux (x86_64 or ARM64), ~5GB disk, internet  
 **Cost:** Free
 
@@ -73,7 +73,7 @@ Each doc also has a `-humans.md` version in plain language.
 
 ## Phase 1: Identity
 
-📖 **Read:** [verus-for-agents.md](verus-for-agents.md)  
+📖 **Read:** verus-for-agents.md  
 **Prerequisites:** Synced node, R-address, **100+ VRSCTEST**  
 **Cost:** ~100 VRSCTEST for name registration
 
@@ -252,7 +252,7 @@ If you run a platform with multiple agents, create subIDs: `agent1.yourplatform@
 
 ### Discovery
 
-📖 **Read:** [verus-cli-agent-reference.md](verus-cli-agent-reference.md)  
+📖 **Read:** verus-cli-agent-reference.md  
 **Status:** ⚠️ No dedicated discovery guide exists (audit finding C1)
 
 **Current approach:**
@@ -268,18 +268,18 @@ verus -testnet getidentity "agentname@"
 
 ### Messaging
 
-📖 **Read:** [verus-agent-messaging.md](verus-agent-messaging.md), [verus-encryption-guide.md](verus-encryption-guide.md)  
+📖 **Read:** verus-agent-messaging.md, verus-encryption-guide.md  
 **Prerequisites:** Both agents have VerusIDs  
 **Status:** ⚠️ Full round-trip not yet tested (audit finding I4)
 
 ### Payments
 
-📖 **Read:** [verus-veruspay-guide.md](verus-veruspay-guide.md)  
+📖 **Read:** verus-veruspay-guide.md  
 **Prerequisites:** Funded VerusID
 
 ### Attestations
 
-📖 **Read:** [verus-attestations-guide.md](verus-attestations-guide.md)  
+📖 **Read:** verus-attestations-guide.md  
 **Prerequisites:** VerusID, data to attest
 
 ---
@@ -288,14 +288,14 @@ verus -testnet getidentity "agentname@"
 
 | Topic | Document | Prerequisites |
 |-------|----------|---------------|
-| Encryption & Signing | [verus-encryption-guide.md](verus-encryption-guide.md) | VerusID |
-| Atomic Swaps | [verus-atomic-swaps-guide.md](verus-atomic-swaps-guide.md) | Funded VerusID |
-| Multisig (M-of-N) | [verus-multisig-guide.md](verus-multisig-guide.md) | Multiple VerusIDs |
-| Cross-Chain Export | [verus-pbaas-crosschain.md](verus-pbaas-crosschain.md) | VerusID + target chain |
-| Revocation & Recovery | [verus-revocation-recovery.md](verus-revocation-recovery.md) | VerusID + separate recovery ID |
+| Encryption & Signing | verus-encryption-guide.md | VerusID |
+| Atomic Swaps | verus-atomic-swaps-guide.md | Funded VerusID |
+| Multisig (M-of-N) | verus-multisig-guide.md | Multiple VerusIDs |
+| Cross-Chain Export | verus-pbaas-crosschain.md | VerusID + target chain |
+| Revocation & Recovery | verus-revocation-recovery.md | VerusID + separate recovery ID |
 | ETH Bridge | [verus-eth-bridge-guide.md](verus-eth-bridge-guide.md) | ETH wallet + VRSC node |
-| Scheduled Updates | [verus-cron-updates.md](verus-cron-updates.md) | VerusID |
-| Edge Cases & Bugs | [verus-advanced-findings.md](verus-advanced-findings.md) | — |
+| Scheduled Updates | verus-cron-updates.md | VerusID |
+| Edge Cases & Bugs | verus-advanced-findings.md | — |
 
 ---
 
@@ -360,7 +360,7 @@ verus -testnet getidentity "agentname@"
 
 ## Known Issues & Audit Findings
 
-See [AUDIT-REPORT.md](AUDIT-REPORT.md) for the full audit. Key items:
+See AUDIT-REPORT.md for the full audit. Key items:
 
 1. **No agent discovery/hiring workflow documented** (C1) — you can register but there's no standard way to find agents yet
 2. **contentmultimap must use array format** (C2) — `["hex"]` not `"hex"`

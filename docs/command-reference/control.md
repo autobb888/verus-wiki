@@ -90,9 +90,9 @@ None typical.
 
 **Related Commands**
 
-- [`getnetworkinfo`](../network/getnetworkinfo.md) — Detailed network info
-- [`getdeprecationinfo`](../network/getdeprecationinfo.md) — Version/deprecation info
-- [`help`](help.md) — List available commands
+- [`getnetworkinfo`](network.md#getnetworkinfo) — Detailed network info
+- [`getdeprecationinfo`](network.md#getdeprecationinfo) — Version/deprecation info
+- [`help`](#help) — List available commands
 
 **Notes**
 
@@ -147,8 +147,8 @@ None typical. Unknown commands return an error message.
 
 **Related Commands**
 
-- [`getinfo`](getinfo.md) — General node info
-- [`stop`](stop.md) — Stop the server
+- [`getinfo`](#getinfo) — General node info
+- [`stop`](#stop) — Stop the server
 
 **Notes**
 
@@ -193,8 +193,8 @@ None typical.
 
 **Related Commands**
 
-- [`getinfo`](getinfo.md) — Check server status before stopping
-- [`help`](help.md) — List available commands
+- [`getinfo`](#getinfo) — Check server status before stopping
+- [`help`](#help) — List available commands
 
 **Notes**
 

@@ -72,8 +72,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblockcount`](getblockcount.md) — get current block height
-- [`getblockchaininfo`](getblockchaininfo.md) — general chain state info
+- [`getblockcount`](#getblockcount) — get current block height
+- [`getblockchaininfo`](#getblockchaininfo) — general chain state info
 
 **Notes**
 
@@ -142,9 +142,9 @@ None typical — this is a simple read-only query.
 
 **Related Commands**
 
-- [`getblockcount`](getblockcount.md) — get the height of the best chain
-- [`getblock`](getblock.md) — get full block details by hash
-- [`getblockhash`](getblockhash.md) — get hash at a specific height
+- [`getblockcount`](#getblockcount) — get the height of the best chain
+- [`getblock`](#getblock) — get full block details by hash
+- [`getblockhash`](#getblockhash) — get hash at a specific height
 
 **Notes**
 
@@ -275,9 +275,9 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblockhash`](getblockhash.md) — get hash at a specific height
-- [`getblockheader`](getblockheader.md) — lighter weight, header only
-- [`getbestblockhash`](getbestblockhash.md) — get tip block hash
+- [`getblockhash`](#getblockhash) — get hash at a specific height
+- [`getblockheader`](#getblockheader) — lighter weight, header only
+- [`getbestblockhash`](#getbestblockhash) — get tip block hash
 
 **Notes**
 
@@ -418,10 +418,10 @@ None typical — read-only query.
 
 **Related Commands**
 
-- [`getblockcount`](getblockcount.md) — just the block count
-- [`getbestblockhash`](getbestblockhash.md) — just the tip hash
-- [`getdifficulty`](getdifficulty.md) — just the difficulty
-- [`getchaintips`](getchaintips.md) — all chain tips including forks
+- [`getblockcount`](#getblockcount) — just the block count
+- [`getbestblockhash`](#getbestblockhash) — just the tip hash
+- [`getdifficulty`](#getdifficulty) — just the difficulty
+- [`getchaintips`](#getchaintips) — all chain tips including forks
 
 **Notes**
 
@@ -490,9 +490,9 @@ None typical.
 
 **Related Commands**
 
-- [`getbestblockhash`](getbestblockhash.md) — hash of the tip block
-- [`getblockhash`](getblockhash.md) — get hash at a specific height
-- [`getblockchaininfo`](getblockchaininfo.md) — comprehensive chain state
+- [`getbestblockhash`](#getbestblockhash) — hash of the tip block
+- [`getblockhash`](#getblockhash) — get hash at a specific height
+- [`getblockchaininfo`](#getblockchaininfo) — comprehensive chain state
 
 **Notes**
 
@@ -610,8 +610,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblock`](getblock.md) — standard block data (no deltas)
-- [`getblockheader`](getblockheader.md) — header only
+- [`getblock`](#getblock) — standard block data (no deltas)
+- [`getblockheader`](#getblockheader) — header only
 
 **Notes**
 
@@ -679,9 +679,9 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblock`](getblock.md) — get full block data (also accepts height directly)
-- [`getblockcount`](getblockcount.md) — get current chain height
-- [`getbestblockhash`](getbestblockhash.md) — get tip block hash
+- [`getblock`](#getblock) — get full block data (also accepts height directly)
+- [`getblockcount`](#getblockcount) — get current chain height
+- [`getbestblockhash`](#getbestblockhash) — get tip block hash
 
 **Notes**
 
@@ -774,8 +774,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblockhash`](getblockhash.md) — get hash by height (not time)
-- [`getblock`](getblock.md) — get full block data from hash
+- [`getblockhash`](#getblockhash) — get hash by height (not time)
+- [`getblock`](#getblock) — get full block data from hash
 
 **Notes**
 
@@ -887,8 +887,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblock`](getblock.md) — full block data including transactions
-- [`getblockhash`](getblockhash.md) — get hash from height
+- [`getblock`](#getblock) — full block data including transactions
+- [`getblockhash`](#getblockhash) — get hash from height
 
 **Notes**
 
@@ -998,8 +998,8 @@ None typical.
 
 **Related Commands**
 
-- [`getblockchaininfo`](getblockchaininfo.md) — general chain state
-- [`getbestblockhash`](getbestblockhash.md) — tip of active chain only
+- [`getblockchaininfo`](#getblockchaininfo) — general chain state
+- [`getbestblockhash`](#getbestblockhash) — tip of active chain only
 
 **Notes**
 
@@ -1093,8 +1093,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblockchaininfo`](getblockchaininfo.md) — general chain state
-- [`getmempoolinfo`](getmempoolinfo.md) — pending transaction stats
+- [`getblockchaininfo`](#getblockchaininfo) — general chain state
+- [`getmempoolinfo`](#getmempoolinfo) — pending transaction stats
 
 **Notes**
 
@@ -1161,8 +1161,8 @@ None typical.
 
 **Related Commands**
 
-- [`getblockchaininfo`](getblockchaininfo.md) — includes difficulty plus more
-- [`getblock`](getblock.md) — per-block difficulty
+- [`getblockchaininfo`](#getblockchaininfo) — includes difficulty plus more
+- [`getblock`](#getblock) — per-block difficulty
 
 **Notes**
 
@@ -1238,8 +1238,8 @@ None typical.
 
 **Related Commands**
 
-- [`getrawmempool`](getrawmempool.md) — list actual transactions in mempool
-- [`clearrawmempool`](../multichain/clearrawmempool.md) — clear the mempool
+- [`getrawmempool`](#getrawmempool) — list actual transactions in mempool
+- [`clearrawmempool`](multichain.md#clearrawmempool) — clear the mempool
 
 **Notes**
 
@@ -1322,8 +1322,8 @@ None typical.
 
 **Related Commands**
 
-- [`getmempoolinfo`](getmempoolinfo.md) — summary stats about mempool
-- [`clearrawmempool`](../multichain/clearrawmempool.md) — clear the mempool
+- [`getmempoolinfo`](#getmempoolinfo) — summary stats about mempool
+- [`clearrawmempool`](multichain.md#clearrawmempool) — clear the mempool
 
 **Notes**
 
@@ -1396,8 +1396,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`gettxout`](gettxout.md) — get details of an unspent output
-- [`gettxoutproof`](gettxoutproof.md) — prove a tx was included in a block
+- [`gettxout`](#gettxout) — get details of an unspent output
+- [`gettxoutproof`](#gettxoutproof) — prove a tx was included in a block
 
 **Notes**
 
@@ -1484,9 +1484,9 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getspentinfo`](getspentinfo.md) — find where an output was spent
-- [`gettxoutsetinfo`](gettxoutsetinfo.md) — aggregate UTXO set statistics
-- [`gettxoutproof`](gettxoutproof.md) — prove inclusion in a block
+- [`getspentinfo`](#getspentinfo) — find where an output was spent
+- [`gettxoutsetinfo`](#gettxoutsetinfo) — aggregate UTXO set statistics
+- [`gettxoutproof`](#gettxoutproof) — prove inclusion in a block
 
 **Notes**
 
@@ -1556,8 +1556,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`verifytxoutproof`](verifytxoutproof.md) — verify a proof created by this command
-- [`gettxout`](gettxout.md) — check if output is unspent
+- [`verifytxoutproof`](#verifytxoutproof) — verify a proof created by this command
+- [`gettxout`](#gettxout) — check if output is unspent
 
 **Notes**
 
@@ -1630,8 +1630,8 @@ None typical, but note this call may take significant time on large chains.
 
 **Related Commands**
 
-- [`gettxout`](gettxout.md) — get a specific UTXO
-- [`coinsupply`](coinsupply.md) — coin supply including shielded funds
+- [`gettxout`](#gettxout) — get a specific UTXO
+- [`coinsupply`](#coinsupply) — coin supply including shielded funds
 
 **Notes**
 
@@ -1718,8 +1718,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`notaries`](notaries.md) — notary information at a height
-- [`getblock`](getblock.md) — full block data
+- [`notaries`](#notaries) — notary information at a height
+- [`getblock`](#getblock) — full block data
 
 **Notes**
 
@@ -1802,8 +1802,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`minerids`](minerids.md) — miner identity at a height
-- [`getblock`](getblock.md) — block data including timestamp
+- [`minerids`](#minerids) — miner identity at a height
+- [`getblock`](#getblock) — block data including timestamp
 
 **Notes**
 
@@ -1878,7 +1878,7 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblockchaininfo`](getblockchaininfo.md) — shows active upgrades and consensus info
+- [`getblockchaininfo`](#getblockchaininfo) — shows active upgrades and consensus info
 
 **Notes**
 
@@ -1957,8 +1957,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblockchaininfo`](getblockchaininfo.md) — general chain state
-- [`gettxoutsetinfo`](gettxoutsetinfo.md) — UTXO set statistics
+- [`getblockchaininfo`](#getblockchaininfo) — general chain state
+- [`gettxoutsetinfo`](#gettxoutsetinfo) — UTXO set statistics
 
 **Notes**
 
@@ -2031,7 +2031,7 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`gettxoutproof`](gettxoutproof.md) — generate the proof this command verifies
+- [`gettxoutproof`](#gettxoutproof) — generate the proof this command verifies
 
 **Notes**
 
@@ -2145,8 +2145,8 @@ curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "metho
 
 **Related Commands**
 
-- [`getblock`](getblock.md) — includes `finalsaplingroot` in output
-- [`getblockheader`](getblockheader.md) — also includes `finalsaplingroot`
+- [`getblock`](#getblock) — includes `finalsaplingroot` in output
+- [`getblockheader`](#getblockheader) — also includes `finalsaplingroot`
 
 **Notes**
 

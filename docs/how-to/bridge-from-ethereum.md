@@ -86,7 +86,7 @@ Confirm the bridge is active and has reserves.
 
 ### Step 2: Send to Ethereum
 
-Use [sendcurrency](../command-reference/multichain/sendcurrency.md) with `exportto`:
+Use [sendcurrency](../command-reference/multichain.md#sendcurrency) with `exportto`:
 
 ```bash
 # Send VRSC to your Ethereum address
@@ -218,7 +218,7 @@ verus getcurrency "Bridge.vETH"
 
 - [Bridge and Cross-Chain](../concepts/bridge-and-crosschain.md) — How the bridge works
 - [How To: Convert Currencies](convert-currencies.md) — Convert bridged assets
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — Command reference
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Command reference
 - [Basket Currencies and DeFi](../concepts/basket-currencies-defi.md) — Bridge.vETH as a basket
 
 ---

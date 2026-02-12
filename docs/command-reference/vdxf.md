@@ -96,7 +96,7 @@ verus -testnet getvdxfid "vrsc::system.currency.export"
 
 **Related Commands**
 
-- [`getidentity`](../identity/getidentity.md) — Get identity with VDXF content
+- [`getidentity`](identity.md#getidentity) — Get identity with VDXF content
 
 **Notes**
 

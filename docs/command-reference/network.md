@@ -54,9 +54,9 @@ verus -testnet addnode "192.168.0.6:18842" "remove"
 
 **Related Commands**
 
-- [`getaddednodeinfo`](getaddednodeinfo.md) — View added nodes
-- [`disconnectnode`](disconnectnode.md) — Disconnect a specific node
-- [`getpeerinfo`](getpeerinfo.md) — View connected peers
+- [`getaddednodeinfo`](#getaddednodeinfo) — View added nodes
+- [`disconnectnode`](#disconnectnode) — Disconnect a specific node
+- [`getpeerinfo`](#getpeerinfo) — View connected peers
 
 **Notes**
 
@@ -102,8 +102,8 @@ None typical — this command always succeeds.
 
 **Related Commands**
 
-- [`setban`](setban.md) — Add or remove an IP from the ban list
-- [`listbanned`](listbanned.md) — List all banned IPs
+- [`setban`](#setban) — Add or remove an IP from the ban list
+- [`listbanned`](#listbanned) — List all banned IPs
 
 **Notes**
 
@@ -152,8 +152,8 @@ verus -testnet disconnectnode "192.168.0.6:18842"
 
 **Related Commands**
 
-- [`addnode`](addnode.md) — Add/remove nodes from the connection list
-- [`getpeerinfo`](getpeerinfo.md) — List connected peers to find node addresses
+- [`addnode`](#addnode) — Add/remove nodes from the connection list
+- [`getpeerinfo`](#getpeerinfo) — List connected peers to find node addresses
 
 **Notes**
 
@@ -223,8 +223,8 @@ verus -testnet getaddednodeinfo true
 
 **Related Commands**
 
-- [`addnode`](addnode.md) — Add nodes to the list
-- [`getpeerinfo`](getpeerinfo.md) — View all connected peers
+- [`addnode`](#addnode) — Add nodes to the list
+- [`getpeerinfo`](#getpeerinfo) — View all connected peers
 
 **Notes**
 
@@ -276,8 +276,8 @@ None typical.
 
 **Related Commands**
 
-- [`getpeerinfo`](getpeerinfo.md) — Detailed info about each connection
-- [`getnetworkinfo`](getnetworkinfo.md) — General network state info
+- [`getpeerinfo`](#getpeerinfo) — Detailed info about each connection
+- [`getnetworkinfo`](#getnetworkinfo) — General network state info
 
 **Notes**
 
@@ -343,8 +343,8 @@ None typical.
 
 **Related Commands**
 
-- [`getinfo`](../control/getinfo.md) — General server information
-- [`getnetworkinfo`](getnetworkinfo.md) — Network-specific info
+- [`getinfo`](control.md#getinfo) — General server information
+- [`getnetworkinfo`](#getnetworkinfo) — Network-specific info
 
 **Notes**
 
@@ -410,8 +410,8 @@ None typical.
 
 **Related Commands**
 
-- [`getnetworkinfo`](getnetworkinfo.md) — General network state info
-- [`getpeerinfo`](getpeerinfo.md) — Per-peer traffic stats
+- [`getnetworkinfo`](#getnetworkinfo) — General network state info
+- [`getpeerinfo`](#getpeerinfo) — Per-peer traffic stats
 
 **Notes**
 
@@ -505,9 +505,9 @@ None typical.
 
 **Related Commands**
 
-- [`getpeerinfo`](getpeerinfo.md) — Detailed per-peer info
-- [`getconnectioncount`](getconnectioncount.md) — Just the connection count
-- [`getnettotals`](getnettotals.md) — Traffic stats
+- [`getpeerinfo`](#getpeerinfo) — Detailed per-peer info
+- [`getconnectioncount`](#getconnectioncount) — Just the connection count
+- [`getnettotals`](#getnettotals) — Traffic stats
 
 **Notes**
 
@@ -611,9 +611,9 @@ None typical.
 
 **Related Commands**
 
-- [`getconnectioncount`](getconnectioncount.md) — Quick connection count
-- [`addnode`](addnode.md) — Add/remove nodes
-- [`disconnectnode`](disconnectnode.md) — Disconnect a peer
+- [`getconnectioncount`](#getconnectioncount) — Quick connection count
+- [`addnode`](#addnode) — Add/remove nodes
+- [`disconnectnode`](#disconnectnode) — Disconnect a peer
 
 **Notes**
 
@@ -665,8 +665,8 @@ None typical.
 
 **Related Commands**
 
-- [`setban`](setban.md) — Add or remove bans
-- [`clearbanned`](clearbanned.md) — Clear all bans
+- [`setban`](#setban) — Add or remove bans
+- [`clearbanned`](#clearbanned) — Clear all bans
 
 **Notes**
 
@@ -716,7 +716,7 @@ None typical.
 
 **Related Commands**
 
-- [`getpeerinfo`](getpeerinfo.md) — View ping results in `pingtime` and `pingwait` fields
+- [`getpeerinfo`](#getpeerinfo) — View ping results in `pingtime` and `pingwait` fields
 
 **Notes**
 
@@ -781,8 +781,8 @@ verus -testnet setban "192.168.0.6" "remove"
 
 **Related Commands**
 
-- [`listbanned`](listbanned.md) — List all banned IPs
-- [`clearbanned`](clearbanned.md) — Clear all bans
+- [`listbanned`](#listbanned) — List all banned IPs
+- [`clearbanned`](#clearbanned) — Clear all bans
 
 **Notes**
 

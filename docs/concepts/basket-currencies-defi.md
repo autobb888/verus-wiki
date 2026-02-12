@@ -89,7 +89,7 @@ This doesn't just reduce MEV — it eliminates the economic incentive for it ent
 
 ## Making Conversions
 
-Conversions happen through the [sendcurrency](../command-reference/multichain/sendcurrency.md) command. You specify a source currency, a destination currency, and the amount:
+Conversions happen through the [sendcurrency](../command-reference/multichain.md#sendcurrency) command. You specify a source currency, a destination currency, and the amount:
 
 ```bash
 # Convert 100 VRSC to MYBASKET
@@ -298,10 +298,10 @@ The fee structure incentivizes trading volume and rewards both long-term basket 
 
 ## Related Commands
 
-- [definecurrency](../command-reference/multichain/definecurrency.md) — Create a basket currency
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — Convert between currencies
-- [getcurrency](../command-reference/multichain/getcurrency.md) — Check reserve ratios and currency details
-- [getcurrencyconverters](../command-reference/multichain/getcurrencyconverters.md) — Find available conversion paths
+- [definecurrency](../command-reference/multichain.md#definecurrency) — Create a basket currency
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Convert between currencies
+- [getcurrency](../command-reference/multichain.md#getcurrency) — Check reserve ratios and currency details
+- [getcurrencyconverters](../command-reference/multichain.md#getcurrencyconverters) — Find available conversion paths
 
 ---
 

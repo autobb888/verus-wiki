@@ -143,4 +143,4 @@ This requires the current minimum signatures to approve.
 ## Related
 
 - [Create a VerusID](create-verusid.md) — VerusID basics
-- [VerusID Concepts](../concepts/verusid.md) — How identities work
+- [VerusID Concepts](../concepts/identity-system.md) — How identities work

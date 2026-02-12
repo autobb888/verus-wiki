@@ -39,7 +39,7 @@ Cross-conversions via basket (two steps internally, one command):
 
 ## Step 2: Estimate the Conversion
 
-**Always estimate before executing.** Use [estimateconversion](../command-reference/multichain/estimateconversion.md) to see what you'll receive:
+**Always estimate before executing.** Use [estimateconversion](../command-reference/multichain.md#estimateconversion) to see what you'll receive:
 
 ### Reserve → Basket (Direct)
 
@@ -86,7 +86,7 @@ Compare `amount` vs `netinputamount`:
 
 ## Step 3: Execute the Conversion
 
-Use [sendcurrency](../command-reference/multichain/sendcurrency.md) with the `convertto` parameter:
+Use [sendcurrency](../command-reference/multichain.md#sendcurrency) with the `convertto` parameter:
 
 ### Reserve → Basket
 
@@ -238,8 +238,8 @@ verus sendcurrency '*' '[{"address":"DEST","amount":N,"currency":"SRC","convertt
 
 ## Related
 
-- [estimateconversion](../command-reference/multichain/estimateconversion.md) — Estimate command reference
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — Send/convert command reference
+- [estimateconversion](../command-reference/multichain.md#estimateconversion) — Estimate command reference
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Send/convert command reference
 - [Basket Currencies and DeFi](../concepts/basket-currencies-defi.md) — How the AMM works
 - [Bridge and Cross-Chain](../concepts/bridge-and-crosschain.md) — Converting bridged assets
 

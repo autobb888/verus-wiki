@@ -8,7 +8,7 @@
 
 ## Prerequisites
 
-- Verus CLI installed and daemon fully synced ([setup guide](../../../research/verus-cli-setup-guide.md))
+- Verus CLI installed and daemon fully synced (setup guide)
 - A modern CPU with AES-NI and AVX support (recommended — GPUs and FPGAs can also mine but CPUs are most cost-effective)
 - Terminal access
 

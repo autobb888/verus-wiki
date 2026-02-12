@@ -52,7 +52,7 @@ verus -testnet z_getpaymentdisclosure "96f12882450429324d5f3b48630e3168220e49ab7
 
 **Related Commands**
 
-- [`z_validatepaymentdisclosure`](z_validatepaymentdisclosure.md) — Validate a payment disclosure
+- [`z_validatepaymentdisclosure`](#z_validatepaymentdisclosure) — Validate a payment disclosure
 
 **Notes**
 
@@ -108,7 +108,7 @@ verus -testnet z_validatepaymentdisclosure "zpd:706462ff004c561a0447ba2ec51184e6
 
 **Related Commands**
 
-- [`z_getpaymentdisclosure`](z_getpaymentdisclosure.md) — Generate a payment disclosure
+- [`z_getpaymentdisclosure`](#z_getpaymentdisclosure) — Generate a payment disclosure
 
 **Notes**
 

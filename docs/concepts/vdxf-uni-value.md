@@ -275,7 +275,7 @@ This ensures decoding never fails — unknown data is preserved as-is.
 ## Related
 
 - [DataDescriptor — Structured Data Containers](data-descriptor.md) — Uses VdxfUniValue for objectdata
-- [DefinedKey — Human-Readable VDXF Labels](definedkey-vdxf-labels.md) — Labels for VDXF keys
+- [DefinedKey — Human-Readable VDXF Labels](vdxf-data-standard.md) — Labels for VDXF keys
 - [VDXF — Verus Data Exchange Format](vdxf-data-standard.md) — The overall data standard
 
 ---

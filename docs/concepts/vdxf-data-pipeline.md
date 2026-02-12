@@ -12,7 +12,7 @@ Verus has three complementary systems for structured on-chain data. Each solves 
 |---|---|---|
 | [VdxfUniValue](vdxf-uni-value.md) | How to **serialize** typed data into bytes | Encoding |
 | [DataDescriptor](data-descriptor.md) | How to **annotate** data with metadata | Container |
-| [DefinedKey](definedkey-vdxf-labels.md) | How to **label** keys so wallets can read them | Discovery |
+| [DefinedKey](vdxf-data-standard.md) | How to **label** keys so wallets can read them | Discovery |
 
 Together, they form a pipeline:
 
@@ -270,7 +270,7 @@ A typical agent profile plus all its DefinedKey labels can fit in 2 transactions
 ## Related
 
 - [VDXF — Verus Data Exchange Format](vdxf-data-standard.md) — Foundation concepts
-- [DefinedKey — Human-Readable Labels](definedkey-vdxf-labels.md) — Key labeling
+- [DefinedKey — Human-Readable Labels](vdxf-data-standard.md) — Key labeling
 - [DataDescriptor — Structured Containers](data-descriptor.md) — Data wrappers
 - [VdxfUniValue — Universal Serialization](vdxf-uni-value.md) — Type encoding
 - [The Verus Identity System](identity-system.md) — Where all this data lives

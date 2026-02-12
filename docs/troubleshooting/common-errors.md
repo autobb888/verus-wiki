@@ -6,7 +6,7 @@
 
 ## "Identity not found"
 
-**When:** Calling [getidentity](../command-reference/identity/getidentity.md) after registering a new identity.
+**When:** Calling [getidentity](../command-reference/identity.md#getidentity) after registering a new identity.
 
 **Cause:** The registration transaction hasn't been mined yet, or you're querying the wrong name format.
 
@@ -23,7 +23,7 @@ Also check: Are you using the correct fully-qualified name? On testnet, use `you
 
 ## "bad-txns-failed-precheck"
 
-**When:** Calling [updateidentity](../command-reference/identity/updateidentity.md) on a SubID.
+**When:** Calling [updateidentity](../command-reference/identity.md#updateidentity) on a SubID.
 
 **Cause:** Missing or incorrect `parent` field. SubID updates require specifying the parent currency's i-address.
 
@@ -47,7 +47,7 @@ Find your parent's i-address:
 
 ## "Invalid parent currency"
 
-**When:** Calling [registernamecommitment](../command-reference/identity/registernamecommitment.md) with a `referralidentity` parameter.
+**When:** Calling [registernamecommitment](../command-reference/identity.md#registernamecommitment) with a `referralidentity` parameter.
 
 **Cause:** Using a friendly name (e.g., `VRSCTEST`) instead of the i-address for the parent currency parameter.
 
@@ -185,7 +185,7 @@ A root VerusID on mainnet costs ~100 VRSC (or 80 VRSC with a referral). Cheaper 
 
 ## "Invalid commitment salt" / Salt Mismatch
 
-**When:** Calling [registeridentity](../command-reference/identity/registeridentity.md).
+**When:** Calling [registeridentity](../command-reference/identity.md#registeridentity).
 
 **Cause:** The `salt` in your `registeridentity` call doesn't match the `salt` from your `registernamecommitment` output.
 

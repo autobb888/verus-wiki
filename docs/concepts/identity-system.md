@@ -32,7 +32,7 @@ VerusID:
 
 ## Anatomy of a VerusID
 
-When you look up an identity with [getidentity](../command-reference/identity/getidentity.md), you see its full structure. Here are the key components:
+When you look up an identity with [getidentity](../command-reference/identity.md#getidentity), you see its full structure. Here are the key components:
 
 ### Name and Addresses
 
@@ -112,7 +112,7 @@ VDXF keys are created deterministically from human-readable strings. For example
 - Attach metadata (website links, social handles, configuration)
 - Create attestations (proof of qualification, membership)
 
-The content multimap is **versioned** — every update creates a new on-chain transaction. You can look up any historical version of an identity using [getidentity](../command-reference/identity/getidentity.md) with a specific block height. This creates an immutable audit trail: data can be updated but never erased from history.
+The content multimap is **versioned** — every update creates a new on-chain transaction. You can look up any historical version of an identity using [getidentity](../command-reference/identity.md#getidentity) with a specific block height. This creates an immutable audit trail: data can be updated but never erased from history.
 
 ---
 
@@ -181,7 +181,7 @@ SubIDs are useful for:
 - **Organizations** managing member identities
 - **Applications** that need named, on-chain identities for components
 
-The identity that owns the namespace controls the **registration fee** for SubIDs. This is set via [definecurrency](../command-reference/multichain/definecurrency.md) with the `idregistrationfees` parameter.
+The identity that owns the namespace controls the **registration fee** for SubIDs. This is set via [definecurrency](../command-reference/multichain.md#definecurrency) with the `idregistrationfees` parameter.
 
 ---
 
@@ -330,10 +330,10 @@ VerusID names can include all characters from all character sets **except**: `/ 
 
 ## Related Commands
 
-- [getidentity](../command-reference/identity/getidentity.md) — Look up any identity's full details
-- [registernamecommitment](../command-reference/identity/registernamecommitment.md) — First step to register a new identity
-- [listidentities](../command-reference/identity/listidentities.md) — List identities in your wallet
-- [definecurrency](../command-reference/multichain/definecurrency.md) — Launch a currency under your identity's namespace
+- [getidentity](../command-reference/identity.md#getidentity) — Look up any identity's full details
+- [registernamecommitment](../command-reference/identity.md#registernamecommitment) — First step to register a new identity
+- [listidentities](../command-reference/identity.md#listidentities) — List identities in your wallet
+- [definecurrency](../command-reference/multichain.md#definecurrency) — Launch a currency under your identity's namespace
 
 ---
 

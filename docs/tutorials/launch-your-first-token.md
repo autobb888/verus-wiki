@@ -313,7 +313,7 @@ This creates a token backed by VRSCTEST reserves with built-in conversion.
 ## Next Steps
 
 - [Manage SubIDs](../how-to/manage-subids.md) under your token namespace
-- Explore [sendcurrency](../command-reference/multichain/sendcurrency.md) for conversions and cross-chain transfers
+- Explore [sendcurrency](../command-reference/multichain.md#sendcurrency) for conversions and cross-chain transfers
 - Read about [fractional basket currencies](../how-to/launch-token.md#option-c-fractional-basket-currency-amm) for DeFi
 
 ---

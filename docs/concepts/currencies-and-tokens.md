@@ -6,7 +6,7 @@
 
 ## Overview
 
-On Verus, anyone with a VerusID can create a new currency. There are no smart contracts to write, no audits to pass, no permission to seek. You run a single command — [definecurrency](../command-reference/multichain/definecurrency.md) — and the blockchain handles the rest.
+On Verus, anyone with a VerusID can create a new currency. There are no smart contracts to write, no audits to pass, no permission to seek. You run a single command — [definecurrency](../command-reference/multichain.md#definecurrency) — and the blockchain handles the rest.
 
 There are three types of currencies you can create, each with increasing complexity:
 
@@ -273,11 +273,11 @@ The `options` parameter is a bitfield. Combine flags by adding their values:
 
 ## Related Commands
 
-- [definecurrency](../command-reference/multichain/definecurrency.md) — Create a new currency
-- [getcurrency](../command-reference/multichain/getcurrency.md) — Look up currency details
-- [listcurrencies](../command-reference/multichain/listcurrencies.md) — List all currencies
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — Send, convert, and trade currencies
-- [getidentity](../command-reference/identity/getidentity.md) — Check the identity behind a currency
+- [definecurrency](../command-reference/multichain.md#definecurrency) — Create a new currency
+- [getcurrency](../command-reference/multichain.md#getcurrency) — Look up currency details
+- [listcurrencies](../command-reference/multichain.md#listcurrencies) — List all currencies
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Send, convert, and trade currencies
+- [getidentity](../command-reference/identity.md#getidentity) — Check the identity behind a currency
 
 ---
 

@@ -51,7 +51,7 @@ This flexibility means the marketplace handles use cases that would require mult
 
 ### Creating an Offer (makeoffer)
 
-When you create an offer with [makeoffer](../command-reference/marketplace/makeoffer.md), you specify:
+When you create an offer with [makeoffer](../command-reference/marketplace.md#makeoffer), you specify:
 
 1. **What you're offering** — a currency amount or an identity
 2. **What you want in return** — a currency amount or an identity definition
@@ -311,11 +311,11 @@ The tradeoff: centralized exchanges offer faster execution, deeper liquidity, an
 
 ## Related Commands
 
-- [makeoffer](../command-reference/marketplace/makeoffer.md) — Create a swap offer
-- [takeoffer](../command-reference/marketplace/takeoffer.md) — Accept an existing offer
-- [getoffers](../command-reference/marketplace/getoffers.md) — Browse offers for an asset
-- [listopenoffers](../command-reference/marketplace/listopenoffers.md) — List your open offers
-- [closeoffers](../command-reference/marketplace/closeoffers.md) — Cancel or reclaim offers
+- [makeoffer](../command-reference/marketplace.md#makeoffer) — Create a swap offer
+- [takeoffer](../command-reference/marketplace.md#takeoffer) — Accept an existing offer
+- [getoffers](../command-reference/marketplace.md#getoffers) — Browse offers for an asset
+- [listopenoffers](../command-reference/marketplace.md#listopenoffers) — List your open offers
+- [closeoffers](../command-reference/marketplace.md#closeoffers) — Cancel or reclaim offers
 
 ## Related Guides
 

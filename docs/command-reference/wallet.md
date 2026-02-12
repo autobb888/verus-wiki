@@ -56,8 +56,8 @@ curl --user myusername --data-binary '{"jsonrpc":"1.0","id":"curltest","method":
 
 **Related Commands**
 
-- [`createmultisig`](../utility/createmultisig.md) — Creates multisig address without adding to wallet
-- [`listunspent`](listunspent.md) — List UTXOs including multisig
+- [`createmultisig`](util.md#createmultisig) — Creates multisig address without adding to wallet
+- [`listunspent`](#listunspent) — List UTXOs including multisig
 
 **Notes**
 
@@ -131,9 +131,9 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`dumpprivkey`](dumpprivkey.md) — Export individual private keys
-- [`importprivkey`](importprivkey.md) — Import keys into a wallet
-- [`getwalletinfo`](getwalletinfo.md) — Check wallet state before backup
+- [`dumpprivkey`](#dumpprivkey) — Export individual private keys
+- [`importprivkey`](#importprivkey) — Import keys into a wallet
+- [`getwalletinfo`](#getwalletinfo) — Check wallet state before backup
 
 **Notes**
 
@@ -192,8 +192,8 @@ verus convertpassphrase "my wallet passphrase words here"
 
 **Related Commands**
 
-- [`importprivkey`](importprivkey.md) — Import WIF private key into wallet
-- [`dumpprivkey`](dumpprivkey.md) — Export private key in WIF format
+- [`importprivkey`](#importprivkey) — Import WIF private key into wallet
+- [`dumpprivkey`](#dumpprivkey) — Export private key in WIF format
 
 **Notes**
 
@@ -271,9 +271,9 @@ verus decryptdata '{"datadescriptor":{...encrypted output...}}'
 
 **Related Commands**
 
-- [`signdata`](../identity/signdata.md) — Sign and optionally encrypt data
-- [`z_exportviewingkey`](z_exportviewingkey.md) — Export viewing key for decryption
-- [`verifydata`](../identity/verifydata.md) — Verify signed data
+- [`signdata`](identity.md#signdata) — Sign and optionally encrypt data
+- [`z_exportviewingkey`](#z_exportviewingkey) — Export viewing key for decryption
+- [`verifydata`](identity.md#verifydata) — Verify signed data
 
 **Notes**
 
@@ -348,8 +348,8 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`importprivkey`](importprivkey.md) — Import a private key
-- [`backupwallet`](backupwallet.md) — Full wallet backup (preferred)
+- [`importprivkey`](#importprivkey) — Import a private key
+- [`backupwallet`](#backupwallet) — Full wallet backup (preferred)
 
 **Notes**
 
@@ -407,9 +407,9 @@ verus dumpwallet "my-wallet-backup"
 
 **Related Commands**
 
-- [`importwallet`](importwallet.md) — Import taddr keys from dump file
-- [`z_exportwallet`](z_exportwallet.md) — Export all keys (taddr + zaddr)
-- [`backupwallet`](backupwallet.md) — Copy wallet.dat file
+- [`importwallet`](#importwallet) — Import taddr keys from dump file
+- [`z_exportwallet`](#z_exportwallet) — Export all keys (taddr + zaddr)
+- [`backupwallet`](#backupwallet) — Copy wallet.dat file
 
 **Notes**
 
@@ -483,9 +483,9 @@ verus walletlock
 
 **Related Commands**
 
-- [`walletpassphrase`](../wallet/walletpassphrase.md) — Unlock encrypted wallet
-- [`walletlock`](../wallet/walletlock.md) — Lock the wallet
-- [`walletpassphrasechange`](../wallet/walletpassphrasechange.md) — Change encryption passphrase
+- [`walletpassphrase`](wallet.md#walletpassphrase) — Unlock encrypted wallet
+- [`walletlock`](wallet.md#walletlock) — Lock the wallet
+- [`walletpassphrasechange`](wallet.md#walletpassphrasechange) — Change encryption passphrase
 
 **Notes**
 
@@ -543,9 +543,9 @@ agentplatform-registration
 
 **Related Commands**
 
-- [`setaccount`](setaccount.md) — Set account for an address (deprecated)
-- [`getaccountaddress`](getaccountaddress.md) — Get address for an account (deprecated)
-- [`listaccounts`](listaccounts.md) — List all accounts (deprecated)
+- [`setaccount`](#setaccount) — Set account for an address (deprecated)
+- [`getaccountaddress`](#getaccountaddress) — Get address for an account (deprecated)
+- [`listaccounts`](#listaccounts) — List all accounts (deprecated)
 
 **Notes**
 
@@ -595,8 +595,8 @@ RNUj32rViHuEk5F3VEmk53q4xhMMq2wffT
 
 **Related Commands**
 
-- [`getaccount`](getaccount.md) — Get account for an address (deprecated)
-- [`getaddressesbyaccount`](getaddressesbyaccount.md) — Get all addresses for account (deprecated)
+- [`getaccount`](#getaccount) — Get account for an address (deprecated)
+- [`getaddressesbyaccount`](#getaddressesbyaccount) — Get all addresses for account (deprecated)
 
 **Notes**
 
@@ -653,9 +653,9 @@ verus getaddressesbyaccount ""
 
 **Related Commands**
 
-- [`getaccount`](getaccount.md) — Get account for address (deprecated)
-- [`getaccountaddress`](getaccountaddress.md) — Get address for account (deprecated)
-- [`listaccounts`](listaccounts.md) — List all accounts (deprecated)
+- [`getaccount`](#getaccount) — Get account for address (deprecated)
+- [`getaccountaddress`](#getaccountaddress) — Get address for account (deprecated)
+- [`listaccounts`](#listaccounts) — List all accounts (deprecated)
 
 **Notes**
 
@@ -734,9 +734,9 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`getcurrencybalance`](getcurrencybalance.md) — Balance for a specific address/currency
-- [`getunconfirmedbalance`](getunconfirmedbalance.md) — Unconfirmed balance only
-- [`getwalletinfo`](getwalletinfo.md) — Full wallet state including balance
+- [`getcurrencybalance`](#getcurrencybalance) — Balance for a specific address/currency
+- [`getunconfirmedbalance`](#getunconfirmedbalance) — Unconfirmed balance only
+- [`getwalletinfo`](#getwalletinfo) — Full wallet state including balance
 
 **Notes**
 
@@ -822,9 +822,9 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`getbalance`](getbalance.md) — Total wallet balance (single currency)
-- [`getwalletinfo`](getwalletinfo.md) — Full wallet state
-- [`listunspent`](listunspent.md) — Detailed UTXO listing
+- [`getbalance`](#getbalance) — Total wallet balance (single currency)
+- [`getwalletinfo`](#getwalletinfo) — Full wallet state
+- [`listunspent`](#listunspent) — Detailed UTXO listing
 
 **Notes**
 
@@ -898,9 +898,9 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`getrawchangeaddress`](getrawchangeaddress.md) — Address for change outputs
-- [`getbalance`](getbalance.md) — Check balance after receiving
-- [`getcurrencybalance`](getcurrencybalance.md) — Check per-address balance
+- [`getrawchangeaddress`](#getrawchangeaddress) — Address for change outputs
+- [`getbalance`](#getbalance) — Check balance after receiving
+- [`getcurrencybalance`](#getcurrencybalance) — Check per-address balance
 
 **Notes**
 
@@ -971,8 +971,8 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`getnewaddress`](getnewaddress.md) — For normal receiving addresses
-- [`listunspent`](listunspent.md) — List UTXOs for raw transaction building
+- [`getnewaddress`](#getnewaddress) — For normal receiving addresses
+- [`listunspent`](#listunspent) — List UTXOs for raw transaction building
 
 **Notes**
 
@@ -1025,8 +1025,8 @@ verus getreceivedbyaccount ""
 
 **Related Commands**
 
-- [`getreceivedbyaddress`](getreceivedbyaddress.md) — Get received amount by address
-- [`listreceivedbyaccount`](listreceivedbyaccount.md) — List received by all accounts (deprecated)
+- [`getreceivedbyaddress`](#getreceivedbyaddress) — Get received amount by address
+- [`listreceivedbyaccount`](#listreceivedbyaccount) — List received by all accounts (deprecated)
 
 **Notes**
 
@@ -1087,9 +1087,9 @@ verus getreceivedbyaddress "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2" 6
 
 **Related Commands**
 
-- [`getreceivedbyaccount`](getreceivedbyaccount.md) — Get received by account (deprecated)
-- [`listreceivedbyaddress`](listreceivedbyaddress.md) — List received by all addresses
-- [`z_getbalance`](z_getbalance.md) — Get balance for any address type
+- [`getreceivedbyaccount`](#getreceivedbyaccount) — Get received by account (deprecated)
+- [`listreceivedbyaddress`](#listreceivedbyaddress) — List received by all addresses
+- [`z_getbalance`](#z_getbalance) — Get balance for any address type
 
 **Notes**
 
@@ -1191,8 +1191,8 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`listtransactions`](listtransactions.md) — List recent transactions
-- [`sendtoaddress`](sendtoaddress.md) — Create a transaction
+- [`listtransactions`](#listtransactions) — List recent transactions
+- [`sendtoaddress`](#sendtoaddress) — Create a transaction
 
 **Notes**
 
@@ -1261,8 +1261,8 @@ None typical — this command takes no arguments.
 
 **Related Commands**
 
-- [`getbalance`](getbalance.md) — Confirmed balance
-- [`getwalletinfo`](getwalletinfo.md) — Includes both confirmed and unconfirmed
+- [`getbalance`](#getbalance) — Confirmed balance
+- [`getwalletinfo`](#getwalletinfo) — Includes both confirmed and unconfirmed
 
 **Notes**
 
@@ -1362,9 +1362,9 @@ None typical — this command takes no arguments.
 
 **Related Commands**
 
-- [`getbalance`](getbalance.md) — Simple balance query
-- [`getunconfirmedbalance`](getunconfirmedbalance.md) — Unconfirmed only
-- [`listtransactions`](listtransactions.md) — Transaction history
+- [`getbalance`](#getbalance) — Simple balance query
+- [`getunconfirmedbalance`](#getunconfirmedbalance) — Unconfirmed only
+- [`listtransactions`](#listtransactions) — Transaction history
 
 **Notes**
 
@@ -1421,8 +1421,8 @@ verus importaddress "RAddr..." "my-watch" false
 
 **Related Commands**
 
-- [`importprivkey`](importprivkey.md) — Import spendable private key
-- [`z_importviewingkey`](z_importviewingkey.md) — Import shielded viewing key (watch-only)
+- [`importprivkey`](#importprivkey) — Import spendable private key
+- [`z_importviewingkey`](#z_importviewingkey) — Import shielded viewing key (watch-only)
 
 **Notes**
 
@@ -1496,8 +1496,8 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`dumpprivkey`](dumpprivkey.md) — Export a private key
-- [`importaddress`](../utility/importaddress.md) — Import watch-only address
+- [`dumpprivkey`](#dumpprivkey) — Export a private key
+- [`importaddress`](util.md#importaddress) — Import watch-only address
 
 **Notes**
 
@@ -1546,8 +1546,8 @@ verus importwallet "/path/to/exportdir/mybackup"
 
 **Related Commands**
 
-- [`dumpwallet`](dumpwallet.md) — Export taddr keys to file
-- [`z_importwallet`](z_importwallet.md) — Import both taddr and zaddr keys
+- [`dumpwallet`](#dumpwallet) — Export taddr keys to file
+- [`z_importwallet`](#z_importwallet) — Import both taddr and zaddr keys
 
 **Notes**
 
@@ -1593,7 +1593,7 @@ verus keypoolrefill 200
 
 **Related Commands**
 
-- [`getwalletinfo`](getwalletinfo.md) — Shows current keypool size
+- [`getwalletinfo`](#getwalletinfo) — Shows current keypool size
 
 **Notes**
 
@@ -1646,8 +1646,8 @@ verus listaccounts
 
 **Related Commands**
 
-- [`getaccount`](getaccount.md) — Get account for address (deprecated)
-- [`listreceivedbyaccount`](listreceivedbyaccount.md) — Detailed received by account (deprecated)
+- [`getaccount`](#getaccount) — Get account for address (deprecated)
+- [`listreceivedbyaccount`](#listreceivedbyaccount) — Detailed received by account (deprecated)
 
 **Notes**
 
@@ -1698,8 +1698,8 @@ verus listaddressgroupings
 
 **Related Commands**
 
-- [`listunspent`](listunspent.md) — List unspent outputs
-- [`listreceivedbyaddress`](listreceivedbyaddress.md) — List received by address
+- [`listunspent`](#listunspent) — List unspent outputs
+- [`listreceivedbyaddress`](#listreceivedbyaddress) — List received by address
 
 **Notes**
 
@@ -1745,8 +1745,8 @@ verus listlockunspent
 
 **Related Commands**
 
-- [`lockunspent`](lockunspent.md) — Lock/unlock specific outputs
-- [`listunspent`](listunspent.md) — List spendable outputs
+- [`lockunspent`](#lockunspent) — Lock/unlock specific outputs
+- [`listunspent`](#listunspent) — List spendable outputs
 
 **Notes**
 
@@ -1806,8 +1806,8 @@ verus listreceivedbyaccount
 
 **Related Commands**
 
-- [`listreceivedbyaddress`](listreceivedbyaddress.md) — List received by address
-- [`listaccounts`](listaccounts.md) — List account balances (deprecated)
+- [`listreceivedbyaddress`](#listreceivedbyaddress) — List received by address
+- [`listaccounts`](#listaccounts) — List account balances (deprecated)
 
 **Notes**
 
@@ -1873,8 +1873,8 @@ verus listreceivedbyaddress 6 true
 
 **Related Commands**
 
-- [`listreceivedbyaccount`](listreceivedbyaccount.md) — List by account (deprecated)
-- [`getreceivedbyaddress`](getreceivedbyaddress.md) — Get total for single address
+- [`listreceivedbyaccount`](#listreceivedbyaccount) — List by account (deprecated)
+- [`getreceivedbyaddress`](#getreceivedbyaddress) — Get total for single address
 
 **Tested On**
 
@@ -1923,8 +1923,8 @@ verus listsinceblock "000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57
 
 **Related Commands**
 
-- [`listtransactions`](listtransactions.md) — List recent transactions
-- [`gettransaction`](gettransaction.md) — Get single transaction details
+- [`listtransactions`](#listtransactions) — List recent transactions
+- [`gettransaction`](#gettransaction) — Get single transaction details
 
 **Notes**
 
@@ -2016,8 +2016,8 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`gettransaction`](gettransaction.md) — Detailed info for a specific tx
-- [`listunspent`](listunspent.md) — List spendable UTXOs
+- [`gettransaction`](#gettransaction) — Detailed info for a specific tx
+- [`listunspent`](#listunspent) — List spendable UTXOs
 
 **Notes**
 
@@ -2125,9 +2125,9 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`getbalance`](getbalance.md) — Summarized balance
-- [`getcurrencybalance`](getcurrencybalance.md) — Per-address currency balances
-- [`gettransaction`](gettransaction.md) — Details for a specific tx
+- [`getbalance`](#getbalance) — Summarized balance
+- [`getcurrencybalance`](#getcurrencybalance) — Per-address currency balances
+- [`gettransaction`](#gettransaction) — Details for a specific tx
 
 **Notes**
 
@@ -2179,8 +2179,8 @@ verus lockunspent true '[{"txid":"a08e6907...","vout":1}]'
 
 **Related Commands**
 
-- [`listlockunspent`](listlockunspent.md) — List currently locked outputs
-- [`listunspent`](listunspent.md) — List spendable outputs
+- [`listlockunspent`](#listlockunspent) — List currently locked outputs
+- [`listunspent`](#listunspent) — List spendable outputs
 
 **Notes**
 
@@ -2223,8 +2223,8 @@ move "fromaccount" "toaccount" amount ( minconf "comment" )
 
 **Related Commands**
 
-- [`listaccounts`](listaccounts.md) — List account balances (deprecated)
-- [`setaccount`](setaccount.md) — Set account for address (deprecated)
+- [`listaccounts`](#listaccounts) — List account balances (deprecated)
+- [`setaccount`](#setaccount) — Set account for address (deprecated)
 
 **Notes**
 
@@ -2281,8 +2281,8 @@ verus prunespentwallettransactions "1075db55d416d3ca..."
 
 **Related Commands**
 
-- [`backupwallet`](backupwallet.md) — Backup wallet before pruning
-- [`listtransactions`](listtransactions.md) — List wallet transactions
+- [`backupwallet`](#backupwallet) — Backup wallet before pruning
+- [`listtransactions`](#listtransactions) — List wallet transactions
 
 **Notes**
 
@@ -2336,9 +2336,9 @@ verus rescanfromheight 1000000
 
 **Related Commands**
 
-- [`importprivkey`](importprivkey.md) — Import key (triggers optional rescan)
-- [`importaddress`](importaddress.md) — Import watch-only address
-- [`z_importkey`](z_importkey.md) — Import shielded key
+- [`importprivkey`](#importprivkey) — Import key (triggers optional rescan)
+- [`importaddress`](#importaddress) — Import watch-only address
+- [`z_importkey`](#z_importkey) — Import shielded key
 
 **Notes**
 
@@ -2384,8 +2384,8 @@ verus resendwallettransactions
 
 **Related Commands**
 
-- [`listtransactions`](listtransactions.md) — List wallet transactions
-- [`gettransaction`](gettransaction.md) — Get transaction details
+- [`listtransactions`](#listtransactions) — List wallet transactions
+- [`gettransaction`](#gettransaction) — Get transaction details
 
 **Notes**
 
@@ -2458,8 +2458,8 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`sendtoaddress`](sendtoaddress.md) — Preferred replacement
-- [`sendmany`](sendmany.md) — Send to multiple addresses
+- [`sendtoaddress`](#sendtoaddress) — Preferred replacement
+- [`sendmany`](#sendmany) — Send to multiple addresses
 
 **Notes**
 
@@ -2547,8 +2547,8 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`sendtoaddress`](sendtoaddress.md) — Send to a single address
-- [`listunspent`](listunspent.md) — Check available UTXOs
+- [`sendtoaddress`](#sendtoaddress) — Send to a single address
+- [`listunspent`](#listunspent) — Check available UTXOs
 
 **Notes**
 
@@ -2636,10 +2636,10 @@ curl --user user:pass --data-binary \
 
 **Related Commands**
 
-- [`sendfrom`](sendfrom.md) — Send from a specific account (deprecated)
-- [`sendmany`](sendmany.md) — Send to multiple addresses in one transaction
-- [`gettransaction`](gettransaction.md) — Look up the resulting transaction
-- [`getbalance`](getbalance.md) — Check available balance first
+- [`sendfrom`](#sendfrom) — Send from a specific account (deprecated)
+- [`sendmany`](#sendmany) — Send to multiple addresses in one transaction
+- [`gettransaction`](#gettransaction) — Look up the resulting transaction
+- [`getbalance`](#getbalance) — Check available balance first
 
 **Notes**
 
@@ -2680,8 +2680,8 @@ No return value on success.
 
 **Related Commands**
 
-- [`getaccount`](getaccount.md) — Get account for address (deprecated)
-- [`listaccounts`](listaccounts.md) — List all accounts (deprecated)
+- [`getaccount`](#getaccount) — Get account for address (deprecated)
+- [`listaccounts`](#listaccounts) — List all accounts (deprecated)
 
 **Notes**
 
@@ -2731,8 +2731,8 @@ true
 
 **Related Commands**
 
-- [`getwalletinfo`](getwalletinfo.md) — Shows current fee settings
-- [`sendtoaddress`](sendtoaddress.md) — Send transaction (uses this fee)
+- [`getwalletinfo`](#getwalletinfo) — Shows current fee settings
+- [`sendtoaddress`](#sendtoaddress) — Send transaction (uses this fee)
 
 **Notes**
 
@@ -2784,9 +2784,9 @@ verus z_exportkey "zs1..."
 
 **Related Commands**
 
-- [`z_importkey`](z_importkey.md) — Import a shielded spending key
-- [`z_exportviewingkey`](z_exportviewingkey.md) — Export viewing key (read-only)
-- [`dumpprivkey`](dumpprivkey.md) — Export transparent address key
+- [`z_importkey`](#z_importkey) — Import a shielded spending key
+- [`z_exportviewingkey`](#z_exportviewingkey) — Export viewing key (read-only)
+- [`dumpprivkey`](#dumpprivkey) — Export transparent address key
 
 **Notes**
 
@@ -2831,8 +2831,8 @@ verus z_exportviewingkey "zs1jqpysk8t5tzfe2rs25qkf0t6pzt3xdc7cjemn2x67zs0txfv4fq
 
 **Related Commands**
 
-- [`z_importviewingkey`](z_importviewingkey.md) — Import a viewing key
-- [`z_exportkey`](z_exportkey.md) — Export full spending key
+- [`z_importviewingkey`](#z_importviewingkey) — Import a viewing key
+- [`z_exportkey`](#z_exportkey) — Export full spending key
 
 **Notes**
 
@@ -2885,9 +2885,9 @@ verus z_exportwallet "full-backup"
 
 **Related Commands**
 
-- [`z_importwallet`](z_importwallet.md) — Import from export file
-- [`dumpwallet`](dumpwallet.md) — Export taddr keys only
-- [`backupwallet`](backupwallet.md) — Copy wallet.dat
+- [`z_importwallet`](#z_importwallet) — Import from export file
+- [`dumpwallet`](#dumpwallet) — Export taddr keys only
+- [`backupwallet`](#backupwallet) — Copy wallet.dat
 
 **Notes**
 
@@ -2941,9 +2941,9 @@ verus z_getbalance "zs1..." 5
 
 **Related Commands**
 
-- [`z_gettotalbalance`](z_gettotalbalance.md) — Get combined transparent + private balance
-- [`getbalance`](getbalance.md) — Get transparent balance
-- [`z_listunspent`](z_listunspent.md) — List shielded unspent notes
+- [`z_gettotalbalance`](#z_gettotalbalance) — Get combined transparent + private balance
+- [`getbalance`](#getbalance) — Get transparent balance
+- [`z_listunspent`](#z_listunspent) — List shielded unspent notes
 
 **Notes**
 
@@ -3009,9 +3009,9 @@ verus z_getencryptionaddress '{"address":"zs1...","fromid":"bob@","toid":"alice@
 
 **Related Commands**
 
-- [`decryptdata`](decryptdata.md) — Decrypt data encrypted to a z-address
-- [`signdata`](../identity/signdata.md) — Sign/encrypt data
-- [`z_getnewaddress`](z_getnewaddress.md) — Generate new z-address
+- [`decryptdata`](#decryptdata) — Decrypt data encrypted to a z-address
+- [`signdata`](identity.md#signdata) — Sign/encrypt data
+- [`z_getnewaddress`](#z_getnewaddress) — Generate new z-address
 
 **Notes**
 
@@ -3075,7 +3075,7 @@ verus z_getmigrationstatus
 
 **Related Commands**
 
-- [`z_setmigration`](z_setmigration.md) — Enable/disable migration
+- [`z_setmigration`](#z_setmigration) — Enable/disable migration
 
 **Notes**
 
@@ -3122,9 +3122,9 @@ verus z_getnewaddress sapling
 
 **Related Commands**
 
-- [`z_listaddresses`](z_listaddresses.md) — List all shielded addresses
-- [`getnewaddress`](getnewaddress.md) — Get new transparent address
-- [`z_exportkey`](z_exportkey.md) — Export private key for z-address
+- [`z_listaddresses`](#z_listaddresses) — List all shielded addresses
+- [`getnewaddress`](#getnewaddress) — Get new transparent address
+- [`z_exportkey`](#z_exportkey) — Export private key for z-address
 
 **Notes**
 
@@ -3172,9 +3172,9 @@ verus z_getoperationresult '["opid-42f729bf-106a-441e-868e-866a2a2c12ac"]'
 
 **Related Commands**
 
-- [`z_getoperationstatus`](z_getoperationstatus.md) — Check status without removing
-- [`z_listoperationids`](z_listoperationids.md) — List all operation IDs
-- [`z_sendmany`](z_sendmany.md) — Returns an operation ID
+- [`z_getoperationstatus`](#z_getoperationstatus) — Check status without removing
+- [`z_listoperationids`](#z_listoperationids) — List all operation IDs
+- [`z_sendmany`](#z_sendmany) — Returns an operation ID
 
 **Notes**
 
@@ -3229,8 +3229,8 @@ verus z_getoperationstatus '["opid-42f729bf-..."]'
 
 **Related Commands**
 
-- [`z_getoperationresult`](z_getoperationresult.md) — Get result and remove from memory
-- [`z_listoperationids`](z_listoperationids.md) — List all operation IDs
+- [`z_getoperationresult`](#z_getoperationresult) — Get result and remove from memory
+- [`z_listoperationids`](#z_listoperationids) — List all operation IDs
 
 **Notes**
 
@@ -3287,8 +3287,8 @@ verus z_gettotalbalance 5
 
 **Related Commands**
 
-- [`getbalance`](getbalance.md) — Transparent balance only
-- [`z_getbalance`](z_getbalance.md) — Balance for specific address
+- [`getbalance`](#getbalance) — Transparent balance only
+- [`z_getbalance`](#z_getbalance) — Balance for specific address
 
 **Notes**
 
@@ -3350,9 +3350,9 @@ verus z_importkey "secret-extended-key..." whenkeyisnew 30000
 
 **Related Commands**
 
-- [`z_exportkey`](z_exportkey.md) — Export spending key
-- [`z_importviewingkey`](z_importviewingkey.md) — Import viewing key (read-only)
-- [`importprivkey`](importprivkey.md) — Import transparent key
+- [`z_exportkey`](#z_exportkey) — Export spending key
+- [`z_importviewingkey`](#z_importviewingkey) — Import viewing key (read-only)
+- [`importprivkey`](#importprivkey) — Import transparent key
 
 **Notes**
 
@@ -3402,9 +3402,9 @@ verus z_importviewingkey "zxviews1..." whenkeyisnew 30000
 
 **Related Commands**
 
-- [`z_exportviewingkey`](z_exportviewingkey.md) — Export viewing key
-- [`z_importkey`](z_importkey.md) — Import full spending key
-- [`importaddress`](importaddress.md) — Import transparent watch-only
+- [`z_exportviewingkey`](#z_exportviewingkey) — Export viewing key
+- [`z_importkey`](#z_importkey) — Import full spending key
+- [`importaddress`](#importaddress) — Import transparent watch-only
 
 **Notes**
 
@@ -3448,8 +3448,8 @@ verus z_importwallet "/path/to/exportdir/backup"
 
 **Related Commands**
 
-- [`z_exportwallet`](z_exportwallet.md) — Export all keys
-- [`importwallet`](importwallet.md) — Import taddr keys only
+- [`z_exportwallet`](#z_exportwallet) — Export all keys
+- [`importwallet`](#importwallet) — Import taddr keys only
 
 **Notes**
 
@@ -3499,8 +3499,8 @@ verus z_listaddresses
 
 **Related Commands**
 
-- [`z_getnewaddress`](z_getnewaddress.md) — Create new shielded address
-- [`z_getbalance`](z_getbalance.md) — Get balance for an address
+- [`z_getnewaddress`](#z_getnewaddress) — Create new shielded address
+- [`z_getbalance`](#z_getbalance) — Get balance for an address
 
 **Tested On**
 
@@ -3552,8 +3552,8 @@ verus z_listoperationids "success"
 
 **Related Commands**
 
-- [`z_getoperationstatus`](z_getoperationstatus.md) — Get operation details
-- [`z_getoperationresult`](z_getoperationresult.md) — Get result and clear
+- [`z_getoperationstatus`](#z_getoperationstatus) — Get operation details
+- [`z_getoperationresult`](#z_getoperationresult) — Get result and clear
 
 **Tested On**
 
@@ -3603,8 +3603,8 @@ verus z_listreceivedbyaddress "zs1..."
 
 **Related Commands**
 
-- [`z_listunspent`](z_listunspent.md) — List unspent shielded notes
-- [`z_getbalance`](z_getbalance.md) — Get balance for address
+- [`z_listunspent`](#z_listunspent) — List unspent shielded notes
+- [`z_getbalance`](#z_getbalance) — Get balance for address
 
 **Tested On**
 
@@ -3661,9 +3661,9 @@ verus z_listunspent
 
 **Related Commands**
 
-- [`z_listreceivedbyaddress`](z_listreceivedbyaddress.md) — List all received notes
-- [`listunspent`](listunspent.md) — List transparent UTXOs
-- [`z_getbalance`](z_getbalance.md) — Get address balance
+- [`z_listreceivedbyaddress`](#z_listreceivedbyaddress) — List all received notes
+- [`listunspent`](#listunspent) — List transparent UTXOs
+- [`z_getbalance`](#z_getbalance) — Get address balance
 
 **Notes**
 
@@ -3729,9 +3729,9 @@ verus z_mergetoaddress '["ANY_SAPLING","RAddr..."]' "zs1..."
 
 **Related Commands**
 
-- [`z_sendmany`](z_sendmany.md) — Send to multiple addresses
-- [`z_shieldcoinbase`](z_shieldcoinbase.md) — Shield coinbase UTXOs
-- [`z_getoperationstatus`](z_getoperationstatus.md) — Track operation
+- [`z_sendmany`](#z_sendmany) — Send to multiple addresses
+- [`z_shieldcoinbase`](#z_shieldcoinbase) — Shield coinbase UTXOs
+- [`z_getoperationstatus`](#z_getoperationstatus) — Track operation
 
 **Notes**
 
@@ -3801,10 +3801,10 @@ verus z_sendmany "zs1..." '[{"address":"zs1...","amount":1.0,"memo":"f600..."}]'
 
 **Related Commands**
 
-- [`z_getoperationstatus`](z_getoperationstatus.md) — Track send progress
-- [`z_getoperationresult`](z_getoperationresult.md) — Get final result
-- [`sendmany`](sendmany.md) — Transparent-only multi-send
-- [`z_mergetoaddress`](z_mergetoaddress.md) — Consolidate UTXOs/notes
+- [`z_getoperationstatus`](#z_getoperationstatus) — Track send progress
+- [`z_getoperationresult`](#z_getoperationresult) — Get final result
+- [`sendmany`](#sendmany) — Transparent-only multi-send
+- [`z_mergetoaddress`](#z_mergetoaddress) — Consolidate UTXOs/notes
 
 **Notes**
 
@@ -3849,7 +3849,7 @@ verus z_setmigration false
 
 **Related Commands**
 
-- [`z_getmigrationstatus`](z_getmigrationstatus.md) — Check migration progress
+- [`z_getmigrationstatus`](#z_getmigrationstatus) — Check migration progress
 
 **Notes**
 
@@ -3905,8 +3905,8 @@ verus z_shieldcoinbase "*" "zs1..."
 
 **Related Commands**
 
-- [`z_mergetoaddress`](z_mergetoaddress.md) — Merge UTXOs and notes
-- [`z_getoperationstatus`](z_getoperationstatus.md) — Track operation
+- [`z_mergetoaddress`](#z_mergetoaddress) — Merge UTXOs and notes
+- [`z_getoperationstatus`](#z_getoperationstatus) — Track operation
 
 **Notes**
 
@@ -3976,8 +3976,8 @@ verus z_viewtransaction "7db301e131fe1edb78e2761f98a82b9440e073230f9f572f10f7f28
 
 **Related Commands**
 
-- [`gettransaction`](gettransaction.md) — Get transparent transaction details
-- [`z_listreceivedbyaddress`](z_listreceivedbyaddress.md) — List received notes
+- [`gettransaction`](#gettransaction) — Get transparent transaction details
+- [`z_listreceivedbyaddress`](#z_listreceivedbyaddress) — List received notes
 
 **Notes**
 
@@ -4028,7 +4028,7 @@ verus zcbenchmark createjoinsplit 5
 
 **Related Commands**
 
-- [`getinfo`](../control/getinfo.md) — General node information
+- [`getinfo`](control.md#getinfo) — General node information
 
 **Notes**
 

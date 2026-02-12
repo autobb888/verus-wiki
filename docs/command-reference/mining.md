@@ -73,8 +73,8 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | Block height out of range | Height exceeds current chain height significantly | Use a valid block height |
 
 **Related Commands**
-- [`getmininginfo`](getmininginfo.md) — comprehensive mining status
-- [`getblocktemplate`](getblocktemplate.md) — get data for constructing blocks
+- [`getmininginfo`](#getmininginfo) — comprehensive mining status
+- [`getblocktemplate`](#getblocktemplate) — get data for constructing blocks
 
 **Notes**
 - VRSCTEST block reward is 6 VRSCTEST per block
@@ -187,10 +187,10 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | Node is downloading blocks | Blockchain not fully synced | Wait for sync to complete |
 
 **Related Commands**
-- [`submitblock`](submitblock.md) — submit a constructed block
-- [`submitmergedblock`](submitmergedblock.md) — submit a merged-mined block
-- [`getblocksubsidy`](getblocksubsidy.md) — check block reward
-- [`getmininginfo`](getmininginfo.md) — current mining status
+- [`submitblock`](#submitblock) — submit a constructed block
+- [`submitmergedblock`](#submitmergedblock) — submit a merged-mined block
+- [`getblocksubsidy`](#getblocksubsidy) — check block reward
+- [`getmininginfo`](#getmininginfo) — current mining status
 
 **Notes**
 - The `coinbasevalue` is in satoshis (600000000 = 6.0 VRSCTEST)
@@ -251,9 +251,9 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | Returns 0 | Mining/staking not active | Enable with `setgenerate true` |
 
 **Related Commands**
-- [`getnetworksolps`](getnetworksolps.md) — network-wide solution rate
-- [`getmininginfo`](getmininginfo.md) — comprehensive mining status
-- [`setgenerate`](../generating/setgenerate.md) — enable/disable mining
+- [`getnetworksolps`](#getnetworksolps) — network-wide solution rate
+- [`getmininginfo`](#getmininginfo) — comprehensive mining status
+- [`setgenerate`](generating.md#setgenerate) — enable/disable mining
 
 **Notes**
 - Returns 0 when mining is not active
@@ -317,9 +317,9 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | Empty/null result | No distribution configured | Use `setminingdistribution` to configure |
 
 **Related Commands**
-- [`setminingdistribution`](setminingdistribution.md) — set the mining reward distribution
-- [`getblocktemplate`](getblocktemplate.md) — also accepts `miningdistribution` parameter
-- [`getmininginfo`](getmininginfo.md) — general mining status
+- [`setminingdistribution`](#setminingdistribution) — set the mining reward distribution
+- [`getblocktemplate`](#getblocktemplate) — also accepts `miningdistribution` parameter
+- [`getmininginfo`](#getmininginfo) — general mining status
 
 **Notes**
 - When no distribution is set, all rewards go to the default mining address
@@ -416,10 +416,10 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | None typical | This command rarely errors | — |
 
 **Related Commands**
-- [`getgenerate`](../generating/getgenerate.md) — focused generate/staking status
-- [`setgenerate`](../generating/setgenerate.md) — enable/disable mining/staking
-- [`getnetworksolps`](getnetworksolps.md) — detailed network hashrate
-- [`getlocalsolps`](getlocalsolps.md) — local solution rate
+- [`getgenerate`](generating.md#getgenerate) — focused generate/staking status
+- [`setgenerate`](generating.md#setgenerate) — enable/disable mining/staking
+- [`getnetworksolps`](#getnetworksolps) — detailed network hashrate
+- [`getlocalsolps`](#getlocalsolps) — local solution rate
 
 **Notes**
 - The `chain` field shows "main" even on testnet — this refers to the chain type within VRSCTEST
@@ -437,7 +437,7 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 
 > **Category:** Mining | **Version:** v1.2.14+
 
-**DEPRECATED** — Use [`getnetworksolps`](getnetworksolps.md) instead. Kept for backwards compatibility.
+**DEPRECATED** — Use [`getnetworksolps`](#getnetworksolps) instead. Kept for backwards compatibility.
 
 Returns the estimated network solutions per second based on the last n blocks.
 
@@ -480,8 +480,8 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | None typical | — | — |
 
 **Related Commands**
-- [`getnetworksolps`](getnetworksolps.md) — preferred replacement
-- [`getlocalsolps`](getlocalsolps.md) — local solution rate
+- [`getnetworksolps`](#getnetworksolps) — preferred replacement
+- [`getlocalsolps`](#getlocalsolps) — local solution rate
 
 **Notes**
 - Identical functionality to `getnetworksolps` — use that instead
@@ -551,9 +551,9 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | None typical | — | — |
 
 **Related Commands**
-- [`getlocalsolps`](getlocalsolps.md) — local node solution rate
-- [`getmininginfo`](getmininginfo.md) — includes network hashrate
-- [`getnetworkhashps`](getnetworkhashps.md) — deprecated alias
+- [`getlocalsolps`](#getlocalsolps) — local node solution rate
+- [`getmininginfo`](#getmininginfo) — includes network hashrate
+- [`getnetworkhashps`](#getnetworkhashps) — deprecated alias
 
 **Notes**
 - This is the preferred command over the deprecated `getnetworkhashps`
@@ -615,8 +615,8 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | Invalid or non-wallet transaction id | txid not in mempool or invalid | Provide a valid txid currently in the mempool |
 
 **Related Commands**
-- [`getmininginfo`](getmininginfo.md) — check mempool size (`pooledtx`)
-- [`getblocktemplate`](getblocktemplate.md) — see which transactions are in the template
+- [`getmininginfo`](#getmininginfo) — check mempool size (`pooledtx`)
+- [`getblocktemplate`](#getblocktemplate) — see which transactions are in the template
 
 **Notes**
 - This only affects the local node's block construction — it doesn't broadcast any changes
@@ -683,9 +683,9 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | Exception on invalid JSON | Malformed JSON input | Ensure proper JSON formatting with quotes |
 
 **Related Commands**
-- [`getminingdistribution`](getminingdistribution.md) — check current distribution
-- [`getblocktemplate`](getblocktemplate.md) — also accepts `miningdistribution` in request
-- [`setgenerate`](../generating/setgenerate.md) — enable mining/staking
+- [`getminingdistribution`](#getminingdistribution) — check current distribution
+- [`getblocktemplate`](#getblocktemplate) — also accepts `miningdistribution` in request
+- [`setgenerate`](generating.md#setgenerate) — enable mining/staking
 
 **Notes**
 - Values are relative weights, not percentages — `{"a":1, "b":1}` is equivalent to `{"a":0.5, "b":0.5}`
@@ -761,9 +761,9 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | `"duplicate"` | Block already known | Block was already submitted or received from network |
 
 **Related Commands**
-- [`getblocktemplate`](getblocktemplate.md) — get data to construct a block
-- [`submitmergedblock`](submitmergedblock.md) — submit merged-mined blocks
-- [`getblocksubsidy`](getblocksubsidy.md) — check expected reward
+- [`getblocktemplate`](#getblocktemplate) — get data to construct a block
+- [`submitmergedblock`](#submitmergedblock) — submit merged-mined blocks
+- [`getblocksubsidy`](#getblocksubsidy) — check expected reward
 
 **Notes**
 - Requires a fully constructed and solved block in hex format
@@ -835,9 +835,9 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | `rejected` | Block doesn't meet target or is invalid | Check block construction and embedded headers |
 
 **Related Commands**
-- [`submitblock`](submitblock.md) — submit a single-chain block
-- [`getblocktemplate`](getblocktemplate.md) — get block construction data
-- [`getmininginfo`](getmininginfo.md) — check `mergemining` and `mergeminedchains` fields
+- [`submitblock`](#submitblock) — submit a single-chain block
+- [`getblocktemplate`](#getblocktemplate) — get block construction data
+- [`getmininginfo`](#getmininginfo) — check `mergemining` and `mergeminedchains` fields
 
 **Notes**
 - The block must contain valid embedded headers for any PBaaS chains being merge-mined

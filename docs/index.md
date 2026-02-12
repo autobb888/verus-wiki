@@ -21,7 +21,7 @@ New to Verus? Start here.
 
 ### [Command Reference](command-reference/)
 Complete documentation for all CLI commands across 14 categories:
-- [Blockchain](command-reference/blockchain/) · [Control](command-reference/control/) · [Generating](command-reference/generating/) · [Identity](command-reference/identity/) · [Marketplace](command-reference/marketplace/) · [Mining](command-reference/mining/) · [Multichain](command-reference/multichain/) · [Network](command-reference/network/) · [Raw Transactions](command-reference/rawtransactions/) · [Util](command-reference/util/) · [Wallet](command-reference/wallet/)
+- [Blockchain](command-reference/blockchain.md) · [Control](command-reference/control.md) · [Generating](command-reference/generating.md) · [Identity](command-reference/identity.md) · [Marketplace](command-reference/marketplace.md) · [Mining](command-reference/mining.md) · [Multichain](command-reference/multichain.md) · [Network](command-reference/network.md) · [Raw Transactions](command-reference/rawtransactions.md) · [Util](command-reference/util.md) · [Wallet](command-reference/wallet.md)
 
 ### [Concepts](concepts/identity-system.md)
 Deep dives into how Verus works:

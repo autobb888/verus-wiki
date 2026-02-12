@@ -249,7 +249,7 @@ Verus Main Chain          PBaaS Chain A          PBaaS Chain B
      │                         │                       │
 ```
 
-When an identity is exported cross-chain (via [sendcurrency](../command-reference/multichain/sendcurrency.md) with `exportid`), its content multimap data travels with it.
+When an identity is exported cross-chain (via [sendcurrency](../command-reference/multichain.md#sendcurrency) with `exportid`), its content multimap data travels with it.
 
 ---
 
@@ -346,7 +346,7 @@ Content multimap data is stored in identity transactions, which are subject to s
 - `getidentity` — Read an identity's full state including content multimap
 - `getidentitycontent` — Selective retrieval with height filtering and key queries
 - `updateidentity` — Write VDXF data to an identity
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — Export identities (with their data) cross-chain
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Export identities (with their data) cross-chain
 
 ## Related Concepts
 

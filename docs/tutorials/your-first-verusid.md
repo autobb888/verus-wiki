@@ -19,7 +19,7 @@ A **VerusID** is a self-sovereign blockchain identity. Think of it like a userna
 
 ## What You Need
 
-- Verus CLI installed and synced to testnet ([setup guide](../../../research/verus-cli-setup-guide.md))
+- Verus CLI installed and synced to testnet (setup guide)
 - A wallet with some VRSCTEST (~100 VRSCTEST for a root ID on testnet — same cost as mainnet but with free test coins)
 - A name you want to register (letters, numbers, spaces — no special characters)
 

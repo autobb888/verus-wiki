@@ -218,8 +218,8 @@ verusd -rescan
 
 ## Related
 
-- [VerusID Concepts](../concepts/verusid.md) — Understanding identities you're backing up
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — Moving funds after restoration
+- [VerusID Concepts](../concepts/identity-system.md) — Understanding identities you're backing up
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Moving funds after restoration
 
 ---
 

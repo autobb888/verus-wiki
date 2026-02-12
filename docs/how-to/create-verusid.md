@@ -8,7 +8,7 @@
 
 ## Prerequisites
 
-- Verus CLI installed and daemon synced ([setup guide](../../../research/verus-cli-setup-guide.md))
+- Verus CLI installed and daemon synced (setup guide)
 - A funded wallet address (R-address) with enough VRSC/VRSCTEST
 - Terminal access
 

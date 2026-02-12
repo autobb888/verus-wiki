@@ -28,7 +28,7 @@
 
 ## Identity Update Not Reflecting
 
-**Symptom:** Called [updateidentity](../command-reference/identity/updateidentity.md) but [getidentity](../command-reference/identity/getidentity.md) still shows old data.
+**Symptom:** Called [updateidentity](../command-reference/identity.md#updateidentity) but [getidentity](../command-reference/identity.md#getidentity) still shows old data.
 
 **Cause:** The update transaction hasn't been mined yet.
 

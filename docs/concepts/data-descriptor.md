@@ -292,7 +292,7 @@ For simple profiles (name, type, version, status), you don't need DataDescriptor
 | Scenario | Use DataDescriptor? |
 |---|---|
 | Simple key-value string data | Not needed — raw hex is fine |
-| Data that needs a label for wallets | Not needed — use [DefinedKey](definedkey-vdxf-labels.md) on the namespace instead |
+| Data that needs a label for wallets | Not needed — use [DefinedKey](vdxf-data-standard.md) on the namespace instead |
 | Content with a known format | ✅ Yes — use `mimeType` |
 | Encrypted on-chain data | ✅ Yes — encryption fields built in |
 | Merkle proofs / hash trees | ✅ Yes — hash vector support |
@@ -304,7 +304,7 @@ For simple profiles (name, type, version, status), you don't need DataDescriptor
 ## Related
 
 - [VdxfUniValue — Universal Value Serialization](vdxf-uni-value.md) — How objectdata is serialized
-- [DefinedKey — Human-Readable VDXF Labels](definedkey-vdxf-labels.md) — Alternative approach for key labeling
+- [DefinedKey — Human-Readable VDXF Labels](vdxf-data-standard.md) — Alternative approach for key labeling
 - [VDXF — Verus Data Exchange Format](vdxf-data-standard.md) — The overall data standard
 - [The Verus Identity System](identity-system.md) — Where DataDescriptors are stored
 

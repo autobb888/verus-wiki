@@ -60,7 +60,7 @@ verus setgenerate true 4
 verus getmininginfo
 ```
 
-The [getmininginfo](../command-reference/mining/getmininginfo.md) command shows key metrics:
+The [getmininginfo](../command-reference/mining.md#getmininginfo) command shows key metrics:
 
 - **localhashps** — Your local hash rate
 - **networkhashps** — Estimated total network hash rate
@@ -166,7 +166,7 @@ Your CPU Hashrate
 Same work, multiple rewards
 ```
 
-When PBaaS chains are launched with PoW consensus, Verus miners can opt in to merged mining. The [getmininginfo](../command-reference/mining/getmininginfo.md) output includes `mergemining` (number of chains being merge-mined) and `mergeminedchains` (their names).
+When PBaaS chains are launched with PoW consensus, Verus miners can opt in to merged mining. The [getmininginfo](../command-reference/mining.md#getmininginfo) output includes `mergemining` (number of chains being merge-mined) and `mergeminedchains` (their names).
 
 This is significant because:
 - New chains get security from the existing Verus mining network from day one
@@ -272,10 +272,10 @@ verus getgenerate
 
 ## Related Commands
 
-- [getmininginfo](../command-reference/mining/getmininginfo.md) — Check mining and staking status
-- [setgenerate](../command-reference/generating/setgenerate.md) — Enable/disable mining and staking
-- [getgenerate](../command-reference/generating/getgenerate.md) — Check generate status
-- [getnetworksolps](../command-reference/mining/getnetworksolps.md) — Network hash rate details
+- [getmininginfo](../command-reference/mining.md#getmininginfo) — Check mining and staking status
+- [setgenerate](../command-reference/generating.md#setgenerate) — Enable/disable mining and staking
+- [getgenerate](../command-reference/generating.md#getgenerate) — Check generate status
+- [getnetworksolps](../command-reference/mining.md#getnetworksolps) — Network hash rate details
 
 ---
 

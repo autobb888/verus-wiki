@@ -225,11 +225,11 @@ A: On the transparent chain, yes — anyone can query an address's UTXOs. Use [s
 
 ## Related Commands
 
-- [`listunspent`](../command-reference/wallet/listunspent.md) — List your wallet's UTXOs
-- [`getaddressutxos`](../command-reference/addressindex/getaddressutxos.md) — Query UTXOs for any address
-- [`getaddressbalance`](../command-reference/addressindex/getaddressbalance.md) — Quick balance check by address
-- [`sendcurrency`](../command-reference/multichain/sendcurrency.md) — Send funds (automatically selects UTXOs)
-- [`z_sendmany`](../command-reference/wallet/z_sendmany.md) — Send with explicit source address
+- [`listunspent`](../command-reference/wallet.md#listunspent) — List your wallet's UTXOs
+- [`getaddressutxos`](../command-reference/addressindex.md#getaddressutxos) — Query UTXOs for any address
+- [`getaddressbalance`](../command-reference/addressindex.md#getaddressbalance) — Quick balance check by address
+- [`sendcurrency`](../command-reference/multichain.md#sendcurrency) — Send funds (automatically selects UTXOs)
+- [`z_sendmany`](../command-reference/wallet.md#z_sendmany) — Send with explicit source address
 
 ---
 
@@ -237,7 +237,7 @@ A: On the transparent chain, yes — anyone can query an address's UTXOs. Use [s
 
 - [Mining and Staking](mining-and-staking.md) — How UTXOs participate in consensus
 - [Privacy and Shielded Transactions](privacy-shielded-tx.md) — Hiding UTXOs with zero-knowledge proofs
-- [Key Concepts](key-concepts.md) — Foundational Verus concepts
+- [Key Concepts](../getting-started/key-concepts.md) — Foundational Verus concepts
 
 ---
 

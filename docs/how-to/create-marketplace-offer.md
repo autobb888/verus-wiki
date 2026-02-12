@@ -266,8 +266,8 @@ verus takeoffer "*" '{
 ## Related
 
 - [Marketplace and Offers](../concepts/marketplace-and-offers.md) — How the marketplace works
-- [makeoffer](../command-reference/marketplace/makeoffer.md) — Command reference
-- [sendcurrency](../command-reference/multichain/sendcurrency.md) — For AMM-based conversions instead
+- [makeoffer](../command-reference/marketplace.md#makeoffer) — Command reference
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — For AMM-based conversions instead
 
 ---
 

@@ -35,7 +35,7 @@ Optional extras: create sub-identities, encrypt messages, trade tokens, bridge t
 4. **Start the daemon** with `./verusd -testnet -bootstrap`
 5. **Wait for sync** — the node downloads the full blockchain. Check progress with `./verus -testnet getinfo`
 
-📖 *Detailed steps:* [verus-cli-setup-guide-humans.md](verus-cli-setup-guide-humans.md), [verus-agent-bootstrap-guide-humans.md](verus-agent-bootstrap-guide-humans.md)
+📖 *Detailed steps:* verus-cli-setup-guide-humans.md, verus-agent-bootstrap-guide-humans.md
 
 ---
 
@@ -59,7 +59,7 @@ It's a two-step process (to prevent name-stealing):
 
 After registration, you have a VerusID like `myagent@` — your on-chain identity.
 
-📖 *Detailed steps:* [verus-for-agents-humans.md](verus-for-agents-humans.md)
+📖 *Detailed steps:* verus-for-agents-humans.md
 
 ---
 
@@ -79,7 +79,7 @@ Think of it like filling in a LinkedIn profile, but on a blockchain:
 
 ⚠️ **Important format note:** When storing data, values must be wrapped in square brackets (arrays). This is a common mistake that causes silent failures.
 
-📖 *Detailed steps:* [verus-agent-registry-schema-humans.md](verus-agent-registry-schema-humans.md)
+📖 *Detailed steps:* verus-agent-registry-schema-humans.md
 
 ---
 
@@ -94,7 +94,7 @@ If you're running a platform with multiple agents, you can create sub-identities
 
 This involves creating a "currency" (really just a namespace) and minting tokens to pay for sub-identity registration.
 
-📖 *Detailed steps:* [verus-subid-creation-guide-humans.md](verus-subid-creation-guide-humans.md)
+📖 *Detailed steps:* verus-subid-creation-guide-humans.md
 
 ---
 
@@ -107,7 +107,7 @@ Once your identity is on-chain, you can:
 - **Receive payments** — generate payment URIs that others can use to pay you
 - **Create attestations** — make verifiable claims about yourself or others
 
-📖 *See:* [verus-agent-messaging-humans.md](verus-agent-messaging-humans.md), [verus-encryption-guide-humans.md](verus-encryption-guide-humans.md), [verus-veruspay-guide-humans.md](verus-veruspay-guide-humans.md), [verus-attestations-guide-humans.md](verus-attestations-guide-humans.md)
+📖 *See:* verus-agent-messaging-humans.md, verus-encryption-guide-humans.md, verus-veruspay-guide-humans.md, verus-attestations-guide-humans.md
 
 > **Note:** Agent discovery (searching for agents by capability) isn't fully documented yet. You can look up agents by name, but there's no built-in search-by-skill feature yet.
 
@@ -171,7 +171,7 @@ These are optional and for specific use cases:
 ## Need Help?
 
 - **Technical details:** See the [technical walkthrough](verus-master-walkthrough.md) with exact commands
-- **Full audit of all docs:** See [AUDIT-REPORT.md](AUDIT-REPORT.md)
+- **Full audit of all docs:** See AUDIT-REPORT.md
 - **Verus community:** [Discord](https://discord.gg/veruscoin), [verus.io](https://verus.io)
 
 ---

@@ -64,10 +64,10 @@ verus -testnet createrawtransaction '[{"txid":"myid","vout":0}]' '{"myaddress":0
 
 **Related Commands**
 
-- [`fundrawtransaction`](fundrawtransaction.md) — Add inputs to fund the transaction
-- [`signrawtransaction`](signrawtransaction.md) — Sign the transaction
-- [`sendrawtransaction`](sendrawtransaction.md) — Broadcast signed transaction
-- [`decoderawtransaction`](decoderawtransaction.md) — Inspect the raw transaction
+- [`fundrawtransaction`](#fundrawtransaction) — Add inputs to fund the transaction
+- [`signrawtransaction`](#signrawtransaction) — Sign the transaction
+- [`sendrawtransaction`](#sendrawtransaction) — Broadcast signed transaction
+- [`decoderawtransaction`](#decoderawtransaction) — Inspect the raw transaction
 
 **Notes**
 
@@ -155,9 +155,9 @@ verus -testnet decoderawtransaction "0400008085202f890206d5c092..."
 
 **Related Commands**
 
-- [`getrawtransaction`](getrawtransaction.md) — Get raw hex from a txid
-- [`decodescript`](decodescript.md) — Decode a script
-- [`createrawtransaction`](createrawtransaction.md) — Create raw transactions
+- [`getrawtransaction`](#getrawtransaction) — Get raw hex from a txid
+- [`decodescript`](#decodescript) — Decode a script
+- [`createrawtransaction`](#createrawtransaction) — Create raw transactions
 
 **Notes**
 
@@ -240,8 +240,8 @@ verus -testnet decodescript "76a91489abcdefabbaabbaabbaabbaabbaabbaabbaabba88ac"
 
 **Related Commands**
 
-- [`decoderawtransaction`](decoderawtransaction.md) — Decode a full transaction
-- [`createrawtransaction`](createrawtransaction.md) — Create raw transactions
+- [`decoderawtransaction`](#decoderawtransaction) — Decode a full transaction
+- [`createrawtransaction`](#createrawtransaction) — Create raw transactions
 
 **Notes**
 
@@ -317,9 +317,9 @@ verus -testnet sendrawtransaction "signedtransactionhex"
 
 **Related Commands**
 
-- [`createrawtransaction`](createrawtransaction.md) — Create the initial transaction
-- [`signrawtransaction`](signrawtransaction.md) — Sign after funding
-- [`sendrawtransaction`](sendrawtransaction.md) — Broadcast signed transaction
+- [`createrawtransaction`](#createrawtransaction) — Create the initial transaction
+- [`signrawtransaction`](#signrawtransaction) — Sign after funding
+- [`sendrawtransaction`](#sendrawtransaction) — Broadcast signed transaction
 
 **Notes**
 
@@ -384,8 +384,8 @@ verus -testnet getrawtransaction "1f345eb81bfc9b349b39fbb87edf284c565084bacc5a7f
 
 **Related Commands**
 
-- [`decoderawtransaction`](decoderawtransaction.md) — Decode raw hex to JSON
-- [`sendrawtransaction`](sendrawtransaction.md) — Broadcast a transaction
+- [`decoderawtransaction`](#decoderawtransaction) — Decode raw hex to JSON
+- [`sendrawtransaction`](#sendrawtransaction) — Broadcast a transaction
 
 **Notes**
 
@@ -445,9 +445,9 @@ verus -testnet sendrawtransaction "signedhex"
 
 **Related Commands**
 
-- [`createrawtransaction`](createrawtransaction.md) — Create the transaction
-- [`signrawtransaction`](signrawtransaction.md) — Sign before sending
-- [`fundrawtransaction`](fundrawtransaction.md) — Add inputs for funding
+- [`createrawtransaction`](#createrawtransaction) — Create the transaction
+- [`signrawtransaction`](#signrawtransaction) — Sign before sending
+- [`fundrawtransaction`](#fundrawtransaction) — Add inputs for funding
 
 **Notes**
 
@@ -532,9 +532,9 @@ verus -testnet signrawtransaction "myhex"
 
 **Related Commands**
 
-- [`createrawtransaction`](createrawtransaction.md) — Create the transaction
-- [`fundrawtransaction`](fundrawtransaction.md) — Add funding inputs
-- [`sendrawtransaction`](sendrawtransaction.md) — Broadcast after signing
+- [`createrawtransaction`](#createrawtransaction) — Create the transaction
+- [`fundrawtransaction`](#fundrawtransaction) — Add funding inputs
+- [`sendrawtransaction`](#sendrawtransaction) — Broadcast after signing
 
 **Notes**
 

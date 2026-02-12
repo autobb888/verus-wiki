@@ -66,8 +66,8 @@ curl --user user:pass \
 | `This method can only be used on regtest` | Called on testnet or mainnet | Use regtest network, or use `setgenerate` for testnet/mainnet mining |
 
 **Related Commands**
-- [`setgenerate`](setgenerate.md) — enable continuous mining/staking (works on all networks)
-- [`getgenerate`](getgenerate.md) — check generation status
+- [`setgenerate`](#setgenerate) — enable continuous mining/staking (works on all networks)
+- [`getgenerate`](#getgenerate) — check generation status
 
 **Notes**
 - This is a synchronous call — it blocks until all requested blocks are mined
@@ -151,8 +151,8 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | None typical | — | — |
 
 **Related Commands**
-- [`setgenerate`](setgenerate.md) — enable/disable mining and staking
-- [`getmininginfo`](../mining/getmininginfo.md) — comprehensive mining status
+- [`setgenerate`](#setgenerate) — enable/disable mining and staking
+- [`getmininginfo`](mining.md#getmininginfo) — comprehensive mining status
 
 **Notes**
 - `generate: true` with `numthreads: 0` means staking only (no CPU mining)
@@ -241,9 +241,9 @@ curl --user user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7
 | None typical | — | — |
 
 **Related Commands**
-- [`getgenerate`](getgenerate.md) — check current generation status
-- [`getmininginfo`](../mining/getmininginfo.md) — comprehensive mining status
-- [`getlocalsolps`](../mining/getlocalsolps.md) — monitor local hashrate after enabling
+- [`getgenerate`](#getgenerate) — check current generation status
+- [`getmininginfo`](mining.md#getmininginfo) — comprehensive mining status
+- [`getlocalsolps`](mining.md#getlocalsolps) — monitor local hashrate after enabling
 
 **Notes**
 - `setgenerate true` without `genproclimit` defaults to staking mode (0 threads)

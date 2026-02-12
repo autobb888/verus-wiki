@@ -35,10 +35,10 @@ VerusID provides naming, authentication, data storage, and key recovery — all 
 - **Profile platforms** — Decentralized user profiles (like Gravatar, but self-sovereign)
 
 **Key APIs:**
-- [getidentity](../command-reference/identity/getidentity.md) — Look up identity data
-- [updateidentity](../command-reference/identity/updateidentity.md) — Store data on-chain
-- [signmessage](../command-reference/identity/signmessage.md) / [verifymessage](../command-reference/identity/verifymessage.md) — Prove identity ownership
-- [getvdxfid](../command-reference/identity/getvdxfid.md) — Create standardized data keys
+- [getidentity](../command-reference/identity.md#getidentity) — Look up identity data
+- [updateidentity](../command-reference/identity.md#updateidentity) — Store data on-chain
+- [signmessage](../command-reference/identity.md#signmessage) / [verifymessage](../command-reference/identity.md#verifymessage) — Prove identity ownership
+- [getvdxfid](../command-reference/identity.md#getvdxfid) — Create standardized data keys
 
 **Example: Login Flow**
 ```
@@ -70,10 +70,10 @@ Verus lets anyone create currencies, tokens, and liquidity pools with a single c
 - **Fundraising** — Token launches with configurable supply and pricing
 
 **Key APIs:**
-- [definecurrency](../command-reference/multichain/definecurrency.md) — Create new currencies
-- [getcurrency](../command-reference/multichain/getcurrency.md) — Query currency details
-- [sendcurrency](../command-reference/financial/sendcurrency.md) — Send and convert currencies
-- [estimateconversion](../command-reference/financial/estimateconversion.md) — Preview conversion rates
+- [definecurrency](../command-reference/multichain.md#definecurrency) — Create new currencies
+- [getcurrency](../command-reference/multichain.md#getcurrency) — Query currency details
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Send and convert currencies
+- [estimateconversion](../command-reference/multichain.md#estimateconversion) — Preview conversion rates
 
 **Example: Create a Simple Token**
 ```bash
@@ -125,9 +125,9 @@ Verus's PBaaS (Public Blockchains as a Service) enables launching independent bl
 - **Scalable platforms** — Offload traffic to a dedicated chain
 
 **Key APIs:**
-- [definecurrency](../command-reference/multichain/definecurrency.md) — Launch PBaaS chains
-- [sendcurrency](../command-reference/financial/sendcurrency.md) — Cross-chain transfers
-- [getcrosschain*](../command-reference/multichain/) — Cross-chain state queries
+- [definecurrency](../command-reference/multichain.md#definecurrency) — Launch PBaaS chains
+- [sendcurrency](../command-reference/multichain.md#sendcurrency) — Cross-chain transfers
+- [getcrosschain*](../command-reference/multichain.md) — Cross-chain state queries
 
 ### 5. Marketplace and Trading Platforms
 

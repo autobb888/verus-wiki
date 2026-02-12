@@ -53,8 +53,8 @@ verus -testnet createmultisig 2 '["RTZMZHDFSTFQst8XmX2dR4DaH87cEUs3gC","RNKiEBdu
 
 **Related Commands**
 
-- [`validateaddress`](validateaddress.md) — Validate an address
-- [`createrawtransaction`](../rawtransactions/createrawtransaction.md) — Use the multisig address in transactions
+- [`validateaddress`](#validateaddress) — Validate an address
+- [`createrawtransaction`](rawtransactions.md#createrawtransaction) — Use the multisig address in transactions
 
 **Notes**
 
@@ -108,7 +108,7 @@ None typical.
 
 **Related Commands**
 
-- [`estimatepriority`](estimatepriority.md) — Estimate priority for zero-fee transactions
+- [`estimatepriority`](#estimatepriority) — Estimate priority for zero-fee transactions
 
 **Notes**
 
@@ -162,7 +162,7 @@ None typical.
 
 **Related Commands**
 
-- [`estimatefee`](estimatefee.md) — Estimate fee per kilobyte
+- [`estimatefee`](#estimatefee) — Estimate fee per kilobyte
 
 **Notes**
 
@@ -212,7 +212,7 @@ verus -testnet invalidateblock "000000018e6991fb0d5b595b7b7b8e4cb7f04a0b8b6704ec
 
 **Related Commands**
 
-- [`reconsiderblock`](reconsiderblock.md) — Undo the effects of `invalidateblock`
+- [`reconsiderblock`](#reconsiderblock) — Undo the effects of `invalidateblock`
 
 **Notes**
 
@@ -259,9 +259,9 @@ verus -testnet jumblr_deposit "RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"
 
 **Related Commands**
 
-- [`jumblr_secret`](jumblr_secret.md) — Set the secret (destination) address
-- [`jumblr_pause`](jumblr_pause.md) — Pause Jumblr
-- [`jumblr_resume`](jumblr_resume.md) — Resume Jumblr
+- [`jumblr_secret`](#jumblr_secret) — Set the secret (destination) address
+- [`jumblr_pause`](#jumblr_pause) — Pause Jumblr
+- [`jumblr_resume`](#jumblr_resume) — Resume Jumblr
 
 **Notes**
 
@@ -305,9 +305,9 @@ verus -testnet jumblr_pause
 
 **Related Commands**
 
-- [`jumblr_resume`](jumblr_resume.md) — Resume Jumblr
-- [`jumblr_deposit`](jumblr_deposit.md) — Set deposit address
-- [`jumblr_secret`](jumblr_secret.md) — Set secret address
+- [`jumblr_resume`](#jumblr_resume) — Resume Jumblr
+- [`jumblr_deposit`](#jumblr_deposit) — Set deposit address
+- [`jumblr_secret`](#jumblr_secret) — Set secret address
 
 **Notes**
 
@@ -349,9 +349,9 @@ verus -testnet jumblr_resume
 
 **Related Commands**
 
-- [`jumblr_pause`](jumblr_pause.md) — Pause Jumblr
-- [`jumblr_deposit`](jumblr_deposit.md) — Set deposit address
-- [`jumblr_secret`](jumblr_secret.md) — Set secret address
+- [`jumblr_pause`](#jumblr_pause) — Pause Jumblr
+- [`jumblr_deposit`](#jumblr_deposit) — Set deposit address
+- [`jumblr_secret`](#jumblr_secret) — Set secret address
 
 **Notes**
 
@@ -395,9 +395,9 @@ verus -testnet jumblr_secret "RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"
 
 **Related Commands**
 
-- [`jumblr_deposit`](jumblr_deposit.md) — Set the deposit address
-- [`jumblr_pause`](jumblr_pause.md) — Pause Jumblr
-- [`jumblr_resume`](jumblr_resume.md) — Resume Jumblr
+- [`jumblr_deposit`](#jumblr_deposit) — Set the deposit address
+- [`jumblr_pause`](#jumblr_pause) — Pause Jumblr
+- [`jumblr_resume`](#jumblr_resume) — Resume Jumblr
 
 **Notes**
 
@@ -447,7 +447,7 @@ verus -testnet reconsiderblock "000000018e6991fb0d5b595b7b7b8e4cb7f04a0b8b6704ec
 
 **Related Commands**
 
-- [`invalidateblock`](invalidateblock.md) — Mark a block as invalid
+- [`invalidateblock`](#invalidateblock) — Mark a block as invalid
 
 **Notes**
 
@@ -533,8 +533,8 @@ None — invalid addresses return `{"isvalid": false}`.
 
 **Related Commands**
 
-- [`z_validateaddress`](z_validateaddress.md) — Validate shielded (z) addresses
-- [`getaddressbalance`](../addressindex/getaddressbalance.md) — Get balance for an address
+- [`z_validateaddress`](#z_validateaddress) — Validate shielded (z) addresses
+- [`getaddressbalance`](addressindex.md#getaddressbalance) — Get balance for an address
 
 **Notes**
 
@@ -612,7 +612,7 @@ None — invalid addresses return `{"isvalid": false}`.
 
 **Related Commands**
 
-- [`validateaddress`](validateaddress.md) — Validate transparent addresses
+- [`validateaddress`](#validateaddress) — Validate transparent addresses
 
 **Notes**
 
