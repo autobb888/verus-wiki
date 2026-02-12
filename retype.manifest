@@ -1,6 +1,6 @@
 {
   "version": "3.11.0",
-  "created": "2026-02-11T06:26:10Z",
+  "created": "2026-02-12T08:21:44Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -242,6 +242,9 @@
     },
     {
       "path": "how-to/mine-vrsc/index.html"
+    },
+    {
+      "path": "how-to/revoke-recover-identity/index.html"
     },
     {
       "path": "how-to/send-private-transaction/index.html"
