@@ -27,5 +27,4 @@ toc:
   depth: 2
 
 theme:
-  variant: dark
-  default: dark
+  mode: dark

@@ -1,6 +1,6 @@
 {
   "version": "3.11.0",
-  "created": "2026-02-12T08:35:49Z",
+  "created": "2026-02-13T04:16:56Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -164,6 +164,9 @@
     },
     {
       "path": "concepts/mining-and-staking/index.html"
+    },
+    {
+      "path": "concepts/on-chain-file-storage/index.html"
     },
     {
       "path": "concepts/privacy-shielded-tx/index.html"
