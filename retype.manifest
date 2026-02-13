@@ -1,6 +1,6 @@
 {
   "version": "3.11.0",
-  "created": "2026-02-13T04:16:56Z",
+  "created": "2026-02-13T05:00:40Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -263,6 +263,9 @@
     },
     {
       "path": "index.html"
+    },
+    {
+      "path": "introduction/the-hidden-power-of-verus/index.html"
     },
     {
       "path": "research/verus-agent-discovery-hiring-guide-humans/index.html"
