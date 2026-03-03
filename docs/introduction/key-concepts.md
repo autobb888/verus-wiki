@@ -66,7 +66,7 @@ You can mix and match: shield coins when you want privacy, use transparent when 
 
 | Concept | What It Does | Learn More |
 |---------|-------------|------------|
-| VRSC | Native currency | [Wallet Setup](wallet-setup.md) |
+| VRSC | Native currency | [Wallet Setup](../getting-started/wallet-setup.md) |
 | VerusID | On-chain identity | [Concepts](../concepts/identity-system.md) |
 | Currencies | User-launched tokens & baskets | [Concepts](../concepts/currencies-and-tokens.md) |
 | Mining/Staking | 50/50 hybrid consensus | [Mine](../how-to/mine-vrsc.md) · [Stake](../how-to/stake-vrsc.md) |

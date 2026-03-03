@@ -17,7 +17,7 @@ New to Verus? Start here.
 - [Installation](getting-started/installation.md) — Download and install Verus Desktop or CLI
 - [First Steps](getting-started/first-steps.md) — Start the daemon, sync the blockchain
 - [Wallet Setup](getting-started/wallet-setup.md) — Create addresses, receive VRSC, back up your wallet
-- [Key Concepts](getting-started/key-concepts.md) — VerusID, currencies, mining, staking, privacy
+- [Key Concepts](introduction/key-concepts.md) — VerusID, currencies, mining, staking, privacy
 
 ### [Command Reference](command-reference/blockchain.md)
 Complete documentation for all CLI commands across 14 categories:

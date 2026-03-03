@@ -156,6 +156,6 @@ The `-fastload` flag skips full chain verification since the shutdown was clean.
 ## Next Steps
 
 - [Wallet Setup](wallet-setup.md) — Create addresses and manage your VRSC
-- [Key Concepts](key-concepts.md) — Understand VerusID, staking, and more
+- [Key Concepts](../introduction/key-concepts.md) — Understand VerusID, staking, and more
 - [Troubleshooting: Sync Issues](../troubleshooting/sync-issues.md) — If you're having trouble syncing
 

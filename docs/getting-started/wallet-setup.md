@@ -144,7 +144,7 @@ Most users start with transparent addresses. When you need privacy, you can move
 
 ## Next Steps
 
-- [Key Concepts](key-concepts.md) — Understand the full Verus ecosystem
+- [Key Concepts](../introduction/key-concepts.md) — Understand the full Verus ecosystem
 - [Send a Private Transaction](../how-to/send-private-transaction.md) — Use shielded addresses
 - [Register a VerusID](../how-to/create-verusid.md) — Get a human-readable identity
 - [Command Reference: Wallet](../command-reference/wallet.md) — All wallet-related commands
