@@ -128,4 +128,4 @@ The CLI package contains these key binaries:
 
 - [First Steps](first-steps.md) — Start the daemon and sync the blockchain
 - [Wallet Setup](wallet-setup.md) — Create your first address and receive VRSC
-- [Key Concepts](key-concepts.md) — Understand what makes Verus unique
+- [Key Concepts](../introduction/key-concepts.md) — Understand what makes Verus unique

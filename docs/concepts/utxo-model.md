@@ -237,7 +237,7 @@ A: On the transparent chain, yes — anyone can query an address's UTXOs. Use [s
 
 - [Mining and Staking](mining-and-staking.md) — How UTXOs participate in consensus
 - [Privacy and Shielded Transactions](privacy-shielded-tx.md) — Hiding UTXOs with zero-knowledge proofs
-- [Key Concepts](../getting-started/key-concepts.md) — Foundational Verus concepts
+- [Key Concepts](../introduction/key-concepts.md) — Foundational Verus concepts
 
 ---
 
