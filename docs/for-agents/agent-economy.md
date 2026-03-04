@@ -12,7 +12,7 @@ Anyone can send VRSC to your identity name:
 
 ```bash
 # Sender runs:
-verus sendcurrency "*" '[{"address":"youragent@","currency":"VRSC","amount":5}]'
+verus sendcurrency "*" '[{"address":"youragent@","currency":"VRSCTEST","amount":5}]'
 ```
 
 ### To a Specific Address
@@ -46,9 +46,9 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
 curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
   -d '{
     "jsonrpc":"1.0","id":"1","method":"sendcurrency",
-    "params":["youragent@", [{"address":"recipient@","currency":"VRSC","amount":5}]]
+    "params":["youragent@", [{"address":"recipient@","currency":"VRSCTEST","amount":5}]]
   }'
-# Returns: txid
+# Returns: operation-id (opid) — use z_getoperationstatus to track, then get txid from result
 ```
 
 ### Send with Memo (for Job Tracking)
@@ -59,7 +59,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
     "jsonrpc":"1.0","id":"1","method":"sendcurrency",
     "params":["youragent@", [{
       "address":"recipient@",
-      "currency":"VRSC",
+      "currency":"VRSCTEST",
       "amount":5,
       "memo":"job_20260207_001"
     }]]
@@ -83,7 +83,7 @@ Store your service offerings in your identity's contentmultimap:
 
 ```bash
 # Service listing format
-SERVICES='[{"id":"code-review","name":"Code Review","price":{"amount":5,"currency":"VRSC","unit":"per-review"}},{"id":"research","name":"Research","price":{"amount":10,"currency":"VRSC","unit":"per-report"}}]'
+SERVICES='[{"id":"code-review","name":"Code Review","price":{"amount":5,"currency":"VRSCTEST","unit":"per-review"}},{"id":"research","name":"Research","price":{"amount":10,"currency":"VRSCTEST","unit":"per-report"}}]'
 
 # Encode to hex
 SERVICES_HEX=$(echo -n "$SERVICES" | xxd -p | tr -d '\n')
@@ -133,7 +133,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
 
 ```bash
 # Create job request
-JOB='{"type":"job_request","jobId":"jr_001","buyer":"you@","seller":"them@","service":"research","price":{"amount":10,"currency":"VRSC"}}'
+JOB='{"type":"job_request","jobId":"jr_001","buyer":"you@","seller":"them@","service":"research","price":{"amount":10,"currency":"VRSCTEST"}}'
 
 # Sign it
 curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
@@ -153,13 +153,13 @@ Verus has a built-in DEX. Convert between currencies:
 ```bash
 # Estimate conversion
 curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
-  -d '{"jsonrpc":"1.0","id":"1","method":"estimateconversion","params":[{"currency":"VRSC","convertto":"OTHERCURRENCY","amount":10}]}'
+  -d '{"jsonrpc":"1.0","id":"1","method":"estimateconversion","params":[{"currency":"VRSCTEST","convertto":"OTHERCURRENCY","amount":10}]}'
 
 # Execute conversion
 curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
   -d '{
     "jsonrpc":"1.0","id":"1","method":"sendcurrency",
-    "params":["youragent@",[{"address":"youragent@","currency":"VRSC","convertto":"OTHERCURRENCY","amount":10}]]
+    "params":["youragent@",[{"address":"youragent@","currency":"VRSCTEST","convertto":"OTHERCURRENCY","amount":10}]]
   }'
 ```
 
@@ -227,26 +227,31 @@ Verus has a built-in decentralized marketplace for trading currencies, identitie
 # Get all open offers for a currency
 {"method":"getoffers","params":["VRSC",true]}
 
-# List open offers with details
-{"method":"listopenoffers","params":["VRSC"]}
+# List open offers (params: unexpired, expired — both bools)
+{"method":"listopenoffers","params":[true, false]}
+
+# Get offers for a specific currency
+{"method":"getoffers","params":["VRSCTEST"]}
 ```
 
 ### Make an Offer
 ```bash
-# Offer to trade — e.g., sell 10 VRSC for 50 OtherCurrency
-{"method":"makeoffer","params":[{
+# Offer to trade — e.g., sell 10 VRSCTEST for 50 OtherCurrency
+# First param is fromaddress, second is the offer JSON object
+{"method":"makeoffer","params":["youragent@", {
   "changeaddress":"youragent@",
-  "offer":{"currency":"VRSC","amount":10},
+  "offer":{"currency":"VRSCTEST","amount":10},
   "for":{"currency":"OtherCurrency","amount":50}
 }]}
 ```
 
 ### Take an Offer
 ```bash
-# Accept an existing offer by its txid
-{"method":"takeoffer","params":["OFFER_TXID",{
+# Accept an existing offer — first param is fromaddress, txid goes INSIDE the JSON
+{"method":"takeoffer","params":["youragent@", {
+  "txid":"OFFER_TXID",
   "changeaddress":"youragent@",
-  "deliver":{"currency":"VRSC","amount":10},
+  "deliver":{"currency":"VRSCTEST","amount":10},
   "accept":{"currency":"OtherCurrency","amount":50}
 }]}
 ```

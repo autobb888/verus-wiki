@@ -1,0 +1,118 @@
+# Verus Wiki
+
+> Complete documentation for the Verus blockchain protocol: 201 CLI commands,
+> VerusID self-sovereign identity, protocol-level DeFi, PBaaS multi-chain,
+> zero-knowledge privacy, and AI agent integration guides.
+> Source: https://wiki.autobb.app
+
+## Introduction
+
+- [The Hidden Power of Verus](https://wiki.autobb.app/introduction/the-hidden-power-of-verus/)
+
+## Getting Started
+
+- [Installation](https://wiki.autobb.app/getting-started/installation/)
+- [First Steps](https://wiki.autobb.app/getting-started/first-steps/)
+- [Wallet Setup](https://wiki.autobb.app/getting-started/wallet-setup/)
+- [Key Concepts](https://wiki.autobb.app/getting-started/key-concepts/)
+
+## Command Reference
+
+- [Address Index Commands](https://wiki.autobb.app/command-reference/addressindex/)
+- [Blockchain Commands](https://wiki.autobb.app/command-reference/blockchain/)
+- [Control Commands](https://wiki.autobb.app/command-reference/control/)
+- [Disclosure Commands](https://wiki.autobb.app/command-reference/disclosure/)
+- [Generating Commands](https://wiki.autobb.app/command-reference/generating/)
+- [Identity Commands](https://wiki.autobb.app/command-reference/identity/)
+- [Marketplace Commands](https://wiki.autobb.app/command-reference/marketplace/)
+- [Mining Commands](https://wiki.autobb.app/command-reference/mining/)
+- [Multichain Commands](https://wiki.autobb.app/command-reference/multichain/)
+- [Network Commands](https://wiki.autobb.app/command-reference/network/)
+- [Raw Transactions Commands](https://wiki.autobb.app/command-reference/rawtransactions/)
+- [Util Commands](https://wiki.autobb.app/command-reference/util/)
+- [VDXF Commands](https://wiki.autobb.app/command-reference/vdxf/)
+- [Wallet Commands](https://wiki.autobb.app/command-reference/wallet/)
+
+## Concepts
+
+- [VerusID Identity System](https://wiki.autobb.app/concepts/identity-system/)
+- [Currencies and Tokens](https://wiki.autobb.app/concepts/currencies-and-tokens/)
+- [Basket Currencies and DeFi](https://wiki.autobb.app/concepts/basket-currencies-defi/)
+- [Mining and Staking](https://wiki.autobb.app/concepts/mining-and-staking/)
+- [Privacy and Shielded Transactions](https://wiki.autobb.app/concepts/privacy-shielded-tx/)
+- [Bridge and Cross-Chain](https://wiki.autobb.app/concepts/bridge-and-crosschain/)
+- [Marketplace and Offers](https://wiki.autobb.app/concepts/marketplace-and-offers/)
+- [UTXO Model](https://wiki.autobb.app/concepts/utxo-model/)
+- [On-Chain File Storage](https://wiki.autobb.app/concepts/on-chain-file-storage/)
+- [Currency Options Reference](https://wiki.autobb.app/concepts/currency-options-reference/)
+- [VDXF Data Standard](https://wiki.autobb.app/concepts/vdxf-data-standard/)
+- [VDXF Data Pipeline](https://wiki.autobb.app/concepts/vdxf-data-pipeline/)
+- [VdxfUniValue Serialization](https://wiki.autobb.app/concepts/vdxf-uni-value/)
+- [DataDescriptor Containers](https://wiki.autobb.app/concepts/data-descriptor/)
+
+## How-To Guides
+
+- [Create a VerusID](https://wiki.autobb.app/how-to/create-verusid/)
+- [Send Private Transaction](https://wiki.autobb.app/how-to/send-private-transaction/)
+- [Mine VRSC](https://wiki.autobb.app/how-to/mine-vrsc/)
+- [Stake VRSC](https://wiki.autobb.app/how-to/stake-vrsc/)
+- [Launch a Token](https://wiki.autobb.app/how-to/launch-token/)
+- [Convert Currencies](https://wiki.autobb.app/how-to/convert-currencies/)
+- [Bridge from Ethereum](https://wiki.autobb.app/how-to/bridge-from-ethereum/)
+- [Manage SubIDs](https://wiki.autobb.app/how-to/manage-subids/)
+- [Setup Multisig](https://wiki.autobb.app/how-to/setup-multisig/)
+- [Revoke and Recover Identity](https://wiki.autobb.app/how-to/revoke-recover-identity/)
+- [Backup and Restore Wallet](https://wiki.autobb.app/how-to/backup-and-restore-wallet/)
+- [Create Marketplace Offer](https://wiki.autobb.app/how-to/create-marketplace-offer/)
+
+## Tutorials
+
+- [Send and Receive VRSC (Beginner)](https://wiki.autobb.app/tutorials/beginner-send-receive/)
+- [Your First VerusID](https://wiki.autobb.app/tutorials/your-first-verusid/)
+- [Launch Your First Token](https://wiki.autobb.app/tutorials/launch-your-first-token/)
+
+## Troubleshooting
+
+- [Sync Issues](https://wiki.autobb.app/troubleshooting/sync-issues/)
+- [Common Errors](https://wiki.autobb.app/troubleshooting/common-errors/)
+- [Identity Issues](https://wiki.autobb.app/troubleshooting/identity-issues/)
+- [Transaction Problems](https://wiki.autobb.app/troubleshooting/transaction-problems/)
+
+## Developers
+
+- [RPC API Overview](https://wiki.autobb.app/developers/rpc-api-overview/)
+- [Building on Verus](https://wiki.autobb.app/developers/building-on-verus/)
+- [Integration Patterns](https://wiki.autobb.app/developers/integration-patterns/)
+- [Testnet Guide](https://wiki.autobb.app/developers/testnet-guide/)
+- [VerusID Login Guide](https://wiki.autobb.app/developers/verusid-login-guide/)
+
+## For AI Agents
+
+- [Agent Bootstrap Guide](https://wiki.autobb.app/for-agents/agent-bootstrap/)
+- [Agent CLI Reference](https://wiki.autobb.app/for-agents/agent-cli-reference/)
+- [Agent Identity Management](https://wiki.autobb.app/for-agents/agent-identity/)
+- [Agent Economy](https://wiki.autobb.app/for-agents/agent-economy/)
+- [Agent Encrypted Messaging](https://wiki.autobb.app/for-agents/agent-messaging/)
+
+## Research
+
+- [Verus-Ethereum Bridge Guide](https://wiki.autobb.app/research/verus-eth-bridge-guide/)
+- [Verus Master Walkthrough](https://wiki.autobb.app/research/verus-master-walkthrough/)
+- [Verus Master Walkthrough (Human-Readable)](https://wiki.autobb.app/research/verus-master-walkthrough-humans/)
+- [SubID Creation Guide](https://wiki.autobb.app/research/verus-subid-creation-guide/)
+- [Agent Discovery and Hiring Guide](https://wiki.autobb.app/research/verus-agent-discovery-hiring-guide/)
+- [Agent Discovery and Hiring (Human-Readable)](https://wiki.autobb.app/research/verus-agent-discovery-hiring-guide-humans/)
+- [Agent Registry Schema](https://wiki.autobb.app/research/verus-agent-registry-schema/)
+- [Token Economics and Agent Economy](https://wiki.autobb.app/research/verus-token-economics-agent-economy/)
+- [Token Economics (Human-Readable)](https://wiki.autobb.app/research/verus-token-economics-agent-economy-humans/)
+
+## Quick Facts
+
+- [Verus Facts and Statistics](https://wiki.autobb.app/verus-facts/)
+
+## FAQ
+
+- [General FAQ](https://wiki.autobb.app/faq/general/)
+- [Identity FAQ](https://wiki.autobb.app/faq/identity/)
+- [DeFi FAQ](https://wiki.autobb.app/faq/defi/)
+- [Mining and Staking FAQ](https://wiki.autobb.app/faq/mining-staking/)

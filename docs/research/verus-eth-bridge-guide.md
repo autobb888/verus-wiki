@@ -45,9 +45,9 @@ The Verus-Ethereum bridge allows trustless transfers between Ethereum and Verus:
 | Contract | Address |
 |----------|---------|
 | Delegator | `process.env.REACT_APP_DELEGATOR_CONTRACT` (check eth.verusbridge.io) |
-| VRSC Token | `0x1Af5b8015C64d39Ab44C60EAd8317f9F5a9B6C4C` |
+| VRSC Token | `0xBc2738BA63882891094C99E59a02141Ca1A1C36a` |
 | vETH (ETH on Verus) | `0x454CB83913D688795E237837d30258d11ea7c752` |
-| Bridge.vETH | `0x0200EbbD26467B866120D84A0d37c82CdE0acAEB` |
+| Bridge.vETH | `0xE6052Dcc60573561ECef2D9A4C0FEA6d3aC5B9A2` |
 | DAI on Verus | `0x8b72F1c2D326d376aDd46698E385Cf624f0CA1dA` |
 | MKR on Verus | `0x65b5AaC6A4aa0Eb656AB6B8812184e7545b6A221` |
 

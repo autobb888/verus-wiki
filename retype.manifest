@@ -1,12 +1,15 @@
 {
   "version": "3.11.0",
-  "created": "2026-02-13T05:18:48Z",
+  "created": "2026-03-03T20:36:22Z",
   "files": [
     {
       "path": ".nojekyll"
     },
     {
       "path": "404.html"
+    },
+    {
+      "path": "agent-index.json"
     },
     {
       "path": "CNAME"
@@ -184,6 +187,9 @@
       "path": "concepts/vdxf-uni-value/index.html"
     },
     {
+      "path": "contribute/suggest-edit/index.html"
+    },
+    {
       "path": "developers/building-on-verus/index.html"
     },
     {
@@ -197,6 +203,18 @@
     },
     {
       "path": "developers/verusid-login-guide/index.html"
+    },
+    {
+      "path": "faq/defi/index.html"
+    },
+    {
+      "path": "faq/general/index.html"
+    },
+    {
+      "path": "faq/identity/index.html"
+    },
+    {
+      "path": "faq/mining-staking/index.html"
     },
     {
       "path": "for-agents/agent-bootstrap/index.html"
@@ -220,7 +238,8 @@
       "path": "getting-started/installation/index.html"
     },
     {
-      "path": "getting-started/key-concepts/index.html"
+      "path": "getting-started/key-concepts/index.html",
+      "old": true
     },
     {
       "path": "getting-started/wallet-setup/index.html"
@@ -265,7 +284,13 @@
       "path": "index.html"
     },
     {
+      "path": "introduction/key-concepts/index.html"
+    },
+    {
       "path": "introduction/the-hidden-power-of-verus/index.html"
+    },
+    {
+      "path": "llms.txt"
     },
     {
       "path": "research/verus-agent-discovery-hiring-guide-humans/index.html"
@@ -359,6 +384,9 @@
     },
     {
       "path": "tutorials/your-first-verusid/index.html"
+    },
+    {
+      "path": "verus-facts/index.html"
     }
   ]
 }

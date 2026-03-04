@@ -84,7 +84,7 @@ ps aux | grep verusd
 
 # If no instance is running but error persists, remove the lock file
 rm ~/.komodo/VRSC/.lock        # mainnet
-rm ~/.komodo/VRSCTEST/.lock    # testnet
+rm ~/.komodo/vrsctest/.lock    # testnet
 
 # Restart
 ./verusd -daemon

@@ -323,7 +323,6 @@ None.
   "chainwork": "xxxx",               // (string) total chain work (hex)
   "size_on_disk": 12345678,          // (numeric) estimated block data size on disk
   "commitments": 123456,             // (numeric) number of note commitments in the commitment tree
-  "commitments": 123456,             // (numeric) note commitments in commitment tree
   "softforks": [                      // (array) softfork status
     {
       "id": "xxxx",                   // (string) softfork name
@@ -1168,7 +1167,7 @@ None typical.
 
 - Value is relative to the minimum difficulty (difficulty 1)
 - Changes based on Verus's difficulty adjustment algorithm
-- Verus uses VerusHash 2.0 for proof-of-work
+- Verus uses VerusHash 2.2 for proof-of-work
 
 **Tested On**
 

@@ -138,14 +138,26 @@ Use `updateidentity` with `contentmultimap` (see above).
 {"method":"getnewaddress","params":["label"]}
 ```
 
-### Send VRSC
+### Send VRSCTEST
 ```bash
-{"method":"sendcurrency","params":["fromid@",[{"address":"toid@","currency":"VRSC","amount":5}]]}
+{"method":"sendcurrency","params":["fromid@",[{"address":"toid@","currency":"VRSCTEST","amount":5}]]}
+# Returns: operation-id (opid), NOT a txid
+```
+
+### Track Send Operation
+```bash
+# sendcurrency returns an opid — use z_getoperationstatus to track it
+{"method":"z_getoperationstatus","params":[["opid-from-sendcurrency"]]}
+# When status is "success", the txid is in result.txid
+
+# Or use z_getoperationresult to get result and remove from queue
+{"method":"z_getoperationresult","params":[["opid-from-sendcurrency"]]}
 ```
 
 ### Send with Memo
 ```bash
-{"method":"sendcurrency","params":["fromid@",[{"address":"toid@","currency":"VRSC","amount":5,"memo":"job_001"}]]}
+{"method":"sendcurrency","params":["fromid@",[{"address":"toid@","currency":"VRSCTEST","amount":5,"memo":"job_001"}]]}
+# Note: memos only work when sending to z-addresses
 ```
 
 ### Check Transaction
@@ -171,7 +183,7 @@ Use `updateidentity` with `contentmultimap` (see above).
 ### Sign a Message
 ```bash
 {"method":"signmessage","params":["yourid@","message text"]}
-# Returns: base64 signature
+# Returns: {"hash":"hexhash", "signature":"base64sig"}
 ```
 
 ### Verify a Signature
@@ -264,12 +276,12 @@ Use `updateidentity` with `contentmultimap` (see above).
 
 ### Estimate Conversion
 ```bash
-{"method":"estimateconversion","params":[{"currency":"VRSC","convertto":"OTHER","amount":10}]}
+{"method":"estimateconversion","params":[{"currency":"VRSCTEST","convertto":"OTHER","amount":10}]}
 ```
 
 ### Convert Currency
 ```bash
-{"method":"sendcurrency","params":["yourid@",[{"address":"yourid@","currency":"VRSC","convertto":"OTHER","amount":10}]]}
+{"method":"sendcurrency","params":["yourid@",[{"address":"yourid@","currency":"VRSCTEST","convertto":"OTHER","amount":10}]]}
 ```
 
 ---

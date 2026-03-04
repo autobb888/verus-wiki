@@ -52,7 +52,7 @@ curl --user myusername --data-binary '{"jsonrpc":"1.0","id":"curltest","method":
 | Error | Cause |
 |-------|-------|
 | `not enough keys supplied` | Fewer keys provided than `nrequired` |
-| `a]multisignature address must require at least one key` | nrequired < 1 |
+| `a multisignature address must require at least one key` | nrequired < 1 |
 
 **Related Commands**
 
@@ -273,7 +273,7 @@ verus decryptdata '{"datadescriptor":{...encrypted output...}}'
 
 - [`signdata`](identity.md#signdata) — Sign and optionally encrypt data
 - [`z_exportviewingkey`](#z_exportviewingkey) — Export viewing key for decryption
-- [`verifydata`](identity.md#signdata) — Verify signed data
+- [`verifysignature`](identity.md#verifysignature) — Verify signed data
 
 **Notes**
 
@@ -483,9 +483,9 @@ verus walletlock
 
 **Related Commands**
 
-- [`walletpassphrase`](wallet.md#encryptwallet) — Unlock encrypted wallet
-- [`walletlock`](wallet.md#encryptwallet) — Lock the wallet
-- [`walletpassphrasechange`](wallet.md#encryptwallet) — Change encryption passphrase
+- `walletpassphrase` — Unlock encrypted wallet (not a standalone RPC — wallet is unlocked via daemon startup flags or `encryptwallet` workflow)
+- `walletlock` — Lock the wallet (not a standalone RPC in Verus)
+- `walletpassphrasechange` — Change encryption passphrase (not a standalone RPC in Verus)
 
 **Notes**
 

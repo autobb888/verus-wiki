@@ -12,7 +12,7 @@ The Verus daemon (`verusd`) is the core software that connects to the network an
 ```
 
 On first launch, `verusd` will automatically:
-1. Create the data directory (`~/.komodo/VRSC/` on Linux, `~/Library/Application Support/Komodo/VRSC/` on macOS, `%AppData%\Roaming\Komodo\VRSC\` on Windows)
+1. Create the data directory (`~/.komodo/VRSC/` on Linux, `~/Library/Application Support/Komodo/VRSC/` on macOS, `%AppData%\Komodo\VRSC\` on Windows)
 2. Generate a default `VRSC.conf` with random RPC credentials
 3. Download a bootstrap snapshot and sync the blockchain
 
@@ -39,8 +39,9 @@ Key fields to watch:
 |-------|---------|
 | `blocks` | Blocks your node has downloaded |
 | `longestchain` | Total blocks in the network |
-| `synced` | `true` when fully synchronized |
 | `connections` | Number of peer connections |
+
+> When `blocks` equals `longestchain`, your node is fully synchronized.
 
 For more detailed info:
 

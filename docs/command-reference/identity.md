@@ -511,7 +511,7 @@ Returns identity metadata plus a combined `contentmultimap` aggregated from all 
 
 **Include Deleted Content**
 ```bash
-./verus -testnet getidentitycontent "ari@" 0 0 false 0 "" true
+./verus -testnet getidentitycontent "ari@" 0 0 false 0 "*" true
 ```
 
 **RPC (curl)**
@@ -1394,7 +1394,7 @@ curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"
 - The **only way to remove a timelock** is through **revoke and recover** — this is by design. Revoking and recovering a timelocked identity removes the timelock entirely
 - There is no other mechanism to cancel or shorten a timelock once set
 - Services supporting VerusID authentication may also honor the lock status for non-spending operations
-- Average block time on Verus is ~62 seconds, so ~1394 blocks ≈ 1 day (1440 blocks ≈ 24.8 hours)
+- Average block time on Verus is ~60 seconds, so ~1440 blocks ≈ 1 day
 - Use `getidentity` to check the current lock state and timelock parameters
 
 **Tested On**

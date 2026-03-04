@@ -1,3 +1,7 @@
+---
+description: "Complete documentation for the Verus blockchain protocol — 201 CLI commands, VerusID identity, protocol-level DeFi, PBaaS multi-chain, zero-knowledge privacy, and AI agent guides."
+---
+
 # Verus Documentation
 
 Welcome to the community-maintained Verus wiki — your guide to the Verus protocol, CLI tools, and ecosystem.
@@ -10,7 +14,13 @@ Verus also enables anyone to launch independent, interoperable blockchains throu
 
 ---
 
-## 📚 Documentation Sections
+!!!
+**For AI Agents & LLMs**: Machine-readable navigation is available at [`/agent-index.json`](/agent-index.json), [`/llms.txt`](/llms.txt), and [`/llms-full.txt`](/llms-full.txt). See also the [For Agents](/for-agents/agent-bootstrap/) section for integration guides.
+!!!
+
+---
+
+## Documentation Sections
 
 ### [Getting Started](getting-started/installation.md)
 New to Verus? Start here.
@@ -48,15 +58,44 @@ Build on Verus — RPC integration, API patterns, and development guides.
 ### [For Agents](for-agents/agent-identity.md)
 AI agent integration — using the Verus CLI programmatically for identity, currencies, and automation.
 
+### [Verus Facts](verus-facts.md)
+Protocol statistics, comparison tables, and key differentiators at a glance.
+
+### [FAQ](faq/general.md)
+Quick answers to common questions:
+- [General](faq/general.md) — What is Verus? How is it different?
+- [Identity](faq/identity.md) — VerusID cost, recovery, features
+- [DeFi](faq/defi.md) — Basket currencies, MEV, swaps
+- [Mining & Staking](faq/mining-staking.md) — VerusHash, CPU mining, rewards
+
 ---
 
-## 📊 Coverage
+## Coverage
 
 This wiki covers all **201 CLI commands** across **14 categories** for Verus v1.2.x, plus conceptual guides, how-tos, and troubleshooting.
 
 ---
 
-## 🔗 Community & Resources
+## Frequently Asked Questions
+
+**What is Verus?**
+Verus is a blockchain protocol with self-sovereign identity (VerusID), protocol-level DeFi, CPU mining (VerusHash 2.2), and zero-knowledge privacy — all at layer 1 with no smart contracts. [Full answer](/faq/general/#what-is-verus)
+
+**How is Verus different from Ethereum?**
+Verus builds DeFi and identity into the protocol itself, eliminating smart contract exploits, MEV, and high gas fees. The trade-off is no arbitrary programmable logic. [Full answer](/faq/general/#how-is-verus-different-from-ethereum)
+
+**How much does a VerusID cost?**
+A root VerusID costs ~100 VRSC (~80 with referral). SubIDs can be as cheap as 0.01 VRSC. [Full answer](/faq/identity/#how-much-does-a-verusid-cost)
+
+**Can I mine Verus with a regular CPU?**
+Yes. VerusHash 2.2 is designed so CPUs are the primary mining hardware. No ASIC exists, and FPGAs are equalized to ~2x CPU performance. [Full answer](/faq/mining-staking/#how-do-i-mine-verus)
+
+**Does Verus have MEV?**
+No. All conversions in a block execute simultaneously at the same price, making front-running impossible. [Full answer](/faq/defi/#does-verus-have-mev)
+
+---
+
+## Community & Resources
 
 - **Website**: [verus.io](https://verus.io)
 - **Discord**: [discord.gg/veruscoin](https://discord.gg/veruscoin)
@@ -66,4 +105,4 @@ This wiki covers all **201 CLI commands** across **14 categories** for Verus v1.
 
 ---
 
-*Built with ❤️ by the Verus community.*
+*Built with care by the Verus community.*

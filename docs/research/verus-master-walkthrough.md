@@ -62,7 +62,7 @@ Each doc also has a `-humans.md` version in plain language.
 1. Download latest CLI from GitHub releases API
 2. Extract to `~/verus-cli`
 3. Run `./fetch-params` (one-time, ~1.5GB download)
-4. Create config at `~/.komodo/VRSCTEST/VRSCTEST.conf` (testnet) with `rpcuser`, `rpcpassword`, `rpcport=18843`
+4. Create config at `~/.komodo/vrsctest/vrsctest.conf` (testnet) with `rpcuser`, `rpcpassword`, `rpcport=18843`
 5. Start daemon: `./verusd -testnet -bootstrap`
 6. Wait for sync: poll `verus -testnet getinfo` until `blocks` matches `longestchain`
 7. Create wallet address: `verus -testnet getnewaddress`
@@ -349,7 +349,7 @@ verus -testnet getidentity "agentname@"
 |---|---------|---------|
 | Flag | `-testnet` | (none) |
 | RPC port | 18843 | 27486 |
-| Config dir | `~/.komodo/VRSCTEST/` | `~/.komodo/VRSC/` |
+| Config dir | `~/.komodo/vrsctest/` | `~/.komodo/VRSC/` |
 | Currency | VRSCTEST (free) | VRSC (real value) |
 | ID cost | ~100 VRSCTEST | ~100 VRSC |
 | Data persistence | May reset | Permanent |

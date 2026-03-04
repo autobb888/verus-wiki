@@ -127,7 +127,7 @@ Verus follows a halving schedule similar to Bitcoin, but with its own parameters
 
 | Era | Block Range | Block Reward | Notes |
 |---|---|---|---|
-| 1 | 1 – 10,080 | Variable (up to 0–384) | Launch phase (~485K VRSC, timelocked) |
+| 1 | 1 – 10,080 | Variable (~0 → 384) | Launch phase (~485K VRSC, timelocked), linearly increasing |
 | 2 | 10,080 – 53,280 | 384 VRSC | Timelocked |
 | 3 | 53,280 – 96,480 | 192 VRSC | Timelocked |
 | 4 | 96,480 – 139,680 | 96 VRSC | |

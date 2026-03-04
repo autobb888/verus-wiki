@@ -195,6 +195,8 @@ The primary argument is a JSON object with the currency definition:
 | notarizationperiod | int | optional | Min blocks between notarizations (default: 10 min) |
 | eras | array | optional | Up to 3 eras: `[{"reward":n,"decay":n,"halving":n,"eraend":n},...]` |
 | nodes | array | optional | Up to 5 nodes: `[{"networkaddress":"ip:port","nodeidentity":"name@"},...]` |
+| notaries | array | optional | List of notary identities for PBaaS chains: `["identity",...]` |
+| minnotariesconfirm | int | optional | Minimum unique notary signatures required for auto-notarization |
 | expiryheight | int | optional | Block height at which the definition transaction expires (default: current height + 20) |
 
 **Result**
@@ -1914,7 +1916,6 @@ verus sendcurrency "fromaddress" '[{"address":"dest","amount":n,...},...]' (minc
 | outputs | array | ✅ | Array of output objects (see below) |
 | minconfs | int | optional | Minimum confirmations for source UTXOs (default: 1) |
 | feeamount | number | optional | Custom fee amount instead of default miner fee |
-| returntxtemplate | bool | optional | If true, returns unsigned tx template instead of broadcasting |
 | returntxtemplate | bool | optional | If true, returns unsigned tx template instead of broadcasting |
 
 **Output Object Fields**

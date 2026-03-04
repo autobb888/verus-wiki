@@ -43,7 +43,7 @@ cd ~/verus-cli && ./fetch-params
 
 ## Step 2: Start and Sync
 
-> **No manual configuration needed.** When you first run `verusd`, it automatically creates the data directory (`~/.komodo/VRSCTEST/` for testnet, `~/.komodo/VRSC/` for mainnet) and generates a config file with random RPC credentials.
+> **No manual configuration needed.** When you first run `verusd`, it automatically creates the data directory (`~/.komodo/vrsctest/` for testnet, `~/.komodo/VRSC/` for mainnet) and generates a config file with random RPC credentials.
 
 ```bash
 # Use -bootstrap for first-time sync (under 3 hours vs ~3 days without it)
@@ -67,12 +67,12 @@ After first launch, read the auto-generated RPC credentials:
 
 ```bash
 # Testnet
-cat ~/.komodo/VRSCTEST/VRSCTEST.conf | grep -E "rpcuser|rpcpassword|rpcport"
+cat ~/.komodo/vrsctest/vrsctest.conf | grep -E "rpcuser|rpcpassword|rpcport"
 
 # Save for programmatic access
-RPC_USER=$(grep rpcuser ~/.komodo/VRSCTEST/VRSCTEST.conf | cut -d= -f2)
-RPC_PASS=$(grep rpcpassword ~/.komodo/VRSCTEST/VRSCTEST.conf | cut -d= -f2)
-RPC_PORT=$(grep rpcport ~/.komodo/VRSCTEST/VRSCTEST.conf | cut -d= -f2)
+RPC_USER=$(grep rpcuser ~/.komodo/vrsctest/vrsctest.conf | cut -d= -f2)
+RPC_PASS=$(grep rpcpassword ~/.komodo/vrsctest/vrsctest.conf | cut -d= -f2)
+RPC_PORT=$(grep rpcport ~/.komodo/vrsctest/vrsctest.conf | cut -d= -f2)
 
 cat > ~/.verus-rpc-credentials << EOF
 RPC_URL=http://127.0.0.1:${RPC_PORT:-18843}
@@ -214,7 +214,7 @@ tar -xzf /tmp/verus-cli.tgz -C "$INSTALL_DIR" --strip-components=1
 
 # Set network args
 if [ "$NETWORK" = "testnet" ]; then
-  DARGS="-testnet"; CONF_DIR="$HOME/.komodo/VRSCTEST"; CONF="VRSCTEST.conf"; PORT=18843
+  DARGS="-testnet"; CONF_DIR="$HOME/.komodo/vrsctest"; CONF="vrsctest.conf"; PORT=18843
 else
   DARGS=""; CONF_DIR="$HOME/.komodo/VRSC"; CONF="VRSC.conf"; PORT=27486
 fi

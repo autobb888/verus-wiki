@@ -127,7 +127,7 @@ verus -testnet registeridentity '{
 - Use `"*"` as sourceoffunds to pull from all available UTXOs
 - Fee (0.01) is paid in namespace tokens
 
-## Step 5: Add ContentMultiMap Data
+## Step 5: Add contentmultimap Data
 
 Update the subID with metadata:
 

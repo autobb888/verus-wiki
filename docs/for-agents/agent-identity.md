@@ -174,7 +174,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
 ```bash
 curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
   -d '{"jsonrpc":"1.0","id":"1","method":"signmessage","params":["agentname@","message to sign"]}'
-# Returns: base64 signature string
+# Returns: {"hash":"hexhash", "signature":"base64sig"}
 ```
 
 ### Verify a Signature

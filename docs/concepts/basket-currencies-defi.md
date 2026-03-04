@@ -220,7 +220,7 @@ The weights determine the target composition. The AMM's pricing mechanism natura
 
 ### 1. Stablecoins
 
-Create a basket backed by multiple stablecoins (DAI, USDC, USDT). The result is a **meta-stablecoin** that's more resilient than any single stablecoin — if one depeg, the basket absorbs the impact across all reserves.
+Create a basket backed by multiple stablecoins (DAI, USDC, USDT). The result is a **meta-stablecoin** that's more resilient than any single stablecoin — if one depegs, the basket absorbs the impact across all reserves.
 
 ### 2. Index Funds
 

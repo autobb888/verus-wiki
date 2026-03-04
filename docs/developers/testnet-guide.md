@@ -34,7 +34,7 @@ cd ~/verus-cli && ./fetch-params
 
 ### 2. Start the Daemon
 
-> **No manual configuration needed.** The daemon automatically creates `~/.komodo/VRSCTEST/` and a `VRSCTEST.conf` with random RPC credentials on first launch.
+> **No manual configuration needed.** The daemon automatically creates `~/.komodo/vrsctest/` and a `vrsctest.conf` with random RPC credentials on first launch.
 
 ```bash
 # First time — use -bootstrap for fast sync (under 3 hours vs ~3 days)
@@ -58,7 +58,7 @@ watch -n 10 './verus -testnet getinfo 2>/dev/null | grep -E "blocks|headers|conn
 ### 4. Read Auto-Generated Credentials
 
 ```bash
-cat ~/.komodo/VRSCTEST/VRSCTEST.conf | grep -E "rpcuser|rpcpassword|rpcport"
+cat ~/.komodo/vrsctest/vrsctest.conf | grep -E "rpcuser|rpcpassword|rpcport"
 ```
 
 > 💡 **Optional:** Add custom settings (like `addnode=195.248.234.41`) to the auto-generated conf, then restart.
@@ -101,8 +101,8 @@ If you have testnet coins elsewhere:
 | Feature | Testnet | Mainnet |
 |---------|---------|---------|
 | CLI prefix | `./verus -testnet` | `./verus` |
-| Config directory | `~/.komodo/VRSCTEST/` | `~/.komodo/VRSC/` |
-| Config file | `VRSCTEST.conf` | `VRSC.conf` |
+| Config directory | `~/.komodo/vrsctest/` | `~/.komodo/VRSC/` |
+| Config file | `vrsctest.conf` | `VRSC.conf` |
 | RPC port | 18843 | 27486 |
 | P2P port | 18842 | 27485 |
 | Currency | VRSCTEST | VRSC |
@@ -219,17 +219,17 @@ If you need a fresh testnet state:
 ./verus -testnet stop
 
 # Option A: Quick reset (keeps wallet and config)
-rm -rf ~/.komodo/VRSCTEST/blocks ~/.komodo/VRSCTEST/chainstate
+rm -rf ~/.komodo/vrsctest/blocks ~/.komodo/vrsctest/chainstate
 ./verusd -testnet -bootstrap
 
 # Option B: Full reset (removes everything — back up wallet.dat first!)
-cp ~/.komodo/VRSCTEST/wallet.dat ~/wallet-testnet-backup.dat
-rm -rf ~/.komodo/VRSCTEST/
+cp ~/.komodo/vrsctest/wallet.dat ~/wallet-testnet-backup.dat
+rm -rf ~/.komodo/vrsctest/
 rm -rf ~/.verustest/    # testnet data may also be here
 ./verusd -testnet -bootstrap
 ```
 
-> **macOS paths:** Replace `~/.komodo/VRSCTEST/` with `~/Library/Application Support/Komodo/VRSCTEST/`
+> **macOS paths:** Replace `~/.komodo/vrsctest/` with `~/Library/Application Support/Komodo/VRSCTEST/`
 
 ---
 

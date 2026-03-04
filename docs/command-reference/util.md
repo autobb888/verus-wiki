@@ -564,7 +564,7 @@ z_validateaddress "zaddr"
 
 | Parameter | Type   | Required | Description |
 |-----------|--------|----------|-------------|
-| zaddr     | string | Yes      | The z address to validate |
+| zaddr     | string | Yes      | The z-address to validate |
 
 **Result**
 

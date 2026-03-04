@@ -75,7 +75,7 @@ Wait for it to sync. Check progress:
 ```json
 {
   "version": 2000753,
-  "protocolversion": 170020,
+  "protocolversion": 170010,
   "blocks": 926950,
   "headers": 926961,
   ...

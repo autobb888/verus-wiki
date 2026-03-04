@@ -121,7 +121,7 @@ The `controladdress` in the commitment must be an address **in your wallet** (si
 
 ### 2. Register with Their Address as Owner
 
-After 1 confirmation (~62 seconds), register the identity with the **recipient's R-address** in `primaryaddresses`:
+After 1 confirmation (~60 seconds), register the identity with the **recipient's R-address** in `primaryaddresses`:
 
 ```bash
 ./verus registeridentity '{

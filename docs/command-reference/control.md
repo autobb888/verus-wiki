@@ -51,6 +51,19 @@ None.
 | relayfee        | numeric | Minimum relay fee in VRSC/kB |
 | unlocked_until  | numeric | Wallet unlock expiry timestamp (0 = locked, absent if unencrypted) |
 | errors          | string  | Any error messages |
+| tiptime         | numeric | Timestamp of current chain tip |
+| nextblocktime   | numeric | Expected timestamp for next block |
+| CCid            | numeric | Currency/chain ID number (1 for VRSC) |
+| p2pport         | numeric | Peer-to-peer network port |
+| rpcport         | numeric | RPC server port |
+| magic           | numeric | Network magic number |
+| premine         | numeric | Premine amount (0 for VRSC) |
+| eras            | numeric | Number of emission eras |
+| reward          | string  | Comma-separated reward per era (satoshis) |
+| halving         | string  | Comma-separated halving interval per era (blocks) |
+| decay           | string  | Comma-separated decay rate per era |
+| endsubsidy      | string  | Comma-separated era end blocks |
+| veruspos        | numeric | Percentage of blocks that are proof-of-stake |
 
 **Examples**
 

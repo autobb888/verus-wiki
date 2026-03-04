@@ -1,0 +1,569 @@
+{
+  "schema": "verus-wiki-agent-index/v1",
+  "site": "https://wiki.autobb.app",
+  "project": "Verus Protocol Documentation",
+  "description": "Community-maintained wiki covering all 201 Verus CLI commands, VerusID self-sovereign identity, protocol-level DeFi, PBaaS multi-chain architecture, zero-knowledge privacy, and AI agent integration.",
+  "llmsTxt": "https://wiki.autobb.app/llms.txt",
+  "llmsFullTxt": "https://wiki.autobb.app/llms-full.txt",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "description": "Overview of Verus protocol capabilities",
+      "pages": [
+        {
+          "path": "/introduction/the-hidden-power-of-verus/",
+          "title": "The Hidden Power of Verus",
+          "description": "Deep exploration of Verus as one of the most feature-complete decentralized protocols ever built",
+          "tags": ["overview", "architecture", "features"]
+        }
+      ]
+    },
+    {
+      "id": "getting-started",
+      "title": "Getting Started",
+      "description": "Installation, setup, and first steps with Verus",
+      "pages": [
+        {
+          "path": "/getting-started/installation/",
+          "title": "Installation",
+          "description": "Download and install Verus Desktop or CLI on any platform",
+          "tags": ["install", "setup", "download"]
+        },
+        {
+          "path": "/getting-started/first-steps/",
+          "title": "First Steps",
+          "description": "Start the daemon, sync the blockchain, basic configuration",
+          "tags": ["daemon", "sync", "config"]
+        },
+        {
+          "path": "/getting-started/wallet-setup/",
+          "title": "Wallet Setup",
+          "description": "Create addresses, receive VRSC, back up your wallet",
+          "tags": ["wallet", "addresses", "backup"]
+        },
+        {
+          "path": "/getting-started/key-concepts/",
+          "title": "Key Concepts",
+          "description": "VerusID, currencies, mining, staking, privacy overview",
+          "tags": ["concepts", "overview", "beginner"]
+        }
+      ]
+    },
+    {
+      "id": "command-reference",
+      "title": "Command Reference",
+      "description": "Complete documentation for all 201 Verus CLI commands across 14 categories",
+      "pages": [
+        {
+          "path": "/command-reference/addressindex/",
+          "title": "Address Index Commands",
+          "description": "Query address balances, UTXOs, and transaction history by address",
+          "tags": ["addressindex", "balance", "utxo", "cli"]
+        },
+        {
+          "path": "/command-reference/blockchain/",
+          "title": "Blockchain Commands",
+          "description": "Query blocks, chain state, mempool, and blockchain information",
+          "tags": ["blockchain", "blocks", "mempool", "cli"]
+        },
+        {
+          "path": "/command-reference/control/",
+          "title": "Control Commands",
+          "description": "Node control, help, and daemon management commands",
+          "tags": ["control", "daemon", "help", "cli"]
+        },
+        {
+          "path": "/command-reference/disclosure/",
+          "title": "Disclosure Commands",
+          "description": "Payment disclosure and transaction proof commands",
+          "tags": ["disclosure", "payment", "proof", "cli"]
+        },
+        {
+          "path": "/command-reference/generating/",
+          "title": "Generating Commands",
+          "description": "Block generation and mining control commands",
+          "tags": ["generating", "mining", "blocks", "cli"]
+        },
+        {
+          "path": "/command-reference/identity/",
+          "title": "Identity Commands",
+          "description": "VerusID registration, updates, signing, and identity management",
+          "tags": ["identity", "verusid", "registration", "cli"]
+        },
+        {
+          "path": "/command-reference/marketplace/",
+          "title": "Marketplace Commands",
+          "description": "On-chain marketplace offers, listing, and atomic swap commands",
+          "tags": ["marketplace", "offers", "swap", "cli"]
+        },
+        {
+          "path": "/command-reference/mining/",
+          "title": "Mining Commands",
+          "description": "Mining pool and solo mining management commands",
+          "tags": ["mining", "pool", "hashrate", "cli"]
+        },
+        {
+          "path": "/command-reference/multichain/",
+          "title": "Multichain Commands",
+          "description": "PBaaS chain launch, currency definition, cross-chain operations",
+          "tags": ["multichain", "pbaas", "currency", "crosschain", "cli"]
+        },
+        {
+          "path": "/command-reference/network/",
+          "title": "Network Commands",
+          "description": "Peer management, network info, and connection commands",
+          "tags": ["network", "peers", "connections", "cli"]
+        },
+        {
+          "path": "/command-reference/rawtransactions/",
+          "title": "Raw Transactions Commands",
+          "description": "Create, sign, and send raw transactions manually",
+          "tags": ["rawtransactions", "signing", "hex", "cli"]
+        },
+        {
+          "path": "/command-reference/util/",
+          "title": "Util Commands",
+          "description": "Utility functions: address validation, signing, encryption",
+          "tags": ["util", "validation", "signing", "encryption", "cli"]
+        },
+        {
+          "path": "/command-reference/vdxf/",
+          "title": "VDXF Commands",
+          "description": "Verus Data Exchange Format operations for structured on-chain data",
+          "tags": ["vdxf", "data", "structured", "cli"]
+        },
+        {
+          "path": "/command-reference/wallet/",
+          "title": "Wallet Commands",
+          "description": "Wallet management, transactions, balances, and key operations",
+          "tags": ["wallet", "transactions", "balance", "keys", "cli"]
+        }
+      ]
+    },
+    {
+      "id": "concepts",
+      "title": "Concepts",
+      "description": "Deep dives into how Verus protocol features work",
+      "pages": [
+        {
+          "path": "/concepts/identity-system/",
+          "title": "The Verus Identity System",
+          "description": "Self-sovereign, on-chain, human-readable identity with revocation and recovery",
+          "tags": ["identity", "verusid", "self-sovereign"]
+        },
+        {
+          "path": "/concepts/currencies-and-tokens/",
+          "title": "Currencies and Tokens",
+          "description": "Create tokens, basket currencies, and blockchains without writing code",
+          "tags": ["currencies", "tokens", "launch"]
+        },
+        {
+          "path": "/concepts/basket-currencies-defi/",
+          "title": "Basket Currencies and DeFi",
+          "description": "Protocol-level AMM, MEV resistance, and DeFi without smart contracts",
+          "tags": ["defi", "basket", "amm", "mev"]
+        },
+        {
+          "path": "/concepts/mining-and-staking/",
+          "title": "Mining and Staking",
+          "description": "50/50 hybrid PoW/PoS consensus with VerusHash 2.2 CPU mining",
+          "tags": ["mining", "staking", "consensus", "verushash"]
+        },
+        {
+          "path": "/concepts/privacy-shielded-tx/",
+          "title": "Privacy and Shielded Transactions",
+          "description": "Zero-knowledge proofs with Sapling for full transaction privacy",
+          "tags": ["privacy", "shielded", "zk-proofs", "sapling"]
+        },
+        {
+          "path": "/concepts/bridge-and-crosschain/",
+          "title": "Bridge and Cross-Chain",
+          "description": "Trustless Verus-Ethereum bridge and PBaaS cross-chain transfers",
+          "tags": ["bridge", "ethereum", "crosschain", "pbaas"]
+        },
+        {
+          "path": "/concepts/marketplace-and-offers/",
+          "title": "Marketplace and Offers",
+          "description": "Trustless on-chain atomic swaps for currencies, tokens, and identities",
+          "tags": ["marketplace", "offers", "atomic-swap"]
+        },
+        {
+          "path": "/concepts/utxo-model/",
+          "title": "UTXO Model",
+          "description": "How Verus tracks fund ownership using the unspent transaction output model",
+          "tags": ["utxo", "transactions", "model"]
+        },
+        {
+          "path": "/concepts/on-chain-file-storage/",
+          "title": "On-Chain File Storage",
+          "description": "Decentralized file storage using multipart data split across transactions",
+          "tags": ["storage", "files", "multipart", "onchain"]
+        },
+        {
+          "path": "/concepts/currency-options-reference/",
+          "title": "Currency Options Reference",
+          "description": "Numeric values and bitfields used in definecurrency",
+          "tags": ["currency", "options", "reference", "bitfield"]
+        },
+        {
+          "path": "/concepts/vdxf-data-standard/",
+          "title": "VDXF Data Standard",
+          "description": "Universal namespaced data format for structured on-chain information",
+          "tags": ["vdxf", "data", "standard", "namespace"]
+        },
+        {
+          "path": "/concepts/vdxf-data-pipeline/",
+          "title": "VDXF Data Pipeline",
+          "description": "How DefinedKey, DataDescriptor, and VdxfUniValue work together",
+          "tags": ["vdxf", "pipeline", "datadescriptor"]
+        },
+        {
+          "path": "/concepts/vdxf-uni-value/",
+          "title": "VdxfUniValue Serialization",
+          "description": "Type system for encoding structured data into bytes for on-chain storage",
+          "tags": ["vdxf", "univalue", "serialization", "encoding"]
+        },
+        {
+          "path": "/concepts/data-descriptor/",
+          "title": "DataDescriptor Containers",
+          "description": "Wrap VDXF data with metadata: labels, MIME types, encryption",
+          "tags": ["datadescriptor", "metadata", "encryption", "vdxf"]
+        }
+      ]
+    },
+    {
+      "id": "how-to",
+      "title": "How-To Guides",
+      "description": "Step-by-step instructions for common Verus tasks",
+      "pages": [
+        {
+          "path": "/how-to/create-verusid/",
+          "title": "Create a VerusID",
+          "description": "Register a self-sovereign identity on the Verus blockchain",
+          "tags": ["verusid", "register", "identity"]
+        },
+        {
+          "path": "/how-to/send-private-transaction/",
+          "title": "Send Private Transaction",
+          "description": "Send a fully private shielded transaction using z-addresses",
+          "tags": ["privacy", "shielded", "transaction"]
+        },
+        {
+          "path": "/how-to/mine-vrsc/",
+          "title": "Mine VRSC",
+          "description": "Use your CPU to mine Verus blocks and earn rewards",
+          "tags": ["mining", "cpu", "rewards"]
+        },
+        {
+          "path": "/how-to/stake-vrsc/",
+          "title": "Stake VRSC",
+          "description": "Earn block rewards by staking VRSC — no special hardware needed",
+          "tags": ["staking", "rewards", "passive"]
+        },
+        {
+          "path": "/how-to/launch-token/",
+          "title": "Launch a Token",
+          "description": "Create your own currency token using the Verus DeFi protocol",
+          "tags": ["token", "launch", "currency"]
+        },
+        {
+          "path": "/how-to/convert-currencies/",
+          "title": "Convert Currencies",
+          "description": "Swap between currencies using the protocol-level AMM",
+          "tags": ["convert", "swap", "amm", "defi"]
+        },
+        {
+          "path": "/how-to/bridge-from-ethereum/",
+          "title": "Bridge from Ethereum",
+          "description": "Transfer ETH and ERC-20 tokens to Verus and back",
+          "tags": ["bridge", "ethereum", "erc20", "transfer"]
+        },
+        {
+          "path": "/how-to/manage-subids/",
+          "title": "Manage SubIDs",
+          "description": "Create and manage child identities under your namespace",
+          "tags": ["subid", "namespace", "identity"]
+        },
+        {
+          "path": "/how-to/setup-multisig/",
+          "title": "Setup Multisig",
+          "description": "Create a 2-of-3 multisig identity using VerusID",
+          "tags": ["multisig", "security", "identity"]
+        },
+        {
+          "path": "/how-to/revoke-recover-identity/",
+          "title": "Revoke and Recover Identity",
+          "description": "Disable a compromised identity and recover it with new keys",
+          "tags": ["revoke", "recover", "security", "identity"]
+        },
+        {
+          "path": "/how-to/backup-and-restore-wallet/",
+          "title": "Backup and Restore Wallet",
+          "description": "Protect your funds and identities with proper wallet backups",
+          "tags": ["backup", "restore", "wallet", "security"]
+        },
+        {
+          "path": "/how-to/create-marketplace-offer/",
+          "title": "Create Marketplace Offer",
+          "description": "Buy, sell, and trade using on-chain atomic swaps",
+          "tags": ["marketplace", "offer", "trade", "swap"]
+        }
+      ]
+    },
+    {
+      "id": "tutorials",
+      "title": "Tutorials",
+      "description": "End-to-end walkthroughs for complex workflows",
+      "pages": [
+        {
+          "path": "/tutorials/beginner-send-receive/",
+          "title": "Send and Receive VRSC (Beginner)",
+          "description": "Your first transactions on Verus from zero to sending coins",
+          "tags": ["beginner", "send", "receive", "tutorial"]
+        },
+        {
+          "path": "/tutorials/your-first-verusid/",
+          "title": "Your First VerusID",
+          "description": "Beginner-friendly walkthrough to registering a self-sovereign identity",
+          "tags": ["beginner", "verusid", "tutorial"]
+        },
+        {
+          "path": "/tutorials/launch-your-first-token/",
+          "title": "Launch Your First Token",
+          "description": "Create your own cryptocurrency token on testnet step by step",
+          "tags": ["beginner", "token", "testnet", "tutorial"]
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "title": "Troubleshooting",
+      "description": "Solutions to common issues with Verus",
+      "pages": [
+        {
+          "path": "/troubleshooting/sync-issues/",
+          "title": "Sync Issues",
+          "description": "Diagnosing and fixing blockchain synchronization problems",
+          "tags": ["sync", "blockchain", "troubleshooting"]
+        },
+        {
+          "path": "/troubleshooting/common-errors/",
+          "title": "Common Errors",
+          "description": "Quick reference for CLI error messages and how to fix them",
+          "tags": ["errors", "cli", "troubleshooting"]
+        },
+        {
+          "path": "/troubleshooting/identity-issues/",
+          "title": "Identity Issues",
+          "description": "Fixing problems with VerusID registration, updates, and management",
+          "tags": ["identity", "verusid", "troubleshooting"]
+        },
+        {
+          "path": "/troubleshooting/transaction-problems/",
+          "title": "Transaction Problems",
+          "description": "Fixing stuck, missing, or failed transactions",
+          "tags": ["transactions", "stuck", "troubleshooting"]
+        }
+      ]
+    },
+    {
+      "id": "developers",
+      "title": "Developers",
+      "description": "Build on Verus — RPC integration, API patterns, and development guides",
+      "pages": [
+        {
+          "path": "/developers/rpc-api-overview/",
+          "title": "RPC API Overview",
+          "description": "Connect to the Verus daemon and make API calls from any language",
+          "tags": ["rpc", "api", "developer"]
+        },
+        {
+          "path": "/developers/building-on-verus/",
+          "title": "Building on Verus",
+          "description": "What you can build on Verus and how the pieces fit together",
+          "tags": ["developer", "building", "architecture"]
+        },
+        {
+          "path": "/developers/integration-patterns/",
+          "title": "Integration Patterns",
+          "description": "Practical patterns for building applications on Verus",
+          "tags": ["integration", "patterns", "developer"]
+        },
+        {
+          "path": "/developers/testnet-guide/",
+          "title": "Testnet Guide",
+          "description": "Set up a Verus testnet node for safe development and testing",
+          "tags": ["testnet", "development", "testing"]
+        },
+        {
+          "path": "/developers/verusid-login-guide/",
+          "title": "VerusID Login Guide",
+          "description": "Implement passwordless authentication using VerusID signatures",
+          "tags": ["login", "authentication", "verusid", "developer"]
+        }
+      ]
+    },
+    {
+      "id": "for-agents",
+      "title": "For AI Agents",
+      "description": "AI agent integration — using the Verus CLI programmatically",
+      "pages": [
+        {
+          "path": "/for-agents/agent-bootstrap/",
+          "title": "Agent Bootstrap Guide",
+          "description": "Go from nothing to operational on Verus as an AI agent with shell access",
+          "tags": ["agent", "bootstrap", "setup"]
+        },
+        {
+          "path": "/for-agents/agent-cli-reference/",
+          "title": "Agent CLI Reference",
+          "description": "Essential Verus commands for AI agents organized by task",
+          "tags": ["agent", "cli", "reference", "commands"]
+        },
+        {
+          "path": "/for-agents/agent-identity/",
+          "title": "Agent Identity Management",
+          "description": "Create, update, and use your VerusID programmatically as an agent",
+          "tags": ["agent", "identity", "verusid"]
+        },
+        {
+          "path": "/for-agents/agent-economy/",
+          "title": "Agent Economy",
+          "description": "How to send, receive, and earn VRSC as an AI agent",
+          "tags": ["agent", "economy", "vrsc", "payments"]
+        },
+        {
+          "path": "/for-agents/agent-messaging/",
+          "title": "Agent Encrypted Messaging",
+          "description": "Send and receive encrypted, signed messages using Verus cryptographic primitives",
+          "tags": ["agent", "messaging", "encryption", "signing"]
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "title": "Research",
+      "description": "In-depth research documents and technical references",
+      "pages": [
+        {
+          "path": "/research/verus-eth-bridge-guide/",
+          "title": "Verus-Ethereum Bridge Guide",
+          "description": "How to bridge funds from Ethereum to Verus for agent bootstrapping",
+          "tags": ["bridge", "ethereum", "research"]
+        },
+        {
+          "path": "/research/verus-master-walkthrough/",
+          "title": "Verus Master Walkthrough",
+          "description": "Complete guide from zero to registered, discoverable, and operational",
+          "tags": ["walkthrough", "complete", "agent", "research"]
+        },
+        {
+          "path": "/research/verus-master-walkthrough-humans/",
+          "title": "Verus Master Walkthrough (Human-Readable)",
+          "description": "Plain-language version of the master agent walkthrough",
+          "tags": ["walkthrough", "human", "research"]
+        },
+        {
+          "path": "/research/verus-subid-creation-guide/",
+          "title": "SubID Creation Guide",
+          "description": "How to create and manage subIDs under your own namespace",
+          "tags": ["subid", "namespace", "research"]
+        },
+        {
+          "path": "/research/verus-agent-discovery-hiring-guide/",
+          "title": "Agent Discovery and Hiring Guide",
+          "description": "Finding agents on-chain and executing the hiring flow",
+          "tags": ["agent", "discovery", "hiring", "research"]
+        },
+        {
+          "path": "/research/verus-agent-discovery-hiring-guide-humans/",
+          "title": "Agent Discovery and Hiring (Human-Readable)",
+          "description": "Plain-English guide to the agent marketplace",
+          "tags": ["agent", "discovery", "human", "research"]
+        },
+        {
+          "path": "/research/verus-agent-registry-schema/",
+          "title": "Agent Registry Schema",
+          "description": "How agents store and discover data on-chain using VDXF naming conventions",
+          "tags": ["agent", "registry", "schema", "vdxf"]
+        },
+        {
+          "path": "/research/verus-token-economics-agent-economy/",
+          "title": "Token Economics and Agent Economy",
+          "description": "Research on how AI agents could build their own economy on Verus",
+          "tags": ["economics", "agent", "tokens", "research"]
+        },
+        {
+          "path": "/research/verus-token-economics-agent-economy-humans/",
+          "title": "Token Economics (Human-Readable)",
+          "description": "Plain-language guide to AI agents building an economy on Verus",
+          "tags": ["economics", "human", "research"]
+        }
+      ]
+    },
+    {
+      "id": "verus-facts",
+      "title": "Quick Facts",
+      "description": "Protocol statistics, comparisons, and key facts about Verus",
+      "pages": [
+        {
+          "path": "/verus-facts/",
+          "title": "Verus Facts and Statistics",
+          "description": "Protocol stats, key differentiators, comparison tables, fee structure, consensus details",
+          "tags": ["facts", "statistics", "comparison"]
+        }
+      ]
+    },
+    {
+      "id": "faq",
+      "title": "FAQ",
+      "description": "Frequently asked questions about Verus in answer-first format",
+      "pages": [
+        {
+          "path": "/faq/general/",
+          "title": "General FAQ",
+          "description": "What is Verus, how is it different, is it a fork of Zcash",
+          "tags": ["faq", "general", "overview"]
+        },
+        {
+          "path": "/faq/identity/",
+          "title": "Identity FAQ",
+          "description": "VerusID cost, features, recovery, and use cases",
+          "tags": ["faq", "identity", "verusid"]
+        },
+        {
+          "path": "/faq/defi/",
+          "title": "DeFi FAQ",
+          "description": "Basket currencies, AMM, MEV resistance, protocol-level DeFi",
+          "tags": ["faq", "defi", "basket", "amm"]
+        },
+        {
+          "path": "/faq/mining-staking/",
+          "title": "Mining and Staking FAQ",
+          "description": "VerusHash, CPU mining, staking requirements, rewards",
+          "tags": ["faq", "mining", "staking", "verushash"]
+        }
+      ]
+    }
+  ],
+  "quickFacts": {
+    "nativeCurrency": "VRSC",
+    "consensus": "50/50 Proof of Work / Proof of Stake hybrid",
+    "miningAlgorithm": "VerusHash 2.2 (CPU-optimized)",
+    "blockTime": "~60 seconds",
+    "totalCLICommands": 201,
+    "commandCategories": 14,
+    "identitySystem": "VerusID — self-sovereign, revocable, recoverable, on-chain",
+    "privacyTechnology": "Sapling zero-knowledge proofs (zk-SNARKs)",
+    "smartContracts": "No — DeFi is protocol-level, not smart contract based",
+    "ethereumBridge": "Trustless, decentralized bridge to Ethereum",
+    "multiChain": "PBaaS — Public Blockchains as a Service",
+    "transactionFees": "0.0001 VRSC per transaction (fractions of a cent)",
+    "launched": "2018 (fair launch, no ICO, no premine)",
+    "website": "https://verus.io",
+    "discord": "https://discord.gg/veruscoin",
+    "github": "https://github.com/VerusCoin",
+    "explorer": "https://explorer.verus.io"
+  }
+}
