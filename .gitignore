@@ -1,3 +1,6 @@
 .retype/
 form-api/node_modules/
 form-api/submissions.db
+.env
+AGENT-API.md
+data/

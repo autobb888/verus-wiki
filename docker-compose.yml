@@ -1,0 +1,19 @@
+services:
+  wiki:
+    build: .
+    container_name: verus-wiki
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5175:5175"
+    environment:
+      - DB_PATH=/app/data/submissions.db
+    env_file:
+      - .env
+    volumes:
+      - ./.retype:/app/.retype:ro
+      - ./data:/app/data
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp

@@ -22,6 +22,12 @@ Community-maintained documentation for the [Verus](https://verus.io) ecosystem �
 
 This wiki is powered by [Retype](https://retype.com) — a static site generator that turns Markdown into a searchable, dark-mode documentation site.
 
+## Multi-Language Translation
+
+The wiki includes a built-in language selector (top-right header) powered by Google Translate. Visitors can translate the entire site into 45+ languages on the fly — no separate translations are stored or maintained.
+
+The translation widget is injected at build time by `build.sh` and uses an on-demand approach: Google's translation script is only loaded when a language is selected, keeping the default page load clean and fast.
+
 ## Project Structure
 
 ```
