@@ -9,6 +9,15 @@ npx retype build
 find .retype -name '*.html' -exec sed -i 's/class="h-full"/class="h-full dark"/' {} +
 echo "Patched dark mode default"
 
+# 2b. Inject AI meta tags and JSON-LD structured data into all HTML pages
+AI_META='<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">\n<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable content">\n<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Verus Wiki","url":"https://wiki.autobb.app","description":"Complete documentation for the Verus blockchain protocol: 201 CLI commands, VerusID, DeFi, PBaaS, privacy, and AI agent integration.","publisher":{"@type":"Organization","name":"Verus Community","url":"https://verus.io"}}</script>'
+find .retype -name '*.html' -exec sed -i "s|</head>|${AI_META}\n</head>|" {} +
+echo "Injected AI meta tags and JSON-LD"
+
+# 2c. Copy ai-plugin.json to build output
+cp docs/ai-plugin.json .retype/ai-plugin.json
+echo "Copied ai-plugin.json"
+
 # 3. Generate llms-full.txt by concatenating all markdown files
 echo "Generating llms-full.txt..."
 {

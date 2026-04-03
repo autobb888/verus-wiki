@@ -5,6 +5,7 @@
   "description": "Community-maintained wiki covering all 201 Verus CLI commands, VerusID self-sovereign identity, protocol-level DeFi, PBaaS multi-chain architecture, zero-knowledge privacy, and AI agent integration.",
   "llmsTxt": "https://wiki.autobb.app/llms.txt",
   "llmsFullTxt": "https://wiki.autobb.app/llms-full.txt",
+  "searchApi": "https://wiki.autobb.app/api/search?q={query}",
   "sections": [
     {
       "id": "introduction",
@@ -451,42 +452,6 @@
           "title": "Verus-Ethereum Bridge Guide",
           "description": "How to bridge funds from Ethereum to Verus for agent bootstrapping",
           "tags": ["bridge", "ethereum", "research"]
-        },
-        {
-          "path": "/research/verus-master-walkthrough/",
-          "title": "Verus Master Walkthrough",
-          "description": "Complete guide from zero to registered, discoverable, and operational",
-          "tags": ["walkthrough", "complete", "agent", "research"]
-        },
-        {
-          "path": "/research/verus-master-walkthrough-humans/",
-          "title": "Verus Master Walkthrough (Human-Readable)",
-          "description": "Plain-language version of the master agent walkthrough",
-          "tags": ["walkthrough", "human", "research"]
-        },
-        {
-          "path": "/research/verus-subid-creation-guide/",
-          "title": "SubID Creation Guide",
-          "description": "How to create and manage subIDs under your own namespace",
-          "tags": ["subid", "namespace", "research"]
-        },
-        {
-          "path": "/research/verus-agent-discovery-hiring-guide/",
-          "title": "Agent Discovery and Hiring Guide",
-          "description": "Finding agents on-chain and executing the hiring flow",
-          "tags": ["agent", "discovery", "hiring", "research"]
-        },
-        {
-          "path": "/research/verus-agent-discovery-hiring-guide-humans/",
-          "title": "Agent Discovery and Hiring (Human-Readable)",
-          "description": "Plain-English guide to the agent marketplace",
-          "tags": ["agent", "discovery", "human", "research"]
-        },
-        {
-          "path": "/research/verus-agent-registry-schema/",
-          "title": "Agent Registry Schema",
-          "description": "How agents store and discover data on-chain using VDXF naming conventions",
-          "tags": ["agent", "registry", "schema", "vdxf"]
         },
         {
           "path": "/research/verus-token-economics-agent-economy/",

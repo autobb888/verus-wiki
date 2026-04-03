@@ -31,7 +31,14 @@ const MIME = {
   '.ttf':  'font/ttf',
   '.txt':  'text/plain',
   '.xml':  'application/xml',
+  '.gz':   'application/gzip',
   '.webmanifest': 'application/manifest+json',
+};
+
+// .well-known redirects for AI/bot discovery
+const WELL_KNOWN = {
+  '/.well-known/llms.txt':      '/llms.txt',
+  '/.well-known/ai-plugin.json': '/ai-plugin.json',
 };
 
 function proxyToApi(req, res) {
@@ -74,7 +81,10 @@ function serveStatic(req, res) {
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
       const ext  = path.extname(filePath).toLowerCase();
       const mime = MIME[ext] || 'application/octet-stream';
-      res.writeHead(200, { 'Content-Type': mime });
+      res.writeHead(200, {
+        'Content-Type': mime,
+        'X-Robots-Tag': 'index, follow',
+      });
       fs.createReadStream(filePath).pipe(res);
       return;
     }
@@ -92,8 +102,13 @@ function serveStatic(req, res) {
 }
 
 const server = http.createServer((req, res) => {
-  if (req.url.startsWith('/api/')) {
+  const urlPath = req.url.split('?')[0];
+
+  if (urlPath.startsWith('/api/')) {
     proxyToApi(req, res);
+  } else if (WELL_KNOWN[urlPath]) {
+    res.writeHead(302, { Location: WELL_KNOWN[urlPath] });
+    res.end();
   } else {
     serveStatic(req, res);
   }

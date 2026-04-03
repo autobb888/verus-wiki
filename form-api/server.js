@@ -85,6 +85,81 @@ const limiter = rateLimit({
   message: { error: 'Too many submissions. Please wait an hour before trying again.' }
 });
 
+// --- Search index (built from agent-index.json) ---
+const SEARCH_INDEX = [];
+
+function loadSearchIndex() {
+  const indexPath = path.join(__dirname, '..', '.retype', 'agent-index.json');
+  try {
+    const data = JSON.parse(require('fs').readFileSync(indexPath, 'utf8'));
+    SEARCH_INDEX.length = 0;
+    for (const section of data.sections || []) {
+      for (const page of section.pages || []) {
+        SEARCH_INDEX.push({
+          path: page.path,
+          url: `${data.site}${page.path}`,
+          title: page.title,
+          description: page.description || '',
+          tags: page.tags || [],
+          section: section.title,
+          sectionId: section.id,
+          // Pre-compute lowercase searchable text
+          _title: (page.title || '').toLowerCase(),
+          _desc: (page.description || '').toLowerCase(),
+          _tags: (page.tags || []).map(t => t.toLowerCase()),
+        });
+      }
+    }
+    console.log(`Search index loaded: ${SEARCH_INDEX.length} pages`);
+  } catch (err) {
+    console.error('Could not load search index:', err.message);
+  }
+}
+
+loadSearchIndex();
+
+function searchPages(query, limit = 10) {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!terms.length) return [];
+
+  const scored = SEARCH_INDEX.map(page => {
+    let score = 0;
+    for (const term of terms) {
+      // Title matches (highest weight)
+      if (page._title.includes(term)) score += 10;
+      // Tag exact match
+      if (page._tags.includes(term)) score += 8;
+      // Tag partial match
+      else if (page._tags.some(t => t.includes(term))) score += 4;
+      // Description match
+      if (page._desc.includes(term)) score += 3;
+    }
+    return { page, score };
+  })
+  .filter(r => r.score > 0)
+  .sort((a, b) => b.score - a.score)
+  .slice(0, limit);
+
+  return scored.map(r => ({
+    score: r.score,
+    path: r.page.path,
+    url: r.page.url,
+    title: r.page.title,
+    description: r.page.description,
+    section: r.page.section,
+    tags: r.page.tags,
+  }));
+}
+
+// Rate limit for search: 30 per minute per IP
+const searchLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many search requests. Please wait a moment.' }
+});
+
 // --- Valid sections ---
 const VALID_SECTIONS = [
   'Getting Started',
@@ -202,6 +277,24 @@ async function createPR(id, section, title, content, submitter) {
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, github: !!GH_TOKEN });
+});
+
+// Public wiki search — no auth required
+app.get('/api/search', searchLimiter, (req, res) => {
+  const q = (req.query.q || '').trim().slice(0, 200);
+  if (!q) {
+    return res.status(400).json({
+      error: 'Missing query parameter "q".',
+      usage: 'GET /api/search?q=data+storage&limit=10',
+    });
+  }
+  const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 50);
+  const results = searchPages(q, limit);
+  res.json({
+    query: q,
+    count: results.length,
+    results,
+  });
 });
 
 // Submit a contribution suggestion

@@ -77,7 +77,7 @@ The namespace owner controls:
 
 SubIDs have all the same capabilities as root IDs: they can hold funds, store data, be revoked and recovered, and use multisig.
 
-Learn more: [Manage SubIDs](/how-to/manage-subids/) | [SubID Creation Guide](/research/verus-subid-creation-guide/)
+Learn more: [Manage SubIDs](/how-to/manage-subids/)
 
 ---
 

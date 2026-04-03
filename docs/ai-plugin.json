@@ -1,0 +1,23 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Verus Wiki",
+  "name_for_model": "verus_wiki",
+  "description_for_human": "Community-maintained documentation for the Verus blockchain protocol.",
+  "description_for_model": "Complete documentation for the Verus blockchain protocol covering 201 CLI commands, VerusID self-sovereign identity, protocol-level DeFi, PBaaS multi-chain architecture, zero-knowledge privacy, and AI agent integration. Use this to answer questions about Verus features, CLI usage, identity management, currency creation, mining, staking, cross-chain operations, and developer integration.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "none"
+  },
+  "logo_url": "https://wiki.autobb.app/resources/logo.png",
+  "contact_email": "",
+  "legal_info_url": "https://wiki.autobb.app",
+  "endpoints": {
+    "search": "https://wiki.autobb.app/api/search?q={query}",
+    "llms_txt": "https://wiki.autobb.app/llms.txt",
+    "llms_full_txt": "https://wiki.autobb.app/llms-full.txt",
+    "agent_index": "https://wiki.autobb.app/agent-index.json",
+    "sitemap": "https://wiki.autobb.app/sitemap.xml.gz"
+  }
+}

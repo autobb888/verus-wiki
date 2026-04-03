@@ -1,6 +1,6 @@
 {
   "version": "4.1.0",
-  "created": "2026-03-09T16:57:29Z",
+  "created": "2026-04-03T16:22:43Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -10,6 +10,9 @@
     },
     {
       "path": "agent-index.json"
+    },
+    {
+      "path": "ai-plugin.json"
     },
     {
       "path": "CNAME"
@@ -293,25 +296,31 @@
       "path": "llms.txt"
     },
     {
-      "path": "research/verus-agent-discovery-hiring-guide-humans/index.html"
+      "path": "research/verus-agent-discovery-hiring-guide-humans/index.html",
+      "old": true
     },
     {
-      "path": "research/verus-agent-discovery-hiring-guide/index.html"
+      "path": "research/verus-agent-discovery-hiring-guide/index.html",
+      "old": true
     },
     {
-      "path": "research/verus-agent-registry-schema/index.html"
+      "path": "research/verus-agent-registry-schema/index.html",
+      "old": true
     },
     {
       "path": "research/verus-eth-bridge-guide/index.html"
     },
     {
-      "path": "research/verus-master-walkthrough-humans/index.html"
+      "path": "research/verus-master-walkthrough-humans/index.html",
+      "old": true
     },
     {
-      "path": "research/verus-master-walkthrough/index.html"
+      "path": "research/verus-master-walkthrough/index.html",
+      "old": true
     },
     {
-      "path": "research/verus-subid-creation-guide/index.html"
+      "path": "research/verus-subid-creation-guide/index.html",
+      "old": true
     },
     {
       "path": "research/verus-token-economics-agent-economy-humans/index.html"
