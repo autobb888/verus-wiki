@@ -478,14 +478,102 @@ This enables hybrid on-chain/off-chain storage: store the hash on-chain, data of
 
 The `GetAggregatedIdentityMultimap` function supports these operations via `ContentMultiMapRemoveKey`:
 
-| Operation | Effect |
-|-----------|--------|
-| `ACTION_CLEAR_MAP` | Clear all entries |
-| `ACTION_REMOVE_ALL_KEY` | Remove all values for a specific VDXF key |
-| `ACTION_REMOVE_ONE_KEYVALUE` | Remove one specific value (by hash) |
-| `ACTION_REMOVE_ALL_KEYVALUE` | Remove all matching values (by hash) |
+| Action | Operation | Effect |
+|--------|-----------|--------|
+| 1 | `ACTION_REMOVE_ONE_KEYVALUE` | Remove one specific value under a key (by hash) |
+| 2 | `ACTION_REMOVE_ALL_KEYVALUE` | Remove all values matching a hash under a key |
+| 3 | `ACTION_REMOVE_ALL_KEY` | Remove a VDXF key and all its values |
+| 4 | `ACTION_CLEAR_MAP` | Clear all entries from the map |
 
 This means you can update and delete on-chain data — the aggregation system processes these operations in block order.
+
+Pass `contentmultimapremove` as a field in the `updateidentity` JSON. It is processed **before** any `contentmultimap` additions in the same transaction, so you can atomically remove old values and write new ones in a single call.
+
+### Action 3: Remove Entire Key
+
+Removes a VDXF key and all its values from the contentmultimap.
+
+```bash
+verus updateidentity '{
+  "name": "myidentity",
+  "contentmultimapremove": {
+    "version": 1,
+    "action": 3,
+    "entrykey": "iLy373iaKafmRCY43ahty4m8aLQx32y8Fh"
+  }
+}'
+```
+
+### Action 4: Clear Entire Map
+
+Wipes all entries from the contentmultimap. Useful for schema migrations.
+
+```bash
+verus updateidentity '{
+  "name": "myidentity",
+  "contentmultimapremove": {
+    "version": 1,
+    "action": 4
+  }
+}'
+```
+
+### Action 1: Remove One Value by Hash
+
+Removes a single value under a key, identified by its hash.
+
+```bash
+verus updateidentity '{
+  "name": "myidentity",
+  "contentmultimapremove": {
+    "version": 1,
+    "action": 1,
+    "entrykey": "iLy373iaKafmRCY43ahty4m8aLQx32y8Fh",
+    "valuehash": "<hex_hash_of_value>"
+  }
+}'
+```
+
+### Action 2: Remove All Values Matching Hash
+
+Same as action 1 but removes **all** values matching the hash under the key (useful if the same value was written multiple times).
+
+### JSON Format Reference
+
+```
+contentmultimapremove {
+  version: 1              // Always 1
+  action: 1 | 2 | 3 | 4
+  entrykey?: string       // Required for actions 1–3 (VDXF i-address)
+  valuehash?: string      // Required for actions 1–2 (hex hash of value)
+}
+```
+
+### Key Findings from Testing
+
+1. **`updateidentity` appends — it does NOT replace.** To update a value, you must first remove the old one with `contentmultimapremove`, then write the new value. A plain `updateidentity` adds entries on top of existing ones.
+
+2. **Atomic remove + write.** `contentmultimapremove` and `contentmultimap` can be in the same `updateidentity` call. The remove is processed first.
+
+3. **Action 4 (clear) confirmed on VRSCTEST** — cleared an identity with 8 parent group keys and re-wrote 25 flat entries successfully.
+
+4. **Action 3 (remove key) confirmed on VRSCTEST** — individual VDXF keys removed cleanly.
+
+5. **`getidentitycontent` still shows history after removal** — `contentmultimapremove` only affects the current aggregated state (visible via `getidentity`). Historical entries remain in `getidentitycontent`.
+
+6. **`returntx=true` for dry runs** — pass `true` as the second argument to `updateidentity` to get a signed raw transaction without broadcasting it.
+
+### Practical Use Case: Schema Migration
+
+```bash
+# Phase 1: Clear everything (atomic — also writes new format in same tx if desired)
+verus updateidentity '{"name":"myid","contentmultimapremove":{"version":1,"action":4}}'
+
+# Wait for confirmation (~60s)
+
+# Phase 2: Write new format
+verus updateidentity '{"name":"myid","contentmultimap":{"iAddr1":["hexvalue1"],"iAddr2":["hexvalue2"]}}'
+```
 
 ## Encryption
 
@@ -645,6 +733,7 @@ Each `updateidentity` creates a new version. Using `getidentitycontent` with hei
 | `Reassemble constructor` | `src/primitives/block.cpp` | 851 |
 | `CMMRDescriptor` | `src/pbaas/vdxf.h` | 1391 |
 | `CDataDescriptor` | `src/pbaas/vdxf.h` / `vdxf.cpp` | 697+ |
+| `ContentMultiMapRemove` | `src/pbaas/identity.cpp` (daemon), `src/pbaas/ContentMultiMapRemove.ts` (TS) | — |
 | `GetAggregatedIdentityMultimap` | `src/pbaas/identity.cpp` | 454 |
 | `signdata` | `src/wallet/rpcwallet.cpp` | 1231 |
 | `updateidentity` (chunking trigger) | `src/rpc/pbaasrpc.cpp` | 16186 |
