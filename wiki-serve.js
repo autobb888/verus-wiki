@@ -29,7 +29,7 @@ const SECURITY_HEADERS = {
   'X-Frame-Options': 'DENY',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' translate.google.com translate.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: translate.google.com; frame-src 'none'; object-src 'none'; base-uri 'self'",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' translate.google.com translate.googleapis.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: translate.google.com www.google.com translate.googleapis.com; connect-src 'self' translate.googleapis.com; frame-src translate.google.com; object-src 'none'; base-uri 'self'",
   'Strict-Transport-Security': 'max-age=63072000; includeSubDomains',
   'Server': 'verus-wiki',
 };
