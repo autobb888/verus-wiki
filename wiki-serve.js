@@ -89,8 +89,10 @@ function proxyToApi(req, res) {
   });
 
   proxy.on('error', () => {
-    res.writeHead(502, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ error: 'API unavailable' }));
+    if (!res.headersSent) {
+      res.writeHead(502, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'API unavailable' }));
+    }
   });
 
   // Enforce body size limit
