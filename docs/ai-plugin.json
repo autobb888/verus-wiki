@@ -8,16 +8,10 @@
     "type": "none"
   },
   "api": {
-    "type": "none"
+    "type": "openapi",
+    "url": "https://wiki.autobb.app/openapi.yaml"
   },
   "logo_url": "https://wiki.autobb.app/resources/logo.png",
   "contact_email": "",
-  "legal_info_url": "https://wiki.autobb.app",
-  "endpoints": {
-    "search": "https://wiki.autobb.app/api/search?q={query}",
-    "llms_txt": "https://wiki.autobb.app/llms.txt",
-    "llms_full_txt": "https://wiki.autobb.app/llms-full.txt",
-    "agent_index": "https://wiki.autobb.app/agent-index.json",
-    "sitemap": "https://wiki.autobb.app/sitemap.xml.gz"
-  }
+  "legal_info_url": "https://wiki.autobb.app"
 }

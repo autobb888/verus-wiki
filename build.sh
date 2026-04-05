@@ -14,9 +14,10 @@ AI_META='<meta name="robots" content="index, follow, max-snippet:-1, max-image-p
 find .retype -name '*.html' -exec sed -i "s|</head>|${AI_META}\n</head>|" {} +
 echo "Injected AI meta tags and JSON-LD"
 
-# 2c. Copy ai-plugin.json to build output
+# 2c. Copy ai-plugin.json and openapi.yaml to build output
 cp docs/ai-plugin.json .retype/ai-plugin.json
-echo "Copied ai-plugin.json"
+cp docs/openapi.yaml .retype/openapi.yaml
+echo "Copied ai-plugin.json and openapi.yaml"
 
 # 3. Generate llms-full.txt by concatenating all markdown files
 echo "Generating llms-full.txt..."

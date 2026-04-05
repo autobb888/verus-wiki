@@ -10,8 +10,9 @@ ExecStart=/usr/bin/node server.js
 Restart=on-failure
 RestartSec=5
 
-# Set your admin token here (generate with: openssl rand -hex 32)
-Environment=ADMIN_TOKEN=750dc544fa7ce79c77cb79bd24d3ad9ef6b4677f9e586f3df1f44c9fd83a19db
+# Set your admin token via .env or systemd override: systemctl edit verus-wiki-api
+# Generate one with: openssl rand -base64 32
+# Environment=ADMIN_TOKEN=<your-token-here>
 Environment=PORT=3737
 
 [Install]

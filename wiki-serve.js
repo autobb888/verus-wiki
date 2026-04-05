@@ -15,7 +15,24 @@ const path = require('path');
 
 const PORT      = parseInt(process.env.PORT || process.argv[2] || '5175', 10);
 const API_PORT  = 3737;
-const STATIC    = path.join(__dirname, '.retype');
+const STATIC    = path.resolve(__dirname, '.retype');
+const MAX_PROXY_BODY = 1 * 1024 * 1024; // 1 MB
+
+// Hop-by-hop headers that must not be forwarded to the backend
+const HOP_BY_HOP = new Set([
+  'connection', 'keep-alive', 'proxy-authenticate', 'proxy-authorization',
+  'te', 'trailers', 'transfer-encoding', 'upgrade',
+]);
+
+const SECURITY_HEADERS = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' translate.google.com translate.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: translate.google.com; frame-src 'none'; object-src 'none'; base-uri 'self'",
+  'Strict-Transport-Security': 'max-age=63072000; includeSubDomains',
+  'Server': 'verus-wiki',
+};
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -30,6 +47,8 @@ const MIME = {
   '.woff2':'font/woff2',
   '.ttf':  'font/ttf',
   '.txt':  'text/plain',
+  '.yaml': 'text/yaml',
+  '.yml':  'text/yaml',
   '.xml':  'application/xml',
   '.gz':   'application/gzip',
   '.webmanifest': 'application/manifest+json',
@@ -42,32 +61,61 @@ const WELL_KNOWN = {
 };
 
 function proxyToApi(req, res) {
+  // Filter headers: only forward safe ones, strip hop-by-hop
+  const fwdHeaders = {};
+  for (const [key, val] of Object.entries(req.headers)) {
+    if (!HOP_BY_HOP.has(key.toLowerCase())) {
+      fwdHeaders[key] = val;
+    }
+  }
+  fwdHeaders['host'] = `127.0.0.1:${API_PORT}`;
+  fwdHeaders['x-forwarded-for'] = req.socket.remoteAddress;
+
   const opts = {
     hostname: '127.0.0.1',
     port:     API_PORT,
     path:     req.url,
     method:   req.method,
-    headers:  {
-      ...req.headers,
-      host: `127.0.0.1:${API_PORT}`,
-      'x-forwarded-for': req.socket.remoteAddress,
-    },
+    headers:  fwdHeaders,
   };
 
   const proxy = http.request(opts, (apiRes) => {
+    // Add security headers to proxied responses too
+    for (const [h, v] of Object.entries(SECURITY_HEADERS)) {
+      apiRes.headers[h.toLowerCase()] = v;
+    }
     res.writeHead(apiRes.statusCode, apiRes.headers);
     apiRes.pipe(res);
   });
 
   proxy.on('error', () => {
-    res.writeHead(502);
+    res.writeHead(502, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: 'API unavailable' }));
   });
 
+  // Enforce body size limit
+  let received = 0;
+  req.on('data', (chunk) => {
+    received += chunk.length;
+    if (received > MAX_PROXY_BODY) {
+      proxy.destroy();
+      if (!res.headersSent) {
+        res.writeHead(413, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Request body too large' }));
+      }
+    }
+  });
   req.pipe(proxy);
 }
 
 function serveStatic(req, res) {
+  // Reject non-GET/HEAD methods on static routes
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.writeHead(405, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain' });
+    res.end('Method Not Allowed');
+    return;
+  }
+
   let urlPath = req.url.split('?')[0];
 
   // Retype uses trailing-slash directories → index.html
@@ -77,11 +125,18 @@ function serveStatic(req, res) {
     path.join(STATIC, urlPath.replace(/\/$/, ''), 'index.html'),
   ];
 
-  for (const filePath of candidates) {
+  for (const candidate of candidates) {
+    // Resolve to absolute and verify it stays within STATIC (path traversal protection)
+    const filePath = path.resolve(candidate);
+    if (!filePath.startsWith(STATIC + path.sep) && filePath !== STATIC) {
+      break; // Escape attempt — fall through to 404
+    }
+
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
       const ext  = path.extname(filePath).toLowerCase();
       const mime = MIME[ext] || 'application/octet-stream';
       res.writeHead(200, {
+        ...SECURITY_HEADERS,
         'Content-Type': mime,
         'X-Robots-Tag': 'index, follow',
       });
@@ -93,10 +148,10 @@ function serveStatic(req, res) {
   // 404 fallback
   const notFound = path.join(STATIC, '404.html');
   if (fs.existsSync(notFound)) {
-    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.writeHead(404, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8' });
     fs.createReadStream(notFound).pipe(res);
   } else {
-    res.writeHead(404);
+    res.writeHead(404, SECURITY_HEADERS);
     res.end('Not found');
   }
 }

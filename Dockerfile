@@ -15,6 +15,6 @@ RUN groupadd -g 1001 wiki && useradd -u 1001 -g wiki -s /bin/sh wiki
 RUN mkdir -p /app/.retype /app/form-api /app/data && chown -R wiki:wiki /app
 USER wiki
 
-EXPOSE 5175 3737
+EXPOSE 5175
 
 CMD sh -c "node wiki-serve.js 5175 & node form-api/server.js & wait"

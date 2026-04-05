@@ -8,6 +8,9 @@ const path = require('path');
 
 const app = express();
 
+app.disable('x-powered-by');
+app.set('trust proxy', 1);
+
 const PORT       = process.env.PORT        || 3737;
 const GH_TOKEN   = process.env.GH_TOKEN   || '';
 const GH_OWNER   = process.env.GH_OWNER   || 'autobb888';
@@ -23,6 +26,15 @@ const AGENT_API_KEYS = new Map(
     return token ? [token, label] : [label, 'unknown'];
   })
 );
+
+// Timing-safe token comparison to prevent timing attacks
+function safeCompare(a, b) {
+  if (!a || !b) return false;
+  const ba = Buffer.from(String(a));
+  const bb = Buffer.from(String(b));
+  if (ba.length !== bb.length) return false;
+  return crypto.timingSafeEqual(ba, bb);
+}
 
 // --- Database setup ---
 const db = new Database(DB_PATH);
@@ -244,18 +256,22 @@ async function createPR(id, section, title, content, submitter) {
   if (fileRes.status !== 201) throw new Error(`File creation failed: ${JSON.stringify(fileRes.body)}`);
 
   // 4. Open the PR — mention @claude so it auto-reviews
+  // Escape user content in fenced blocks to prevent markdown/prompt injection
+  const safeSubmitter = (submitter || 'Anonymous').replace(/@/g, '@ ');
   const prBody = [
     `A community member suggested a wiki update via the [Suggest an Edit](https://wiki.autobb.app/contribute/suggest-edit/) form.`,
     '',
-    `**Section:** ${section}`,
-    `**Title:** ${title}`,
-    `**Submitted by:** ${submitter || 'Anonymous'}`,
+    `**Section:** \`${section}\``,
+    `**Title:** \`${title}\``,
+    `**Submitted by:** \`${safeSubmitter}\``,
     '',
     '---',
     '',
     '## Suggested content',
     '',
+    '````markdown',
     content,
+    '````',
     '',
     '---',
     '',
@@ -288,7 +304,7 @@ app.get('/api/search', searchLimiter, (req, res) => {
       usage: 'GET /api/search?q=data+storage&limit=10',
     });
   }
-  const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 50);
+  const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 10, 1), 50);
   const results = searchPages(q, limit);
   res.json({
     query: q,
@@ -344,23 +360,25 @@ app.post('/api/submit', limiter, async (req, res) => {
 
 // List submissions (admin)
 app.get('/api/submissions', (req, res) => {
-  const token = req.headers['x-admin-token'] || req.query.token;
-  if (!token || token !== process.env.ADMIN_TOKEN) {
+  const token = req.headers['x-admin-token'];
+  if (!safeCompare(token, process.env.ADMIN_TOKEN)) {
     return res.status(403).json({ error: 'Forbidden.' });
   }
 
   const status = req.query.status || 'pending';
+  const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
+  const offset = Math.max(parseInt(req.query.offset, 10) || 0, 0);
   const rows = status === 'all'
-    ? db.prepare('SELECT * FROM submissions ORDER BY created_at DESC').all()
-    : db.prepare('SELECT * FROM submissions WHERE status = ? ORDER BY created_at DESC').all(status);
+    ? db.prepare('SELECT * FROM submissions ORDER BY created_at DESC LIMIT ? OFFSET ?').all(limit, offset)
+    : db.prepare('SELECT * FROM submissions WHERE status = ? ORDER BY created_at DESC LIMIT ? OFFSET ?').all(status, limit, offset);
 
   res.json(rows);
 });
 
 // Mark a submission reviewed
 app.post('/api/submissions/:id/review', (req, res) => {
-  const token = req.headers['x-admin-token'] || req.query.token;
-  if (!token || token !== process.env.ADMIN_TOKEN) {
+  const token = req.headers['x-admin-token'];
+  if (!safeCompare(token, process.env.ADMIN_TOKEN)) {
     return res.status(403).json({ error: 'Forbidden.' });
   }
 
@@ -488,13 +506,14 @@ app.post('/api/agent/submit', agentAuth, agentLimiter, async (req, res) => {
     res.json({ ok: true, id, pr_url: prUrl });
   } catch (err) {
     console.error(`[agent #${id}] PR creation failed:`, err.message);
-    res.status(502).json({ ok: false, id, error: 'Submission saved but PR creation failed.', detail: err.message });
+    res.status(502).json({ ok: false, id, error: 'Submission saved but PR creation failed.' });
   }
 });
 
 async function createAgentPR(id, agentLabel, action, filePath, title, content, summary) {
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50);
-  const branch = `agent/${agentLabel}/${id}-${slug}`;
+  const safeLabel = agentLabel.toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+  const branch = `agent/${safeLabel}/${id}-${slug}`;
 
   // 1. Get base branch SHA
   const ref = await ghApi('GET', `/git/ref/heads/${GH_BASE}`);
@@ -557,8 +576,8 @@ async function createAgentPR(id, agentLabel, action, filePath, title, content, s
 
 // Generate a new agent API key (admin only)
 app.post('/api/agent/generate-key', (req, res) => {
-  const token = req.headers['x-admin-token'] || req.query.token;
-  if (!token || token !== process.env.ADMIN_TOKEN) {
+  const token = req.headers['x-admin-token'];
+  if (!safeCompare(token, process.env.ADMIN_TOKEN)) {
     return res.status(403).json({ error: 'Forbidden.' });
   }
 
@@ -578,17 +597,34 @@ app.post('/api/agent/generate-key', (req, res) => {
 
 // List agent submissions (admin)
 app.get('/api/agent/submissions', (req, res) => {
-  const token = req.headers['x-admin-token'] || req.query.token;
-  if (!token || token !== process.env.ADMIN_TOKEN) {
+  const token = req.headers['x-admin-token'];
+  if (!safeCompare(token, process.env.ADMIN_TOKEN)) {
     return res.status(403).json({ error: 'Forbidden.' });
   }
 
   const status = req.query.status || 'all';
+  const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
+  const offset = Math.max(parseInt(req.query.offset, 10) || 0, 0);
   const rows = status === 'all'
-    ? db.prepare('SELECT * FROM agent_submissions ORDER BY created_at DESC').all()
-    : db.prepare('SELECT * FROM agent_submissions WHERE status = ? ORDER BY created_at DESC').all(status);
+    ? db.prepare('SELECT * FROM agent_submissions ORDER BY created_at DESC LIMIT ? OFFSET ?').all(limit, offset)
+    : db.prepare('SELECT * FROM agent_submissions WHERE status = ? ORDER BY created_at DESC LIMIT ? OFFSET ?').all(status, limit, offset);
 
   res.json(rows);
+});
+
+// Catch-all 404 for /api routes (suppress default Express error page)
+app.use('/api', (req, res) => {
+  res.status(404).json({ error: 'Not found.' });
+});
+
+// Global error handler — never leak stack traces
+app.use((err, req, res, _next) => {
+  if (err.message && err.message.includes('Not allowed by CORS')) {
+    res.status(403).json({ error: 'Forbidden.' });
+  } else {
+    console.error('Unhandled error:', err.message);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
 });
 
 app.listen(PORT, '127.0.0.1', () => {

@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: Verus Wiki API
+  description: Search the Verus blockchain protocol documentation — 201 CLI commands, VerusID, DeFi, PBaaS, privacy, and AI agent integration.
+  version: 1.0.0
+servers:
+  - url: https://wiki.autobb.app
+paths:
+  /api/search:
+    get:
+      operationId: searchDocs
+      summary: Search Verus Wiki documentation
+      description: Returns ranked documentation pages matching the query. Covers CLI commands, VerusID, DeFi, mining, staking, cross-chain operations, and developer guides.
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query string
+      responses:
+        "200":
+          description: Search results ranked by relevance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: string
+                    description: The search query that was executed
+                  count:
+                    type: integer
+                    description: Number of results returned
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        score:
+                          type: integer
+                          description: Relevance score (higher is better)
+                        path:
+                          type: string
+                          description: URL path on the wiki
+                        url:
+                          type: string
+                          description: Full URL to the page
+                        title:
+                          type: string
+                          description: Page title
+                        description:
+                          type: string
+                          description: Short description of the page content
+                        section:
+                          type: string
+                          description: Wiki section the page belongs to
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                          description: Content tags for the page
+        "400":
+          description: Missing or empty query parameter
