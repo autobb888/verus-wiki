@@ -51,7 +51,7 @@ INJECT = r'''<div id="gt-wrap" style="position:fixed;top:23px;left:60px;z-index:
 <style>
 #gt-lang:hover{color:#e5e7eb;border-color:#666}
 #gt-lang option{background:#1e1e2e;color:#ccc}
-@media(max-width:960px){#gt-wrap{top:auto;left:auto;right:55px;bottom:auto;position:fixed;top:72px;right:12px}#gt-lang{font-size:12px;padding:4px 20px 4px 6px}}
+@media(max-width:960px){#gt-wrap{top:72px!important;left:auto!important;right:12px!important}#gt-lang{font-size:12px;padding:4px 20px 4px 6px}}
 .goog-te-banner-frame{display:none!important}
 body{top:0!important}
 .skiptranslate{display:none!important}
