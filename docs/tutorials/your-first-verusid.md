@@ -119,12 +119,18 @@ Your name:
 This is a security step. It hides your chosen name in a hash so miners can't see it and steal it before you register.
 
 ```bash
-./verus -testnet registernamecommitment "YOUR_NAME" "YOUR_ADDRESS"
+./verus -testnet registernamecommitment "YOUR_NAME" "YOUR_ADDRESS" "REFERRAL_IDENTITY"
+```
+
+The referral identity is optional but recommended. If you don't have a referrer, use `"Verus Coin Foundation@"` as the default — it supports the project and can reduce your registration cost:
+
+```bash
+./verus -testnet registernamecommitment "YOUR_NAME" "YOUR_ADDRESS" "Verus Coin Foundation@"
 ```
 
 **Example with actual values:**
 ```bash
-./verus -testnet registernamecommitment "alice" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"
+./verus -testnet registernamecommitment "alice" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5" "Verus Coin Foundation@"
 ```
 
 **What you should see:**
