@@ -105,6 +105,8 @@ Cannot find identity
 }
 ```
 
+> ⚠️ **Note:** Checking availability does **not** hold or reserve the name. Another user could commit and register it between your check and your commitment. Proceed to Step 5 promptly once you've found an available name.
+
 ### Name Rules
 
 Your name:
