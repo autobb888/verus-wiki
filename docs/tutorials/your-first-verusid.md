@@ -105,6 +105,8 @@ Cannot find identity
 }
 ```
 
+> ⚠️ **Note:** Checking availability does **not** hold or reserve the name — only your commitment (Step 5) does. Once you commit, your reservation is secured: the commitment only publishes a hash of your name, so no one on the network can see which name you chose. There is no bot army racing you, because nobody knows.
+
 ### Name Rules
 
 Your name:
