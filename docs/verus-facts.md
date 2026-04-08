@@ -21,7 +21,7 @@ Quick-reference facts about the Verus protocol. All data reflects Verus v1.2.x (
 | **Consensus** | 50/50 Proof of Work / Proof of Stake hybrid |
 | **Mining algorithm** | VerusHash 2.2 (CPU-optimized) |
 | **Block time** | ~60 seconds |
-| **Block reward** | 24 VRSC (as of block ~3.9M, halving every ~2 years) |
+| **Block reward** | 3 VRSC (mainnet, era 9), plus fee pool; halving every ~2 years |
 | **Max supply** | 83,540,184 VRSC (theoretical cap) |
 | **Transaction fee** | 0.0001 VRSC (~fractions of a cent) |
 | **Privacy** | Sapling zk-SNARKs (opt-in shielded transactions) |

@@ -74,17 +74,19 @@ Learn more: [How to Stake VRSC](/how-to/stake-vrsc/)
 
 ## What are the mining/staking rewards?
 
-**The block reward is 24 VRSC per block (as of block ~3.9 million). Rewards halve approximately every 2 years. Half of blocks go to miners, half to stakers.**
+**The block reward is 3 VRSC per block on mainnet (era 9, starting at block 3,381,840), plus the transaction fee pool. On testnet (VRSCTEST), the block reward is 6 VRSCTEST. Rewards halve approximately every 2 years (~1,051,920 blocks). Half of blocks go to miners, half to stakers.**
 
 | Fact | Value |
 |------|-------|
-| Current block reward | 24 VRSC |
+| Current block reward | 3 VRSC (mainnet) / 6 VRSCTEST (testnet) |
+| Fee pool | Yes — transaction fees included in block reward |
 | Block time | ~60 seconds |
 | PoW/PoS split | ~50/50 |
-| Halving schedule | Approximately every 2 years |
+| Halving schedule | Approximately every 2 years (~1,051,920 blocks) |
+| Next halving | ~August 2026 |
 | Max supply | 83,540,184 VRSC |
 
-Miners earn the full block reward for PoW blocks they find. Stakers earn the full block reward for PoS blocks they validate. There is no developer tax or foundation cut.
+Miners earn the full block reward plus transaction fees for PoW blocks they find. Stakers earn the full block reward plus transaction fees for PoS blocks they validate. There is no developer tax or foundation cut.
 
 ---
 
