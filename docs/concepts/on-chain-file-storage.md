@@ -118,7 +118,7 @@ verus -chain=vrsctest updateidentity '{
 }'
 ```
 
-**Limit:** ~5KB max. Above ~5.5KB → `bad-txns-failed-precheck`. Data above ~5KB may be **silently truncated** with no error.
+**Limit:** 5,500 bytes (11,000 hex chars) max. Above this → `bad-txns-failed-precheck`. Data approaching this limit may be **silently truncated** with no error.
 
 ### Method Comparison
 
@@ -346,6 +346,7 @@ For data larger than 2MB, you need multiple transactions across multiple blocks:
 |------|-------|-------|
 | Single script element | ~6,000 bytes | `MAX_SCRIPT_ELEMENT_SIZE_PBAAS` |
 | Chunk after overhead | ~5,744 bytes | Element minus 256 byte overhead |
+| Raw contentmultimap hex | 5,500 bytes (11,000 hex chars) | Above this causes `bad-txns-failed-precheck` |
 | Data wrapper input | 1,000,000 bytes | Hard limit in `signdata` |
 | Single transaction | 2,000,000 bytes (2MB) | Can fill an entire block |
 | Single block | 2,000,000 bytes (2MB) | `MAX_BLOCK_SIZE` |
