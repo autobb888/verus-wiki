@@ -39,7 +39,7 @@ Options is a bitfield — you can combine values by adding them together.
 | 3 | PROOF_ETHNOTARIZATION | Ethereum-mapped — token supply follows an Ethereum contract. Used for bridged tokens. |
 
 **When to use what:**
-- **Running an agent platform with subIDs?** → `proofprotocol: 2` (you control the token supply)
+- **Running a platform that issues subIDs?** → `proofprotocol: 2` (you control the token supply)
 - **Launching a PBaaS blockchain?** → `proofprotocol: 1` (decentralized mining)
 - **Bridging an ERC-20 token?** → `proofprotocol: 3` (tracks Ethereum supply)
 

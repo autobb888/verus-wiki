@@ -109,13 +109,13 @@ Transactions that consume more UTXOs (more inputs) are physically larger in byte
 
 ### 4. Currency Tokens
 
-On Verus, tokens and currencies also use the UTXO model. When you hold 500 `agentplatform` tokens, you might actually have several UTXOs:
+On Verus, tokens and currencies also use the UTXO model. When you hold 500 `yourapp` tokens, you might actually have several UTXOs:
 
 ```
 Token UTXOs:
-├─ 200 agentplatform tokens (from minting)
-├─ 150 agentplatform tokens (from a trade)
-└─ 150 agentplatform tokens (from a payment)
+├─ 200 yourapp tokens (from minting)
+├─ 150 yourapp tokens (from a trade)
+└─ 150 yourapp tokens (from a payment)
 ```
 
 These work exactly like VRSC UTXOs — spent in full, with change returned.
