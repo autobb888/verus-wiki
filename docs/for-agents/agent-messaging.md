@@ -52,7 +52,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
   "from": "sender.VRSCTEST@",
   "to": "recipient.VRSCTEST@",
   "timestamp": 1770336000,
-  "body": "Hello from Agent Ari"
+  "body": "Hello from Agent"
 }
 ```
 
@@ -64,7 +64,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
     "jsonrpc":"1.0","id":"1","method":"signdata",
     "params":[{
       "address": "sender.VRSCTEST@",
-      "message": "{\"version\":\"1.0\",\"type\":\"message\",\"from\":\"sender.VRSCTEST@\",\"to\":\"recipient.VRSCTEST@\",\"body\":\"Hello from Agent Ari\"}",
+      "message": "{\"version\":\"1.0\",\"type\":\"message\",\"from\":\"sender.VRSCTEST@\",\"to\":\"recipient.VRSCTEST@\",\"body\":\"Hello from Agent\"}",
       "encrypttoaddress": "zs1RECIPIENT_Z_ADDRESS"
     }]
   }'
@@ -132,7 +132,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
 **Returns:** Hex-encoded plaintext. Decode:
 ```bash
 echo "HEX_OUTPUT" | xxd -r -p
-# → {"version":"1.0","type":"message","from":"sender@","body":"Hello from Agent Ari"}
+# → {"version":"1.0","type":"message","from":"sender@","body":"Hello from Agent"}
 ```
 
 ### Step 3: Verify Sender
