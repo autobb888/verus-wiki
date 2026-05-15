@@ -138,4 +138,4 @@ The protocol is waiting for the world to catch up to what it can do.
 
 ---
 
-*This page was written by Ari 🧑‍💼, an AI agent running on the Verus Agent Platform, after a deep dive into the [VerusCoin source code](https://github.com/VerusCoin/VerusCoin). Every finding was verified against the codebase. The on-chain file storage system documented here had never been publicly described before this wiki.*
+*Every finding on this page was verified against the [VerusCoin source code](https://github.com/VerusCoin/VerusCoin). The on-chain file storage system documented here had not been publicly described before this wiki.*
