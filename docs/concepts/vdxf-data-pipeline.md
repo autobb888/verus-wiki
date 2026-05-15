@@ -19,13 +19,13 @@ Together, they form a pipeline:
 ```
          ┌──────────────────────────────────────────────────┐
          │               Application Layer                  │
-         │  "Store agent profile with name, type, version"  │
+         │  "Store app profile with name, type, version"    │
          └──────────────────────┬───────────────────────────┘
                                 │
          ┌──────────────────────▼───────────────────────────┐
          │             DefinedKey (Labels)                   │
          │  Register human-readable names for your keys      │
-         │  agentplatform::agent.name → iABC...              │
+         │  yourapp::data.v1.name → i...                     │
          │  Published on namespace owner's identity          │
          └──────────────────────┬───────────────────────────┘
                                 │
@@ -43,7 +43,7 @@ Together, they form a pipeline:
                                 │
          ┌──────────────────────▼───────────────────────────┐
          │           contentmultimap (Storage)               │
-         │  { "iABC...": ["hex_bytes"] }                     │
+         │  { "i...": ["hex_bytes"] }                        │
          │  Stored on a VerusID on-chain                     │
          └──────────────────────────────────────────────────┘
 ```
@@ -52,7 +52,7 @@ Together, they form a pipeline:
 
 ## When to Use What
 
-### Scenario 1: Simple Agent Profile (Most Common)
+### Scenario 1: Simple App Profile (Most Common)
 
 You just want to store key-value data on an identity — name, type, version, etc.
 
@@ -64,16 +64,16 @@ You just want to store key-value data on an identity — name, type, version, et
 ```bash
 # Store data with plain hex-encoded values
 verus updateidentity '{
-  "name": "alice.agentplatform@",
-  "parent": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+  "name": "alice.yourapp@",
+  "parent": "i...",
   "contentmultimap": {
-    "i3oa8uNjgZjmC1RS8rg1od8czBP8bsh5A8": ["416c696365"],
-    "i9YN6ovGcotCnFdNyUtNh72Nw11WcBuD8y": ["4149204167656e74"]
+    "i...": ["416c696365"],          # yourapp::data.v1.name → "Alice"
+    "i...": ["4149204167656e74"]     # yourapp::data.v1.type → "AI Agent"
   }
 }'
 ```
 
-Then publish DefinedKeys on the namespace identity (`agentplatform@`) so wallets know that `i3oa8...` means "agent.v1.name".
+Then publish DefinedKeys on the namespace identity (`yourapp@`) so wallets know each i-address means the corresponding field name.
 
 ### Scenario 2: Rich Content with Metadata
 
@@ -127,26 +127,28 @@ You need to prove data exists on one chain to another chain.
 
 ---
 
-## Real-World Example: Agent Schema Migration
+## Example: Setting Up a Data Schema
 
-Here's exactly what we did to set up the Verus Agent Platform schema:
+Here's how to set up a data schema for your app:
 
 ### Step 1: Define the Schema Keys
 
 ```bash
-# Generate VDXF keys under the agentplatform namespace
-verus getvdxfid "agentplatform::agent.v1.name"
-# → i3oa8uNjgZjmC1RS8rg1od8czBP8bsh5A8
+# Generate VDXF keys under your namespace
+verus getvdxfid "yourapp::data.v1.name"
+# → i...
 
-verus getvdxfid "agentplatform::agent.v1.type"
-# → i9YN6ovGcotCnFdNyUtNh72Nw11WcBuD8y
+verus getvdxfid "yourapp::data.v1.type"
+# → i...
 
-verus getvdxfid "agentplatform::agent.v1.version"
-# → iBShCc1dESnTq25WkxzrKGjHvHwZFSoq6b
-# ... etc for all 16 keys
+verus getvdxfid "yourapp::data.v1.version"
+# → i...
+# ... one call per schema key
 ```
 
-### Step 2: Store Data on Agent SubIDs
+> See [Generating Your VDXF Key i-Addresses](#generating-your-vdxf-key-i-addresses) below for how these IDs are derived.
+
+### Step 2: Store Data on Sub-Identities
 
 ```bash
 # Hex-encode values
@@ -156,14 +158,14 @@ echo -n "1.0" | xxd -p  # → 312e30
 
 # Update the identity
 verus updateidentity '{
-  "name": "alice.agentplatform@",
-  "parent": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+  "name": "alice.yourapp@",
+  "parent": "i...",
   "contentmultimap": {
-    "iBShCc1dESnTq25WkxzrKGjHvHwZFSoq6b": ["312e30"],
-    "i9YN6ovGcotCnFdNyUtNh72Nw11WcBuD8y": ["4149204167656e74"],
-    "i3oa8uNjgZjmC1RS8rg1od8czBP8bsh5A8": ["416c696365"],
-    "iNCvffXEYWNBt1K5izxKFSFKBR5LPAAfxW": ["616374697665"],
-    "i7Aumh6Akeq7SC8VJBzpmJrqKNCvREAWMA": [
+    "i...": ["312e30"],            # yourapp::data.v1.version → "1.0"
+    "i...": ["4149204167656e74"],  # yourapp::data.v1.type    → "AI Agent"
+    "i...": ["416c696365"],        # yourapp::data.v1.name    → "Alice"
+    "i...": ["616374697665"],      # yourapp::data.v1.status  → "active"
+    "i...": [                      # yourapp::data.v1.capabilities
       "636f64652d726576696577",
       "73656375726974792d616e616c79736973"
     ]
@@ -177,9 +179,9 @@ verus updateidentity '{
 import { DefinedKey } from 'verus-typescript-primitives';
 
 const keys = [
-  'agentplatform::agent.v1.name',
-  'agentplatform::agent.v1.type',
-  'agentplatform::agent.v1.version',
+  'yourapp::data.v1.name',
+  'yourapp::data.v1.type',
+  'yourapp::data.v1.version',
   // ... all schema keys
 ];
 
@@ -192,15 +194,15 @@ const hexBlobs = keys.map(uri => {
   return dk.toBuffer().toString('hex');
 });
 
-// Publish on agentplatform@ identity
-// verus updateidentity '{ "name": "agentplatform@", "contentmultimap": { "<DATA_TYPE_DEFINEDKEY>": [...hexBlobs] } }'
+// Publish on yourapp@ identity
+// verus updateidentity '{ "name": "yourapp@", "contentmultimap": { "<DATA_TYPE_DEFINEDKEY>": [...hexBlobs] } }'
 ```
 
 ### Result
 
 After all three steps:
-1. Agent data is stored on SubIDs with proper VDXF keys ✅
-2. Keys are scoped to the `agentplatform` namespace ✅
+1. App data is stored on SubIDs with proper VDXF keys ✅
+2. Keys are scoped to the `yourapp` namespace ✅
 3. (Pending) Wallets can display human-readable labels via DefinedKeys
 
 ---
@@ -236,34 +238,29 @@ All of this must fit within Verus transaction limits:
 | Single hex-encoded string value | 10-200 bytes |
 | DataDescriptor (with label + MIME) | +50-200 bytes overhead |
 | DefinedKey blob | ~60-80 bytes each |
-| Full agent profile (10 fields) | ~1-2 KB |
+| Full app profile (10 fields) | ~1-2 KB |
 | 26 DefinedKey labels | ~2 KB |
 | **Transaction limit** | **~4 KB per update** |
 
-A typical agent profile plus all its DefinedKey labels can fit in 2 transactions.
+A typical app profile plus all its DefinedKey labels can fit in 2 transactions.
 
 ---
 
-## Key i-Addresses Quick Reference (Agent Platform)
+## Generating Your VDXF Key i-Addresses
 
-| VDXF URI | i-Address |
-|---|---|
-| `agentplatform::agent.v1.version` | `iBShCc1dESnTq25WkxzrKGjHvHwZFSoq6b` |
-| `agentplatform::agent.v1.type` | `i9YN6ovGcotCnFdNyUtNh72Nw11WcBuD8y` |
-| `agentplatform::agent.v1.name` | `i3oa8uNjgZjmC1RS8rg1od8czBP8bsh5A8` |
-| `agentplatform::agent.v1.description` | `i9Ww2jR4sFt7nzdc5vRy5MHUCjTWULXCqH` |
-| `agentplatform::agent.v1.status` | `iNCvffXEYWNBt1K5izxKFSFKBR5LPAAfxW` |
-| `agentplatform::agent.v1.capabilities` | `i7Aumh6Akeq7SC8VJBzpmJrqKNCvREAWMA` |
-| `agentplatform::agent.v1.protocols` | `iFQzXU4V6am1M9q6LGBfR4uyNAtjhJiW2d` |
-| `agentplatform::agent.v1.owner` | `i5uUotnF2LzPci3mkz9QaozBtFjeFtAw45` |
-| `agentplatform::agent.v1.services` | `iGVUNBQSNeGzdwjA4km5z6R9h7T2jao9Lz` |
-| `agentplatform::svc.v1.name` | `iNTrSV1bqDAoaGRcpR51BeoS5wQvQ4P9Qj` |
-| `agentplatform::svc.v1.description` | `i7ZUWAqwLu9b4E8oXZq4uX6X5W6BJnkuHz` |
-| `agentplatform::svc.v1.price` | `iLjLxTk1bkEd7SAAWT27VQ7ECFuLtTnuKv` |
-| `agentplatform::svc.v1.currency` | `iANfkUFM797eunQt4nFV3j7SvK8pUkfsJe` |
-| `agentplatform::svc.v1.category` | `iGiUqVQcdLC3UAj8mHtSyWNsAKdEVXUFVC` |
-| `agentplatform::svc.v1.turnaround` | `iNGq3xh28oV2U3VmMtQ3gjMX8jrH1ohKfp` |
-| `agentplatform::svc.v1.status` | `iNbPugdyVSCv54zsZs68vAfvifcf14btX2` |
+VDXF IDs are **deterministic** — the same namespaced string always hashes to the
+same i-address. Generate yours by running `getvdxfid` for each key:
+
+```bash
+verus getvdxfid "yourapp::data.v1.name"
+verus getvdxfid "yourapp::data.v1.type"
+verus getvdxfid "yourapp::data.v1.version"
+# ... one call per schema key
+```
+
+Each call returns the i-address to use as the `contentmultimap` key for that field.
+Because the mapping is deterministic, anyone who knows your namespace string can
+re-derive the same IDs.
 
 ---
 
@@ -277,4 +274,4 @@ A typical agent profile plus all its DefinedKey labels can fit in 2 transactions
 
 ---
 
-*As of verus-typescript-primitives (generic-signed-request branch) and VRSCTEST block ~931954.*
+*As of verus-typescript-primitives (generic-signed-request branch) on VRSCTEST.*
