@@ -5,6 +5,7 @@ icon: terminal
 
 # Identity Commands
 
+> **Placeholder convention:** Examples in this reference use `myid@` as your own identity, `recovery@` / `revocation@` as authority-role identities, `yourapp@` as an application namespace, `i...` to mark a placeholder i-address (substitute your own from `getidentity`), `<R-address>` / `<your-R-address>` for transparent R-addresses, and `<block-height>` for a placeholder block number. Commands shown were tested on VRSCTEST — only these project-specific values have been genericized.
 
 ---
 
@@ -43,7 +44,7 @@ An array of matching identity objects, each with an additional `txout` field con
 
 **Basic Usage**
 ```bash
-./verus -testnet getidentitieswithaddress '{"address":"RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"}'
+./verus -testnet getidentitieswithaddress '{"address":"<your-R-address>"}'
 
 ## Actual Output (tested on VRSCTEST)
 ## ERROR: requires -idindex=1 when starting the daemon
@@ -53,7 +54,7 @@ An array of matching identity objects, each with an additional `txout` field con
 
 **With Height Range and Unspent Filter**
 ```bash
-./verus -testnet getidentitieswithaddress '{"address":"RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5","fromheight":920000,"toheight":930000,"unspent":true}'
+./verus -testnet getidentitieswithaddress '{"address":"<your-R-address>","fromheight":920000,"toheight":930000,"unspent":true}'
 ```
 
 **RPC (curl)**
@@ -61,7 +62,7 @@ An array of matching identity objects, each with an additional `txout` field con
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitieswithaddress","params":[{"address":"RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"}]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitieswithaddress","params":[{"address":"<your-R-address>"}]}'
 ```
 
 **Common Use Cases**
@@ -107,7 +108,7 @@ verus getidentitieswithrecovery '{"identityid":"idori-address","fromheight":heig
 **Parameters**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| identityid | string | Yes | Name (e.g., `"ari@"`) or i-address — returns all identities where this is the recovery authority |
+| identityid | string | Yes | Name (e.g., `"recovery@"`) or i-address — returns all identities where this is the recovery authority |
 | fromheight | number | No | Default = 0. Search from this height forward only |
 | toheight | number | No | Default = 0 (no limit). Search up to this height only |
 | unspent | bool | No | Default = false. If true, only return active (unspent) ID UTXOs |
@@ -128,7 +129,7 @@ An array of identity objects where the specified ID is the recovery authority.
 
 **Basic Usage**
 ```bash
-./verus -testnet getidentitieswithrecovery '{"identityid":"ari@"}'
+./verus -testnet getidentitieswithrecovery '{"identityid":"recovery@"}'
 
 ## Actual Output (tested on VRSCTEST)
 ## ERROR: requires -idindex=1 when starting the daemon
@@ -138,7 +139,7 @@ An array of identity objects where the specified ID is the recovery authority.
 
 **Only Active Identities**
 ```bash
-./verus -testnet getidentitieswithrecovery '{"identityid":"ari@","unspent":true}'
+./verus -testnet getidentitieswithrecovery '{"identityid":"recovery@","unspent":true}'
 ```
 
 **RPC (curl)**
@@ -146,7 +147,7 @@ An array of identity objects where the specified ID is the recovery authority.
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitieswithrecovery","params":[{"identityid":"ari@"}]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitieswithrecovery","params":[{"identityid":"recovery@"}]}'
 ```
 
 **Common Use Cases**
@@ -167,7 +168,7 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 
 **Notes**
 - **Requires `-idindex=1`** daemon flag. See [getidentitieswithaddress](identity.md#getidentitieswithaddress) for details.
-- By default, an identity's recovery authority is set to itself. This means querying `"ari@"` will return `ari@` itself plus any other identities that explicitly set `ari@` as their recovery authority.
+- By default, an identity's recovery authority is set to itself. This means querying an identity like `"recovery@"` will return that identity itself, plus any others that have explicitly set it as their recovery authority.
 - Recovery authority is the identity that can recover (regain control of) an identity if primary keys are compromised.
 
 **Tested On**
@@ -191,7 +192,7 @@ verus getidentitieswithrevocation '{"identityid":"idori-address","fromheight":he
 **Parameters**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| identityid | string | Yes | Name (e.g., `"ari@"`) or i-address — returns all identities where this is the revocation authority |
+| identityid | string | Yes | Name (e.g., `"revocation@"`) or i-address — returns all identities where this is the revocation authority |
 | fromheight | number | No | Default = 0. Search from this height forward only |
 | toheight | number | No | Default = 0 (no limit). Search up to this height only |
 | unspent | bool | No | Default = false. If true, only return active (unspent) ID UTXOs |
@@ -212,7 +213,7 @@ An array of identity objects where the specified ID is the revocation authority.
 
 **Basic Usage**
 ```bash
-./verus -testnet getidentitieswithrevocation '{"identityid":"ari@"}'
+./verus -testnet getidentitieswithrevocation '{"identityid":"revocation@"}'
 
 ## Actual Output (tested on VRSCTEST)
 ## ERROR: requires -idindex=1 when starting the daemon
@@ -222,7 +223,7 @@ An array of identity objects where the specified ID is the revocation authority.
 
 **Only Active Identities**
 ```bash
-./verus -testnet getidentitieswithrevocation '{"identityid":"ari@","unspent":true}'
+./verus -testnet getidentitieswithrevocation '{"identityid":"revocation@","unspent":true}'
 ```
 
 **RPC (curl)**
@@ -230,7 +231,7 @@ An array of identity objects where the specified ID is the revocation authority.
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitieswithrevocation","params":[{"identityid":"ari@"}]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitieswithrevocation","params":[{"identityid":"revocation@"}]}'
 ```
 
 **Common Use Cases**
@@ -252,7 +253,7 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 **Notes**
 - **Requires `-idindex=1`** daemon flag.
 - Revocation authority is the identity that can *revoke* (disable) an identity. This is a critical security role.
-- By default, an identity's revocation authority is itself. Querying an identity will return at least that identity itself.
+- By default, an identity's revocation authority is set to itself. This means querying an identity like `"revocation@"` will return that identity itself, plus any others that have explicitly set it as their revocation authority.
 - Revoking an identity prevents it from being used for signing or spending until it is recovered by the recovery authority.
 
 **Tested On**
@@ -286,29 +287,29 @@ Returns a JSON object containing the full identity definition, status, and metad
 
 ```json
 {
-  "friendlyname": "ari.VRSCTEST@",
-  "fullyqualifiedname": "ari.VRSCTEST@",
+  "friendlyname": "myid.VRSCTEST@",
+  "fullyqualifiedname": "myid.VRSCTEST@",
   "identity": {
     "version": 3,
     "flags": 0,
     "primaryaddresses": [
-      "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"
+      "<R-address>"
     ],
     "minimumsignatures": 1,
-    "name": "ari",
-    "identityaddress": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+    "name": "myid",
+    "identityaddress": "i...",
     "parent": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
     "systemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
     "contentmap": {},
     "contentmultimap": { ... },
-    "revocationauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
-    "recoveryauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+    "revocationauthority": "i...",
+    "recoveryauthority": "i...",
     "timelock": 0
   },
   "status": "active",
   "canspendfor": true,
   "cansignfor": true,
-  "blockheight": 926607,
+  "blockheight": <block-height>,
   "txid": "51e1261ab8f5899dc7480b9b546f0b03a9c054fb160fd9f9dbdfec62d954379c",
   "vout": 0
 }
@@ -339,47 +340,47 @@ Returns a JSON object containing the full identity definition, status, and metad
 
 **Basic Usage — Lookup by Name**
 ```bash
-./verus -testnet getidentity "ari@"
+./verus -testnet getidentity "myid@"
 ```
 
 **Lookup by i-Address**
 ```bash
-./verus -testnet getidentity "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129"
+./verus -testnet getidentity "i..."
 ```
 
 **Lookup at a Specific Block Height**
 ```bash
-## Get identity as it was at block 921081 (before any updates)
-./verus -testnet getidentity "ari@" 921081
+## Get identity as it was at a specific block height (before any updates)
+./verus -testnet getidentity "myid@" <block-height>
 
 ## Output shows empty contentmultimap (identity was freshly registered)
 {
-  "friendlyname": "ari.VRSCTEST@",
+  "friendlyname": "myid.VRSCTEST@",
   "identity": {
     "version": 3,
-    "primaryaddresses": ["RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"],
-    "name": "ari",
+    "primaryaddresses": ["<R-address>"],
+    "name": "myid",
     "contentmultimap": {},
     ...
   },
-  "blockheight": 921081,
+  "blockheight": <block-height>,
   ...
 }
 ```
 
 **Include Mempool (Unconfirmed Updates)**
 ```bash
-./verus -testnet getidentity "ari@" -1
+./verus -testnet getidentity "myid@" -1
 ```
 
 **With Transaction Proof**
 ```bash
-./verus -testnet getidentity "ari@" 926607 true
+./verus -testnet getidentity "myid@" <block-height> true
 ```
 
 **Lookup a SubID**
 ```bash
-./verus -testnet getidentity "alice.agentplatform@"
+./verus -testnet getidentity "alice.yourapp@"
 ```
 
 **RPC (curl)**
@@ -387,7 +388,7 @@ Returns a JSON object containing the full identity definition, status, and metad
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentity","params":["ari@"]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentity","params":["myid@"]}'
 ```
 
 **Common Use Cases**
@@ -414,13 +415,13 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 Be careful with name qualification — it's the most common source of "Identity not found" errors:
 
 - `"alice@"` → looks for a **top-level** identity called "alice"
-- `"alice.agentplatform@"` → looks for a **SubID** "alice" under the "agentplatform" namespace
+- `"alice.yourapp@"` → looks for a **SubID** "alice" under the "yourapp" namespace
 - `"alice.VRSCTEST@"` → fully qualified top-level name on testnet
 
-These are different identities! If alice only exists as a SubID under agentplatform, then `getidentity "alice@"` will return "Identity not found" while `getidentity "alice.agentplatform@"` succeeds.
+These are different identities! If alice only exists as a SubID under yourapp, then `getidentity "alice@"` will return "Identity not found" while `getidentity "alice.yourapp@"` succeeds.
 
 **Notes**
-- The `@` suffix is required when looking up by name (e.g., `"ari@"` not `"ari"`).
+- The `@` suffix is required when looking up by name (e.g., `"myid@"` not `"myid"`).
 - On VRSCTEST, names are displayed as `name.VRSCTEST@` in `fullyqualifiedname`.
 - The `contentmultimap` stores hex-encoded data keyed by VDXF i-addresses. Decode the hex to see the actual content.
 - When `flags` = 1, the identity can issue subIDs (has the `activecurrency` flag set).
@@ -459,19 +460,19 @@ Returns identity metadata plus a combined `contentmultimap` aggregated from all 
 
 ```json
 {
-  "fullyqualifiedname": "ari.VRSCTEST@",
+  "fullyqualifiedname": "myid.VRSCTEST@",
   "status": "active",
   "canspendfor": true,
   "cansignfor": true,
-  "blockheight": 926607,
+  "blockheight": <block-height>,
   "fromheight": 0,
   "toheight": 926957,
   "txid": "51e1261ab8f5899dc7480b9b546f0b03a9c054fb160fd9f9dbdfec62d954379c",
   "vout": 0,
   "identity": {
     "version": 3,
-    "name": "ari",
-    "identityaddress": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+    "name": "myid",
+    "identityaddress": "i...",
     "contentmultimap": {
       "iKLo9XnNwzec2dj92kX9QQpng5EfU8XHxo": [
         "7b2276657273696f6e223a22312e30222c2274797065223a224149204167656e74227d",
@@ -490,28 +491,29 @@ Returns identity metadata plus a combined `contentmultimap` aggregated from all 
 
 **Basic Usage**
 ```bash
-./verus -testnet getidentitycontent "ari@"
+./verus -testnet getidentitycontent "myid@"
 ```
 
 **Content from a Specific Height Range**
 ```bash
 ## Only get content added between blocks 925000 and 926000
-./verus -testnet getidentitycontent "ari@" 925000 926000
+./verus -testnet getidentitycontent "myid@" 925000 926000
 ```
 
 **Include Mempool Content**
 ```bash
-./verus -testnet getidentitycontent "ari@" 0 -1
+./verus -testnet getidentitycontent "myid@" 0 -1
 ```
 
 **Filter by VDXF Key**
 ```bash
-./verus -testnet getidentitycontent "ari@" 0 0 false 0 "iKLo9XnNwzec2dj92kX9QQpng5EfU8XHxo"
+## iKLo9XnNwzec2dj92kX9QQpng5EfU8XHxo is the i-address of `vrsc::system.agent.profile`, a built-in Verus system VDXF key — `getvdxfid` produces the same hash for everyone
+./verus -testnet getidentitycontent "myid@" 0 0 false 0 "iKLo9XnNwzec2dj92kX9QQpng5EfU8XHxo"
 ```
 
 **Include Deleted Content**
 ```bash
-./verus -testnet getidentitycontent "ari@" 0 0 false 0 "*" true
+./verus -testnet getidentitycontent "myid@" 0 0 false 0 "*" true
 ```
 
 **RPC (curl)**
@@ -519,7 +521,7 @@ Returns identity metadata plus a combined `contentmultimap` aggregated from all 
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitycontent","params":["ari@"]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitycontent","params":["myid@"]}'
 ```
 
 **Common Use Cases**
@@ -575,22 +577,22 @@ Returns identity metadata plus a `history` array containing the full identity ob
 
 ```json
 {
-  "fullyqualifiedname": "ari.VRSCTEST@",
+  "fullyqualifiedname": "myid.VRSCTEST@",
   "status": "active",
   "canspendfor": true,
   "cansignfor": true,
-  "blockheight": 926607,
+  "blockheight": <block-height>,
   "txid": "51e1261ab8f5899dc7480b9b546f0b03a9c054fb160fd9f9dbdfec62d954379c",
   "vout": 0,
   "history": [
     {
       "identity": {
         "version": 3,
-        "name": "ari",
+        "name": "myid",
         "contentmultimap": {}
       },
       "blockhash": "208172af9b283a1f06e5775f532134d6858393b076808fe415ea960dcca74125",
-      "height": 921081,
+      "height": <block-height>,
       "output": {
         "txid": "b4af174d4bee117a8f6bd4fa47e5f0195d1409302aca4aeba08acd391e5c9954",
         "voutnum": 0
@@ -599,19 +601,19 @@ Returns identity metadata plus a `history` array containing the full identity ob
     {
       "identity": {
         "version": 3,
-        "name": "ari",
+        "name": "myid",
         "contentmultimap": {
           "iKLo9XnNwzec2dj92kX9QQpng5EfU8XHxo": ["..."]
         }
       },
       "blockhash": "00000000e60e18baa0daa50c6d55186face08c2f6d39ddc2557021cef7ef1130",
-      "height": 921090,
+      "height": <block-height>,
       "output": { "txid": "edcfe0a06a...", "voutnum": 0 }
     }
   ]
 }
 ```
-*(Output truncated — the `ari@` identity had 8 historical updates from block 921081 to 926607)*
+*(Output truncated — example identity had multiple historical updates across a range of blocks)*
 
 **History Entry Fields**
 | Field | Description |
@@ -626,18 +628,18 @@ Returns identity metadata plus a `history` array containing the full identity ob
 
 **Full History**
 ```bash
-./verus -testnet getidentityhistory "ari@"
+./verus -testnet getidentityhistory "myid@"
 ```
 
 **History in a Block Range**
 ```bash
 ## Only show updates between blocks 925000 and 926000
-./verus -testnet getidentityhistory "ari@" 925000 926000
+./verus -testnet getidentityhistory "myid@" 925000 926000
 ```
 
 **Include Mempool**
 ```bash
-./verus -testnet getidentityhistory "ari@" 0 -1
+./verus -testnet getidentityhistory "myid@" 0 -1
 ```
 
 **RPC (curl)**
@@ -645,7 +647,7 @@ Returns identity metadata plus a `history` array containing the full identity ob
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentityhistory","params":["ari@"]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentityhistory","params":["myid@"]}'
 ```
 
 **Common Use Cases**
@@ -667,7 +669,7 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 **Notes**
 - Each entry in the `history` array represents a complete snapshot of the identity at that block height. You can see exactly what changed between updates by diffing consecutive entries.
 - The first entry is always the identity registration (creation) transaction.
-- Multiple updates can occur at the same block height (e.g., `ari@` had two updates at block 922296).
+- Multiple updates can occur at the same block height — for example, if an identity has a key rotation and a content update in the same block.
 - For identities with many updates, the response can be large. Use `heightstart`/`heightend` to limit scope.
 
 **Tested On**
@@ -717,10 +719,10 @@ verus getidentitytrust '["id",...]'
 
 **Query Specific Identity**
 ```bash
-./verus -testnet getidentitytrust '["ari@"]'
+./verus -testnet getidentitytrust '["myid@"]'
 
 ## Actual Output (tested on VRSCTEST)
-## (empty output — no rating set for ari@)
+## (empty output — no rating set for myid@)
 ```
 
 **RPC (curl)**
@@ -728,7 +730,7 @@ verus getidentitytrust '["id",...]'
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitytrust","params":[["ari@"]]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"getidentitytrust","params":[["myid@"]]}'
 ```
 
 **Common Use Cases**
@@ -786,19 +788,19 @@ Returns an array of identity objects with wallet-specific status fields.
     "identity": {
       "version": 3,
       "flags": 0,
-      "primaryaddresses": ["RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"],
+      "primaryaddresses": ["<R-address>"],
       "minimumsignatures": 1,
-      "name": "ari",
-      "identityaddress": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+      "name": "myid",
+      "identityaddress": "i...",
       "parent": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
       "systemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
       "contentmap": {},
       "contentmultimap": { "..." },
-      "revocationauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
-      "recoveryauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+      "revocationauthority": "i...",
+      "recoveryauthority": "i...",
       "timelock": 0
     },
-    "blockheight": 926607,
+    "blockheight": <block-height>,
     "txid": "51e1261ab8f5899dc7480b9b546f0b03a9c054fb160fd9f9dbdfec62d954379c",
     "status": "active",
     "canspendfor": true,
@@ -806,9 +808,9 @@ Returns an array of identity objects with wallet-specific status fields.
   },
   {
     "identity": {
-      "name": "agentplatform",
+      "name": "yourapp",
       "flags": 1,
-      "identityaddress": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+      "identityaddress": "i...",
       "..."
     },
     "blockheight": 926587,
@@ -818,10 +820,10 @@ Returns an array of identity objects with wallet-specific status fields.
   },
   {
     "identity": {
-      "name": "arimultisig",
+      "name": "mymultisig",
       "primaryaddresses": [
-        "RFgbPkbeFADR2tMk6sAW9teTKtzTbWnTMT",
-        "RNJVffPkMQoSfF7Ww4W3QaRCRp6ajZrB4o"
+        "<R-address-1>",
+        "<R-address-2>"
       ],
       "minimumsignatures": 2,
       "..."
@@ -832,12 +834,12 @@ Returns an array of identity objects with wallet-specific status fields.
   }
 ]
 ```
-*(Output truncated — test wallet contained 10 identities including ari@, agentplatform@, alice.agentplatform@, bob.agentplatform@, and others)*
+*(Output truncated — test wallet contained 10 identities including myid@, yourapp@, alice.yourapp@, bob.yourapp@, and others)*
 
 **Notable Observations from Testing**
 - `canspendfor: true` — wallet has enough keys to meet `minimumsignatures`
-- `canspendfor: false, cansignfor: true` — wallet has *some* keys but not enough (e.g., `arimultisig@` requires 2 of 2 sigs, wallet only has 1 key)
-- SubIDs (like `alice.agentplatform@`) appear alongside top-level IDs
+- `canspendfor: false, cansignfor: true` — wallet has *some* keys but not enough (e.g., `mymultisig@` requires 2 of 2 sigs, wallet only has 1 key)
+- SubIDs (like `alice.yourapp@`) appear alongside top-level IDs
 
 **Examples**
 
@@ -883,7 +885,7 @@ curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7d
 **Notes**
 - This command only shows identities for which the local wallet has relevant keys. It does **not** search the entire blockchain.
 - The distinction between `canspendfor` and `cansignfor` matters for multi-sig identities. A wallet might hold 1 of 2 required keys — it can sign but not spend alone.
-- SubIDs (e.g., `alice.agentplatform@`) appear in the list if the wallet holds their keys, even if the parent identity is a different wallet.
+- SubIDs (e.g., `alice.yourapp@`) appear in the list if the wallet holds their keys, even if the parent identity is a different wallet.
 - The `flags` field value of `1` indicates the identity has the `activecurrency` flag (can issue subIDs).
 
 **Tested On**
@@ -1045,7 +1047,7 @@ transactionid    (string) The transaction ID of the registration
   },
   "identity": {
     "name": "myname",
-    "primaryaddresses": ["RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"],
+    "primaryaddresses": ["<your-R-address>"],
     "minimumsignatures": 1,
     "version": 3
   }
@@ -1138,17 +1140,17 @@ verus registernamecommitment "name" "controladdress" ("referralidentity") ("pare
 
 **Basic Name Commitment**
 ```bash
-./verus -testnet registernamecommitment "mynewid" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"
+./verus -testnet registernamecommitment "mynewid" "<your-R-address>"
 ```
 
 **With Referral Identity**
 ```bash
-./verus -testnet registernamecommitment "mynewid" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5" "ari@"
+./verus -testnet registernamecommitment "mynewid" "<your-R-address>" "myid@"
 ```
 
 **SubID Under a Parent Namespace**
 ```bash
-./verus -testnet registernamecommitment "newagent" "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2" "" "agentplatform@"
+./verus -testnet registernamecommitment "newname" "<your-R-address>" "" "yourapp@"
 ```
 
 **RPC (curl)**
@@ -1156,7 +1158,7 @@ verus registernamecommitment "name" "controladdress" ("referralidentity") ("pare
 curl -s -u user1445741888:pass2f0dc70dded67b9f392c0f3950a547bc6ef4d1edfa78da3a7da5b78113def067b6 \
   -X POST http://localhost:18843 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"1.0","id":"wiki","method":"registernamecommitment","params":["mynewid","RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"]}'
+  -d '{"jsonrpc":"1.0","id":"wiki","method":"registernamecommitment","params":["mynewid","<your-R-address>"]}'
 ```
 
 **Common Use Cases**
@@ -1224,7 +1226,7 @@ verus revokeidentity "nameorID" (returntx) (tokenrevoke) (feeoffer) (sourceoffun
 **Parameters**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| nameorID | string | Yes | The identity name (e.g., `ari@`) or i-address to revoke |
+| nameorID | string | Yes | The identity name (e.g., `myid@`) or i-address to revoke |
 | returntx | bool | No | If true, return signed tx instead of broadcasting. Default: false |
 | tokenrevoke | bool | No | If true, use tokenized ID control token for revocation. Default: false |
 | feeoffer | value | No | Non-standard fee amount |
@@ -1439,8 +1441,8 @@ No return on success, error on failure.
 
 **Set Trust Rating for an Identity**
 ```bash
-## Set trust level for ari@
-./verus -testnet setidentitytrust '{"setratings":{"ari@":{"trustlevel":2}}, "identitytrustmode":0}'
+## Set trust level for myid@
+./verus -testnet setidentitytrust '{"setratings":{"myid@":{"trustlevel":2}}, "identitytrustmode":0}'
 
 ## Actual Output (tested on VRSCTEST)
 ## (no output — success returns nothing)
@@ -1448,23 +1450,23 @@ No return on success, error on failure.
 
 **Remove Trust Ratings**
 ```bash
-./verus -testnet setidentitytrust '{"removeratings":["ari@"]}'
+./verus -testnet setidentitytrust '{"removeratings":["myid@"]}'
 ```
 
 **Clear All and Set Fresh**
 ```bash
-./verus -testnet setidentitytrust '{"clearall":true, "setratings":{"ari@":{"trustlevel":1}}, "identitytrustmode":1}'
+./verus -testnet setidentitytrust '{"clearall":true, "setratings":{"myid@":{"trustlevel":1}}, "identitytrustmode":1}'
 ```
 
 **Read Trust Ratings**
 ```bash
 ## Use getidentitytrust to read (separate command)
-./verus -testnet getidentitytrust '["ari@"]'
+./verus -testnet getidentitytrust '["myid@"]'
 ```
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"setidentitytrust","params":[{"setratings":{"ari@":{"trustlevel":2}},"identitytrustmode":0}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"setidentitytrust","params":[{"setratings":{"myid@":{"trustlevel":2}},"identitytrustmode":0}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -1510,7 +1512,7 @@ verus signdata '{"address":"id@", "message":"data", ...}'
 **Parameters**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| address | string | Yes | VerusID (e.g., `ari@`) or t-address to sign with |
+| address | string | Yes | VerusID (e.g., `myid@`) or t-address to sign with |
 | message | string | No* | Plain text message to sign |
 | filename | string | No* | File path to sign |
 | messagehex | string | No* | Hex-encoded data to sign |
@@ -1562,7 +1564,7 @@ verus signdata '{"address":"id@", "message":"data", ...}'
 **Basic Usage — Sign a Message**
 ```bash
 ## Command
-./verus -testnet signdata '{"address":"ari@", "message":"Hello from Ari - testing signdata for wiki docs"}'
+./verus -testnet signdata '{"address":"myid@", "message":"Hello from myid - testing signdata for wiki docs"}'
 
 ## Actual Output (tested on VRSCTEST)
 {
@@ -1571,7 +1573,7 @@ verus signdata '{"address":"id@", "message":"data", ...}'
     "systemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
     "hashtype": 5,
     "signaturehash": "6972221095db42a7c97bd325ab7b6c641d3372be2ae0b435f7696c90789260c6",
-    "identityid": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+    "identityid": "i...",
     "signaturetype": 1,
     "signature": "AgXtJA4AAUEfK2i7aQevRK3PPJFttLTRk7bkXeKE8vMPd+KE3fobhnViIM496FCXFN4TN2Nh0iQ5fOlcc8VHJqCOTEDa03gvrQ=="
   },
@@ -1579,9 +1581,9 @@ verus signdata '{"address":"id@", "message":"data", ...}'
   "systemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
   "hashtype": "sha256",
   "hash": "6972221095db42a7c97bd325ab7b6c641d3372be2ae0b435f7696c90789260c6",
-  "identity": "ari.VRSCTEST@",
-  "canonicalname": "ari.vrsctest@",
-  "address": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+  "identity": "myid.VRSCTEST@",
+  "canonicalname": "myid.vrsctest@",
+  "address": "i...",
   "signatureheight": 926957,
   "signatureversion": 2,
   "signature": "AgXtJA4AAUEfK2i7aQevRK3PPJFttLTRk7bkXeKE8vMPd+KE3fobhnViIM496FCXFN4TN2Nh0iQ5fOlcc8VHJqCOTEDa03gvrQ=="
@@ -1590,7 +1592,7 @@ verus signdata '{"address":"id@", "message":"data", ...}'
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"signdata","params":[{"address":"ari@","message":"hello world"}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"signdata","params":[{"address":"myid@","message":"hello world"}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -1649,7 +1651,7 @@ verus signfile "address or identity" "filepath/filename" ("currentsig")
 **Parameters**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| address | string | Yes | t-address or VerusID (e.g., `ari@`) to sign with |
+| address | string | Yes | t-address or VerusID (e.g., `myid@`) to sign with |
 | filename | string | Yes | Path to local file to sign |
 | cursig | string | No | Current partial signature (base64) for multisig IDs |
 
@@ -1666,7 +1668,7 @@ verus signfile "address or identity" "filepath/filename" ("currentsig")
 **Basic Usage**
 ```bash
 ## Command
-./verus -testnet signfile "ari@" "/tmp/verus_test_sign.txt"
+./verus -testnet signfile "myid@" "/tmp/verus_test_sign.txt"
 
 ## Actual Output (tested on VRSCTEST)
 {
@@ -1677,7 +1679,7 @@ verus signfile "address or identity" "filepath/filename" ("currentsig")
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"signfile","params":["ari@","/tmp/verus_test_sign.txt"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"signfile","params":["myid@","/tmp/verus_test_sign.txt"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -1724,7 +1726,7 @@ verus signmessage "address or identity" "message" ("currentsig")
 **Parameters**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| address | string | Yes | t-address or VerusID (e.g., `ari@`) to sign with |
+| address | string | Yes | t-address or VerusID (e.g., `myid@`) to sign with |
 | message | string | Yes | The message text to sign |
 | cursig | string | No | Current partial signature (base64) for multisig IDs |
 
@@ -1741,7 +1743,7 @@ verus signmessage "address or identity" "message" ("currentsig")
 **Basic Usage**
 ```bash
 ## Command
-./verus -testnet signmessage "ari@" "Hello from Ari - testing signmessage for wiki docs"
+./verus -testnet signmessage "myid@" "Hello from myid - testing signmessage for wiki docs"
 
 ## Actual Output (tested on VRSCTEST)
 {
@@ -1752,13 +1754,13 @@ verus signmessage "address or identity" "message" ("currentsig")
 
 **Verify the Signed Message**
 ```bash
-./verus -testnet verifymessage "ari@" "Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE" "Hello from Ari - testing signmessage for wiki docs"
+./verus -testnet verifymessage "myid@" "Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE" "Hello from myid - testing signmessage for wiki docs"
 ## Output: true
 ```
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"signmessage","params":["ari@","Hello from Ari"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"signmessage","params":["myid@","Hello from myid"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -1836,30 +1838,31 @@ hexstring    (string) txid if returntx is false, or hex serialized transaction i
 
 **Basic Usage — Update a Root ID**
 ```bash
-## Update ari@ identity (root-level ID on VRSCTEST)
-./verus -testnet updateidentity '{"name":"ari", "contentmultimap":{"iC6oQAC5rufBtks35ctW1YtugXc9QyxF2a":["226172694022"]}}'
+## Update myid@ identity (root-level ID on VRSCTEST)
+## (replace i... with a VDXF key from your namespace, e.g. yourapp::data.v1.owner)
+./verus -testnet updateidentity '{"name":"myid", "contentmultimap":{"i...":["226172694022"]}}'
 ```
 
 **⚠️ CRITICAL: SubID Updates Require `parent` Field**
 ```bash
 ## WRONG — This will fail silently or update the wrong identity:
-./verus -testnet updateidentity '{"name":"alice.agentplatform"}'
+./verus -testnet updateidentity '{"name":"alice.yourapp"}'
 
 ## CORRECT — SubIDs MUST include the parent field:
-./verus -testnet updateidentity '{"name":"alice", "parent":"iKxGfbQTMPiQ95FjfJDjWW4MQzkvFqxpbB"}'
+./verus -testnet updateidentity '{"name":"alice", "parent":"i..."}'
 ```
 
-> **⚠️ SubID Gotcha:** When updating a sub-identity (e.g., `alice.agentplatform@`), you **must** include the `"parent"` field with the parent identity's i-address. Without it, the daemon will look for a root identity named "alice" instead of the subID "alice.agentplatform". This is the most common source of errors with `updateidentity`.
+> **⚠️ SubID Gotcha:** When updating a sub-identity (e.g., `alice.yourapp@`), you **must** include the `"parent"` field with the parent identity's i-address. Without it, the daemon will look for a root identity named "alice" instead of the subID "alice.yourapp". This is the most common source of errors with `updateidentity`.
 
 **Token-Based Update**
 ```bash
 ## Use tokenized control token instead of key-based authority
-./verus -testnet updateidentity '{"name":"ari"}' false true
+./verus -testnet updateidentity '{"name":"myid"}' false true
 ```
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"updateidentity","params":[{"name":"ari","contentmultimap":{"iC6oQAC5rufBtks35ctW1YtugXc9QyxF2a":["226172694022"]}}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"updateidentity","params":[{"name":"myid","contentmultimap":{"i...":["226172694022"]}}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -1927,7 +1930,7 @@ true|false    (boolean) Whether the signature is valid
 **Basic Usage**
 ```bash
 ## Command
-./verus -testnet verifyfile "ari@" "Ae0kDgABQR+9rcThasA9w0KYb/90a4QGRWUKgt3WZnRZOE+YDvKXKVhWMKMT15PT2MkO+Ru4i9cnt/XsGO2pMyDo42VmQ186" "/tmp/verus_test_sign.txt"
+./verus -testnet verifyfile "myid@" "Ae0kDgABQR+9rcThasA9w0KYb/90a4QGRWUKgt3WZnRZOE+YDvKXKVhWMKMT15PT2MkO+Ru4i9cnt/XsGO2pMyDo42VmQ186" "/tmp/verus_test_sign.txt"
 
 ## Actual Output (tested on VRSCTEST)
 true
@@ -1936,12 +1939,12 @@ true
 **Check Against Latest Identity State**
 ```bash
 ## Verify using the current identity keys (not the keys at signing time)
-./verus -testnet verifyfile "ari@" "signature_base64" "/tmp/verus_test_sign.txt" true
+./verus -testnet verifyfile "myid@" "signature_base64" "/tmp/verus_test_sign.txt" true
 ```
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifyfile","params":["ari@","Ae0kDgABQR+9rcThasA9w0KYb/90a4QGRWUKgt3WZnRZOE+YDvKXKVhWMKMT15PT2MkO+Ru4i9cnt/XsGO2pMyDo42VmQ186","/tmp/verus_test_sign.txt"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifyfile","params":["myid@","Ae0kDgABQR+9rcThasA9w0KYb/90a4QGRWUKgt3WZnRZOE+YDvKXKVhWMKMT15PT2MkO+Ru4i9cnt/XsGO2pMyDo42VmQ186","/tmp/verus_test_sign.txt"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -2002,7 +2005,7 @@ true|false    (boolean) Whether the signature is valid
 **Basic Usage**
 ```bash
 ## Using the hash from signmessage output to verify
-./verus -testnet verifyhash "ari@" "Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE" "c7eb4997c9887fc59c2c02e397e44735f70a0173f547a1402170e120221bd48c"
+./verus -testnet verifyhash "myid@" "Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE" "c7eb4997c9887fc59c2c02e397e44735f70a0173f547a1402170e120221bd48c"
 
 ## Actual Output (tested on VRSCTEST)
 true
@@ -2010,7 +2013,7 @@ true
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifyhash","params":["ari@","Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE","c7eb4997c9887fc59c2c02e397e44735f70a0173f547a1402170e120221bd48c"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifyhash","params":["myid@","Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE","c7eb4997c9887fc59c2c02e397e44735f70a0173f547a1402170e120221bd48c"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -2072,7 +2075,7 @@ true|false    (boolean) Whether the signature is valid
 **Basic Usage**
 ```bash
 ## Command
-./verus -testnet verifymessage "ari@" "Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE" "Hello from Ari - testing signmessage for wiki docs"
+./verus -testnet verifymessage "myid@" "Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE" "Hello from myid - testing signmessage for wiki docs"
 
 ## Actual Output (tested on VRSCTEST)
 true
@@ -2081,12 +2084,12 @@ true
 **Verify with Latest Identity State**
 ```bash
 ## Check against current keys (useful after key rotation)
-./verus -testnet verifymessage "ari@" "signature_base64" "message" true
+./verus -testnet verifymessage "myid@" "signature_base64" "message" true
 ```
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifymessage","params":["ari@","Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE","Hello from Ari - testing signmessage for wiki docs"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifymessage","params":["myid@","Ae0kDgABQSDPV6z9gmeWVtGt6SaLiRk78JnsSf8LwCQjSeGj3Bja+WkFKg8jl0M1e+z/z6OzfQVjeW+rp26qg5mWxzrD1QAE","Hello from myid - testing signmessage for wiki docs"]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
@@ -2154,9 +2157,9 @@ verus verifysignature '{"address":"id@", "signature":"base64sig", ...}'
   "signaturestatus": "verified",
   "system": "VRSCTEST",
   "systemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
-  "identity": "ari.VRSCTEST@",
-  "canonicalname": "ari.vrsctest@",
-  "address": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+  "identity": "myid.VRSCTEST@",
+  "canonicalname": "myid.vrsctest@",
+  "address": "i...",
   "hashtype": "sha256",
   "hash": "hexhash",
   "height": 926958,
@@ -2170,16 +2173,16 @@ verus verifysignature '{"address":"id@", "signature":"base64sig", ...}'
 **Verify Using datahash (Recommended for signdata signatures)**
 ```bash
 ## Use the "hash" field from signdata output as "datahash"
-./verus -testnet verifysignature '{"address":"ari@", "datahash":"ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae", "signature":"AgXtJA4AAUEgXgBD28607ExvUtwYN788OyIboWOewNh5VS62b6iLhlM2fE1FFu3T793hVo4thSLPlDMLPjzyeZqQIgbafkrzGQ=="}'
+./verus -testnet verifysignature '{"address":"myid@", "datahash":"ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae", "signature":"AgXtJA4AAUEgXgBD28607ExvUtwYN788OyIboWOewNh5VS62b6iLhlM2fE1FFu3T793hVo4thSLPlDMLPjzyeZqQIgbafkrzGQ=="}'
 
 ## Actual Output (tested on VRSCTEST)
 {
   "signaturestatus": "verified",
   "system": "VRSCTEST",
   "systemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
-  "identity": "ari.VRSCTEST@",
-  "canonicalname": "ari.vrsctest@",
-  "address": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
+  "identity": "myid.VRSCTEST@",
+  "canonicalname": "myid.vrsctest@",
+  "address": "i...",
   "hashtype": "sha256",
   "hash": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae",
   "height": 926958,
@@ -2191,17 +2194,17 @@ verus verifysignature '{"address":"id@", "signature":"base64sig", ...}'
 **⚠️ Important: Message-Based Verification with signdata**
 ```bash
 ## This will NOT work — signdata v2 signatures include system context in the hash:
-./verus -testnet verifysignature '{"address":"ari@", "message":"test123", "signature":"..."}'
+./verus -testnet verifysignature '{"address":"myid@", "message":"test123", "signature":"..."}'
 ## Result: signaturestatus: "invalid"
 
 ## Instead, use the "hash" from signdata output as "datahash":
-./verus -testnet verifysignature '{"address":"ari@", "datahash":"hash_from_signdata", "signature":"..."}'
+./verus -testnet verifysignature '{"address":"myid@", "datahash":"hash_from_signdata", "signature":"..."}'
 ## Result: signaturestatus: "verified"
 ```
 
 **RPC (curl)**
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifysignature","params":[{"address":"ari@","datahash":"ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae","signature":"AgXtJA4AAUEgXgBD28607ExvUtwYN788OyIboWOewNh5VS62b6iLhlM2fE1FFu3T793hVo4thSLPlDMLPjzyeZqQIgbafkrzGQ=="}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
+curl --user user:pass --data-binary '{"jsonrpc":"1.0","id":"curltest","method":"verifysignature","params":[{"address":"myid@","datahash":"ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae","signature":"AgXtJA4AAUEgXgBD28607ExvUtwYN788OyIboWOewNh5VS62b6iLhlM2fE1FFu3T793hVo4thSLPlDMLPjzyeZqQIgbafkrzGQ=="}]}' -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
 **Common Use Cases**
