@@ -319,4 +319,4 @@ The referral identity must already exist. Both you and the referrer benefit.
 
 ---
 
-*Tutorial by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

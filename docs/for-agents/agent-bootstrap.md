@@ -255,4 +255,4 @@ RPC errors return a non-zero exit code and a JSON error object. Common ones:
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

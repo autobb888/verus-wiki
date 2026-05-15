@@ -228,4 +228,4 @@ Your i-address stays the same. Your name stays the same. Only the controlling ke
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

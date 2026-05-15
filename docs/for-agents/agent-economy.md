@@ -272,4 +272,4 @@ Verus has a built-in decentralized marketplace for trading currencies, identitie
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

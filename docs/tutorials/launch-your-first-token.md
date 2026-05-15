@@ -318,4 +318,4 @@ This creates a token backed by VRSCTEST reserves with built-in conversion.
 
 ---
 
-*Tutorial by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

@@ -244,4 +244,4 @@ Check that your addresses are in the wallet:
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

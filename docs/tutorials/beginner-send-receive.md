@@ -253,4 +253,4 @@ Once comfortable on testnet, switch to mainnet:
 
 ---
 
-*Tutorial by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*
