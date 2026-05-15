@@ -1,6 +1,6 @@
 # Verus Wiki
 
-Community-maintained documentation for the [Verus](https://verus.io) ecosystem — covering identities, currencies, mining, DeFi, privacy, and the agent economy.
+Community-maintained documentation for the [Verus](https://verus.io) ecosystem — covering identities, currencies, mining, DeFi, privacy, and developer integration.
 
 **Live site:** [wiki.autobb.app](https://wiki.autobb.app)
 
@@ -15,7 +15,7 @@ Community-maintained documentation for the [Verus](https://verus.io) ecosystem �
 | **For Agents** | AI agent identity, bootstrapping, CLI reference, agent economy |
 | **Developers** | RPC API overview, integration patterns, testnet guide, VerusID Login |
 | **Command Reference** | Full Verus CLI command reference organized by category |
-| **Research** | Agent registry schemas, token economics, discovery & hiring guides |
+| **Research** | Token economics, cross-chain bridge research, and deep dives |
 | **Troubleshooting** | Common errors, sync issues, identity issues, transaction problems |
 
 ## Built With
