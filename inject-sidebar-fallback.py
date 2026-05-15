@@ -55,17 +55,7 @@ for f in glob.glob(".retype/**/*.html", recursive=True):
     with open(f, "r") as fh:
         html = fh.read()
 
-    # --- 1. Move EN dropdown from right to left ---
-    # Fix desktop position
-    html = html.replace(
-        'position:fixed;top:23px;right:315px;',
-        'position:fixed;top:23px;left:60px;'
-    )
-    # Fix mobile position
-    html = html.replace(
-        '@media(max-width:1024px){#gt-wrap{top:14px;right:55px}',
-        '@media(max-width:960px){#gt-wrap{top:18px;left:55px}'
-    )
+    # --- 1. EN dropdown position is now set directly in build.sh ---
 
     # --- 2. Remove ALL previous sidebar fallback versions ---
     html = re.sub(r'<!-- sidebar-fb -->.*?</script>\s*', '', html, flags=re.DOTALL)

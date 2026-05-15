@@ -18,6 +18,10 @@ const GH_REPO    = process.env.GH_REPO    || 'verus-wiki';
 const GH_BASE    = process.env.GH_BASE    || 'main';
 const DB_PATH    = process.env.DB_PATH || path.join(__dirname, 'submissions.db');
 
+// Startup validations
+if (!process.env.ADMIN_TOKEN) console.warn('WARNING: ADMIN_TOKEN is not set — admin endpoints will reject all requests');
+if (!/^[a-zA-Z0-9._\/-]+$/.test(GH_BASE)) { console.error('ERROR: GH_BASE contains invalid characters'); process.exit(1); }
+
 // Agent API keys — comma-separated list in env, e.g. "agent1:key1,agent2:key2"
 // Format is "label:token" so you can track which agent submitted
 const AGENT_API_KEYS = new Map(
@@ -223,11 +227,13 @@ async function createPR(id, section, title, content, submitter) {
   const branch = `wiki-suggestion/${id}-${slug}`;
   const filePath = `suggestions/${id}-${slug}.md`;
 
+  const safeTitle = title.replace(/@/g, '@ ');
+  const safeSubmitterFile = (submitter || 'Anonymous').replace(/@/g, '@ ');
   const fileContent = [
-    `# [Suggestion #${id}] ${title}`,
+    `# [Suggestion #${id}] ${safeTitle}`,
     '',
     `**Section:** ${section}`,
-    `**Submitted by:** ${submitter || 'Anonymous'}`,
+    `**Submitted by:** ${safeSubmitterFile}`,
     `**Date:** ${new Date().toISOString().slice(0, 10)}`,
     '',
     '---',
@@ -258,20 +264,23 @@ async function createPR(id, section, title, content, submitter) {
   // 4. Open the PR — mention @claude so it auto-reviews
   // Escape user content in fenced blocks to prevent markdown/prompt injection
   const safeSubmitter = (submitter || 'Anonymous').replace(/@/g, '@ ');
+  // Dynamic fence: always longer than any backtick run in the content
+  const maxTicks = (content.match(/`+/g) || []).reduce((a, s) => Math.max(a, s.length), 3);
+  const fence = '`'.repeat(maxTicks + 1);
   const prBody = [
     `A community member suggested a wiki update via the [Suggest an Edit](https://wiki.autobb.app/contribute/suggest-edit/) form.`,
     '',
     `**Section:** \`${section}\``,
-    `**Title:** \`${title}\``,
+    `**Title:** \`${safeTitle}\``,
     `**Submitted by:** \`${safeSubmitter}\``,
     '',
     '---',
     '',
     '## Suggested content',
     '',
-    '````markdown',
+    fence + 'markdown',
     content,
-    '````',
+    fence,
     '',
     '---',
     '',
@@ -327,7 +336,7 @@ app.post('/api/submit', limiter, async (req, res) => {
     return res.status(400).json({ error: 'Content must be 20–10,000 characters.' });
   }
 
-  const ip = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.ip;
+  const ip = req.ip;
 
   const { lastInsertRowid: id } = db.prepare(`
     INSERT INTO submissions (section, title, content, submitter, ip)
@@ -555,8 +564,8 @@ async function createAgentPR(id, agentLabel, action, filePath, title, content, s
     '',
     `**Action:** ${action}`,
     `**File:** \`${filePath}\``,
-    `**Title:** ${title}`,
-    summary ? `**Summary:** ${summary}` : '',
+    `**Title:** \`${title.replace(/`/g, '')}\``,
+    summary ? `**Summary:** \`${summary.replace(/`/g, '')}\`` : '',
     '',
     '---',
     '',
