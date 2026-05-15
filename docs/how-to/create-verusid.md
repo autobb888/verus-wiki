@@ -24,7 +24,7 @@ If you don't have one yet:
 
 **Expected output:**
 ```
-RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5
+<R-address>
 ```
 
 Save this address — you'll use it as your control address and primary address.
@@ -60,7 +60,7 @@ This hides your name choice to prevent front-running:
 
 **Example:**
 ```bash
-./verus -testnet registernamecommitment "alice" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"
+./verus -testnet registernamecommitment "alice" "<R-address>"
 ```
 
 **Expected output:**
@@ -83,7 +83,7 @@ This hides your name choice to prevent front-running:
 #### With a Referral (saves ~20% on mainnet — you pay 80 instead of 100 VRSC)
 
 ```bash
-./verus -testnet registernamecommitment "alice" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5" "existingid@"
+./verus -testnet registernamecommitment "alice" "<R-address>" "existingid@"
 ```
 
 ### 5. Wait for Confirmation

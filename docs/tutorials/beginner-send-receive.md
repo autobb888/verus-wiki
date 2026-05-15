@@ -92,7 +92,7 @@ When `blocks` equals `headers`, you're fully synced. This can take 10-30 minutes
 
 **Expected output:**
 ```
-RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5
+<R-address>
 ```
 
 This is your **R-address**. It's like your account number — safe to share with anyone who wants to send you coins.
@@ -132,7 +132,7 @@ Once someone sends you coins, check your balance:
 ```json
 [
   {
-    "address": "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5",
+    "address": "<R-address>",
     "category": "receive",
     "amount": 10.00000000,
     "confirmations": 3,

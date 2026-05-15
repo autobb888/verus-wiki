@@ -6,7 +6,7 @@
 
 ## What Is a VerusID?
 
-A VerusID is a blockchain-native identity. Unlike a wallet address (a string of random characters), a VerusID has a **human-readable name** like `alice@` that maps permanently to a cryptographic identity address (an "i-address" like `i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129`).
+A VerusID is a blockchain-native identity. Unlike a wallet address (a string of random characters), a VerusID has a **human-readable name** like `alice@` that maps permanently to a cryptographic identity address (an "i-address" like `i...`).
 
 Think of it as **a domain name + a bank account + a passport**, all in one:
 
@@ -150,7 +150,7 @@ alice.VRSC@          Same as alice@ on mainnet (fully qualified)
 
 **Key rule:** `alice@` and `alice.yourapp@` are *completely different identities*. The first is a top-level ID; the second is a SubID under yourapp. If you use the wrong form, you'll get "Identity not found."
 
-On testnet, the system appends `.VRSCTEST` to fully qualified names, so `ari@` displays as `ari.VRSCTEST@` in the `fullyqualifiedname` field. On mainnet, top-level names show as `alice.VRSC@` in fully qualified form but can be referenced simply as `alice@`.
+On testnet, the system appends `.VRSCTEST` to fully qualified names, so `myid@` displays as `myid.VRSCTEST@` in the `fullyqualifiedname` field. On mainnet, top-level names show as `alice.VRSC@` in fully qualified form but can be referenced simply as `alice@`.
 
 ### Namespaces
 
