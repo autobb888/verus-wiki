@@ -2,6 +2,8 @@
 
 This guide walks through the complete revoke and recover cycle for a VerusID. This is one of Verus's most powerful safety features — if your keys are compromised, you can disable the identity and recover it with new keys.
 
+> **Placeholder convention:** Examples in this guide use `alice.yourapp@` as the identity being protected, `recovery@` as the revocation/recovery authority, `i...` to mark a placeholder i-address (substitute the real one from `getidentity`), `<R-address>` for a transparent address, `<new-R-address>` for the post-recovery address, and `<txid>` for a transaction ID returned by the chain.
+
 ## Overview
 
 Every VerusID has three key authorities:
@@ -20,25 +22,25 @@ By default, all three point to the identity itself. For real security, you shoul
 
 ## Step 1: Set Up Revocation and Recovery Authorities
 
-First, assign a trusted identity as your rev/recovery authority. In this example, we'll set `ari@` as both authorities for `external1.agentplatform@`.
+First, assign a trusted identity as your rev/recovery authority. In this example, we'll set `recovery@` as both authorities for `alice.yourapp@`.
 
-**From the owner's wallet** (the wallet holding the primary key for `external1.agentplatform@`):
+**From the owner's wallet** (the wallet holding the primary key for `alice.yourapp@`):
 
 ```bash
 verus -testnet updateidentity '{
-  "name": "external1",
-  "parent": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
-  "revocationauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
-  "recoveryauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129"
+  "name": "alice",
+  "parent": "i...",
+  "revocationauthority": "i...",
+  "recoveryauthority": "i..."
 }'
 ```
 
 | Field | Value | Meaning |
 |-------|-------|---------|
-| `name` | `external1` | The identity name (without parent suffix) |
-| `parent` | `i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW` | Parent namespace i-address (required for subIDs) |
-| `revocationauthority` | `i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129` | i-address of `ari@` |
-| `recoveryauthority` | `i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129` | i-address of `ari@` |
+| `name` | `alice` | The identity name (without parent suffix) |
+| `parent` | `i...` | Parent namespace i-address (required for subIDs) |
+| `revocationauthority` | `i...` | i-address of `recovery@` |
+| `recoveryauthority` | `i...` | i-address of `recovery@` |
 
 > ⚠️ **Important**: Once you assign rev/recovery to another identity, only that identity can revoke or recover yours. Only the current revocation authority can change the revocation authority, and only the current recovery authority can change the recovery authority. Make sure you trust whoever controls that identity.
 
@@ -47,16 +49,16 @@ Wait for the transaction to confirm (1 block, ~60 seconds).
 ## Step 2: Verify the Setup
 
 ```bash
-verus -testnet getidentity external1.agentplatform@
+verus -testnet getidentity alice.yourapp@
 ```
 
 Check the output:
 ```json
 {
   "identity": {
-    "primaryaddresses": ["RFa3H1cRoZNJGsZ5oZHzLzB3r79ezHGHnQ"],
-    "revocationauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
-    "recoveryauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129"
+    "primaryaddresses": ["<R-address>"],
+    "revocationauthority": "i...",
+    "recoveryauthority": "i..."
   },
   "status": "active",
   "canspendfor": true,
@@ -66,20 +68,20 @@ Check the output:
 
 ## Step 3: Revoke the Identity
 
-This is done from the **revocation authority's wallet** (the wallet holding the keys for `ari@`).
+This is done from the **revocation authority's wallet** (the wallet holding the keys for `recovery@`).
 
 ```bash
-verus -testnet revokeidentity "external1.agentplatform@"
+verus -testnet revokeidentity "alice.yourapp@"
 ```
 
 Returns a transaction ID:
 ```
-31c6aa273a368af8a4014dcccffa5302ab3452baeb68ed886383a315378df3d5
+<txid>
 ```
 
 After confirmation, check the status:
 ```bash
-verus -testnet getidentity external1.agentplatform@
+verus -testnet getidentity alice.yourapp@
 ```
 
 ```json
@@ -106,25 +108,25 @@ This is done from the **recovery authority's wallet**. Generate a new address fi
 verus -testnet getnewaddress
 ```
 ```
-RMBy33oXB3WarCPKhnwZeho6obFmA1aG8h
+<new-R-address>
 ```
 
 Now recover the identity, assigning the new primary key:
 
 ```bash
 verus -testnet recoveridentity '{
-  "name": "external1",
-  "parent": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
-  "primaryaddresses": ["RMBy33oXB3WarCPKhnwZeho6obFmA1aG8h"],
+  "name": "alice",
+  "parent": "i...",
+  "primaryaddresses": ["<new-R-address>"],
   "minimumsignatures": 1,
-  "revocationauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
-  "recoveryauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129"
+  "revocationauthority": "i...",
+  "recoveryauthority": "i..."
 }'
 ```
 
 Returns a transaction ID:
 ```
-2cdfb153cd8e1665c6d49a64863990f340381bbb2aa15777fec4fe952d6772b0
+<txid>
 ```
 
 > 💡 You can change rev/recovery during recovery too. To hand full control back to the owner, set both to the identity's own i-address.
@@ -134,15 +136,15 @@ Returns a transaction ID:
 After confirmation:
 
 ```bash
-verus -testnet getidentity external1.agentplatform@
+verus -testnet getidentity alice.yourapp@
 ```
 
 ```json
 {
   "identity": {
-    "primaryaddresses": ["RMBy33oXB3WarCPKhnwZeho6obFmA1aG8h"],
-    "revocationauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129",
-    "recoveryauthority": "i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129"
+    "primaryaddresses": ["<new-R-address>"],
+    "revocationauthority": "i...",
+    "recoveryauthority": "i..."
   },
   "status": "active",
   "canspendfor": true,
@@ -158,8 +160,8 @@ If the recovery was done to protect the identity temporarily, you can transfer c
 
 ```bash
 verus -testnet updateidentity '{
-  "name": "external1",
-  "parent": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+  "name": "alice",
+  "parent": "i...",
   "primaryaddresses": ["<owners-new-R-address>"],
   "revocationauthority": "<owners-choice>",
   "recoveryauthority": "<owners-choice>"
@@ -171,7 +173,7 @@ verus -testnet updateidentity '{
 ### Key Compromise
 Your computer is hacked and your private keys are stolen. Your recovery authority (on a separate device or held by a trusted friend) can revoke the identity before the attacker drains funds, then recover it with fresh keys.
 
-### Agent Platform Safety
+### Platform-Managed Identity Safety
 An AI agent's identity is controlled by a platform. If the agent misbehaves or is compromised, the platform (as revocation authority) can instantly disable it. The agent's identity, reputation, and funds remain intact for later recovery.
 
 ### Dead Man's Switch
@@ -200,16 +202,3 @@ Set revocation to yourself (quick response) and recovery to a trusted third part
 | `revokeidentity` | Revocation authority | Disable the identity |
 | `recoveridentity` | Recovery authority | Re-enable with new keys |
 | `getidentity` | Anyone | Check status, authorities, keys |
-
-## Test Data (from live testnet test)
-
-This guide was written from a real test performed on VRSCTEST:
-
-| Item | Value |
-|------|-------|
-| Identity | `external1.agentplatform@` (`iRjJm9KsNE9HfHYaWVebSijqrszpeggaMx`) |
-| Original primary | `RFa3H1cRoZNJGsZ5oZHzLzB3r79ezHGHnQ` |
-| Rev/Recovery authority | `ari@` (`i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129`) |
-| Revoke tx | `31c6aa273a368af8a4014dcccffa5302ab3452baeb68ed886383a315378df3d5` |
-| New primary (after recovery) | `RMBy33oXB3WarCPKhnwZeho6obFmA1aG8h` |
-| Recovery tx | `2cdfb153cd8e1665c6d49a64863990f340381bbb2aa15777fec4fe952d6772b0` |
