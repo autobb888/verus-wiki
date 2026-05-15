@@ -159,4 +159,4 @@ Check the Verus Discord for current staking pools (e.g., Synergy Pool).
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

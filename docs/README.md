@@ -13,9 +13,6 @@ Comprehensive documentation for all 201 Verus CLI commands + guides.
 - `getting-started/` — Installation, first steps
 - `scripts/` — Auto-generation scripts + raw help data
 
-## Separate From
-- `brain/research/` — Agent platform guides (VerusID integration, VDXF schema, hiring flow, etc.)
-
 ## Approach
 Test every command on testnet first, then document what actually works.
 

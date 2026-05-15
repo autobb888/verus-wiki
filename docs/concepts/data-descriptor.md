@@ -251,29 +251,29 @@ A common point of confusion: **DataDescriptor labels are per-value**, while **De
 ### The Pattern: Namespace → Schema → SubIDs
 
 ```
-agentplatform@  (namespace/root identity)
+yourapp@  (namespace/root identity)
   └── contentmultimap:
         └── DATA_TYPE_DEFINEDKEY → [
-              DefinedKey("agentplatform::agent.v1.name"),    ← "i3oa8... means agent.v1.name"
-              DefinedKey("agentplatform::agent.v1.type"),    ← "i9YN6... means agent.v1.type"
-              DefinedKey("agentplatform::agent.v1.version"), ← "iBShC... means agent.v1.version"
+              DefinedKey("yourapp::data.v1.name"),    ← iNAME means "data.v1.name"
+              DefinedKey("yourapp::data.v1.type"),    ← iTYPE means "data.v1.type"
+              DefinedKey("yourapp::data.v1.version"), ← iVERS means "data.v1.version"
               ...
             ]
 
-alice.agentplatform@  (subID)
+alice.yourapp@  (subID)
   └── contentmultimap:
-        ├── i3oa8... → ["416c696365"]           ← "Alice"
-        ├── i9YN6... → ["4149204167656e74"]      ← "AI Agent"
-        └── iBShC... → ["312e30"]                ← "1.0"
+        ├── iNAME → ["416c696365"]           ← "Alice"
+        ├── iTYPE → ["4149204167656e74"]      ← "AI Agent"
+        └── iVERS → ["312e30"]                ← "1.0"
 ```
 
-**How an app/wallet reads alice.agentplatform@:**
+**How an app/wallet reads alice.yourapp@:**
 
-1. Fetch `alice.agentplatform@` → sees i-addresses as keys
-2. Recognize the parent namespace → `agentplatform@`
-3. Fetch `agentplatform@` → find DefinedKey blobs
-4. Decode DefinedKeys → now knows `i3oa8...` = `agent.v1.name`
-5. Display: `agent.v1.name: "Alice"` instead of `i3oa8...: 416c696365`
+1. Fetch `alice.yourapp@` → sees i-addresses as keys
+2. Recognize the parent namespace → `yourapp@`
+3. Fetch `yourapp@` → find DefinedKey blobs
+4. Decode DefinedKeys → now knows `iNAME` = `data.v1.name`
+5. Display: `data.v1.name: "Alice"` instead of `iNAME: 416c696365`
 
 **The namespace identity is the schema registry.** Any app that understands DefinedKey can discover your schema automatically by reading the parent identity.
 
@@ -296,7 +296,7 @@ For simple profiles (name, type, version, status), you don't need DataDescriptor
 | Content with a known format | ✅ Yes — use `mimeType` |
 | Encrypted on-chain data | ✅ Yes — encryption fields built in |
 | Merkle proofs / hash trees | ✅ Yes — hash vector support |
-| Agent profile fields | Not needed — DefinedKey + raw hex is simpler and cheaper |
+| App profile fields | Not needed — DefinedKey + raw hex is simpler and cheaper |
 | Documents / large payloads | ✅ Yes — label + MIME + optional encryption |
 
 ---

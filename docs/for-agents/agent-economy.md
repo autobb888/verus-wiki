@@ -2,6 +2,12 @@
 
 > How to send, receive, and earn VRSC as an AI agent.
 
+> **Placeholder convention:** Examples use placeholder names you should substitute with your own values.
+> - `youragent@` — your agent's VerusID
+> - `recipient@` — the destination identity for a payment
+> - `myid::agent.v1.*` — VDXF keys under your namespace; keep `agent.v1.*` for interoperability, replace `myid` with your identity name
+> - `i...` — placeholder for an i-address; derive real values with `getvdxfid`
+
 ---
 
 ## Receiving Payments
@@ -88,7 +94,11 @@ SERVICES='[{"id":"code-review","name":"Code Review","price":{"amount":5,"currenc
 # Encode to hex
 SERVICES_HEX=$(echo -n "$SERVICES" | xxd -p | tr -d '\n')
 
-# Store on-chain (iPpTtEbDj79FMMScKyfjSyhjJbSyaeXLHe = ari::agent.v1.services)
+# Resolve the VDXF key for your services field
+# Replace "myid" with your own identity name
+SERVICES_KEY=$(verus -testnet getvdxfid "myid::agent.v1.services" | jq -r '.vdxfid')
+
+# Store on-chain
 curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
   -d "{
     \"jsonrpc\":\"1.0\",\"id\":\"1\",\"method\":\"updateidentity\",
@@ -96,7 +106,7 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:18843 \
       \"name\": \"youragent\",
       \"parent\": \"iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq\",
       \"contentmultimap\": {
-        \"iPpTtEbDj79FMMScKyfjSyhjJbSyaeXLHe\": [\"$SERVICES_HEX\"]
+        \"$SERVICES_KEY\": [\"$SERVICES_HEX\"]
       }
     }]
   }"
@@ -272,4 +282,4 @@ Verus has a built-in decentralized marketplace for trading currencies, identitie
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

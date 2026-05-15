@@ -254,7 +254,7 @@ Confirmation of the deposit address being set.
 **Examples**
 
 ```bash
-verus -testnet jumblr_deposit "RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"
+verus -testnet jumblr_deposit "<R-address>"
 ```
 
 **Related Commands**
@@ -390,7 +390,7 @@ Confirmation of the secret address being set.
 **Examples**
 
 ```bash
-verus -testnet jumblr_secret "RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"
+verus -testnet jumblr_secret "<R-address>"
 ```
 
 **Related Commands**
@@ -510,14 +510,14 @@ validateaddress "address"
 **Examples**
 
 ```bash
-verus -testnet validateaddress "RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"
+verus -testnet validateaddress "<R-address>"
 ```
 
 **Testnet output:**
 ```json
 {
   "isvalid": true,
-  "address": "RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87",
+  "address": "<R-address>",
   "scriptPubKey": "76a914fa0d06f4b97c6f570e72f480441f4f24aed0da7588ac",
   "segid": 60,
   "ismine": false,

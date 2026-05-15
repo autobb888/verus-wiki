@@ -6,6 +6,7 @@ icon: terminal
 
 # Address Index Commands
 
+> **Placeholder convention:** Examples in this reference use `<R-address>` for the queried address and `i...` to mark a placeholder currency i-address (substitute the real one from `getcurrency`). Commands shown were tested on VRSCTEST — only project-specific values have been genericized.
 
 ---
 
@@ -53,7 +54,7 @@ getaddressbalance {"addresses": ["address", ...], "friendlynames": bool}
 **Examples**
 
 ```bash
-verus -testnet getaddressbalance '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"]}'
+verus -testnet getaddressbalance '{"addresses": ["<R-address>"]}'
 ```
 
 **Testnet output (address with multi-currency balance):**
@@ -62,11 +63,11 @@ verus -testnet getaddressbalance '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5
   "balance": 5288370000,
   "received": 52814070000,
   "currencybalance": {
-    "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW": 109.99000000,
+    "i...": 109.99000000,
     "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": 52.88370000
   },
   "currencyreceived": {
-    "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW": 109.99000000,
+    "i...": 109.99000000,
     "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": 528.14070000
   }
 }
@@ -138,7 +139,7 @@ getaddressdeltas {"addresses": ["address"], "start": n, "end": n, "chaininfo": b
 **Examples**
 
 ```bash
-verus -testnet getaddressdeltas '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"], "start": 926980, "end": 926990}'
+verus -testnet getaddressdeltas '{"addresses": ["<R-address>"], "start": 926980, "end": 926990}'
 ```
 
 **Testnet output:**
@@ -209,7 +210,7 @@ getaddressmempool {"addresses": ["address"], "friendlynames": bool, "verbosity":
 **Examples**
 
 ```bash
-verus -testnet getaddressmempool '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"]}'
+verus -testnet getaddressmempool '{"addresses": ["<R-address>"]}'
 ```
 
 **Testnet output:**
@@ -272,7 +273,7 @@ getaddresstxids {"addresses": ["address"], "start": n, "end": n}
 **Examples**
 
 ```bash
-verus -testnet getaddresstxids '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"]}'
+verus -testnet getaddresstxids '{"addresses": ["<R-address>"]}'
 ```
 
 **Testnet output:**
@@ -342,7 +343,7 @@ getaddressutxos {"addresses": ["address"], "chaininfo": bool, "friendlynames": b
 **Examples**
 
 ```bash
-verus -testnet getaddressutxos '{"addresses": ["RY5LccmGiX9bUHYGtSWQouNy1yFhc5rM87"]}'
+verus -testnet getaddressutxos '{"addresses": ["<R-address>"]}'
 ```
 
 **Testnet output:**

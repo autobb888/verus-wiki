@@ -6,6 +6,7 @@ icon: terminal
 
 # Wallet Commands
 
+> **Placeholder convention:** Examples in this reference use `yourapp` / `yourapp-registration` as example token and account names, `<R-address>` for transparent addresses, `<txid>` for transaction IDs, `<blockhash>` for block hashes, and `<WIF-private-key>` for private key output. Commands shown were tested on VRSCTEST — only these project-specific values have been genericized.
 
 ---
 
@@ -316,19 +317,19 @@ dumpprivkey "t-addr"
 **Basic Usage**
 
 ```bash
-verus -testnet dumpprivkey "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"
+verus -testnet dumpprivkey "<R-address>"
 ```
 
 **Output:**
 ```
-UsURC5zbdKXcapirrvFHcok8VCrUyG8FmSMzLPA2zQAFX1XAuTYE
+<WIF-private-key>
 ```
 
 **RPC (curl)**
 
 ```bash
 curl --user user:pass --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"dumpprivkey","params":["RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"dumpprivkey","params":["<R-address>"]}' \
   -H 'content-type:text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -527,12 +528,12 @@ getaccount "address"
 **Examples**
 
 ```bash
-verus getaccount "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"
+verus getaccount "<R-address>"
 ```
 
 **Live output (testnet):**
 ```
-agentplatform-registration
+yourapp-registration
 ```
 
 **Common Errors**
@@ -642,9 +643,9 @@ verus getaddressesbyaccount ""
 [
   "RB5s8g763JCWcpdsMsiTMiQ5SQdj376ipg",
   "RExj2gcJrBnrPjmaqcyk7NdvLtvaKX2LGH",
-  "RFgbPkbeFADR2tMk6sAW9teTKtzTbWnTMT",
+  "<R-address>",
   "RNUj32rViHuEk5F3VEmk53q4xhMMq2wffT",
-  "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5",
+  "<R-address>",
   "RQVywYFCbASodUjjpff57RLpGpT5UUbcbT",
   "RRcQfB7G4GKFb9pShCK48V1kvuspnKrFMf",
   "RSCo6N67YCBTv6M2u8XmXbQo63EEqD148v"
@@ -781,28 +782,28 @@ Returns an object with currency names as keys and balances as values.
 **Basic Usage**
 
 ```bash
-verus -testnet getcurrencybalance "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"
+verus -testnet getcurrencybalance "<R-address>"
 ```
 
 **Output:**
 ```json
 {
   "VRSCTEST": 52.88540000,
-  "agentplatform": 109.99000000
+  "yourapp": 109.99000000
 }
 ```
 
 **With Minimum Confirmations**
 
 ```bash
-verus -testnet getcurrencybalance "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2" 5
+verus -testnet getcurrencybalance "<R-address>" 5
 ```
 
 **RPC (curl)**
 
 ```bash
 curl --user user:pass --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"getcurrencybalance","params":["RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2",5]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"getcurrencybalance","params":["<R-address>",5]}' \
   -H 'content-type:text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -1066,7 +1067,7 @@ getreceivedbyaddress "address" ( minconf )
 **Examples**
 
 ```bash
-verus getreceivedbyaddress "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"
+verus getreceivedbyaddress "<R-address>"
 ```
 
 **Live output (testnet):**
@@ -1076,7 +1077,7 @@ verus getreceivedbyaddress "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"
 
 ```bash
 ## With minimum 6 confirmations
-verus getreceivedbyaddress "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2" 6
+verus getreceivedbyaddress "<R-address>" 6
 ```
 
 **Common Errors**
@@ -1143,7 +1144,7 @@ gettransaction "txid" ( includeWatchonly )
 **Basic Usage**
 
 ```bash
-verus -testnet gettransaction "adce8581971e889d253a2980542c1600daf0b9b43c614d94d6df6c25c4bcacc9"
+verus -testnet gettransaction "<txid>"
 ```
 
 **Output (trimmed):**
@@ -1152,14 +1153,14 @@ verus -testnet gettransaction "adce8581971e889d253a2980542c1600daf0b9b43c614d94d
   "amount": 0.00000000,
   "fee": -0.00100000,
   "confirmations": 326,
-  "blockhash": "2ec6dde4389eaff88c2fdfd697131b1378f417e778deba2cb25a4fd825a4e719",
+  "blockhash": "<blockhash>",
   "blockindex": 1,
   "blocktime": 1770429214,
-  "txid": "adce8581971e889d253a2980542c1600daf0b9b43c614d94d6df6c25c4bcacc9",
+  "txid": "<txid>",
   "details": [
     {
       "account": "",
-      "address": "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2",
+      "address": "<R-address>",
       "category": "send",
       "amount": -0.92700000,
       "vout": 1,
@@ -1173,7 +1174,7 @@ verus -testnet gettransaction "adce8581971e889d253a2980542c1600daf0b9b43c614d94d
 
 ```bash
 curl --user user:pass --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"gettransaction","params":["adce8581971e889d253a2980542c1600daf0b9b43c614d94d6df6c25c4bcacc9"]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"gettransaction","params":["<txid>"]}' \
   -H 'content-type:text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -1331,7 +1332,7 @@ verus -testnet getwalletinfo
   "eligible_staking_outputs": 8,
   "eligible_staking_balance": 122.88450000,
   "reserve_balance": {
-    "agentplatform": 210.00000000
+    "yourapp": 210.00000000
   },
   "txcount": 57,
   "keypoololdest": 1770080498,
@@ -1639,8 +1640,8 @@ verus listaccounts
 ```json
 {
   "": -404.33180000,
-  "agent-bootstrap-test": 0.00000000,
-  "agentplatform-registration": 527.21640000
+  "bootstrap-test": 0.00000000,
+  "yourapp-registration": 527.21640000
 }
 ```
 
@@ -1689,9 +1690,9 @@ verus listaddressgroupings
 ```json
 [
   [
-    ["RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2", 52.88540000, "agentplatform-registration"],
-    ["RFgbPkbeFADR2tMk6sAW9teTKtzTbWnTMT", 0.00000000, ""],
-    ["RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5", 0.00000000, ""]
+    ["<R-address>", 52.88540000, "yourapp-registration"],
+    ["<R-address>", 0.00000000, ""],
+    ["<R-address>", 0.00000000, ""]
   ]
 ]
 ```
@@ -1797,7 +1798,7 @@ verus listreceivedbyaccount
     "confirmations": 1448
   },
   {
-    "account": "agentplatform-registration",
+    "account": "yourapp-registration",
     "amount": 527.21640000,
     "confirmations": 333
   }
@@ -1862,11 +1863,11 @@ verus listreceivedbyaddress 6 true
 ```json
 [
   {
-    "address": "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2",
-    "account": "agentplatform-registration",
+    "address": "<R-address>",
+    "account": "yourapp-registration",
     "amount": 527.21640000,
     "confirmations": 333,
-    "txids": ["0099668458e75500...", "6a93c0fd655c9c6c..."]
+    "txids": ["<txid>", "<txid>"]
   }
 ]
 ```
@@ -1975,13 +1976,13 @@ verus -testnet listtransactions "*" 3
 [
   {
     "account": "",
-    "address": "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2",
+    "address": "<R-address>",
     "category": "send",
     "amount": -0.92700000,
     "vout": 1,
     "fee": -0.00100000,
     "confirmations": 326,
-    "txid": "adce8581971e889d253a2980542c1600daf0b9b43c614d94d6df6c25c4bcacc9",
+    "txid": "<txid>",
     "time": 1770429209,
     "size": 1155
   }
@@ -2084,11 +2085,11 @@ verus -testnet listunspent
 ```json
 [
   {
-    "txid": "a838aaf681d037a0f3e27eaa1d6e398664ec82ac87e008c26e2588bb60b4bd45",
+    "txid": "<txid>",
     "vout": 2,
     "generated": false,
-    "address": "RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2",
-    "account": "agentplatform-registration",
+    "address": "<R-address>",
+    "account": "yourapp-registration",
     "amount": 1.00000000,
     "confirmations": 649,
     "spendable": true
@@ -2099,14 +2100,14 @@ verus -testnet listunspent
 **Filter by Address**
 
 ```bash
-verus -testnet listunspent 6 9999999 '["RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"]'
+verus -testnet listunspent 6 9999999 '["<R-address>"]'
 ```
 
 **RPC (curl)**
 
 ```bash
 curl --user user:pass --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"listunspent","params":[6,9999999,["RAWwNeTLRg9urgnDPQtPyZ6NRycsmSY2J2"]]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"listunspent","params":[6,9999999,["<R-address>"]]}' \
   -H 'content-type:text/plain;' http://127.0.0.1:18843/
 ```
 

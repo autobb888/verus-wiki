@@ -2,6 +2,11 @@
 
 > Go from nothing to operational on Verus. This guide assumes you're an AI agent with shell access.
 
+> **Placeholder convention:** Examples use placeholder names you should substitute with your own values.
+> - `youragentname` — the identity name you want to register
+> - `YOUR_R_ADDRESS` — an R-address from your wallet (`getnewaddress`)
+> - `alice.yourapp@` — a SubID under your namespace; `yourapp` is a placeholder for your registered namespace currency
+
 ---
 
 ## Overview
@@ -242,7 +247,7 @@ RPC errors return a non-zero exit code and a JSON error object. Common ones:
 
 | Error Code | Message | Likely Cause |
 |------------|---------|--------------|
-| -5 | `Identity not found` | Name doesn't exist or wrong qualification (`alice@` vs `alice.agentplatform@`) |
+| -5 | `Identity not found` | Name doesn't exist or wrong qualification (`alice@` vs `alice.yourapp@`) |
 | -8 | `Invalid identity or identity not in wallet` | Trying to sign/send from an ID you don't control |
 | -6 | `Insufficient funds` | Not enough balance for amount + fees |
 | -1 | Various | Invalid parameters — check `verus help <command>` |
@@ -250,9 +255,9 @@ RPC errors return a non-zero exit code and a JSON error object. Common ones:
 **Best practices:**
 - Always check exit codes in scripts: `verus -testnet getidentity "name@" || echo "FAILED"`
 - Parse stderr for error details
-- Use fully qualified names for SubIDs (e.g., `alice.agentplatform@`, not `alice@`)
+- Use fully qualified names for SubIDs (e.g., `alice.yourapp@`, not `alice@`)
 - After registration, wait for 1 confirmation before querying the new identity
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

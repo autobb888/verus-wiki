@@ -6,7 +6,7 @@
 
 ## What Is a VerusID?
 
-A VerusID is a blockchain-native identity. Unlike a wallet address (a string of random characters), a VerusID has a **human-readable name** like `alice@` that maps permanently to a cryptographic identity address (an "i-address" like `i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129`).
+A VerusID is a blockchain-native identity. Unlike a wallet address (a string of random characters), a VerusID has a **human-readable name** like `alice@` that maps permanently to a cryptographic identity address (an "i-address" like `i...`).
 
 Think of it as **a domain name + a bank account + a passport**, all in one:
 
@@ -95,19 +95,19 @@ Every VerusID includes a **content multimap** — a key-value data store that li
 
 ```
 ┌─────────────────────────────────────────┐
-│  Identity: myagent@                     │
+│  Identity: yourapp@                     │
 ├─────────────────────────────────────────┤
 │  contentmultimap:                       │
-│  ├─ iK7a5FEI...  →  "agent profile v1" │
+│  ├─ iK7a5FEI...  →  "profile data v1"  │
 │  ├─ i8bC2xPQ...  →  "public key data"  │
 │  └─ iD9eR3vW...  →  "service listing"  │
 └─────────────────────────────────────────┘
 ```
 
-VDXF keys are created deterministically from human-readable strings. For example, `vrsc::system.agent.profile` always maps to the same i-address. This means anyone who knows the key name can look up the data — it's a universal namespace.
+VDXF keys are created deterministically from human-readable strings. For example, `yourapp::data.v1.name` always maps to the same i-address. This means anyone who knows the key name can look up the data — it's a universal namespace.
 
 **Use cases for content multimap:**
-- Store public agent profiles or service descriptions
+- Store public profiles or service descriptions
 - Publish public keys for encrypted communication
 - Attach metadata (website links, social handles, configuration)
 - Create attestations (proof of qualification, membership)
@@ -144,13 +144,13 @@ Format:              Resolves to:
 ─────────────────────────────────────────────
 alice@               Top-level identity "alice" on current chain
 alice.VRSCTEST@      Same as alice@ on testnet (fully qualified)
-alice.agentplatform@ SubID "alice" under "agentplatform" namespace
+alice.yourapp@       SubID "alice" under "yourapp" namespace
 alice.VRSC@          Same as alice@ on mainnet (fully qualified)
 ```
 
-**Key rule:** `alice@` and `alice.agentplatform@` are *completely different identities*. The first is a top-level ID; the second is a SubID under agentplatform. If you use the wrong form, you'll get "Identity not found."
+**Key rule:** `alice@` and `alice.yourapp@` are *completely different identities*. The first is a top-level ID; the second is a SubID under yourapp. If you use the wrong form, you'll get "Identity not found."
 
-On testnet, the system appends `.VRSCTEST` to fully qualified names, so `ari@` displays as `ari.VRSCTEST@` in the `fullyqualifiedname` field. On mainnet, top-level names show as `alice.VRSC@` in fully qualified form but can be referenced simply as `alice@`.
+On testnet, the system appends `.VRSCTEST` to fully qualified names, so `myid@` displays as `myid.VRSCTEST@` in the `fullyqualifiedname` field. On mainnet, top-level names show as `alice.VRSC@` in fully qualified form but can be referenced simply as `alice@`.
 
 ### Namespaces
 
@@ -160,19 +160,19 @@ When you launch a currency or PBaaS chain, that currency's name becomes a new na
 
 ### SubIDs
 
-A SubID is an identity registered *under* another identity's namespace. For example, if `agentplatform@` exists and has an active currency, someone could register `alice.agentplatform@`.
+A SubID is an identity registered *under* another identity's namespace. For example, if `yourapp@` exists and has an active currency, someone could register `alice.yourapp@`.
 
 ```
 Namespace hierarchy:
 
 VRSC (root)
-├── alice@                    ← Top-level identity
-├── agentplatform@            ← Identity with active currency
-│   ├── alice.agentplatform@  ← SubID
-│   ├── bob.agentplatform@    ← SubID
-│   └── service.agentplatform@← SubID
-└── mypbaas@                  ← PBaaS chain namespace
-    ├── user1.mypbaas@        ← Identity on that chain
+├── alice@                 ← Top-level identity
+├── yourapp@               ← Identity with active currency
+│   ├── alice.yourapp@     ← SubID
+│   ├── bob.yourapp@       ← SubID
+│   └── service.yourapp@   ← SubID
+└── mypbaas@               ← PBaaS chain namespace
+    ├── user1.mypbaas@     ← Identity on that chain
     └── user2.mypbaas@
 ```
 

@@ -2,6 +2,13 @@
 
 > The essential Verus commands for AI agents, organized by task. All examples use JSON-RPC via curl. Replace credentials and addresses with your own.
 
+> **Placeholder convention:** Examples use placeholder names you should substitute with your own values.
+> - `myid@` — your top-level VerusID
+> - `alice.yourapp@` — a SubID under your namespace
+> - `yourapp` — your registered namespace currency (placeholder, not a real testnet currency)
+> - `myid::agent.v1.*` — VDXF keys under your namespace; keep `agent.v1.*` for interoperability, replace `myid` with your identity name
+> - `i...` — placeholder for an i-address; derive real values with `getvdxfid`
+
 ---
 
 ## Getting Help
@@ -20,15 +27,15 @@ Understanding name formats is critical — using the wrong form will give "Ident
 
 | Format | Meaning | Example |
 |--------|---------|---------|
-| `name@` | Top-level identity on the current chain | `ari@` (looks for top-level "ari") |
-| `name.PARENT@` | SubID under a parent namespace | `alice.agentplatform@` (SubID under agentplatform) |
-| `name.VRSCTEST@` | Fully qualified on testnet | `ari.VRSCTEST@` (same as `ari@` on testnet) |
+| `name@` | Top-level identity on the current chain | `myid@` (looks for top-level "myid") |
+| `name.PARENT@` | SubID under a parent namespace | `alice.yourapp@` (SubID under yourapp) |
+| `name.VRSCTEST@` | Fully qualified on testnet | `myid.VRSCTEST@` (same as `myid@` on testnet) |
 
-**Common mistake:** `alice@` looks for a *top-level* identity called "alice". If alice is a SubID under agentplatform, you must use `alice.agentplatform@`. Using the wrong form returns "Identity not found".
+**Common mistake:** `alice@` looks for a *top-level* identity called "alice". If alice is a SubID under yourapp, you must use `alice.yourapp@`. Using the wrong form returns "Identity not found".
 
 ```bash
-# ✅ Correct — alice is a SubID under agentplatform
-getidentity "alice.agentplatform@"
+# ✅ Correct — alice is a SubID under yourapp
+getidentity "alice.yourapp@"
 
 # ❌ Wrong — no top-level identity called "alice" exists
 getidentity "alice@"
@@ -44,7 +51,7 @@ getidentity "alice@"
 | `VRSCTEST` | Native testnet coin (equivalent of VRSC on mainnet) |
 | `Bridge.vETH` | Bridge currency for Ethereum testnet |
 | `VRSC-USD` | USD-pegged test currency |
-| `agentplatform` | Agent identity namespace (register SubIDs under it) |
+| `yourapp` | Placeholder — replace with your own registered namespace currency |
 
 ---
 
@@ -104,8 +111,8 @@ curl -s -u $RPC_USER:$RPC_PASS http://127.0.0.1:$RPC_PORT \
 
 ### Get VDXF Key
 ```bash
-{"method":"getvdxfid","params":["ari::agent.v1.name"]}
-# Returns: {"vdxfid": "iDdkfGg9wCLk6im1BrKTwh9rhSiUEcrE9d", ...}
+{"method":"getvdxfid","params":["myid::agent.v1.name"]}
+# Returns: {"vdxfid": "i...", ...}
 ```
 
 ### Encode Data to Hex
@@ -288,18 +295,20 @@ Use `updateidentity` with `contentmultimap` (see above).
 
 ## Agent VDXF Key Reference
 
+> **Note:** i-addresses below are derived from the VDXF key string. Replace `myid` with your own identity name — e.g., if your identity is `devplatform`, run `getvdxfid "devplatform::agent.v1.name"` to get your i-address. The `agent.v1.*` schema names are kept for interoperability — only the namespace prefix changes per deployer.
+
 | Field | i-address |
 |-------|-----------|
-| `ari::agent.v1.version` | `i6HXzMMD3TTDDPvGB5UbHZVKxk8UhnKiE3` |
-| `ari::agent.v1.type` | `iB5K4HoKTBzJErGscJaQkWrdg6c3tMsU6R` |
-| `ari::agent.v1.name` | `iDdkfGg9wCLk6im1BrKTwh9rhSiUEcrE9d` |
-| `ari::agent.v1.description` | `iKdG3eo2DLm19NJWDHiem2WobtYzbmqW6U` |
-| `ari::agent.v1.capabilities` | `iRu8CaKpMEkqYiednh7Ff1BT32TNgDXasZ` |
-| `ari::agent.v1.endpoints` | `i9kWQsJkfSATuWdSJs9QG6SA9MfbhbpPKt` |
-| `ari::agent.v1.protocols` | `i8BMBVcsX9GDm3yrRNaMeTe1TQ2m1ng1qC` |
-| `ari::agent.v1.owner` | `iC6oQAC5rufBtks35ctW1YtugXc9QyxF2a` |
-| `ari::agent.v1.status` | `iCwKbumFMBTmBFFQAGzsH4Nz2xpT2yvsyf` |
-| `ari::agent.v1.services` | `iPpTtEbDj79FMMScKyfjSyhjJbSyaeXLHe` |
+| `myid::agent.v1.version` | `i...` |
+| `myid::agent.v1.type` | `i...` |
+| `myid::agent.v1.name` | `i...` |
+| `myid::agent.v1.description` | `i...` |
+| `myid::agent.v1.capabilities` | `i...` |
+| `myid::agent.v1.endpoints` | `i...` |
+| `myid::agent.v1.protocols` | `i...` |
+| `myid::agent.v1.owner` | `i...` |
+| `myid::agent.v1.status` | `i...` |
+| `myid::agent.v1.services` | `i...` |
 
 ---
 
@@ -327,7 +336,7 @@ error code: -5
 error message:
 Identity not found
 ```
-**Cause:** The name doesn't exist, is misspelled, or you used the wrong qualification (e.g., `alice@` instead of `alice.agentplatform@`).
+**Cause:** The name doesn't exist, is misspelled, or you used the wrong qualification (e.g., `alice@` instead of `alice.yourapp@`).
 
 ### Invalid identity or not in wallet (error code: -8)
 ```
@@ -373,4 +382,4 @@ verus -testnet getidentity "name@" | jq -r \
 
 ---
 
-*Reference by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

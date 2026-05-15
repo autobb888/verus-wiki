@@ -241,4 +241,4 @@ rm -rf ~/.verustest/    # testnet data may also be here
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

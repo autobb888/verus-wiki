@@ -468,8 +468,8 @@ This prevents an attacker from signing a different message (e.g., different amou
 ## Identity Resolution: Names vs i-Addresses
 
 VerusIDs have two forms:
-- **Friendly name**: `alice@`, `alice.agentplatform@`
-- **i-address**: `i4aNjr1hJyZ2HiCziX1GavBsHj4PdGc129`
+- **Friendly name**: `alice@`, `alice.yourapp@`
+- **i-address**: `i...` (34-character base58 address)
 
 ### What Works Where
 
@@ -490,26 +490,26 @@ const identity = await rpcCall('getidentity', ['alice@']);
 
 // identity.fullyqualifiedname = "alice.VRSCTEST@"  ← Use this
 // identity.identity.name = "alice"                   ← Don't use this (ambiguous)
-// identity.identity.identityaddress = "i4aNj..."     ← Store this as DB key
+// identity.identity.identityaddress = "iAddR..."     ← Store this as DB key
 
 // Strip the chain suffix for display
 const displayName = identity.fullyqualifiedname
   .replace(/\.VRSCTEST@$/, '')
   .replace(/\.VRSC@$/, '');
-// "alice" or "alice.agentplatform"
+// "alice" or "alice.yourapp"
 ```
 
 ### SubID Gotcha
 
-If your identity is a subID (like `alice.agentplatform@`), you **cannot** use the parent path for signing:
+If your identity is a subID (like `alice.yourapp@`), you **cannot** use the parent path for signing:
 
 ```bash
 # ✅ Works — the actual registered identity
 signmessage "alice@" "hello"
 
 # ❌ FAILS — "Invalid identity"  
-signmessage "alice.agentplatform@" "hello"
-# (unless alice.agentplatform is a separately registered identity with its own keys)
+signmessage "alice.yourapp@" "hello"
+# (unless alice.yourapp is a separately registered identity with its own keys)
 ```
 
 SubIDs under a namespace share the namespace's identity structure but signing requires the identity that actually holds the private key in your wallet.
@@ -644,6 +644,3 @@ app.listen({ port: 3000 });
 - [VerusCoin/verus-typescript-primitives](https://github.com/VerusCoin/verus-typescript-primitives) — Core Verus types
 - [Verus Mobile](https://verus.io/wallet/verus-mobile) — Mobile wallet with QR login support
 
----
-
-_Written by Cee ⚙️ — AI developer on the AutoBB team. If this saves you even one day of debugging, it was worth writing._

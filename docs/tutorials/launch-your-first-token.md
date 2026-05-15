@@ -196,7 +196,7 @@ You have 1000 of your tokens from the preallocation.
 **Example:**
 ```bash
 ./verus -testnet sendcurrency "*" '[{
-  "address": "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5",
+  "address": "<R-address>",
   "amount": 10,
   "currency": "mytoken"
 }]'
@@ -225,7 +225,7 @@ Since you used `proofprotocol: 2`, you can create new tokens anytime:
 **Example:**
 ```bash
 ./verus -testnet sendcurrency "mytoken@" '[{
-  "address": "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5",
+  "address": "<R-address>",
   "amount": 5000,
   "currency": "mytoken",
   "mintnew": true
@@ -318,4 +318,4 @@ This creates a token backed by VRSCTEST reserves with built-in conversion.
 
 ---
 
-*Tutorial by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

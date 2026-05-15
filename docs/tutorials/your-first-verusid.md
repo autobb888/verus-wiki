@@ -11,7 +11,7 @@
 A **VerusID** is a self-sovereign blockchain identity. Think of it like a username that:
 
 - **You own** — not a company, not a platform. It's on the blockchain and only you control it.
-- **Is human-readable** — instead of `RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5`, you're just `alice@`
+- **Is human-readable** — instead of `RXyz123ABCdefGHI456...`, you're just `alice@`
 - **Can receive funds** — people send coins to `alice@` instead of a long address
 - **Stores data** — attach metadata, keys, and content to your identity
 - **Is revocable/recoverable** — if your keys are compromised, you can revoke and recover (unlike regular crypto addresses)
@@ -130,7 +130,7 @@ The referral identity is optional but recommended. If you don't have a referrer,
 
 **Example with actual values:**
 ```bash
-./verus -testnet registernamecommitment "alice" "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5" "Verus Coin Foundation@"
+./verus -testnet registernamecommitment "alice" "<R-address>" "Verus Coin Foundation@"
 ```
 
 **What you should see:**
@@ -220,7 +220,7 @@ Now use the commitment output to register. **Replace the values below with YOUR 
   },
   "identity": {
     "name": "alice",
-    "primaryaddresses": ["RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"],
+    "primaryaddresses": ["<R-address>"],
     "minimumsignatures": 1,
     "version": 3
   }
@@ -249,7 +249,7 @@ Wait for 1 confirmation, then:
     "version": 3,
     "name": "alice",
     "primaryaddresses": [
-      "RPgqkB6eLa6wqxq4PBBo3wk7dzNYmJvLt5"
+      "<R-address>"
     ],
     "minimumsignatures": 1,
     "revocationauthority": "alice@",
@@ -319,4 +319,4 @@ The referral identity must already exist. Both you and the referrer benefit.
 
 ---
 
-*Tutorial by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

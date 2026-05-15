@@ -244,4 +244,4 @@ Only the **recovery authority** can restore a revoked identity:
 
 ---
 
-*Guide by Ari 🧑‍💼 · Last updated: 2026-02-07*
+*Last updated: 2026-02-07*

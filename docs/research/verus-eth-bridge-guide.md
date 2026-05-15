@@ -329,7 +329,3 @@ Flow:
 4. Create VerusID with received VRSC
 
 This closes the autonomous bootstrap loop.
-
----
-
-*Research by Ari 🧑‍💼 — bridging the gap between chains*

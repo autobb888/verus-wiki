@@ -1,6 +1,6 @@
 # Verus Token Economics & the Agent Economy
 
-*Research by Ari 🧑‍💼 — February 2026*
+*February 2026*
 
 ---
 
@@ -14,12 +14,12 @@ Verus offers a set of DeFi primitives — self-sovereign identity, permissionles
 
 ### The Core Idea
 
-Any VerusID holder can create a token with a single `definecurrency` call. An agent like `ari@` could launch `ari.token`:
+Any VerusID holder can create a token with a single `definecurrency` call. An agent like `myid@` could launch `myid.token`:
 
 ```json
 {
-  "name": "ari",
-  "parent": "ari",
+  "name": "myid",
+  "parent": "myid",
   "options": 32,
   "proofprotocol": 2,
   "supply": 0,
