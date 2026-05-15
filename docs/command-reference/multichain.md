@@ -5,6 +5,7 @@ icon: terminal
 
 # Multichain Commands
 
+> **Placeholder convention:** Examples in this reference use `yourapp` as an example token/currency name, `i...` to mark a placeholder i-address (substitute the real one from `getcurrency`), and `<block-height>` for a placeholder block number. Commands shown were tested on VRSCTEST — only these project-specific values have been genericized.
 
 ---
 
@@ -210,21 +211,21 @@ The primary argument is a JSON object with the currency definition:
 
 **Examples**
 
-**Simple Token Definition (reference: agentplatform)**
-The `agentplatform` token on VRSCTEST was defined with these characteristics:
+**Simple Token Definition (reference: yourapp)**
+The `yourapp` token on VRSCTEST was defined with these characteristics:
 ```bash
 ## Example definition (DO NOT run — creates real currency):
 ./verus -testnet definecurrency '{
-  "name": "agentplatform",
+  "name": "yourapp",
   "options": 32,
   "proofprotocol": 2,
   "idregistrationfees": 0.01,
   "idreferrallevels": 0,
-  "preallocations": [{"ari@": 200}]
+  "preallocations": [{"myid@": 200}]
 }'
 
-## Result: agentplatform token created at block 926606
-## currencyid: i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW
+## Result: yourapp token created at block <block-height>
+## currencyid: i...
 ## proofprotocol 2 = centralized (ID holder can mint/burn)
 ## options 32 (0x20) = TOKEN
 ```
@@ -541,28 +542,28 @@ Key fields:
 
 **Basic Usage — Token**
 ```bash
-./verus -testnet getcurrency agentplatform
+./verus -testnet getcurrency yourapp
 ## Actual Output (tested on VRSCTEST)
 {
   "version": 1,
   "options": 32,
-  "name": "agentplatform",
-  "currencyid": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+  "name": "yourapp",
+  "currencyid": "i...",
   "parent": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
   "systemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
   "notarizationprotocol": 1,
   "proofprotocol": 2,
   "launchsystemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
-  "startblock": 926606,
+  "startblock": <block-height>,
   "endblock": 0,
   "idregistrationfees": 0.01000000,
   "idreferrallevels": 0,
   "idimportfees": 0.02000000,
-  "fullyqualifiedname": "agentplatform",
+  "fullyqualifiedname": "yourapp",
   "bestcurrencystate": {
     "flags": 48,
     "version": 1,
-    "currencyid": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+    "currencyid": "i...",
     "initialsupply": 0.00000000,
     "emitted": 10.00000000,
     "supply": 210.00000000
@@ -583,7 +584,7 @@ Key fields:
 **RPC (curl)**
 ```bash
 curl --user user1445741888:pass... --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"getcurrency","params":["agentplatform"]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"getcurrency","params":["yourapp"]}' \
   -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -700,7 +701,7 @@ curl --user user1445741888:pass... --data-binary \
 
 **Notes**
 - Only returns **fractional** currencies (baskets with reserves)
-- Simple tokens like `agentplatform` won't appear (they have no reserves)
+- Simple tokens like `yourapp` won't appear (they have no reserves)
 - The advanced JSON form with `slippage` filters converters that can satisfy the trade within tolerance
 
 **Tested On**
@@ -734,7 +735,7 @@ Array of objects, each containing `height`, `blocktime`, `currencystate`, and op
 
 **Basic Usage**
 ```bash
-./verus -testnet getcurrencystate agentplatform
+./verus -testnet getcurrencystate yourapp
 ## Actual Output (tested on VRSCTEST)
 [
   {
@@ -743,7 +744,7 @@ Array of objects, each containing `height`, `blocktime`, `currencystate`, and op
     "currencystate": {
       "flags": 48,
       "version": 1,
-      "currencyid": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+      "currencyid": "i...",
       "launchcurrencies": [],
       "initialsupply": 0.00000000,
       "emitted": 10.00000000,
@@ -759,7 +760,8 @@ Array of objects, each containing `height`, `blocktime`, `currencystate`, and op
 
 **At Specific Height**
 ```bash
-./verus -testnet getcurrencystate agentplatform "926610"
+./verus -testnet getcurrencystate yourapp <block-height>
+## replace <block-height> with an actual block number
 ```
 
 **Range with Step (for charting)**
@@ -777,7 +779,7 @@ Array of objects, each containing `height`, `blocktime`, `currencystate`, and op
 **RPC (curl)**
 ```bash
 curl --user user1445741888:pass... --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"getcurrencystate","params":["agentplatform"]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"getcurrencystate","params":["yourapp"]}' \
   -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -849,7 +851,8 @@ Trust modes:
 
 **Query Specific Currency**
 ```bash
-./verus -testnet getcurrencytrust '["i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW"]'
+./verus -testnet getcurrencytrust '["i..."]'
+## Replace i... with the actual currencyid from getcurrency
 ```
 
 **RPC (curl)**
@@ -906,23 +909,23 @@ Array of export objects containing height, txid, export info (source/destination
 
 **Examples**
 
-**Get Exports for agentplatform**
+**Get Exports for yourapp**
 ```bash
-./verus -testnet getexports agentplatform
+./verus -testnet getexports yourapp
 ## Actual Output (tested on VRSCTEST, truncated)
 [
   {
-    "height": 926587,
+    "height": <block-height>,
     "txid": "62b74cbb9d2ed4050c1d59d09f69bda23cc0ca8de67343b8c1e6b17c961cd657",
     "txoutnum": 4,
     "exportinfo": {
       "version": 1,
       "flags": 65,
       "sourceheightstart": 0,
-      "sourceheightend": 926586,
+      "sourceheightend": <block-height>,
       "sourcesystemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
       "destinationsystemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
-      "destinationcurrencyid": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+      "destinationcurrencyid": "i...",
       "totalamounts": {
         "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": 100.00000000
       },
@@ -945,7 +948,7 @@ Array of export objects containing height, txid, export info (source/destination
 **RPC (curl)**
 ```bash
 curl --user user1445741888:pass... --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"getexports","params":["agentplatform"]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"getexports","params":["yourapp"]}' \
   -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -1105,14 +1108,14 @@ verus getinitialcurrencystate "name"
 
 **Examples**
 
-**Get Initial State for agentplatform**
+**Get Initial State for yourapp**
 ```bash
-./verus -testnet getinitialcurrencystate agentplatform
+./verus -testnet getinitialcurrencystate yourapp
 ## Actual Output (tested on VRSCTEST)
 {
   "flags": 26,
   "version": 1,
-  "currencyid": "i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW",
+  "currencyid": "i...",
   "launchcurrencies": [],
   "initialsupply": 0.00000000,
   "emitted": 0.00000000,
@@ -1129,7 +1132,7 @@ verus getinitialcurrencystate "name"
 **RPC (curl)**
 ```bash
 curl --user user1445741888:pass... --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"getinitialcurrencystate","params":["agentplatform"]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"getinitialcurrencystate","params":["yourapp"]}' \
   -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -1256,9 +1259,9 @@ verus getlaunchinfo "currencyid"
 
 **Examples**
 
-**Get Launch Info for agentplatform**
+**Get Launch Info for yourapp**
 ```bash
-./verus -testnet getlaunchinfo agentplatform
+./verus -testnet getlaunchinfo yourapp
 ## Actual Output (tested on VRSCTEST):
 ## Error: "No valid export found"
 ## This is expected for simple tokens that launched without pre-conversion exports
@@ -1294,7 +1297,7 @@ curl --user user1445741888:pass... --data-binary \
 - [definecurrency](#definecurrency) — how the currency was defined
 
 **Notes**
-- Simple tokens (like `agentplatform`) that launch without pre-conversions may return "No valid export found"
+- Simple tokens (like `yourapp`) that launch without pre-conversions may return "No valid export found"
 - This command is primarily useful for PBaaS chains and fractional currencies with launch phases
 - The `transactionproof` can be used for cross-chain verification of the launch
 
@@ -1522,9 +1525,9 @@ Array of pending transfer objects, or empty if no transfers are pending.
 ## (empty — no pending transfers at time of test)
 ```
 
-**Check Pending Transfers for agentplatform**
+**Check Pending Transfers for yourapp**
 ```bash
-./verus -testnet getpendingtransfers agentplatform
+./verus -testnet getpendingtransfers yourapp
 ## (empty — no pending transfers)
 ```
 
@@ -1640,7 +1643,7 @@ curl --user user1445741888:pass... --data-binary \
 
 **Notes**
 - Only fractional currencies (baskets) have reserve deposits
-- Simple tokens (like `agentplatform`) and native chains return empty `{}`
+- Simple tokens (like `yourapp`) and native chains return empty `{}`
 - Reserve deposits are held in special on-chain outputs controlled by the currency protocol
 - The i-addresses in the result map to the reserve currency IDs (use `getcurrency` to resolve names)
 
@@ -1954,31 +1957,31 @@ Or if `returntxtemplate` is true:
 
 **Simple Send**
 ```bash
-./verus -testnet sendcurrency "*" '[{"address":"ari@","amount":1}]'
-## Sends 1 VRSCTEST from any wallet address to ari@
+./verus -testnet sendcurrency "*" '[{"address":"myid@","amount":1}]'
+## Sends 1 VRSCTEST from any wallet address to myid@
 ```
 
 **Send a Token**
 ```bash
-./verus -testnet sendcurrency "*" '[{"address":"ari@","amount":5,"currency":"agentplatform"}]'
-## Sends 5 agentplatform tokens to ari@
+./verus -testnet sendcurrency "*" '[{"address":"myid@","amount":5,"currency":"yourapp"}]'
+## Sends 5 yourapp tokens to myid@
 ```
 
 **Convert VRSCTEST → VRSC-USD**
 ```bash
 ./verus -testnet sendcurrency "*" '[{
-  "address":"ari@",
+  "address":"myid@",
   "amount":10,
   "currency":"VRSCTEST",
   "convertto":"VRSC-USD"
 }]'
-## Converts 10 VRSCTEST to VRSC-USD basket tokens, sent to ari@
+## Converts 10 VRSCTEST to VRSC-USD basket tokens, sent to myid@
 ```
 
 **Convert Between Reserves (VRSCTEST → USD via basket)**
 ```bash
 ./verus -testnet sendcurrency "*" '[{
-  "address":"ari@",
+  "address":"myid@",
   "amount":100,
   "currency":"VRSCTEST",
   "convertto":"USD",
@@ -1990,7 +1993,7 @@ Or if `returntxtemplate` is true:
 **Cross-Chain Export**
 ```bash
 ./verus -testnet sendcurrency "*" '[{
-  "address":"ari@",
+  "address":"myid@",
   "amount":10,
   "currency":"VRSCTEST",
   "exportto":"vETH",
@@ -2001,30 +2004,30 @@ Or if `returntxtemplate` is true:
 
 **Mint New Tokens (Centralized Currency)**
 ```bash
-./verus -testnet sendcurrency "agentplatform@" '[{
-  "address":"ari@",
+./verus -testnet sendcurrency "yourapp@" '[{
+  "address":"myid@",
   "amount":10,
-  "currency":"agentplatform",
+  "currency":"yourapp",
   "mintnew":true
 }]'
-## Mints 10 new agentplatform tokens (must send from controlling ID)
+## Mints 10 new yourapp tokens (must send from controlling ID)
 ```
 
 **Burn Tokens**
 ```bash
 ./verus -testnet sendcurrency "*" '[{
-  "address":"ari@",
+  "address":"myid@",
   "amount":5,
-  "currency":"agentplatform",
+  "currency":"yourapp",
   "burn":true
 }]'
-## Burns 5 agentplatform tokens, removing them from supply
+## Burns 5 yourapp tokens, removing them from supply
 ```
 
 **RPC (curl)**
 ```bash
 curl --user user1445741888:pass... --data-binary \
-  '{"jsonrpc":"1.0","id":"curltest","method":"sendcurrency","params":["*",[{"address":"ari@","amount":1}]]}' \
+  '{"jsonrpc":"1.0","id":"curltest","method":"sendcurrency","params":["*",[{"address":"myid@","amount":1}]]}' \
   -H 'content-type: text/plain;' http://127.0.0.1:18843/
 ```
 
@@ -2097,13 +2100,14 @@ No return on success; error on failure.
 
 **Approve a Specific Currency**
 ```bash
-./verus -testnet setcurrencytrust '{"setratings":[{"i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW":{"trustlevel":1}}]}'
-## Approves agentplatform token
+./verus -testnet setcurrencytrust '{"setratings":[{"i...":{"trustlevel":1}}]}'
+## Approves yourapp token (replace i... with your currency's actual currencyid)
 ```
 
 **Remove a Rating**
 ```bash
-./verus -testnet setcurrencytrust '{"removeratings":["i7xKUpKQDSriYFfgHYfRpFc2uzRKWLDkjW"]}'
+./verus -testnet setcurrencytrust '{"removeratings":["i..."]}'
+## Removes the rating for that currency (replace i... with your currency's actual currencyid)
 ```
 
 **Reset All Trust Settings**
